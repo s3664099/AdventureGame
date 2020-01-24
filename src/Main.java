@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import Controller.GetCommand;
@@ -10,6 +11,7 @@ public class Main {
 	
 	private Location[] location;
 	private Objects[] object;
+	private Item[] item;
 	private GetCommand parser;
 	private int spot = 1;
 
@@ -17,6 +19,7 @@ public class Main {
 	{
 		this.location = location;
 		this.object = object;
+		this.item = item;
 		parser = new GetCommand();
 		String command = "";
 		
@@ -38,11 +41,32 @@ public class Main {
 			
 			try
 			{
-				if (checkDirection(commands[0]))
+				if (checkDirection(commands[0])) 
 					spot = location[spot].getExit(commands[0]);
 			} catch (InvalidDirectionException e) {
 				
 				System.err.println(e);
+				
+			}
+			
+			if (commands[0].equals("unlock")) {
+								
+				for (Objects door:object) {
+					
+					if (commands[1].equals(door.getName().toLowerCase()) && door.getLocation() == spot) {
+						
+						ArrayList<Item> carriedItems = new ArrayList<Item>();
+						
+						for(Item items:item) {
+							if (items.getLocation() == 0) {
+								carriedItems.add(items);
+							}
+						}
+						
+						System.out.println(door.unlock(carriedItems, location));
+					}
+					
+				}
 				
 			}
 						
@@ -59,9 +83,10 @@ public class Main {
 				"i","in","o","out"};
 		
 		for (int i=0;i<direction.length;i++)
+		
 			if (direction[i].equals(command))
 				move = true;
-		
+			
 		return move;
 		
 		

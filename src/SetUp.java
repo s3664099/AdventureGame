@@ -26,7 +26,7 @@ import Model.Objects;
 public class SetUp {
 	
 	private int NUMBER_LOCATIONS = 12;
-	private int NUMBER_OBJECTS = 5;
+	private int NUMBER_OBJECTS = 6;
 	private int NUMBER_ITEMS = 5;
 	
 	private Location[] location = new Location[NUMBER_LOCATIONS];
@@ -40,7 +40,7 @@ public class SetUp {
 		location[1] = new Location("outside a hut");
 		location[1].addExit("West", 3);
 		location[2] = new Location("inside a hut");	
-		location[2].addExit("Out", 1);
+		location[2].addExit("Outside", 1);
 		location[3] = new Location("in a paddock");
 		location[3].addExit("East", 1);
 		location[3].addExit("South", 4);
@@ -60,10 +60,11 @@ public class SetUp {
 		location[8].addExit("West", 6);
 		location[9] = new Location("inside the mine");
 		location[9].addExit("East", 10);
-		location[9].addExit("West", 8);
+		location[9].addExit("Outside", 8);
 		location[10] = new Location("before a rockfall");	
 		location[10].addExit("West", 9);
 		location[11] = new Location("on the other side of a rockfall");
+		location[11].addExit("West", 10);
 		
 		item[0] = new Item("key",-1);
 		item[1] = new Item("lamp",-2);
@@ -73,9 +74,10 @@ public class SetUp {
 		
 		object[0] = new Container("Rug", 2);
 		object[1] = new Container("Cabinet", 2, true, item[0], 0);
-		object[2] = new Door("Door", 1);
+		object[2] = new Door("Door", 1, false, 2, "Inside", "");
 		object[3] = new Container("Mining Cart", 8);
-		object[4] = new Door("Rockfall", 10);
+		object[4] = new Door("Rockfall", 10, true, 11, "east","pickaxe");
+		object[5] = new Door("Cave Entrance", 9, true, 10, "Inside", "lit lamp");
 				
 		for (Objects objects:object) {
 			location[objects.getLocation()].addObjects(objects);

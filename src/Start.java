@@ -19,7 +19,6 @@ public class Start {
 	public static void main(String[] args) throws IOException {
 
 		LoadData data = new LoadData();
-		//data.populateLocations();
 		
 		System.out.println("Data loaded, ready to begin");
 		

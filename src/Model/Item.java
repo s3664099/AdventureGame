@@ -23,7 +23,7 @@ public class Item extends Objects {
 
 		return location;
 	}
-	
+		
 	public String getName () {
 		return super.getName();
 	}

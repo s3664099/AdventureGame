@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public abstract class Objects implements Serializable {
 	
@@ -13,6 +14,7 @@ public abstract class Objects implements Serializable {
 	
 	private String name;
 	private int location;
+	String key;
 	
 	public Objects(String name)
 	{
@@ -21,8 +23,17 @@ public abstract class Objects implements Serializable {
 	
 	public Objects(String name, int location)
 	{
-		this.name = name;
+		this(name);
+		
 		this.location = location;
+	}
+	
+	public Objects(String name, int location, String key) {
+
+		this(name, location);
+
+		this.key = key;
+		
 	}
 	
 	public int getLocation()
@@ -35,12 +46,18 @@ public abstract class Objects implements Serializable {
 		return name;
 	}
 	
-	public void addItem() {}
-	
 	public boolean checkLocked() {
 		return false;
 	}
 	
+	public String unlock(ArrayList<Item> objectsCarried, Location[] locations) {
+		
+		return "";
+		
+	}
+	
+	public void addItem() {}
+		
 	public int getKey() {
 		return -1;
 	}
