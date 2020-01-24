@@ -1,6 +1,9 @@
 import java.io.BufferedWriter;
+import java.io.DataOutputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Map;
 
 import Model.Container;
@@ -90,58 +93,57 @@ public class SetUp {
 	}
 	
 	//This method then writes the contents of the objects to file.
-	//Currently it is a txt file, but it should be turned into a binary file.
+	//The objects are written as data, namely because it is not human
+	//readable, as this should be the case with adventures games - otherwise
+	//it gives too much away.
 	public void writeToFile() throws IOException {
+
+		ObjectOutputStream objout = createFile("locations.dat");
 		
-		String filename = "datafile.txt";
-		String fileToWrite = String.format("%d%n%d%n%d%n*****%n", NUMBER_LOCATIONS,
-				NUMBER_OBJECTS, NUMBER_ITEMS);
-		
-		for (Location locations:location) {
-			
-			fileToWrite = String.format("%s%s%n", fileToWrite, locations.getName());
-			
-			for (Map.Entry<String, Integer> exits:locations.getExits().entrySet()) {
-				
-				fileToWrite = String.format("%s%s, %d%n", fileToWrite,exits.getKey(),exits.getValue());
-				
-			}
-			
-			fileToWrite = String.format("%s*****%n", fileToWrite);
-			
-		}
-				
-		fileToWrite = String.format("%s====%n", fileToWrite);
-		
-		
-		for (Item items:item) {
-			
-			fileToWrite = String.format("%s%s,%d%n", fileToWrite, items.getName(), items.getLocation());
-			
+		for (int i=0;i<location.length; i++) {	
+			objout.writeObject(location[i]);
 		}
 		
-		fileToWrite = String.format("%s====%n", fileToWrite);
+		closeOutputStream(objout);
 		
-		for (Objects objects:object) {
-			
-			if (objects.checkLocked()) {
-				fileToWrite = String.format("%sLOCKED,%s,%d,%d%n", fileToWrite,
-						objects.getName(), objects.getLocation(), objects.getKey());
-			} else if (objects instanceof Container){
-				fileToWrite = String.format("%sUNLOCK,%s,%d%n", fileToWrite, objects.getName(), objects.getLocation());
-			} else {
-				fileToWrite = String.format("%s%s,%d%n", fileToWrite, objects.getName(), objects.getLocation());
-			}
+		objout = createFile("objects.dat");
+		
+		for (int i=0;i<object.length; i++) {	
+			objout.writeObject(object[i]);
 		}
 		
-		System.out.println(fileToWrite);
+		closeOutputStream(objout);
 		
-		BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
+		objout = createFile("items.dat");
 		
-		writer.write(fileToWrite);
+		for (int i=0;i<item.length; i++) {	
+			objout.writeObject(item[i]);
+		}
 		
-		writer.close();
+		closeOutputStream(objout);
 		
+	}
+	
+	/**
+	 * 
+	 * The following two methods were created to elimiate code 
+	 * duplication. The first creates a file, which the second closes
+	 * the file off.
+	 * 
+	 */
+	
+	public ObjectOutputStream createFile(String fileName) throws IOException {
+		
+		FileOutputStream fileOut = new FileOutputStream(fileName);
+		ObjectOutputStream objout = new ObjectOutputStream(fileOut);
+		
+		return objout;
+	}
+	
+	public void closeOutputStream(ObjectOutputStream objout) throws IOException {
+		
+		objout.flush();
+		objout.close();
 		
 	}
 	

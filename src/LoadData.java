@@ -1,10 +1,9 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.EOFException;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Scanner;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
 
-import Model.Container;
-import Model.Door;
 import Model.Item;
 import Model.Location;
 import Model.Objects;
@@ -32,109 +31,140 @@ public class LoadData {
 
 	public LoadData() {
 		
-		Scanner inputStream = null;
-		
-		try {
-			inputStream = new Scanner(new File("datafile.txt"));
-		} catch (FileNotFoundException e) {
-			System.err.println("File datafile.txt not found");
-		}
-		
-		while (inputStream.hasNextLine()) {
-			
-			//The data file has been divided up into sections
-			//The position flag tells the loader at what point the loading is up to
-			//So, the positions are as follows:
-			//0) Locations
-			//1) Immovable Objects
-			//2) Items
-			//This has been set up so that it may be possible to add further
-			//parts to the program (maybe monsters, or specific items such as
-			//weapons & armour)
-			
-			if (dataPosition == 0) {
-				LOCATION_NUMBER = Integer.parseInt(inputStream.nextLine());
-				OBJECT_NUMBER = Integer.parseInt(inputStream.nextLine());
-				ITEM_NUMBER = Integer.parseInt(inputStream.nextLine());
-				
-				location = new Location[LOCATION_NUMBER]; 
-				object = new Objects[OBJECT_NUMBER];
-				item = new Item[ITEM_NUMBER];
-				
-				dataPosition ++;
-			} else if (dataPosition == 1) {
-				
-				String locationData = inputStream.nextLine();
-				
-				if (locationData.equals("====")) {
-					dataPosition++;
-				} else if (locationData.equals("*****") && locationPosition<LOCATION_NUMBER) {
-					location[locationPosition] = new Location(inputStream.nextLine());
-					locationPosition++;
-				} else if (locationData.equals("*****")){
-				} else {
-					String direction = locationData.substring(0, locationData.length()-3);
-					int toRoom = Integer.parseInt(
-							locationData.substring(locationData.length()-1, locationData.length()));
-					location[locationPosition-1].addExit(direction, toRoom);
-				}
-						
-			} else if (dataPosition == 2){
-			
-				String itemData = inputStream.nextLine();
-				
-				if (itemData.equals("====")) {
-					dataPosition++;
-				} else {
-					String currentItem[] = itemData.split(",");
-					item[itemPosition] = new Item(currentItem[0],Integer.parseInt(currentItem[1]));
-					itemPosition++;
-				}
-				
-			} else if (dataPosition == 3){
-				
-				String objectData = inputStream.nextLine();
-				String currentObject[] = objectData.split(",");
-				
-				if (objectData.equals("====")) {
-					dataPosition++;
-				} else if (currentObject[0].equals("LOCKED")) {
-					int keyNumber = Integer.parseInt(currentObject[2]);
-					object[objectPosition] = 
-							new Container(currentObject[1], Integer.parseInt(currentObject[2]),
-							true,item[keyNumber], keyNumber);
-					objectPosition++;
-				} else if (currentObject[0].equals("UNLOCK")) {
-					object[objectPosition] = new Container(currentObject[1],
-							Integer.parseInt(currentObject[2]));
-					objectPosition++;
-				} else {
-					object[objectPosition] = new Door(currentObject[0],
-							Integer.parseInt(currentObject[1]));
-					objectPosition++;
-				}
-			}
-		}	
-		
-		inputStream.close();
+		String locationFile = "locations.dat";
+		String objectFile = "objects.dat";
+		String itemFile = "items.dat";
+		Boolean cont = true;
+
+		loadLocations(locationFile, cont);
+		loadObjects(objectFile, cont);
+		loadItems(itemFile, cont);
+										
 	}
 	
-	//Once all of the data has been loaded, this method will place everything where it needs
-	//to be.
-	//It should be noted that location 0 is the player's backpack.
-	public void populateLocations() {
+	//each of these methods are similar in that they load specific types of objects
+	//initially they are added to an array list, but they are then passed into a 
+	//primitive array (namely because primitive arrays are faster, however the length
+	//needs to be predefined)
+	
+	public void loadLocations (String file, Boolean cont) {
 		
-		for (Objects objects:object) {
-			location[objects.getLocation()].addObjects(objects);
+		ArrayList<Location> locationList = new ArrayList<Location>();
+		
+		try {
+			ObjectInputStream objinp = new ObjectInputStream( new FileInputStream(file));
+			
+			while (cont) {
+				try {
+					Location location = (Location) objinp.readObject();
+					
+					if (location != null) {
+						locationList.add(location);
+					} else {
+						cont = false;
+					}
+					
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+			}
+		
+		//when the end of file is reached, an exception is thrown.
+		//this catches the exception and, well, does nothing because
+		//nothing needs to be done.
+		} catch (EOFException e) {
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
 		}
 		
-		for (Item items:item) {
-			if (items.getLocation()>0)
-				location[items.getLocation()].addItems(items);
-			else if (items.getLocation()<0) {
-				int itemLocation = (items.getLocation()+1)*-1;
-				object[itemLocation].addItem();
+		LOCATION_NUMBER = locationList.size();
+		location = new Location[LOCATION_NUMBER]; 
+
+		
+		for (Location locations:locationList) {
+			location[locationPosition] = locations;
+			locationPosition++;
+		}
+	}
+	
+	public void loadObjects(String file, Boolean cont) {
+		
+		ArrayList<Objects> objectList = new ArrayList<Objects>();
+		
+		try {
+			ObjectInputStream objinp = new ObjectInputStream( new FileInputStream(file));
+			
+			while (cont) {
+				try {
+					Objects objects = (Objects) objinp.readObject();
+					
+					if (objects != null) {
+						objectList.add(objects);
+					} else {
+						cont = false;
+					}
+					
+				} catch (ClassNotFoundException e) {
+					
+					e.printStackTrace();
+				}
 			}
+			
+		} catch (EOFException e) {
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
+		OBJECT_NUMBER = objectList.size();
+		object = new Objects[OBJECT_NUMBER]; 
+
+		
+		for (Objects objectNumber:objectList) {
+			object[objectPosition] = objectNumber;
+			objectPosition++;
+		}
+	}
+	
+	public void loadItems(String file, Boolean cont) {
+		
+		ArrayList<Item> itemList = new ArrayList<Item>();
+		
+		try {
+			ObjectInputStream objinp = new ObjectInputStream( new FileInputStream(file));
+			
+			while (cont) {
+				try {
+					Item item = (Item) objinp.readObject();
+					
+					if (item != null) {
+						itemList.add(item);
+					} else {
+						cont = false;
+					}
+					
+				} catch (EOFException e) {
+					
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+			}
+			
+		} catch (IOException e) {
+			System.err.println("File "+file+" not found");
+		}
+		
+		ITEM_NUMBER = itemList.size();
+		item = new Item[ITEM_NUMBER]; 
+
+		
+		for (Item items:itemList) {
+			item[itemPosition] = items;
+			itemPosition++;
+			
 		}
 		
 	}

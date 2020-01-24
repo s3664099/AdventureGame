@@ -19,7 +19,7 @@ public class Start {
 	public static void main(String[] args) throws IOException {
 
 		LoadData data = new LoadData();
-		data.populateLocations();
+		//data.populateLocations();
 		
 		//SetUp start = new SetUp();
 		//start.writeToFile();

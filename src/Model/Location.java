@@ -1,12 +1,16 @@
 package Model;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
-public class Location {
-	
+//The object has been made serialisable so as to
+//allow it to be saved as an object
+public class Location implements Serializable {
+
+	private static final long serialVersionUID = -1529029575012437256L;
 	private String name;
 	private Map<String, Integer> exits = new HashMap<String, Integer>();
 	private List<Objects> objects = new Stack<Objects>();

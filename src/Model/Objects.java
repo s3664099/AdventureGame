@@ -1,6 +1,8 @@
 package Model;
 
-public abstract class Objects {
+import java.io.Serializable;
+
+public abstract class Objects implements Serializable {
 	
 	/**
 	 * This is an abstract class that represents all types of objects
