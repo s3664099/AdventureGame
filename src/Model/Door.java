@@ -8,9 +8,23 @@ public class Door extends Objects {
 	 * 
 	 * 
 	 */
-
+	
+	private boolean isLocked = false;
+	
 	public Door(String name, int location) {
+		
 		super(name, location);
 	}
+	
+	public Door(String name, int location, boolean isLocked) {
+		super(name, location);
+		
+		this.isLocked = isLocked;
+	}
+	
+	public boolean checkLocked() {
+		return isLocked;
+	}
+	
 
 }

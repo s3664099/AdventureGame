@@ -16,14 +16,14 @@ import Model.Objects;
 
 public class LoadData {
 	
-	int dataPosition = 0;
+	private int dataPosition = 0;
 	
-	int LOCATION_NUMBER;
-	int OBJECT_NUMBER;
-	int ITEM_NUMBER;
-	int locationPosition=0;
-	int itemPosition=0;
-	int objectPosition=0;
+	private int LOCATION_NUMBER;
+	private int OBJECT_NUMBER;
+	private int ITEM_NUMBER;
+	private int locationPosition=0;
+	private int itemPosition=0;
+	private int objectPosition=0;
 	
 	Location[] location;
 	Objects[] object;
@@ -39,7 +39,7 @@ public class LoadData {
 		loadLocations(locationFile, cont);
 		loadObjects(objectFile, cont);
 		loadItems(itemFile, cont);
-										
+											
 	}
 	
 	//each of these methods are similar in that they load specific types of objects
@@ -137,6 +137,7 @@ public class LoadData {
 			ObjectInputStream objinp = new ObjectInputStream( new FileInputStream(file));
 			
 			while (cont) {
+
 				try {
 					Item item = (Item) objinp.readObject();
 					
@@ -146,15 +147,15 @@ public class LoadData {
 						cont = false;
 					}
 					
-				} catch (EOFException e) {
-					
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
 			}
 			
+		} catch (EOFException e) {
+			
 		} catch (IOException e) {
-			System.err.println("File "+file+" not found");
+			e.printStackTrace();
 		}
 		
 		ITEM_NUMBER = itemList.size();

@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+import Controller.GetCommand;
 import Model.InvalidDirectionException;
 import Model.Item;
 import Model.Location;
@@ -9,14 +10,14 @@ public class Main {
 	
 	private Location[] location;
 	private Objects[] object;
+	private GetCommand parser;
 	private int spot = 1;
-	Scanner input = new Scanner(System.in);
-	
-	
+
 	public Main(Location[] location, Objects[] object, Item[] item)
 	{
 		this.location = location;
 		this.object = object;
+		parser = new GetCommand();
 		String command = "";
 		
 		while (!command.startsWith("quit"))
@@ -28,9 +29,7 @@ public class Main {
 			
 			System.out.println("Please Tell Me What to Do:");
 			
-			command = input.nextLine();
-			
-			command = command.toLowerCase();
+			command = parser.command(command);
 			
 			String commands[] = command.split(" ");
 

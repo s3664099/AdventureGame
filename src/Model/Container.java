@@ -18,7 +18,7 @@ import java.util.List;
 
 public class Container extends Objects {
 
-	List<Item> itemsInContainer = new ArrayList<Item>();
+	private List<Item> itemsInContainer = new ArrayList<Item>();
 	private boolean isContainerLocked = false;
 	private Item keyToUnlockContainer;
 	private int keyItemNo;

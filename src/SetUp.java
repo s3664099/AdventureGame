@@ -25,13 +25,13 @@ import Model.Objects;
 
 public class SetUp {
 	
-	int NUMBER_LOCATIONS = 12;
-	int NUMBER_OBJECTS = 5;
-	int NUMBER_ITEMS = 5;
+	private int NUMBER_LOCATIONS = 12;
+	private int NUMBER_OBJECTS = 5;
+	private int NUMBER_ITEMS = 5;
 	
-	Location[] location = new Location[NUMBER_LOCATIONS];
-	Objects[] object = new Objects[NUMBER_OBJECTS];
-	Item[] item = new Item[NUMBER_ITEMS];
+	private Location[] location = new Location[NUMBER_LOCATIONS];
+	private Objects[] object = new Objects[NUMBER_OBJECTS];
+	private Item[] item = new Item[NUMBER_ITEMS];
 	
 	//The constructor sets up all of the data
 	public SetUp()

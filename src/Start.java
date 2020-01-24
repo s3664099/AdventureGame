@@ -21,9 +21,11 @@ public class Start {
 		LoadData data = new LoadData();
 		//data.populateLocations();
 		
+		System.out.println("Data loaded, ready to begin");
+		
 		//SetUp start = new SetUp();
 		//start.writeToFile();
-		//Main begin = new Main(data.getLocation(), data.getObject(), data.getItem());
+		Main begin = new Main(data.getLocation(), data.getObject(), data.getItem());
 	}
 
 }
