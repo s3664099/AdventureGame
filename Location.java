@@ -12,21 +12,32 @@ public class Location {
 	public Location(String name) {
 		this.name = name;
 		this.nouns = new ArrayList<String>();
+		this.exits = new ArrayList<Exit>();
+		this.items = new ArrayList<Thing>();
+		this.objects = new ArrayList<Thing>();
 	}
 	
 	public void addExit(Exit exit) {
-		exits.add(exit);
-		nouns.add(exit.getDescription());
+		this.exits.add(exit);
+		this.nouns.add(exit.getDescription());
+	}
+	
+	public ArrayList<Exit> getExits() {
+		return this.exits;
+	}
+	
+	public ArrayList<String> getNouns() {
+		return this.nouns;
 	}
 	
 	public void addItem(Thing item) {
 		
 		if(item instanceof Item) {
-			items.add(item);
+			this.items.add(item);
 		} else {
-			objects.add(item);
+			this.objects.add(item);
 		}
-		nouns.add(item.getDescription());
+		this.nouns.add(item.getDescription());
 	}
 	
 	public String getName() {

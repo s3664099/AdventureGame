@@ -24,6 +24,4 @@ class GameTest {
 		assertEquals("Front Door",location.getName());
 	}
 	
-	
-
 }
