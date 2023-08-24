@@ -1,3 +1,4 @@
+package Data;
 import java.util.ArrayList;
 
 public class Location {
@@ -42,6 +43,18 @@ public class Location {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public String getExitList() {
+		
+		String exit_list = "";
+		
+		for (Exit exit:this.exits) {
+			exit_list = exit_list + exit.getDescription()+", ";
+		}
+		
+		return exit_list;
+		
 	}
 	
 	public boolean checkNoun(String nounCheck) {

@@ -1,6 +1,10 @@
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import Data.Exit;
+import Data.Location;
+
 import java.util.ArrayList;
 
 class GameTest {

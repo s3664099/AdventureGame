@@ -7,3 +7,6 @@ Java as the main language.
 
 ##23 August 2023##
 I have gone back to redo this game, so this is the new one that I have started to write.
+
+##24 August 2023##
+Added the model/view/controller. Added display to display location. Added controller to take input

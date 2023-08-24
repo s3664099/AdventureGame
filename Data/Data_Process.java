@@ -1,7 +1,11 @@
-public class Rooms {
+package Data;
+
+public class Data_Process {
 	
-	public Rooms() {
-		Location start = new Location("in the Minories");
+	Location start;
+	
+	public Data_Process() {
+		start = new Location("in the Minories");
 		Location two = new Location("in the Minories Beer Garden");
 		Location three = new Location("under the railway line");
 		Location four = new Location("on Tower Hill");
@@ -41,5 +45,9 @@ public class Rooms {
 		thirteen.addExit(new Exit("East",eleven,false,false,true));
 		thirteen.addExit(new Exit("Cheshire Cheese",fourteen,false,false,true));
 		fourteen.addExit(new Exit("East",thirteen,false,false,true));
+	}
+	
+	public Location start() {
+		return start;
 	}
 }
