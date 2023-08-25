@@ -11,12 +11,31 @@ public class Input {
 	
 	public String getCommand(String query) {
 		
-		String command;
+		String command = "";
+		boolean validCommand = false;
 		
-		System.out.print(query);
-		command = input.nextLine();
+		while (!validCommand) {
+			System.out.print(query);
+			command = input.nextLine();
+			validCommand = validateString(command);
+		}
 		
 		return command;
+	}
+	
+	private boolean validateString(String command) {
+
+		boolean validCommand = false;
+		
+		String[] lenCommand = command.split(" ");
+		
+		if ((lenCommand.length<3) && (command.length()>0)) {
+			validCommand = true;
+		} else {
+			System.out.println("Command has to be less than three words and not empty");
+		}
+		
+		return validCommand;
 	}
 
 }

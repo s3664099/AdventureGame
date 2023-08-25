@@ -5,7 +5,6 @@ import Data.Location;
 import View.Display_Text;
 
 //TODO
-//Controller - Only Allow Verb/Noun
 //Add Movement Functions
 //Add Comments
 //Move Data for Tower of London for a new game - ChatGPT
