@@ -1,5 +1,6 @@
 package Model;
 import Control.Input;
+import Control.Parser;
 import Data.Data_Process;
 import Data.Location;
 import View.Display_Text;
@@ -9,10 +10,9 @@ import View.Display_Text;
 //Add Comments
 //Move Data for Tower of London for a new game - ChatGPT
 
-
 public class Main {
 	
-	String parser = "Tell me what to do: ";
+	String query = "Tell me what to do: ";
 	String command;
 
 	public void run() {
@@ -21,12 +21,14 @@ public class Main {
 		Display_Text display = new Display_Text();
 		Location data = game_data.start();
 		Input input = new Input();
+		Parser parser = new Parser();
+		Command processor = new Command();
 		
 		while (true) {
 			display.display(data);
-			command = input.getCommand(parser);
-			System.out.println(command);
-		
+			command = input.getCommand(query);
+			String[] commands = parser.parseCommand(command);
+			data = processor.processCommand(commands,data);
 		}
 	}
 	

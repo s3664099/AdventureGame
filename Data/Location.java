@@ -67,8 +67,25 @@ public class Location {
 				foundNoun = true;
 			}
 		}
+		return foundNoun;	
+	}
+	
+	public Location checkMove(String command) {
 		
-		return foundNoun;
+		Location location = this;
 		
+		for (Exit exit:exits) {
+			
+			if (command.equals(exit.getDescription())) {
+				exit.move();
+				
+				if (exit.haveMoved()) {
+					location = exit.getDestination();
+				}
+				
+			}
+		}
+		
+		return location;
 	}
 }

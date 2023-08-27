@@ -32,11 +32,25 @@ public class Exit {
 			response = response.format("You go %s and enter a %s%n",this.description,
 										this.destination.getName());
 		}
-		
 		return response;
+	}
+	
+	public boolean haveMoved() {
+		
+		boolean moved = true;
+		
+		if ((locked) || (closed) || (!direction)) {
+			moved = false;
+		}
+		
+		return moved;
 	}
 	
 	public String getDescription() {
 		return this.description;
+	}
+	
+	public Location getDestination() {
+		return this.destination;
 	}
 }

@@ -1,5 +1,26 @@
 package Model;
 
-public class Command {
+import Data.Location;
 
+public class Command {
+	
+	Location currentLocation;
+	
+	public Location processCommand(String [] commands, Location location) {
+		
+		this.currentLocation = location;
+				
+		if (commands[0].equals("Go")) {
+			location = changeLocation(commands[1]);
+		}
+		return currentLocation;
+	}
+	
+	private Location changeLocation(String command) {
+
+		this.currentLocation = currentLocation.checkMove(command);
+		
+		return currentLocation;
+	}
+	
 }
