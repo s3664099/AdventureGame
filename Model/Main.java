@@ -1,3 +1,9 @@
+/* Main Function
+ * Created: 25 August 2023
+ * Updated: 27 August 2023
+ * This is the main routine for the game
+ */
+
 package Model;
 import Control.Input;
 import Control.Parser;
@@ -6,8 +12,7 @@ import Data.Location;
 import View.Display_Text;
 
 //TODO
-//Add Movement Functions
-//Add Comments
+//Add locked and closed doors to test the locked/closed functions
 //Move Data for Tower of London for a new game - ChatGPT
 
 public class Main {
@@ -31,5 +36,8 @@ public class Main {
 			data = processor.processCommand(commands,data);
 		}
 	}
-	
 }
+
+/* 25 August 2023 - Created File
+ * 27 August 2023 - Added Comments
+ */

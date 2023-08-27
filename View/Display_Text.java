@@ -1,3 +1,9 @@
+/* Display Class
+ * Created: 25 August 2023
+ * Updated: 27 August 2023
+ * View class to display details on the console.
+ */
+
 package View;
 import java.io.IOException;
 
@@ -21,5 +27,8 @@ public class Display_Text {
 		    System.out.println("");
 		}
 	}
-
 }
+
+/* 25 August 2023 - Created File
+* 27 August 2023 - Added Comments
+*/

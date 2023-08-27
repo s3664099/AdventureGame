@@ -1,3 +1,10 @@
+/* Location Class
+ * Created: 25 August 2023
+ * Updated: 27 August 2023
+ * The class that holds the details of the locations and handles
+ * any actions that deal with the location
+ */
+
 package Data;
 import java.util.ArrayList;
 
@@ -91,3 +98,6 @@ public class Location {
 		return location;
 	}
 }
+/* 25 August 2023 - Created file
+* 27 August 2023 - Added comments
+*/

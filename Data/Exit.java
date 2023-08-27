@@ -1,3 +1,10 @@
+/* Exit Class
+ * Created: 25 August 2023
+ * Updated: 27 August 2023
+ * Version 0.2
+ * Class to handle everything to do with an exit.
+ */
+
 package Data;
 
 public class Exit {
@@ -69,3 +76,7 @@ public class Exit {
 		return this.destination;
 	}
 }
+
+/* 25 August 2023 - Created File
+ * 27 August 2023 - Added Comments
+*/

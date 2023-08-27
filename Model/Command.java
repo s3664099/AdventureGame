@@ -1,3 +1,9 @@
+/* Command Function
+ * Created: 25 August 2023
+ * Updated: 27 August 2023
+ * Class that handles fuctions that deal with commands that are entered.
+ */
+
 package Model;
 
 import Data.Location;
@@ -22,5 +28,8 @@ public class Command {
 		
 		return currentLocation;
 	}
-	
 }
+
+/* 25 August 2023 - Created File
+ * 27 August 2023 - Added Comments
+ */
