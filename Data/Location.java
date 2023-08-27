@@ -76,10 +76,12 @@ public class Location {
 		
 		for (Exit exit:exits) {
 			
-			if (command.equals(exit.getDescription())) {
-				exit.move();
+			if (command.equals(exit.getCommand())) {
+				
+				System.out.println(exit.move());
 				
 				if (exit.haveMoved()) {
+					System.out.println("Hello");
 					location = exit.getDestination();
 				}
 				

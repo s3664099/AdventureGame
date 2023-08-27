@@ -10,7 +10,7 @@ public class Command {
 		
 		this.currentLocation = location;
 				
-		if (commands[0].equals("Go")) {
+		if (commands[0].equals("go")) {
 			location = changeLocation(commands[1]);
 		}
 		return currentLocation;
