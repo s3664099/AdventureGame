@@ -1,6 +1,7 @@
 /* Location Class
  * Created: 25 August 2023
- * Updated: 27 August 2023
+ * Updated: 29 August 2023
+ * Version: 0.3
  * The class that holds the details of the locations and handles
  * any actions that deal with the location
  */
@@ -83,15 +84,16 @@ public class Location {
 		
 		for (Exit exit:exits) {
 			
-			if (command.equals(exit.getCommand())) {
+			for(String x:exit.getCommand()) {
+			
+				if (command.equals(x)) {
 				
 				System.out.println(exit.move());
 				
-				if (exit.haveMoved()) {
-					System.out.println("Hello");
-					location = exit.getDestination();
+					if (exit.haveMoved()) {
+						location = exit.getDestination();
+					}
 				}
-				
 			}
 		}
 		
@@ -100,4 +102,5 @@ public class Location {
 }
 /* 25 August 2023 - Created file
 * 27 August 2023 - Added comments
+* 29 August 2023 - Reconfigured move command to allow for an array list
 */

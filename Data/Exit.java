@@ -1,11 +1,13 @@
 /* Exit Class
  * Created: 25 August 2023
- * Updated: 27 August 2023
- * Version 0.2
+ * Updated: 29 August 2023
+ * Version 0.3
  * Class to handle everything to do with an exit.
  */
 
 package Data;
+
+import java.util.ArrayList;
 
 public class Exit {
 	
@@ -14,22 +16,27 @@ public class Exit {
 	private boolean locked;
 	private boolean closed;
 	private boolean direction;
-	private String command;
+	private ArrayList<String> commands = new ArrayList<String>();
 	
+	//Standard Exit
 	public Exit(String description, Location destination, boolean locked, 
 				boolean closed,boolean direction) {
 		this.description = description;
-		this.command = description.toLowerCase();
+		this.commands.add(description.toLowerCase());
 		this.destination = destination;
 		this.locked = locked;
 		this.closed = closed;
 		this.direction = direction;
 	}
 	
+	//Exit with mutliple commands
 	public Exit(String description, String command, Location destination, boolean locked, 
 			boolean closed,boolean direction) {
 	this.description = description;
-	this.command = command;
+	
+	for (String x:command.split(" ")) {
+		this.commands.add(x);
+	}
 	this.destination = destination;
 	this.locked = locked;
 	this.closed = closed;
@@ -68,15 +75,32 @@ public class Exit {
 		return this.description;
 	}
 	
-	public String getCommand() {
-		return this.command;
+	public ArrayList<String> getCommand() {
+		return this.commands;
 	}
 	
 	public Location getDestination() {
 		return this.destination;
 	}
+	
+	public boolean getOpen() {
+		return this.closed;
+	}
+	
+	public boolean getLocked() {
+		return this.locked;
+	}
+	
+	public void openClose() {
+		this.closed = !this.closed;
+	}
+	
+	public void lockUnlock() {
+		this.locked = !this.locked;
+	}	
 }
 
 /* 25 August 2023 - Created File
  * 27 August 2023 - Added Comments
+ * 29 August 2023 - Added open/close lock/unlock. Added multiple commands for exits
 */
