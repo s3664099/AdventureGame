@@ -1,7 +1,7 @@
 /* Location Class
  * Created: 25 August 2023
- * Updated: 29 August 2023
- * Version: 0.3
+ * Updated: 4 September 2023
+ * Version: 0.4
  * The class that holds the details of the locations and handles
  * any actions that deal with the location
  */
@@ -78,6 +78,7 @@ public class Location {
 		return foundNoun;	
 	}
 	
+	//Checks whether is exit is present in the location
 	private Exit getExit(String command) {
 		
 		Exit foundExit = null;
@@ -94,6 +95,7 @@ public class Location {
 		return foundExit;
 	}
 	
+	//Checks whether movement is possible.
 	public Location checkMove(String command) {
 		
 		Location location = this;
@@ -115,6 +117,7 @@ public class Location {
 		return location;
 	}
 	
+	//Checks whether the exit can be opened
 	public void openExit(String command) {
 		
 		Exit exit = getExit(command);
@@ -139,4 +142,6 @@ public class Location {
 /* 25 August 2023 - Created file
 * 27 August 2023 - Added comments
 * 29 August 2023 - Reconfigured move command to allow for an array list
+* 4 September 2023 - Added function to open and exit. Moved exit check to separate private
+*                    method
 */
