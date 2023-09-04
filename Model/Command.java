@@ -18,7 +18,12 @@ public class Command {
 				
 		if (commands[0].equals("go")) {
 			location = changeLocation(commands[1]);
+		} else if (commands[0].equals("open")) {
+			openExit(commands[1]);
+		} else if (commands[0].equals("close")) {
+			closeExit(commands[1]);
 		}
+		
 		return currentLocation;
 	}
 	
@@ -27,6 +32,16 @@ public class Command {
 		this.currentLocation = currentLocation.checkMove(command);
 		
 		return currentLocation;
+	}
+	
+	private Location openExit(String command) {
+		System.out.println("Opened");
+		return this.currentLocation;
+	}
+	
+	private Location closeExit(String command) {
+		System.out.println("Opened");
+		return this.currentLocation;
 	}
 }
 
