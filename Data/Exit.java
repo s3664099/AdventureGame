@@ -1,7 +1,7 @@
 /* Exit Class
  * Created: 25 August 2023
- * Updated: 29 August 2023
- * Version 0.3
+ * Updated: 4 September 2023
+ * Version 0.4
  * Class to handle everything to do with an exit.
  */
 
@@ -66,10 +66,17 @@ public class Exit {
 	public Location getDestination() {
 		return this.destination;
 	}
+	
+	public boolean getOpen() {
+		return false;
+	}
+	
+	public void openClose() {};
 
 }
 
 /* 25 August 2023 - Created File
  * 27 August 2023 - Added Comments
  * 29 August 2023 - Added open/close lock/unlock. Added multiple commands for exits
+ * 4 September 2023 - Created subclass for closeable Exit
 */

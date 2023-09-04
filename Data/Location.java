@@ -78,26 +78,62 @@ public class Location {
 		return foundNoun;	
 	}
 	
-	public Location checkMove(String command) {
+	private Exit getExit(String command) {
 		
-		Location location = this;
+		Exit foundExit = null;
 		
 		for (Exit exit:exits) {
 			
-			for(String x:exit.getCommand()) {
-			
+			for (String x:exit.getCommand()) {
 				if (command.equals(x)) {
-				
-				System.out.println(exit.move());
-				
-					if (exit.haveMoved()) {
-						location = exit.getDestination();
-					}
+					foundExit = exit;
 				}
 			}
 		}
 		
+		return foundExit;
+	}
+	
+	public Location checkMove(String command) {
+		
+		Location location = this;
+		
+		Exit exit = getExit(command);
+		
+		if (exit != null) {
+			
+			System.out.println(exit.move());
+			
+			if (exit.haveMoved()) {
+				location = exit.getDestination();
+			}
+			
+		} else {
+			System.out.println("You cannot go in that direction");
+		}
+		
 		return location;
+	}
+	
+	public void openExit(String command) {
+		
+		Exit exit = getExit(command);
+		
+		if (exit != null) {
+			
+			if (exit instanceof CloseableExit) {
+				
+				if (exit.getOpen()) {
+					exit.openClose();
+				}
+				
+			} else {
+				System.out.printf("I cannot open %s%n", command);
+			}
+		} else {
+			System.out.printf("I cannot see a %s%n",command);
+		}
+		
 	}
 }
 /* 25 August 2023 - Created file

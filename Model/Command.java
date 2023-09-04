@@ -15,13 +15,19 @@ public class Command {
 	public Location processCommand(String [] commands, Location location) {
 		
 		this.currentLocation = location;
+		
+		String verb = "";
+		
+		if (commands.length>1) {
+			verb = commands[1];
+		}
 				
 		if (commands[0].equals("go")) {
-			location = changeLocation(commands[1]);
+			location = changeLocation(verb);
 		} else if (commands[0].equals("open")) {
-			openExit(commands[1]);
+			openExit(verb);
 		} else if (commands[0].equals("close")) {
-			closeExit(commands[1]);
+			closeExit(verb);
 		}
 		
 		return currentLocation;
@@ -34,14 +40,13 @@ public class Command {
 		return currentLocation;
 	}
 	
-	private Location openExit(String command) {
-		System.out.println("Opened");
-		return this.currentLocation;
+	private void openExit(String command) {
+		
+		currentLocation.openExit(command);
 	}
 	
-	private Location closeExit(String command) {
+	private void closeExit(String command) {
 		System.out.println("Opened");
-		return this.currentLocation;
 	}
 }
 

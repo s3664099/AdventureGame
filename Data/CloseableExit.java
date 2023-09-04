@@ -55,7 +55,6 @@ public class CloseableExit extends Exit {
 		return moved;
 	}
 	
-	
 	public boolean getOpen() {
 		return this.closed;
 	}
