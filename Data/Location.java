@@ -14,24 +14,24 @@ public class Location {
 	private String name;
 	private String description;
 	private ArrayList<String> nouns;
-	private ArrayList<Exit> exits;
+	private ArrayList<OrdinaryExit> exits;
 	private ArrayList<Thing> items;
 	private ArrayList<Thing> objects;
 	
 	public Location(String name) {
 		this.name = name;
 		this.nouns = new ArrayList<String>();
-		this.exits = new ArrayList<Exit>();
+		this.exits = new ArrayList<OrdinaryExit>();
 		this.items = new ArrayList<Thing>();
 		this.objects = new ArrayList<Thing>();
 	}
 	
-	public void addExit(Exit exit) {
+	public void addExit(OrdinaryExit exit) {
 		this.exits.add(exit);
 		this.nouns.add(exit.getDescription());
 	}
 	
-	public ArrayList<Exit> getExits() {
+	public ArrayList<OrdinaryExit> getExits() {
 		return this.exits;
 	}
 	
@@ -57,7 +57,7 @@ public class Location {
 		
 		String exit_list = "";
 		
-		for (Exit exit:this.exits) {
+		for (OrdinaryExit exit:this.exits) {
 			exit_list = exit_list + exit.getDescription()+", ";
 		}
 		
@@ -79,11 +79,11 @@ public class Location {
 	}
 	
 	//Checks whether is exit is present in the location
-	private Exit getExit(String command) {
+	private OrdinaryExit getExit(String command) {
 		
-		Exit foundExit = null;
+		OrdinaryExit foundExit = null;
 		
-		for (Exit exit:exits) {
+		for (OrdinaryExit exit:exits) {
 			
 			for (String x:exit.getCommand()) {
 				if (command.equals(x)) {
@@ -100,7 +100,7 @@ public class Location {
 		
 		Location location = this;
 		
-		Exit exit = getExit(command);
+		OrdinaryExit exit = getExit(command);
 		
 		if (exit != null) {
 			
@@ -120,7 +120,7 @@ public class Location {
 	//Checks whether the exit can be opened
 	public void openExit(String command) {
 		
-		Exit exit = getExit(command);
+		OrdinaryExit exit = getExit(command);
 		
 		if (exit != null) {
 			

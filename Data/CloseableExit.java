@@ -1,7 +1,7 @@
 /* CloseableExit Class
  * Created: 4 September 2023
- * Updated: 4 September 2023
- * Version 0.1
+ * Updated: 5 September 2023
+ * Version 0.3
  * Class to handle and exit that can be closed
  */
 
@@ -9,15 +9,19 @@ package Data;
 
 import java.util.ArrayList;
 
-public class CloseableExit extends Exit {
+public class CloseableExit implements Exit {
 	
+	private String description;
+	private Location destination;
+	private boolean direction;
+	private ArrayList<String> commands = new ArrayList<String>();
 	private boolean closed;
-	private boolean closeable = true;
 	
 	//Standard Exit
-	public CloseableExit(String description, Location destination, boolean closed,boolean direction) {
+	public CloseableExit(String description, Location destination, boolean closed) {
 		
-		super(description, destination, direction);
+		this.description = description;
+		this.destination = destination;
 		this.closed = closed;
 	}
 		
@@ -61,6 +65,36 @@ public class CloseableExit extends Exit {
 	
 	public void openClose() {
 		this.closed = !this.closed;
+	}
+
+	@Override
+	public String moveDescription(String Command) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDescription() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<String> getCommands() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Location getDestination() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void lockUnlock() {
+		// TODO Auto-generated method stub
+		
 	}
 }
 
