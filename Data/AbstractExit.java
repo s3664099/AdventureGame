@@ -1,6 +1,6 @@
 /* Abstract Exit Class
  * Created: 5 September 2023
- * Updated: 5 September 2023
+ * Updated: 6 September 2023
  * Version 0.1
  * Class to handle everything to do with an exit.
  */
@@ -34,8 +34,24 @@ public abstract class AbstractExit {
 		this.destination = destination;
 		this.direction = direction;
 	}
+	
+	public String getDescription() {
+		return this.description;
+	}
+	
+	public ArrayList<String> getCommands() {
+		return this.commands;
+	}
+	
+	public Location getDestination() {
+		return this.destination;
+	}
+	
+	public boolean getDirection() {
+		return direction;
+	}
 
 }
 /* 5 September 2023 - Created File
- * 
+ * 6 September 2023 - Completed class with getters and setters
  */ 

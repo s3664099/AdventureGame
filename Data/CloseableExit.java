@@ -1,7 +1,7 @@
 /* CloseableExit Class
  * Created: 4 September 2023
- * Updated: 5 September 2023
- * Version 0.3
+ * Updated: 6 September 2023
+ * Version 0.4
  * Class to handle and exit that can be closed
  */
 
@@ -9,40 +9,26 @@ package Data;
 
 import java.util.ArrayList;
 
-public class CloseableExit implements Exit {
+public class CloseableExit extends AbstractExit implements Exit {
 	
-	private String description;
-	private Location destination;
-	private boolean direction;
-	private ArrayList<String> commands = new ArrayList<String>();
 	private boolean closed;
-	
-	//Standard Exit
-	public CloseableExit(String description, Location destination, boolean closed) {
-		
-		this.description = description;
-		this.destination = destination;
-		this.closed = closed;
-	}
 		
 	//Exit with multiple commands
-	public CloseableExit(String description, String command, Location destination,
-			boolean closed, boolean direction) {
+	public CloseableExit(String description, String command, Location destination, boolean closed) {
 	
-		super(description, command, destination, direction);
-		
+		super(description, destination, false, command);
 		this.closed = closed;
 
 	}
 	
-	public String move() {
+	public String moveDescription(String command) {
 		
 		String response = "";
 		
 		if (closed) {
 			response = response.format("The %s is closed%n", super.getDescription());
 		} else {
-			response = super.move();
+			response = response.format("You enter the %s%n",super.getDescription());
 		}
 		
 		return response;
@@ -68,35 +54,33 @@ public class CloseableExit implements Exit {
 	}
 
 	@Override
-	public String moveDescription(String Command) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return super.getDescription();
 	}
 
 	@Override
 	public ArrayList<String> getCommands() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return super.getCommands();
 	}
 
 	@Override
 	public Location getDestination() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return super.getDestination();
 	}
 
 	@Override
-	public void lockUnlock() {
-		// TODO Auto-generated method stub
-		
+	public void lockUnlock() {}
+
+	//Flags that the exit can be opened/closed
+	@Override
+	public boolean isOpenable() {
+		return true;
 	}
 }
 
 /* 4 September 2023 - Created File
-*/
+ * 6 September 2023 - Fixed file to call abstractExit and match interface
+ */

@@ -1,7 +1,7 @@
 /* Location Class
  * Created: 25 August 2023
- * Updated: 4 September 2023
- * Version: 0.4
+ * Updated: 6 September 2023
+ * Version: 0.5
  * The class that holds the details of the locations and handles
  * any actions that deal with the location
  */
@@ -85,7 +85,7 @@ public class Location {
 		
 		for (OrdinaryExit exit:exits) {
 			
-			for (String x:exit.getCommand()) {
+			for (String x:exit.getCommands()) {
 				if (command.equals(x)) {
 					foundExit = exit;
 				}
@@ -104,7 +104,7 @@ public class Location {
 		
 		if (exit != null) {
 			
-			System.out.println(exit.move());
+			System.out.println(exit.moveDescription(command));
 			
 			if (exit.haveMoved()) {
 				location = exit.getDestination();
@@ -118,25 +118,31 @@ public class Location {
 	}
 	
 	//Checks whether the exit can be opened
-	public void openExit(String command) {
+	public String openExit(String command) {
+		
+		String response = "";
 		
 		OrdinaryExit exit = getExit(command);
 		
 		if (exit != null) {
 			
-			if (exit instanceof CloseableExit) {
+			if (exit.isOpenable()) {
 				
 				if (exit.getOpen()) {
 					exit.openClose();
+					response = response.format("You open the %s%n", exit.getDescription());
+				} else {
+					response = response.format("The %s is already open%n", exit.getDescription());
 				}
 				
 			} else {
-				System.out.printf("I cannot open %s%n", command);
+				response = response.format("I cannot open %s%n", exit.getDescription());
 			}
 		} else {
-			System.out.printf("I cannot see a %s%n",command);
+			response = response.format("I cannot see a %s%n",command);
 		}
 		
+		return response;
 	}
 }
 /* 25 August 2023 - Created file
@@ -144,4 +150,5 @@ public class Location {
 * 29 August 2023 - Reconfigured move command to allow for an array list
 * 4 September 2023 - Added function to open and exit. Moved exit check to separate private
 *                    method
+* 6 September 2023 - Modified the code to handle the exits and finalised the openExit method
 */
