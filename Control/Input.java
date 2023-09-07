@@ -1,7 +1,7 @@
 /* Name: Input Class
  * Created: 25 August 2023
- * Updated: 27 August 2023
- * Version: 0.2
+ * Updated: 7 September 2023
+ * Version: 0.3
  * This takes the user input and returns the command.
  * At this stage the parser consists of only a verb and a noun.
  */
@@ -27,6 +27,7 @@ public class Input {
 		while (!validCommand) {
 			System.out.print(query);
 			command = input.nextLine();
+			command = cardinalDirections(command);
 			validCommand = validateString(command);
 		}
 		
@@ -48,9 +49,32 @@ public class Input {
 		
 		return validCommand;
 	}
+	
+	//Reconfigures movement command for cardinal directions
+	private String cardinalDirections(String command) {
+		
+		command = command.toLowerCase();
+		
+		if ((command.equals("n")) || (command.equals("north"))) {
+			command = "go north";
+		} else if ((command.equals("s")) || (command.equals("south"))) {
+			command = "go south";
+		} else if ((command.equals("e")) || (command.equals("east"))) {
+			command = "go east";
+		} else if ((command.equals("w")) || (command.equals("west"))) {
+			command = "go west";
+		} else if ((command.equals("u")) || (command.equals("up"))) {
+			command = "go up";
+		} else if ((command.equals("d")) || (command.equals("down"))) {
+			command = "go down";
+		}
+		
+		return command;
+	}
 }
 
 /*
  * 25 August 2023 - Created file
  * 27 August 2023 - Added Comments
+ * 7 September 2023 - Added method to allow single word/letter movement for directions
 */
