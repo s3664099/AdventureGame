@@ -1,7 +1,7 @@
 /* Location Class
  * Created: 25 August 2023
- * Updated: 6 September 2023
- * Version: 0.5
+ * Updated: 7 September 2023
+ * Version: 0.6
  * The class that holds the details of the locations and handles
  * any actions that deal with the location
  */
@@ -14,24 +14,24 @@ public class Location {
 	private String name;
 	private String description;
 	private ArrayList<String> nouns;
-	private ArrayList<OrdinaryExit> exits;
+	private ArrayList<Exit> exits;
 	private ArrayList<Thing> items;
 	private ArrayList<Thing> objects;
 	
 	public Location(String name) {
 		this.name = name;
 		this.nouns = new ArrayList<String>();
-		this.exits = new ArrayList<OrdinaryExit>();
+		this.exits = new ArrayList<Exit>();
 		this.items = new ArrayList<Thing>();
 		this.objects = new ArrayList<Thing>();
 	}
 	
-	public void addExit(OrdinaryExit exit) {
+	public void addExit(Exit exit) {
 		this.exits.add(exit);
 		this.nouns.add(exit.getDescription());
 	}
 	
-	public ArrayList<OrdinaryExit> getExits() {
+	public ArrayList<Exit> getExits() {
 		return this.exits;
 	}
 	
@@ -57,7 +57,7 @@ public class Location {
 		
 		String exit_list = "";
 		
-		for (OrdinaryExit exit:this.exits) {
+		for (Exit exit:this.exits) {
 			exit_list = exit_list + exit.getDescription()+", ";
 		}
 		
@@ -79,11 +79,11 @@ public class Location {
 	}
 	
 	//Checks whether is exit is present in the location
-	private OrdinaryExit getExit(String command) {
+	private Exit getExit(String command) {
 		
-		OrdinaryExit foundExit = null;
+		Exit foundExit = null;
 		
-		for (OrdinaryExit exit:exits) {
+		for (Exit exit:exits) {
 			
 			for (String x:exit.getCommands()) {
 				if (command.equals(x)) {
@@ -100,7 +100,7 @@ public class Location {
 		
 		Location location = this;
 		
-		OrdinaryExit exit = getExit(command);
+		Exit exit = getExit(command);
 		
 		if (exit != null) {
 			
@@ -122,7 +122,7 @@ public class Location {
 		
 		String response = "";
 		
-		OrdinaryExit exit = getExit(command);
+		Exit exit = getExit(command);
 		
 		if (exit != null) {
 			
@@ -151,4 +151,5 @@ public class Location {
 * 4 September 2023 - Added function to open and exit. Moved exit check to separate private
 *                    method
 * 6 September 2023 - Modified the code to handle the exits and finalised the openExit method
+* 7 September 2023 - Changed code to handle redefined exit
 */

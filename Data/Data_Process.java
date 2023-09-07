@@ -23,7 +23,7 @@ public class Data_Process {
 		Location sixteen = new Location("in Starbuck's Toilet");
 		start.addExit(new OrdinaryExit("North", two, true));
 		start.addExit(new OrdinaryExit("South", three, true));
-		start.addExit(new CloseableExit("Storeroom Door","storeroom door",fifteen,true,false));
+		start.addExit(new CloseableExit("Storeroom Door","storeroom door",fifteen,true));
 		two.addExit(new OrdinaryExit("South",start,true));
 		three.addExit(new OrdinaryExit("South",four,true));
 		three.addExit(new OrdinaryExit("North",eleven,true));
@@ -45,7 +45,7 @@ public class Data_Process {
 		eleven.addExit(new OrdinaryExit("West",thirteen,true));
 		eleven.addExit(new OrdinaryExit("Starbucks",twelve,false));
 		twelve.addExit(new OrdinaryExit("West",eleven,true));
-		twelve.addExit(new CloseableExit("Toilet Door","toilet door",sixteen,false,false));
+		twelve.addExit(new CloseableExit("Toilet Door","toilet door",sixteen,true));
 		thirteen.addExit(new OrdinaryExit("East",eleven,true));
 		thirteen.addExit(new OrdinaryExit("Cheshire Cheese","cheshire cheese pub",fourteen,true));
 		fourteen.addExit(new OrdinaryExit("East",thirteen,true));
