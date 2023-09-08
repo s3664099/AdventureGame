@@ -15,6 +15,7 @@ import Data.Location;
 public class Command {
 	
 	private Location currentLocation;
+	private String response = "";
 	
 	public Location getCurrentLocation() {
 		return currentLocation;
@@ -27,7 +28,7 @@ public class Command {
 		this.currentLocation = location;
 
 		//Standard response
-		String response = "I'm sorry, I do not understand";
+		response = "I'm sorry, I do not understand";
 		
 		String verb = "";
 		
@@ -47,35 +48,71 @@ public class Command {
 		return response;
 	}
 	
-	//Movement method
-	private String changeLocation(String command) {
-
-		String response = "You are unable to move there";
-
+	private Exit getExits(String command) {
+		
+		Exit exit = null;
+		
 		//Gets all exits from location
 		ArrayList<Exit> exits = currentLocation.getExits();
 		
-		for (Exit exit:exits) {
-			for (String x:exit.getCommands()) {
+		for (Exit exitSearch:exits) {
+			
+			//Gets the commands
+			for (String x:exitSearch.getCommands()) {
 				
 				//Checks if the exit matches the command
 				if (command.equals(x)) {
-					
-					//Checks if the player can move through the direction
-					response = exit.moveDescription(command);
-					if (exit.haveMoved()) {
-						currentLocation = exit.getDestination();
-					}
+					exit = exitSearch;
 				}
 			}
+		}
+		return exit;
+	}
+	
+	//Movement method
+	private String changeLocation(String command) {
+
+		response = "You are unable to move there";
+
+		Exit exit = getExits(command);
+		
+		if (exit !=  null) {
+			response = exit.moveDescription(command);
+			if (exit.haveMoved()) {
+				currentLocation = exit.getDestination();
+			}
+				
 		}
 		
 		return response;
 	}
 	
+	//Method to open an exit
 	private void openExit(String command) {
 		
-		//currentLocation.openExit(command);
+		response = response.format("You cannot open the %s",command);
+		
+		Exit exit = getExits(command);
+		
+		//Checks if the exit is present
+		if (exit == null) {
+			response = response.format("I do not see a ", command);
+		} else {
+			
+			//Is the exit openable?
+			if (exit.isOpenable()) {
+				
+				//Is the exit open - if not the exit is opened.
+				if (exit.getOpen()) {
+					exit.openClose();
+					response = response.format("You open the %s",exit.getDescription());
+				} else {
+					response = response.format("The %s is already open",exit.getDescription());
+				}
+			} else {
+				response = response.format("You cannot open the %s", exit.getDescription());
+			}
+		}
 	}
 	
 	private void closeExit(String command) {
