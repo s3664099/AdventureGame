@@ -1,7 +1,7 @@
 /* Location Class
  * Created: 25 August 2023
- * Updated: 7 September 2023
- * Version: 0.6
+ * Updated: 8 September 2023
+ * Version: 0.7
  * The class that holds the details of the locations and handles
  * any actions that deal with the location
  */
@@ -78,34 +78,6 @@ public class Location {
 		}
 		return foundNoun;	
 	}
-			
-	//Checks whether the exit can be opened
-/*	public String openExit(String command) {
-		
-		String response = "";
-		
-		Exit exit = getExit(command);
-		
-		if (exit != null) {
-			
-			if (exit.isOpenable()) {
-				
-				if (exit.getOpen()) {
-					exit.openClose();
-					response = response.format("You open the %s%n", exit.getDescription());
-				} else {
-					response = response.format("The %s is already open%n", exit.getDescription());
-				}
-				
-			} else {
-				response = response.format("I cannot open %s%n", exit.getDescription());
-			}
-		} else {
-			response = response.format("I cannot see a %s%n",command);
-		}
-		
-		return response;
-	}*/
 } 
 /* 25 August 2023 - Created file
 * 27 August 2023 - Added comments
@@ -114,4 +86,5 @@ public class Location {
 *                    method
 * 6 September 2023 - Modified the code to handle the exits and finalised the openExit method
 * 7 September 2023 - Changed code to handle redefined exit
+* 8 September 2023 - Removed command processing from class
 */

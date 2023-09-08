@@ -1,6 +1,7 @@
 /* Display Class
  * Created: 25 August 2023
- * Updated: 27 August 2023
+ * Updated: 8 September 2023
+ * Version: 0.3
  * View class to display details on the console.
  */
 
@@ -36,4 +37,5 @@ public class Display_Text {
 
 /* 25 August 2023 - Created File
 * 27 August 2023 - Added Comments
+* 8 September 2023 - Added method to display responses
 */

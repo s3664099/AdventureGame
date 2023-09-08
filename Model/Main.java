@@ -1,6 +1,7 @@
 /* Main Function
  * Created: 25 August 2023
- * Updated: 27 August 2023
+ * Updated: 8 September 2023
+ * Version: 0.3
  * This is the main routine for the game
  */
 
@@ -42,4 +43,6 @@ public class Main {
 
 /* 25 August 2023 - Created File
  * 27 August 2023 - Added Comments
+ * 8 September 2023 - Reconfigured code to pass responses to view and retrieve location
+ *                    from processor
  */

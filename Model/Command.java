@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 4 September 2023
- * Version: 0.3
+ * Updated: 8 September 2023
+ * Version: 0.5
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -147,4 +147,5 @@ public class Command {
 /* 25 August 2023 - Created File
  * 27 August 2023 - Added Comments
  * 4 August 2023 - Added the open and began the close command
+ * 8 September 2023 - Moved movement processing and added open and close.
  */
