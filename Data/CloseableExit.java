@@ -21,6 +21,7 @@ public class CloseableExit extends AbstractExit implements Exit {
 
 	}
 	
+	//Returns the description of what happens when attempt to move
 	public String moveDescription(String command) {
 		
 		String response = "";
@@ -34,6 +35,7 @@ public class CloseableExit extends AbstractExit implements Exit {
 		return response;
 	}
 	
+	//Checks if it is possible to move in that direction
 	public boolean haveMoved() {
 		
 		boolean moved = true;

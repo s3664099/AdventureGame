@@ -7,43 +7,75 @@
 
 package Model;
 
+import java.util.ArrayList;
+
+import Data.Exit;
 import Data.Location;
 
 public class Command {
 	
-	Location currentLocation;
+	private Location currentLocation;
 	
-	public Location processCommand(String [] commands, Location location) {
+	public Location getCurrentLocation() {
+		return currentLocation;
+	}
+	
+	//Executes the command
+	public String processCommand(String [] commands, Location location) {
 		
+		//Sets the location
 		this.currentLocation = location;
+
+		//Standard response
+		String response = "I'm sorry, I do not understand";
 		
 		String verb = "";
 		
 		if (commands.length>1) {
 			verb = commands[1];
 		}
-				
+		
+		//Goes through the verbs
 		if (commands[0].equals("go")) {
-			location = changeLocation(verb);
+			response = changeLocation(verb);
 		} else if (commands[0].equals("open")) {
 			openExit(verb);
 		} else if (commands[0].equals("close")) {
 			closeExit(verb);
 		}
 		
-		return currentLocation;
+		return response;
 	}
 	
-	private Location changeLocation(String command) {
+	//Movement method
+	private String changeLocation(String command) {
 
-		this.currentLocation = currentLocation.checkMove(command);
+		String response = "You are unable to move there";
+
+		//Gets all exits from location
+		ArrayList<Exit> exits = currentLocation.getExits();
 		
-		return currentLocation;
+		for (Exit exit:exits) {
+			for (String x:exit.getCommands()) {
+				
+				//Checks if the exit matches the command
+				if (command.equals(x)) {
+					
+					//Checks if the player can move through the direction
+					response = exit.moveDescription(command);
+					if (exit.haveMoved()) {
+						currentLocation = exit.getDestination();
+					}
+				}
+			}
+		}
+		
+		return response;
 	}
 	
 	private void openExit(String command) {
 		
-		currentLocation.openExit(command);
+		//currentLocation.openExit(command);
 	}
 	
 	private void closeExit(String command) {

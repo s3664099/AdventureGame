@@ -21,6 +21,11 @@ public class Display_Text {
 		
 	}
 	
+	//Displays response to the command
+	public void displayResponse(String response) {
+		System.out.println(response);
+	}
+	
 	private void clear() {
 		for(int i = 0; i < 1000; i++)
 		{

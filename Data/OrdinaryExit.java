@@ -21,7 +21,8 @@ public class OrdinaryExit extends AbstractExit implements Exit {
 	public OrdinaryExit(String description, String command, Location destination, boolean direction) {
 		super(description, destination, direction, command);
 	}
-		
+	
+	//Exit is always moveable
 	public boolean haveMoved() {
 		return true;
 	}
@@ -40,6 +41,7 @@ public class OrdinaryExit extends AbstractExit implements Exit {
 	
 	public void openClose() {}
 
+	//Returns the description of the player attempts to move
 	@Override
 	public String moveDescription(String Command) {
 		

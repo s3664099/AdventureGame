@@ -28,12 +28,14 @@ public class Main {
 		Input input = new Input();
 		Parser parser = new Parser();
 		Command processor = new Command();
+		String response = "";
 		
 		while (true) {
 			display.display(data);
 			command = input.getCommand(query);
 			String[] commands = parser.parseCommand(command);
-			data = processor.processCommand(commands,data);
+			display.displayResponse(processor.processCommand(commands,data));
+			data = processor.getCurrentLocation();
 		}
 	}
 }

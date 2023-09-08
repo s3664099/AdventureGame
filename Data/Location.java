@@ -53,6 +53,7 @@ public class Location {
 		return name;
 	}
 	
+	//Returns a list of exits to display
 	public String getExitList() {
 		
 		String exit_list = "";
@@ -77,48 +78,9 @@ public class Location {
 		}
 		return foundNoun;	
 	}
-	
-	//Checks whether is exit is present in the location
-	private Exit getExit(String command) {
-		
-		Exit foundExit = null;
-		
-		for (Exit exit:exits) {
 			
-			for (String x:exit.getCommands()) {
-				if (command.equals(x)) {
-					foundExit = exit;
-				}
-			}
-		}
-		
-		return foundExit;
-	}
-	
-	//Checks whether movement is possible.
-	public Location checkMove(String command) {
-		
-		Location location = this;
-		
-		Exit exit = getExit(command);
-		
-		if (exit != null) {
-			
-			System.out.println(exit.moveDescription(command));
-			
-			if (exit.haveMoved()) {
-				location = exit.getDestination();
-			}
-			
-		} else {
-			System.out.println("You cannot go in that direction");
-		}
-		
-		return location;
-	}
-	
 	//Checks whether the exit can be opened
-	public String openExit(String command) {
+/*	public String openExit(String command) {
 		
 		String response = "";
 		
@@ -143,8 +105,8 @@ public class Location {
 		}
 		
 		return response;
-	}
-}
+	}*/
+} 
 /* 25 August 2023 - Created file
 * 27 August 2023 - Added comments
 * 29 August 2023 - Reconfigured move command to allow for an array list
