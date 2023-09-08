@@ -49,6 +49,8 @@ public class Data_Process {
 		thirteen.addExit(new OrdinaryExit("East",eleven,true));
 		thirteen.addExit(new OrdinaryExit("Cheshire Cheese","cheshire cheese pub",fourteen,true));
 		fourteen.addExit(new OrdinaryExit("East",thirteen,true));
+		fifteen.addExit(new OrdinaryExit("West", start, true));
+		sixteen.addExit(new OrdinaryExit("North", twelve, true));
 	}
 	
 	public Location start() {

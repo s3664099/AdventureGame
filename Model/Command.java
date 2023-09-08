@@ -115,8 +115,32 @@ public class Command {
 		}
 	}
 	
+	//Method for closing an exit
 	private void closeExit(String command) {
-		System.out.println("Opened");
+		
+		response = response.format("You cannot close the %s",command);
+		
+		Exit exit = getExits(command);
+		
+		//Checks if the exit is present
+		if (exit == null) {
+			response = response.format("I do not see a ", command);
+		} else {
+			
+			//Is the exit openable?
+			if (exit.isOpenable()) {
+				
+				//Is the exit open - if not the exit is opened.
+				if (!exit.getOpen()) {
+					exit.openClose();
+					response = response.format("You close the %s",exit.getDescription());
+				} else {
+					response = response.format("The %s is already closed",exit.getDescription());
+				}
+			} else {
+				response = response.format("You cannot close the %s", exit.getDescription());
+			}
+		}
 	}
 }
 
