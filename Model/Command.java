@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 8 September 2023
- * Version: 0.5
+ * Updated: 12 September 2023
+ * Version: 0.6
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -40,9 +40,11 @@ public class Command {
 		if (commands[0].equals("go")) {
 			response = changeLocation(verb);
 		} else if (commands[0].equals("open")) {
-			openExit(verb);
+			response = openExit(verb);
 		} else if (commands[0].equals("close")) {
-			closeExit(verb);
+			response = closeExit(verb);
+		} else if (commands[0].equals("look")) {
+			
 		}
 		
 		return response;
@@ -88,7 +90,7 @@ public class Command {
 	}
 	
 	//Method to open an exit
-	private void openExit(String command) {
+	private String openExit(String command) {
 		
 		response = response.format("You cannot open the %s",command);
 		
@@ -113,10 +115,11 @@ public class Command {
 				response = response.format("You cannot open the %s", exit.getName());
 			}
 		}
+		return response;
 	}
 	
 	//Method for closing an exit
-	private void closeExit(String command) {
+	private String closeExit(String command) {
 		
 		response = response.format("You cannot close the %s",command);
 		
@@ -141,11 +144,13 @@ public class Command {
 				response = response.format("You cannot close the %s", exit.getName());
 			}
 		}
+		return response;
 	}
 }
 
 /* 25 August 2023 - Created File
  * 27 August 2023 - Added Comments
  * 4 August 2023 - Added the open and began the close command
- * 8 September 2023 - Moved movement processing and added open and close.
+ * 8 September 2023 - Moved movement processing and added open and close.\
+ * 12 September 2023 - Started look at added response to open and close
  */
