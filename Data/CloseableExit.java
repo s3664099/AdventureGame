@@ -1,7 +1,7 @@
 /* CloseableExit Class
  * Created: 4 September 2023
- * Updated: 6 September 2023
- * Version 0.4
+ * Updated: 12 September 2023
+ * Version 0.5
  * Class to handle and exit that can be closed
  */
 
@@ -14,9 +14,10 @@ public class CloseableExit extends AbstractExit implements Exit {
 	private boolean closed;
 		
 	//Exit with multiple commands
-	public CloseableExit(String description, String command, Location destination, boolean closed) {
+	public CloseableExit(String name, String command, Location destination, 
+						boolean closed, String description) {
 	
-		super(description, destination, false, command);
+		super(name, destination, false, command, description);
 		this.closed = closed;
 
 	}
@@ -27,9 +28,9 @@ public class CloseableExit extends AbstractExit implements Exit {
 		String response = "";
 		
 		if (closed) {
-			response = response.format("The %s is closed%n", super.getDescription());
+			response = response.format("The %s is closed%n", super.getName());
 		} else {
-			response = response.format("You enter the %s%n",super.getDescription());
+			response = response.format("You enter the %s%n",super.getName());
 		}
 		
 		return response;
@@ -56,9 +57,9 @@ public class CloseableExit extends AbstractExit implements Exit {
 	}
 
 	@Override
-	public String getDescription() {
+	public String getName() {
 		
-		return super.getDescription();
+		return super.getName();
 	}
 
 	@Override
@@ -81,8 +82,15 @@ public class CloseableExit extends AbstractExit implements Exit {
 	public boolean isOpenable() {
 		return true;
 	}
+
+	@Override
+	public String getDescription() {
+		
+		return super.getDescription();
+	}
 }
 
 /* 4 September 2023 - Created File
  * 6 September 2023 - Fixed file to call abstractExit and match interface
+ * 12 September 2023 - Added functionality to handle exit descriptions
  */

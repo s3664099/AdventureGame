@@ -17,9 +17,11 @@ public class Location {
 	private ArrayList<Exit> exits;
 	private ArrayList<Thing> items;
 	private ArrayList<Thing> objects;
+	private boolean firstVisit = true;
 	
-	public Location(String name) {
+	public Location(String name, String description) {
 		this.name = name;
+		this.description = description;
 		this.nouns = new ArrayList<String>();
 		this.exits = new ArrayList<Exit>();
 		this.items = new ArrayList<Thing>();
@@ -28,7 +30,7 @@ public class Location {
 	
 	public void addExit(Exit exit) {
 		this.exits.add(exit);
-		this.nouns.add(exit.getDescription());
+		this.nouns.add(exit.getName());
 	}
 	
 	public ArrayList<Exit> getExits() {
@@ -50,7 +52,19 @@ public class Location {
 	}
 	
 	public String getName() {
-		return name;
+		
+		String description = name;
+	
+		//Checks if the player has been here before, and if so displays the full description.
+		if (firstVisit) {
+			description = description.format("%s%n%n%s%n",description, this.description);
+			firstVisit = false;
+		}
+		return description;
+	}
+	
+	public String getDescription() {
+		return String.format("%s%n%n%s",this.name,this.description);
 	}
 	
 	//Returns a list of exits to display
@@ -59,7 +73,7 @@ public class Location {
 		String exit_list = "";
 		
 		for (Exit exit:this.exits) {
-			exit_list = exit_list + exit.getDescription()+", ";
+			exit_list = exit_list + exit.getName()+", ";
 		}
 		
 		return exit_list;
@@ -86,5 +100,6 @@ public class Location {
 *                    method
 * 6 September 2023 - Modified the code to handle the exits and finalised the openExit method
 * 7 September 2023 - Changed code to handle redefined exit
-* 8 September 2023 - Removed command processing from class
+* 8 September 2023 - Removed command processing from class. Added detailed description
+*                    to the location.
 */

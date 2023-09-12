@@ -105,12 +105,12 @@ public class Command {
 				//Is the exit open - if not the exit is opened.
 				if (exit.getOpen()) {
 					exit.openClose();
-					response = response.format("You open the %s",exit.getDescription());
+					response = response.format("You open the %s",exit.getName());
 				} else {
-					response = response.format("The %s is already open",exit.getDescription());
+					response = response.format("The %s is already open",exit.getName());
 				}
 			} else {
-				response = response.format("You cannot open the %s", exit.getDescription());
+				response = response.format("You cannot open the %s", exit.getName());
 			}
 		}
 	}
@@ -133,12 +133,12 @@ public class Command {
 				//Is the exit open - if not the exit is opened.
 				if (!exit.getOpen()) {
 					exit.openClose();
-					response = response.format("You close the %s",exit.getDescription());
+					response = response.format("You close the %s",exit.getName());
 				} else {
-					response = response.format("The %s is already closed",exit.getDescription());
+					response = response.format("The %s is already closed",exit.getName());
 				}
 			} else {
-				response = response.format("You cannot close the %s", exit.getDescription());
+				response = response.format("You cannot close the %s", exit.getName());
 			}
 		}
 	}
