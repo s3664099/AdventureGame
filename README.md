@@ -15,3 +15,6 @@ Added the model/view/controller. Added display to display location. Added contro
 Well, I should have been updating these notes. However, I have completed the movement functions, as well as
 completing the open and close functions. I have also used an Abstract class and an interface for the exits,
 which I will be doing for the items as well.
+
+##11 September 2023##
+Added the look function for locations and exits. Set up the next steps for progressing the game with items

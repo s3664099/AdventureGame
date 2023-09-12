@@ -45,6 +45,31 @@ public class Command {
 			response = closeExit(verb);
 		} else if (commands[0].equals("look")) {
 			
+			response = "";
+			
+			//Is the player just looking around the room
+			if ((commands.length==1) || (commands[1].equals("around")) ||
+				 (commands[1].equals("room")) || (commands[1].equals("location"))) {
+				response = location.getDescription();
+			} else {
+				
+				//Checks if the player is looking at the exit
+				ArrayList<Exit> exits = location.getExits();
+				
+				for (Exit exit:exits) {
+					ArrayList<String> nouns = exit.getCommands();
+					
+					for (String noun:nouns) {
+						if (noun.equals(commands[1])) {
+							response = exit.getDescription();
+						}
+					}
+				}
+			}
+			
+			if (response.length()==0) {
+				response = "I do not see that";
+			}
 		}
 		
 		return response;
@@ -151,6 +176,7 @@ public class Command {
 /* 25 August 2023 - Created File
  * 27 August 2023 - Added Comments
  * 4 August 2023 - Added the open and began the close command
- * 8 September 2023 - Moved movement processing and added open and close.\
- * 12 September 2023 - Started look at added response to open and close
+ * 8 September 2023 - Moved movement processing and added open and close.
+ * 12 September 2023 - Started look at added response to open and close. Added the look
+ *                     command for exits.
  */
