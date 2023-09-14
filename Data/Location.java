@@ -15,8 +15,8 @@ public class Location {
 	private String description;
 	private ArrayList<String> nouns;
 	private ArrayList<Exit> exits;
-	private ArrayList<Thing> items;
-	private ArrayList<Thing> objects;
+	private ArrayList<AbstractItem> items;
+	private ArrayList<AbstractItem> objects;
 	private boolean firstVisit = true;
 	
 	public Location(String name, String description) {
@@ -24,8 +24,8 @@ public class Location {
 		this.description = description;
 		this.nouns = new ArrayList<String>();
 		this.exits = new ArrayList<Exit>();
-		this.items = new ArrayList<Thing>();
-		this.objects = new ArrayList<Thing>();
+		this.items = new ArrayList<AbstractItem>();
+		this.objects = new ArrayList<AbstractItem>();
 	}
 	
 	public void addExit(Exit exit) {
@@ -41,9 +41,9 @@ public class Location {
 		return this.nouns;
 	}
 	
-	public void addItem(Thing item) {
+	public void addItem(AbstractItem item) {
 		
-		if(item instanceof Item) {
+		if(item instanceof CarriableItem) {
 			this.items.add(item);
 		} else {
 			this.objects.add(item);

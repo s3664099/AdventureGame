@@ -1,15 +1,23 @@
-/* Item Class
- * Created: 25 August 2023
- * Updated: 27 August 2023
- * The class for things that can be picked up and carried
+/* Item Interface
+ * Created: 12 September 2023
+ * Updated: 14 September 2023
+ * Version: 0.2
+ * The main class for objects. Since we can't call it an object (reserved word)
+ * we have to call it a thing.
  */
 
 package Data;
 
-public class Item extends Thing {
+import java.util.ArrayList;
 
-}
+public interface Item {
+	
+	public String getDescription();
+	public String[] getNouns();
+	public String getName();
+	public void updateItem(String name, String description);
+};
 
-/* 25 August 2023 - Created file.
- * 27 August 2023 - Added comments
+/* 12 September 2023 - Created File
+ * 14 September 2023 - Began to add methods
  */
