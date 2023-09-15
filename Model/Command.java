@@ -16,6 +16,7 @@ public class Command {
 	
 	private Location currentLocation;
 	private String response = "";
+	private boolean displayLocation = true;
 	
 	public Location getCurrentLocation() {
 		return currentLocation;
@@ -26,6 +27,7 @@ public class Command {
 		
 		//Sets the location
 		this.currentLocation = location;
+		this.displayLocation = false;
 
 		//Standard response
 		response = "I'm sorry, I do not understand";
@@ -39,6 +41,7 @@ public class Command {
 		//Goes through the verbs
 		if (commands[0].equals("go")) {
 			response = changeLocation(verb);
+			this.displayLocation = true;
 		} else if (commands[0].equals("open")) {
 			response = openExit(verb);
 		} else if (commands[0].equals("close")) {
@@ -50,7 +53,7 @@ public class Command {
 			//Is the player just looking around the room
 			if ((commands.length==1) || (commands[1].equals("around")) ||
 				 (commands[1].equals("room")) || (commands[1].equals("location"))) {
-				response = location.getDescription();
+				response = response.format("%s%n=======================",location.getName(true));
 			} else {
 				
 				//Checks if the player is looking at the exit
@@ -94,6 +97,10 @@ public class Command {
 			}
 		}
 		return exit;
+	}
+	
+	public boolean displayLocation() {
+		return displayLocation;
 	}
 	
 	//Movement method

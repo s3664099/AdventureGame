@@ -1,7 +1,7 @@
 /* Display Class
  * Created: 25 August 2023
- * Updated: 8 September 2023
- * Version: 0.3
+ * Updated: 15 September 2023
+ * Version: 0.4
  * View class to display details on the console.
  */
 
@@ -15,9 +15,7 @@ public class Display_Text {
 	public void display(Location location) {
 		
 		System.out.println();
-		//clear();
-		System.out.printf("You are %s%n",location.getName());
-		System.out.printf("Exits: %s%n",location.getExitList());
+		System.out.printf("You are %s%n",location.getName(false));
 		System.out.println("=======================");
 		
 	}
@@ -38,4 +36,6 @@ public class Display_Text {
 /* 25 August 2023 - Created File
 * 27 August 2023 - Added Comments
 * 8 September 2023 - Added method to display responses
+* 15 September 2023 - Changed description method to display items. Added check to not
+* 					  display exits or items if there are none.
 */

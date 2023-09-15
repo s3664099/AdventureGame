@@ -32,7 +32,10 @@ public class Main {
 		String response = "";
 		
 		while (true) {
-			display.display(data);
+			
+			if(processor.displayLocation()) {
+				display.display(data);
+			}
 			command = input.getCommand(query);
 			String[] commands = parser.parseCommand(command);
 			display.displayResponse(processor.processCommand(commands,data));

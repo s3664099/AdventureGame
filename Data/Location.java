@@ -1,7 +1,7 @@
 /* Location Class
  * Created: 25 August 2023
- * Updated: 8 September 2023
- * Version: 0.7
+ * Updated: 15 September 2023
+ * Version: 0.8
  * The class that holds the details of the locations and handles
  * any actions that deal with the location
  */
@@ -15,8 +15,7 @@ public class Location {
 	private String description;
 	private ArrayList<String> nouns;
 	private ArrayList<Exit> exits;
-	private ArrayList<AbstractItem> items;
-	private ArrayList<AbstractItem> objects;
+	private ArrayList<Item> items;
 	private boolean firstVisit = true;
 	
 	public Location(String name, String description) {
@@ -24,8 +23,7 @@ public class Location {
 		this.description = description;
 		this.nouns = new ArrayList<String>();
 		this.exits = new ArrayList<Exit>();
-		this.items = new ArrayList<AbstractItem>();
-		this.objects = new ArrayList<AbstractItem>();
+		this.items = new ArrayList<Item>();
 	}
 	
 	public void addExit(Exit exit) {
@@ -41,34 +39,38 @@ public class Location {
 		return this.nouns;
 	}
 	
-	public void addItem(AbstractItem item) {
+	public void addItem(Item item) {
 		
-		if(item instanceof CarriableItem) {
-			this.items.add(item);
-		} else {
-			this.objects.add(item);
-		}
-		this.nouns.add(item.getDescription());
+		this.items.add(item);
 	}
 	
-	public String getName() {
+	public ArrayList<Item> getItems() {
+		return this.items;
+	}
+	
+	public String getName(boolean displayFull) {
 		
 		String description = name;
 	
 		//Checks if the player has been here before, and if so displays the full description.
-		if (firstVisit) {
+		if ((firstVisit) || (displayFull)) {
 			description = description.format("%s%n%n%s%n",description, this.description);
 			firstVisit = false;
 		}
+		
+		if (items.size()>0) {
+			description = description.format("%s%nYou See: %s", description, this.getItemList());
+		}
+		
+		if (exits.size()>0) {
+			description = description.format("%s%nExits: %s", description, this.getExitList());
+		}		
+		
 		return description;
 	}
 	
-	public String getDescription() {
-		return String.format("%s%n%n%s",this.name,this.description);
-	}
-	
 	//Returns a list of exits to display
-	public String getExitList() {
+	private String getExitList() {
 		
 		String exit_list = "";
 		
@@ -78,6 +80,16 @@ public class Location {
 		
 		return exit_list;
 		
+	}
+	
+	private String getItemList() {
+		
+		String item_list = "";
+		
+		for (Item item:this.items) {
+			item_list = item_list + item.getName();
+		}
+		return item_list;
 	}
 	
 	public boolean checkNoun(String nounCheck) {
@@ -102,4 +114,6 @@ public class Location {
 * 7 September 2023 - Changed code to handle redefined exit
 * 8 September 2023 - Removed command processing from class. Added detailed description
 *                    to the location.
+* 15 September 2023 - Added methods to handle items, and reduced to single item list. 
+* 					  reworked display method to handle all displays                  
 */
