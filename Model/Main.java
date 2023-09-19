@@ -12,10 +12,6 @@ import Data.Data_Process;
 import Data.Location;
 import View.Display_Text;
 
-//TODO
-//Add locked and closed doors to test the locked/closed functions
-//Move Data for Tower of London for a new game - ChatGPT
-
 public class Main {
 	
 	String query = "Tell me what to do: ";

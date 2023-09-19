@@ -20,6 +20,7 @@ public class AbstractItem {
 		
 		this.name = name;
 		this.description = description;
+		name = name.toLowerCase();
 		this.nouns = name.split(" ");
 	}
 	

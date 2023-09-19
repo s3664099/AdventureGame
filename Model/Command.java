@@ -10,6 +10,7 @@ package Model;
 import java.util.ArrayList;
 
 import Data.Exit;
+import Data.Item;
 import Data.Location;
 
 public class Command {
@@ -56,8 +57,9 @@ public class Command {
 				response = response.format("%s%n=======================",location.getName(true));
 			} else {
 				
-				//Checks if the player is looking at the exit
+				//Checks if the player is looking at the exit/Items
 				ArrayList<Exit> exits = location.getExits();
+				ArrayList<Item> items = location.getItems();
 				
 				for (Exit exit:exits) {
 					ArrayList<String> nouns = exit.getCommands();
@@ -65,6 +67,18 @@ public class Command {
 					for (String noun:nouns) {
 						if (noun.equals(commands[1])) {
 							response = exit.getDescription();
+						}
+					}
+				}
+				
+				if (response.length()==0) {
+					for (Item item:items) {
+						String[] nouns = item.getNouns();
+						
+						for (String noun:nouns) {
+							if (noun.equals(commands[1])) {
+								response = item.getDescription();
+							}
 						}
 					}
 				}

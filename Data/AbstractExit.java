@@ -29,7 +29,7 @@ public abstract class AbstractExit {
 						String command, String description) {
 		 
 		this.name = name;
-		
+				
 		for (String x:command.split(" ")) {
 			this.commands.add(x);
 		}
