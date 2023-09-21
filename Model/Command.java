@@ -24,7 +24,7 @@ public class Command {
 	}
 	
 	//Executes the command
-	public String processCommand(String [] commands, Location location) {
+	public String processCommand(String [] commands, Location location, ArrayList<Item> inventory) {
 		
 		//Sets the location
 		this.currentLocation = location;
@@ -47,6 +47,9 @@ public class Command {
 			response = openExit(verb);
 		} else if (commands[0].equals("close")) {
 			response = closeExit(verb);
+		} else if (commands[0].equals("i") || (commands[0].equals("inventory")
+					|| (commands[0].equals("inv")))) {
+			response = "I am carrying nothing";
 		} else if (commands[0].equals("look")) {
 			
 			response = "";

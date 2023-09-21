@@ -6,9 +6,12 @@
  */
 
 package Model;
+import java.util.ArrayList;
+
 import Control.Input;
 import Control.Parser;
 import Data.Data_Process;
+import Data.Item;
 import Data.Location;
 import View.Display_Text;
 
@@ -16,6 +19,7 @@ public class Main {
 	
 	String query = "Tell me what to do: ";
 	String command;
+	ArrayList<Item> inventory = new ArrayList<Item>();
 
 	public void run() {
 		
@@ -34,7 +38,7 @@ public class Main {
 			}
 			command = input.getCommand(query);
 			String[] commands = parser.parseCommand(command);
-			display.displayResponse(processor.processCommand(commands,data));
+			display.displayResponse(processor.processCommand(commands,data,inventory));
 			data = processor.getCurrentLocation();
 		}
 	}
