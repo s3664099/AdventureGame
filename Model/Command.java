@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 12 September 2023
- * Version: 0.6
+ * Updated: 2 October 2023
+ * Version: 0.7
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -51,45 +51,7 @@ public class Command {
 					|| (commands[0].equals("inv")))) {
 			response = "I am carrying nothing";
 		} else if (commands[0].equals("look")) {
-			
-			response = "";
-			
-			//Is the player just looking around the room
-			if ((commands.length==1) || (commands[1].equals("around")) ||
-				 (commands[1].equals("room")) || (commands[1].equals("location"))) {
-				response = response.format("%s%n=======================",location.getName(true));
-			} else {
-				
-				//Checks if the player is looking at the exit/Items
-				ArrayList<Exit> exits = location.getExits();
-				ArrayList<Item> items = location.getItems();
-				
-				for (Exit exit:exits) {
-					ArrayList<String> nouns = exit.getCommands();
-					
-					for (String noun:nouns) {
-						if (noun.equals(commands[1])) {
-							response = exit.getDescription();
-						}
-					}
-				}
-				
-				if (response.length()==0) {
-					for (Item item:items) {
-						String[] nouns = item.getNouns();
-						
-						for (String noun:nouns) {
-							if (noun.equals(commands[1])) {
-								response = item.getDescription();
-							}
-						}
-					}
-				}
-			}
-			
-			if (response.length()==0) {
-				response = "I do not see that";
-			}
+			response = look(commands,location);
 		}
 		
 		return response;
@@ -195,6 +157,49 @@ public class Command {
 		}
 		return response;
 	}
+	
+	private String look(String[] commands, Location location) {
+		String response = "";
+		
+		//Is the player just looking around the room
+		if ((commands.length==1) || (commands[1].equals("around")) ||
+			 (commands[1].equals("room")) || (commands[1].equals("location"))) {
+			response = response.format("%s%n=======================",location.getName(true));
+		} else {
+			
+			//Checks if the player is looking at the exit/Items
+			ArrayList<Exit> exits = location.getExits();
+			ArrayList<Item> items = location.getItems();
+			
+			for (Exit exit:exits) {
+				ArrayList<String> nouns = exit.getCommands();
+				
+				for (String noun:nouns) {
+					if (noun.equals(commands[1])) {
+						response = exit.getDescription();
+					}
+				}
+			}
+			
+			if (response.length()==0) {
+				for (Item item:items) {
+					String[] nouns = item.getNouns();
+					
+					for (String noun:nouns) {
+						if (noun.equals(commands[1])) {
+							response = item.getDescription();
+						}
+					}
+				}
+			}
+		}
+		
+		if (response.length()==0) {
+			response = "I do not see that";
+		}		
+		
+		return response;
+	}
 }
 
 /* 25 August 2023 - Created File
@@ -203,4 +208,5 @@ public class Command {
  * 8 September 2023 - Moved movement processing and added open and close.
  * 12 September 2023 - Started look at added response to open and close. Added the look
  *                     command for exits.
+ * 2 October 2023 - Moved look into a separate method                    
  */
