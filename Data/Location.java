@@ -87,7 +87,7 @@ public class Location {
 		String item_list = "";
 		
 		for (Item item:this.items) {
-			item_list = item_list + item.getName();
+			item_list = item_list + item.getName()+" ";
 		}
 		return item_list;
 	}

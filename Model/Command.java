@@ -9,6 +9,7 @@ package Model;
 
 import java.util.ArrayList;
 
+import Data.CarriableItem;
 import Data.Exit;
 import Data.Item;
 import Data.Location;
@@ -60,10 +61,46 @@ public class Command {
 			}
 		} else if (commands[0].equals("look")) {
 			response = look(commands,location);
-		} else if ((commands[0].equals("get")) ||(commands[0].equals("get"))) {
+		} else if ((commands[0].equals("take")) ||(commands[0].equals("get"))) {
 			
 			if (commands.length == 1) {
 				response = "I need a verb";
+			} else {
+			
+				//Sets counter for items
+				int itemNo = -1;
+				int itemFound = -1;
+				
+				response = "I don't see that here";
+				
+				//Goes through the items at the location
+				for (Item item: location.getItems()) {
+					
+					itemNo +=1;
+					
+					for (String noun:item.getNouns()) {
+						
+						//Is the item in this location
+						if (commands[1].equals(noun)) {
+							
+							//Is it a carriable item.
+							if (item instanceof CarriableItem) {
+
+								//Add it to the player's inventory
+								itemFound = itemNo;
+								inventory.add(item);
+								response = response.format("I have picked up the %s",item.getName());
+							} else {
+								response = "I cannot pick that up";
+							}
+						}
+					}
+				}
+				
+				//Has an item been picked up - Remove it from the location
+				if (itemFound != -1) {
+					location.getItems().remove(itemFound);
+				}
 			}
 		}
 		
@@ -200,7 +237,7 @@ public class Command {
 					
 					for (String noun:nouns) {
 						if (noun.equals(commands[1])) {
-							response = item.getDescription();
+							response = item.getDescription()+" ";
 						}
 					}
 				}
