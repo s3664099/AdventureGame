@@ -38,7 +38,7 @@ public class Command {
 		if (commands.length>1) {
 			verb = commands[1];
 		}
-		
+				
 		//Goes through the verbs
 		if (commands[0].equals("go")) {
 			response = changeLocation(verb);
@@ -49,9 +49,22 @@ public class Command {
 			response = closeExit(verb);
 		} else if (commands[0].equals("i") || (commands[0].equals("inventory")
 					|| (commands[0].equals("inv")))) {
-			response = "I am carrying nothing";
+			
+			if (inventory.size() == 0) {
+				response = "I am carrying nothing";
+			} else {
+				response = "I am carrying:";
+				for (Item item:inventory) {
+					response = response.format("%s %s", response, item.getName());
+				}
+			}
 		} else if (commands[0].equals("look")) {
 			response = look(commands,location);
+		} else if ((commands[0].equals("get")) ||(commands[0].equals("get"))) {
+			
+			if (commands.length == 1) {
+				response = "I need a verb";
+			}
 		}
 		
 		return response;

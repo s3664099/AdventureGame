@@ -6,11 +6,26 @@
 
 package Data;
 
-public class CarriableItem extends AbstractItem {
+public class CarriableItem extends AbstractItem implements Item {
 
 	public CarriableItem(String name, String description) {
 		super(name, description);
-		// TODO Auto-generated constructor stub
+	}
+	
+	public String getDescription() {
+		return super.getDescription();
+	}
+	
+	public String[] getNouns() {
+		return super.getNouns();
+	}
+	
+	public String getName() {
+		return super.getName();
+	}
+	
+	public void updateItem(String name, String description) {
+		super.updateItem(name, description);
 	}
 
 }
