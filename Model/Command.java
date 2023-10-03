@@ -252,7 +252,7 @@ public class Command {
 					
 					for (String noun:nouns) {
 						if (noun.equals(commands[1])) {
-							response = item.getDescription()+" ";
+							response = item.getDescription();
 						}
 					}
 				}

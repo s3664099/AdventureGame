@@ -73,9 +73,16 @@ public class Location {
 	private String getExitList() {
 		
 		String exit_list = "";
+		int count = 0;
 		
 		for (Exit exit:this.exits) {
-			exit_list = exit_list + exit.getName()+", ";
+
+			if (count>0) {
+				exit_list +=", ";
+			}
+			
+			exit_list += exit.getName();
+			count ++;
 		}
 		
 		return exit_list;
@@ -86,8 +93,16 @@ public class Location {
 		
 		String item_list = "";
 		
+		int count = 0;
+		
 		for (Item item:this.items) {
-			item_list = item_list + item.getName()+" ";
+
+			if (count>0) {
+				item_list += ", ";
+			}
+			
+			item_list += item.getName();
+			count ++;
 		}
 		return item_list;
 	}
