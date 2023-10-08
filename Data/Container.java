@@ -49,11 +49,20 @@ public class Container extends ImmoveableItem implements Item {
 			int length = 0;
 		
 			for (Item content:contents) {
-			
+				
+				String article = "a";
+				
+				char firstChar = content.getName().charAt(0);
+				
+				if ((firstChar == 'A') || (firstChar == 'E') || (firstChar == 'I')
+					|| (firstChar == 'O') || (firstChar == 'U')) {
+					article = "an";
+				}
+				
 				if (length == 0) {
-					response = response.format("%s %s",response,content.getDescription());
+					response = response.format("%s %s %s",response, article, content.getName());
 				} else {
-					response = response.format("%s, %s",response,content.getDescription());
+					response = response.format("%s, %s %s",response,article, content.getName());
 				}
 				length ++;
 			}

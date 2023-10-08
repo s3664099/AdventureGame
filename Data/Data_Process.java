@@ -13,6 +13,9 @@ public class Data_Process {
 		start.addItem(new CarriableItem("Beer Glass","This is a think glass with a handle used for holding beer."));
 		container = new Container("Table", "The table is a sturdy wooden table, stained with years worth of spilled beer");
 		container.addItem(new CarriableItem("Beer Coaster","A small square piece of cardboard advertising Camden Larger."));
+		container.addItem(new CarriableItem("Spoon","Your typical plain spoon you find in a pub"));
+		container.addItem(new CarriableItem("Articulator","Nobody knows what this is"));
+		container.addItem(new CarriableItem("Indicator","A light that should be on a car"));
 		start.addItem(container);
 		description = "Tucked away behind The Minories, the beer garden is a hidden oasis of greenery and tranquility. Amidst colorful \nblooms, you can enjoy your chosen drink, basking in the serene ambiance as you plan your next adventure or savor the moment.";
 		Location two = new Location("in the Minories Beer Garden",description);

@@ -261,7 +261,28 @@ public class Command {
 		
 		if (response.length()==0) {
 			response = "I do not see that";
-		}		
+		}
+		
+		int position = 0;
+		boolean space = false; 
+		
+		for (int i=0;i<response.length();i++) {
+			
+			if ((position<100) && (!space)) {
+				position += 1;
+			} else {
+				if (response.charAt(i) != ' ') {
+					space = true;
+				} else {
+					response = response.substring(0,i+1) + "\n" + response.substring(i+1);
+					position = 0;
+					space = false;
+				}
+				
+			}
+			
+			
+		}
 		
 		return response;
 	}
