@@ -4,12 +4,16 @@ public class Data_Process {
 	
 	Location start;
 	String description;
+	Container container;
 	
 	public Data_Process() {
 		description = "The Minories Pub in London beckons adventurers with its historic charm, wooden beams, and a well-stocked bar. \nInside, you'll find a cozy haven where tales of epic journeys and daring quests are shared.";
 		start = new Location("in the Minories",description);
 		start.addItem(new ImmoveableItem("Bar","The bar is a focal point of conviviality, adorned with a rich mahogany countertop that's been \ngracefully worn by countless patrons over the years."));
 		start.addItem(new CarriableItem("Beer Glass","This is a think glass with a handle used for holding beer."));
+		container = new Container("Table", "The table is a sturdy wooden table, stained with years worth of spilled beer");
+		container.addItem(new CarriableItem("Beer Coaster","A small square piece of cardboard advertising Camden Larger."));
+		start.addItem(container);
 		description = "Tucked away behind The Minories, the beer garden is a hidden oasis of greenery and tranquility. Amidst colorful \nblooms, you can enjoy your chosen drink, basking in the serene ambiance as you plan your next adventure or savor the moment.";
 		Location two = new Location("in the Minories Beer Garden",description);
 		description = "The road outside The Minories near Tower Gateway DLR Station buzzes with modern city life. Skyscrapers rise \naround you as commuters rush to and fro, and the distant rumble of traffic fills the air. This vibrant junction \nserves as a bustling crossroads, offering access to London's iconic landmarks and endless urban adventures.";

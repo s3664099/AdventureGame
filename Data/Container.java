@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Container extends ImmoveableItem implements Item {
 	
-	private ArrayList<CarriableItem> contents;
+	private ArrayList<CarriableItem> contents = new ArrayList<CarriableItem>();
 	private boolean lockable = false;
 	private boolean closeable = false;
 	private boolean locked = false;
@@ -41,11 +41,11 @@ public class Container extends ImmoveableItem implements Item {
 		return super.getName();
 	}
 	
-	public String getItemList() {
+	public String getDescription() {
 		String response = super.getDescription();
 		
 		if (!closed) {
-			response = response.format("%s. The %s contains ",super.getDescription(),super.getName());
+			response = response.format("%s. The %s contains",super.getDescription(),super.getName());
 			int length = 0;
 		
 			for (Item content:contents) {
@@ -59,7 +59,7 @@ public class Container extends ImmoveableItem implements Item {
 			}
 		
 			if (length == 0) {
-				response = response.format("%s nothing",response);
+				response = response.format("%s nothing.",response);
 			}
 		
 		} else {
