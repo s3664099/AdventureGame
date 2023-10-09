@@ -11,11 +11,12 @@ import java.util.ArrayList;
 
 public class Container extends ImmoveableItem implements Item {
 	
-	private ArrayList<CarriableItem> contents = new ArrayList<CarriableItem>();
+	private ArrayList<Item> contents = new ArrayList<Item>();
 	private boolean lockable = false;
 	private boolean closeable = false;
 	private boolean locked = false;
 	private boolean closed = false;
+	private boolean haveViewed = false;
 	
 	public Container(String name, String description) {
 		super(name,description);
@@ -66,9 +67,11 @@ public class Container extends ImmoveableItem implements Item {
 				}
 				length ++;
 			}
-		
+			
 			if (length == 0) {
 				response = response.format("%s nothing.",response);
+			} else {
+				this.haveViewed = true;
 			}
 		
 		} else {
@@ -83,8 +86,14 @@ public class Container extends ImmoveableItem implements Item {
 		contents.add(item);
 	}
 	
-	//Check Contents
-	//Remove item
+	public ArrayList<Item> getContents() {
+		return contents;
+	}
+		
+	public boolean getViewed() {
+		return haveViewed;
+	}
+	
 	//Lock/Unlock
 	//Open/Close
 

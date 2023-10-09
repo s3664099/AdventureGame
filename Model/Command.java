@@ -10,6 +10,7 @@ package Model;
 import java.util.ArrayList;
 
 import Data.CarriableItem;
+import Data.Container;
 import Data.Exit;
 import Data.Item;
 import Data.Location;
@@ -110,7 +111,15 @@ public class Command {
 					} else {
 						response = "I cannot pick that up";
 					}
-				}
+				} else if (item instanceof Container) {
+					System.out.println("Container");
+					if (((Container) item).getViewed()) {
+						System.out.println("Hello");
+						ArrayList<Item> contents = ((Container) item).getContents();
+						response = this.switchList(contents,listTwo,command,statement);
+					}
+					
+				} 
 			}
 		}
 		
