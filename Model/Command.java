@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 2 October 2023
- * Version: 0.7
+ * Updated: 10 October 2023
+ * Version: 0.9
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -67,7 +67,7 @@ public class Command {
 			if (commands.length == 1) {
 				response = "I need a verb";
 			} else {
-				response = switchList(location.getItems(), inventory, commands[1], "I picked up the");
+				response = switchList(location.getItems(), inventory, commands[1], "I picked up the",false);
 			}
 			
 		} else if (commands[0].equals("drop")) {
@@ -75,7 +75,7 @@ public class Command {
 			if (commands.length == 1) {
 				response = "I need a verb";
 			} else {
-				response = switchList(inventory,location.getItems(),commands[1], "I dropped the");
+				response = switchList(inventory,location.getItems(),commands[1], "I dropped the",false);
 			}			
 		}
 		
@@ -83,12 +83,11 @@ public class Command {
 	}
 	
 	//Method to move item from one list to another
-	private String switchList(ArrayList<Item> listOne, ArrayList<Item> listTwo, String command, String statement) {
+	private String switchList(ArrayList<Item> listOne, ArrayList<Item> listTwo, String command, String statement, boolean itemTaken) {
 
 		//Sets counter for items
 		int itemNo = -1;
 		int itemFound = -1;
-		boolean itemTaken = false;
 		
 		String response = "I don't see that here";
 		
@@ -117,7 +116,7 @@ public class Command {
 					if (((Container) item).getViewed()) {
 						
 						ArrayList<Item> contents = ((Container) item).getContents();
-						response = this.switchList(contents,listTwo,command,statement);
+						response = this.switchList(contents,listTwo,command,statement,itemTaken);
 					}					
 				} 
 			}
@@ -303,5 +302,7 @@ public class Command {
  * 8 September 2023 - Moved movement processing and added open and close.
  * 12 September 2023 - Started look at added response to open and close. Added the look
  *                     command for exits.
- * 2 October 2023 - Moved look into a separate method                    
+ * 2 October 2023 - Moved look into a separate method      
+ * 9 October 2023 - Added ability to take items from a container once looked in them.
+ * 10 October 2023 - Reworked take and drop so only one item is taken and dropped.              
  */

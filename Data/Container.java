@@ -1,7 +1,7 @@
 /* Container Class
  * Created: 5 October 2023
- * Updated: 5 October 2023
- * Version: 0.0
+ * Updated: 9 October 2023
+ * Version: 0.1
  * Class for items that can't be picked up and carried.
  */
 
@@ -100,4 +100,5 @@ public class Container extends ImmoveableItem implements Item {
 }
 
 /* 5 October 2023 Created File
+ * 9 October 2023 Added functionality to Container
 */
