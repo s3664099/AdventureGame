@@ -88,6 +88,7 @@ public class Command {
 		//Sets counter for items
 		int itemNo = -1;
 		int itemFound = -1;
+		boolean itemTaken = false;
 		
 		String response = "I don't see that here";
 		
@@ -97,9 +98,9 @@ public class Command {
 			itemNo +=1;
 			
 			for (String noun:item.getNouns()) {
-				
+								
 				//Is the item in this location
-				if (command.equals(noun)) {
+				if ((command.equals(noun)) && (!itemTaken)) {
 					
 					//Is it a carriable item.
 					if (item instanceof CarriableItem) {
@@ -108,17 +109,16 @@ public class Command {
 						itemFound = itemNo;
 						listTwo.add(item);
 						response = response.format("%s %s",statement, item.getName());
+						itemTaken = true;
 					} else {
 						response = "I cannot pick that up";
 					}
-				} else if (item instanceof Container) {
-					System.out.println("Container");
+				} else if ((item instanceof Container) && (!itemTaken)) {
 					if (((Container) item).getViewed()) {
-						System.out.println("Hello");
+						
 						ArrayList<Item> contents = ((Container) item).getContents();
 						response = this.switchList(contents,listTwo,command,statement);
-					}
-					
+					}					
 				} 
 			}
 		}
