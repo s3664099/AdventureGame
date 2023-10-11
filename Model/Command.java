@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 10 October 2023
- * Version: 0.9
+ * Updated: 11 October 2023
+ * Version: 0.10
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -77,6 +77,13 @@ public class Command {
 			} else {
 				response = switchList(inventory,location.getItems(),commands[1], "I dropped the",false);
 			}			
+		} else if (commands[0].equals("unlock")) {
+
+			if (commands.length == 1) {
+				response = "I need a verb";
+			} else {
+				response = unlock(inventory,location.getExits(),location.getItems(), commands[1]);
+			}
 		}
 		
 		return response;
@@ -294,6 +301,26 @@ public class Command {
 		
 		return response;
 	}
+	
+	private String unlock(ArrayList<Item> inventory, ArrayList<Exit>exits,ArrayList<Item>items,String command) {
+		response = "";
+		boolean found = false;
+		
+		for (Exit exit:exits) {
+			for (String noun:exit.getCommands()) {
+								
+				if (exit.getLocked())
+				if (command.equals(noun)) {
+					for (Item item:inventory) {
+						
+					}
+				}
+			}
+		}
+		
+		
+		return response;
+	}
 }
 
 /* 25 August 2023 - Created File
@@ -304,5 +331,6 @@ public class Command {
  *                     command for exits.
  * 2 October 2023 - Moved look into a separate method      
  * 9 October 2023 - Added ability to take items from a container once looked in them.
- * 10 October 2023 - Reworked take and drop so only one item is taken and dropped.              
+ * 10 October 2023 - Reworked take and drop so only one item is taken and dropped. 
+ * 11 October 2023 - Started Unlock Command             
  */

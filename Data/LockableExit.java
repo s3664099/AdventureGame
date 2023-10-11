@@ -13,6 +13,7 @@ public class LockableExit extends CloseableExit implements Exit {
 	
 	private boolean locked;
 	private CarriableItem key;
+	private boolean lockable = true;
 		
 	//Exit with multiple commands
 	public LockableExit(String name, String command, Location destination, 

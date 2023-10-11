@@ -1,7 +1,7 @@
 /* CloseableExit Class
  * Created: 4 September 2023
- * Updated: 12 September 2023
- * Version 0.5
+ * Updated: 11 October 2023
+ * Version 0.6
  * Class to handle and exit that can be closed
  */
 
@@ -85,9 +85,18 @@ public class CloseableExit extends AbstractExit implements Exit {
 		
 		return super.getDescription();
 	}
+	
+	public boolean getLocked() {
+		return true;
+	}
+	
+	public boolean isLockable() {
+		return false;
+	}
 }
 
 /* 4 September 2023 - Created File
  * 6 September 2023 - Fixed file to call abstractExit and match interface
  * 12 September 2023 - Added functionality to handle exit descriptions
+ * 11 October 2023 - Added check for lockable
  */

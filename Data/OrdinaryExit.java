@@ -1,7 +1,7 @@
 /* Ordinary Exit Class
  * Created: 25 August 2023
- * Updated: 12 September 2023
- * Version 0.6
+ * Updated: 11 October 2023
+ * Version 0.7
  * Class to handle everything to do with an exit.
  */
 
@@ -62,9 +62,6 @@ public class OrdinaryExit extends AbstractExit implements Exit {
 	}
 
 	@Override
-	public void lockUnlock() {}
-
-	@Override
 	public boolean getOpen() {
 		return false;
 	}
@@ -74,6 +71,15 @@ public class OrdinaryExit extends AbstractExit implements Exit {
 	public boolean isOpenable() {
 		return false;
 	};
+	
+	public boolean isLockable() {
+		return false;
+	}
+
+	@Override
+	public boolean getLocked() {
+		return false;
+	}
 
 }
 
@@ -84,4 +90,5 @@ public class OrdinaryExit extends AbstractExit implements Exit {
  * 5 September 2023 - Refactored class & created Abstract and Interface
  * 6 September 2023 - Fixed up Abstract class and add description
  * 12 September 2023 - Added functionality to handle exit description
+ * 11 October 2023 - Added lockable function
 */
