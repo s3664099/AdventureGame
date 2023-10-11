@@ -1,24 +1,26 @@
-/* CloseableExit Class
- * Created: 4 September 2023
- * Updated: 12 September 2023
- * Version 0.5
- * Class to handle and exit that can be closed
+/* LockableExit Class
+ * Created: 11 October 2023
+ * Updated: 11 October 2023
+ * Version 0.0
+ * Class to handle and exit that can be locked
  */
 
 package Data;
 
 import java.util.ArrayList;
 
-public class CloseableExit extends AbstractExit implements Exit {
+public class LockableExit extends CloseableExit implements Exit {
 	
-	private boolean closed;
+	private boolean locked;
+	private CarriableItem key;
 		
 	//Exit with multiple commands
-	public CloseableExit(String name, String command, Location destination, 
-						boolean closed, String description) {
+	public LockableExit(String name, String command, Location destination, 
+						boolean closed, String description, CarriableItem key) {
 	
-		super(name, destination, false, command, description);
-		this.closed = closed;
+		super(name, command, destination, false, description);
+		this.locked = closed;
+		this.key = key;
 
 	}
 	
@@ -27,10 +29,10 @@ public class CloseableExit extends AbstractExit implements Exit {
 		
 		String response = "";
 		
-		if (closed) {
+		if (locked) {
 			response = response.format("The %s is closed%n", super.getName());
 		} else {
-			response = response.format("You enter the %s%n",super.getName());
+			response = super.moveDescription(command);
 		}
 		
 		return response;
@@ -41,19 +43,21 @@ public class CloseableExit extends AbstractExit implements Exit {
 		
 		boolean moved = true;
 		
-		if (closed) {
+		if (locked) {
 			moved = false;
+		} else {
+			moved = super.haveMoved();
 		}
 		
 		return moved;
 	}
 	
 	public boolean getOpen() {
-		return this.closed;
+		return super.getOpen();
 	}
 	
 	public void openClose() {
-		this.closed = !this.closed;
+		super.openClose();
 	}
 
 	@Override
@@ -74,6 +78,13 @@ public class CloseableExit extends AbstractExit implements Exit {
 		return super.getDestination();
 	}
 
+	public void lockUnlock(CarriableItem item) {
+		
+		if (item == key) {
+			this.locked = !this.locked;
+		}
+	}
+
 	//Flags that the exit can be opened/closed
 	@Override
 	public boolean isOpenable() {
@@ -85,9 +96,11 @@ public class CloseableExit extends AbstractExit implements Exit {
 		
 		return super.getDescription();
 	}
+	
+	public boolean getLocked() {
+		return locked;
+	}
 }
 
-/* 4 September 2023 - Created File
- * 6 September 2023 - Fixed file to call abstractExit and match interface
- * 12 September 2023 - Added functionality to handle exit descriptions
- */
+/* 11 October 2023 - Created File
+*/

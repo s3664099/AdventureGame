@@ -18,7 +18,6 @@ public interface Exit {
 	boolean haveMoved();
 	Location getDestination();
 	void openClose();
-	void lockUnlock();
 	boolean getOpen();
 	boolean isOpenable();
 }
