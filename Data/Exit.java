@@ -1,7 +1,7 @@
 /* Exit Interface
  * Created: 5 September 2023
- * Updated: 11 October 2023
- * Version 0.3
+ * Updated: 13 October 2023
+ * Version 0.4
  * Interface to govern exits
  */
 
@@ -22,10 +22,13 @@ public interface Exit {
 	boolean isOpenable();
 	boolean isLockable();
 	boolean getLocked();
+	Item getKey();
+	String lockUnlock(CarriableItem item, String action);
 }
 
 /*
  * 5 September 2023 - Created File 
  * 12 September 2023 - Added functionality to handle exit description
  * 11 October 2023 - Added lockable functions
+ * 13 October 2023 - Added methods for lock and close
 */

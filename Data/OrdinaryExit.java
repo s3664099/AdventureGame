@@ -1,7 +1,7 @@
 /* Ordinary Exit Class
  * Created: 25 August 2023
- * Updated: 11 October 2023
- * Version 0.7
+ * Updated: 13 October 2023
+ * Version 0.8
  * Class to handle everything to do with an exit.
  */
 
@@ -81,6 +81,18 @@ public class OrdinaryExit extends AbstractExit implements Exit {
 		return false;
 	}
 
+	@Override
+	public Item getKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String lockUnlock(CarriableItem item, String action) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
 
 /* 25 August 2023 - Created File
@@ -91,4 +103,5 @@ public class OrdinaryExit extends AbstractExit implements Exit {
  * 6 September 2023 - Fixed up Abstract class and add description
  * 12 September 2023 - Added functionality to handle exit description
  * 11 October 2023 - Added lockable function
+ * 13 October 2023 - Added methods for exits to close and lock
 */

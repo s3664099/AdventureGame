@@ -60,7 +60,6 @@ public abstract class AbstractExit {
 	public boolean getDirection() {
 		return direction;
 	}
-
 }
 /* 5 September 2023 - Created File
  * 6 September 2023 - Completed class with getters and setters

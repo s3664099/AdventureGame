@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 11 October 2023
- * Version: 0.10
+ * Updated: 13 October 2023
+ * Version: 0.11
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -303,16 +303,25 @@ public class Command {
 	}
 	
 	private String unlock(ArrayList<Item> inventory, ArrayList<Exit>exits,ArrayList<Item>items,String command) {
-		response = "";
+		response = "I do not see that here";
 		boolean found = false;
 		
 		for (Exit exit:exits) {
 			for (String noun:exit.getCommands()) {
 								
-				if (exit.getLocked())
-				if (command.equals(noun)) {
-					for (Item item:inventory) {
-						
+				if (command.equals(noun) && (found)) {
+					if (exit.getLocked()) {
+						for (Item item:inventory) {
+							if (item == exit.getKey()) {
+								response = exit.lockUnlock((CarriableItem) item, command);
+								found = true;
+							} else {
+								response = "You do not have a key that fits";
+								found = true;
+							}
+						}
+					} else {
+						response = String.format("The %s is not locked", exit.getName());
 					}
 				}
 			}
@@ -332,5 +341,6 @@ public class Command {
  * 2 October 2023 - Moved look into a separate method      
  * 9 October 2023 - Added ability to take items from a container once looked in them.
  * 10 October 2023 - Reworked take and drop so only one item is taken and dropped. 
- * 11 October 2023 - Started Unlock Command             
+ * 11 October 2023 - Started Unlock Command  
+ * 13 October 2023 - Began working on the unlock command        
  */

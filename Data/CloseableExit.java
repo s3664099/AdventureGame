@@ -1,7 +1,7 @@
 /* CloseableExit Class
  * Created: 4 September 2023
- * Updated: 11 October 2023
- * Version 0.6
+ * Updated: 13 October 2023
+ * Version 0.7
  * Class to handle and exit that can be closed
  */
 
@@ -93,10 +93,22 @@ public class CloseableExit extends AbstractExit implements Exit {
 	public boolean isLockable() {
 		return false;
 	}
+	
+	@Override
+	public Item getKey() {
+		return null;
+	}
+
+	@Override
+	public String lockUnlock(CarriableItem item, String action) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 
 /* 4 September 2023 - Created File
  * 6 September 2023 - Fixed file to call abstractExit and match interface
  * 12 September 2023 - Added functionality to handle exit descriptions
  * 11 October 2023 - Added check for lockable
+ * 13 October 2023 - Added unimplemented methods
  */

@@ -1,7 +1,7 @@
 /* LockableExit Class
  * Created: 11 October 2023
- * Updated: 11 October 2023
- * Version 0.0
+ * Updated: 13 October 2023
+ * Version 0.1
  * Class to handle and exit that can be locked
  */
 
@@ -19,7 +19,7 @@ public class LockableExit extends CloseableExit implements Exit {
 	public LockableExit(String name, String command, Location destination, 
 						boolean closed, String description, CarriableItem key) {
 	
-		super(name, command, destination, false, description);
+		super(name, command, destination, true, description);
 		this.locked = closed;
 		this.key = key;
 
@@ -79,11 +79,9 @@ public class LockableExit extends CloseableExit implements Exit {
 		return super.getDestination();
 	}
 
-	public void lockUnlock(CarriableItem item) {
-		
-		if (item == key) {
-			this.locked = !this.locked;
-		}
+	public String lockUnlock(CarriableItem item, String action) {
+		this.locked = !this.locked;
+		return String.format("You %s the %s with the %s", action, this.getDescription(), this.key.getName());
 	}
 
 	//Flags that the exit can be opened/closed
@@ -94,14 +92,18 @@ public class LockableExit extends CloseableExit implements Exit {
 
 	@Override
 	public String getDescription() {
-		
 		return super.getDescription();
 	}
 	
 	public boolean getLocked() {
 		return locked;
 	}
+	
+	public Item getKey() {
+		return key;
+	}
 }
 
 /* 11 October 2023 - Created File
+ * 13 October 2023 - Added Lockable specific methods
 */
