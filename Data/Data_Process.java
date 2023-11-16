@@ -19,7 +19,8 @@ public class Data_Process {
 		container.addItem(new CarriableItem("Indicator","A light that should be on a car"));
 		container.addItem(new CarriableItem("Steel Key","An old grimy key for an old door."));
 		start.addItem(container);
-		start.addItem(new CarriableItem("Blue Key","It's metal, and blue. Probably for an Air BnB"));
+		CarriableItem key = new CarriableItem("Blue Key","It's metal, and blue. Probably for an Air BnB");
+		start.addItem(key);
 		description = "Tucked away behind The Minories, the beer garden is a hidden oasis of greenery and tranquility. Amidst colorful \nblooms, you can enjoy your chosen drink, basking in the serene ambiance as you plan your next adventure or savor the moment.";
 		Location two = new Location("in the Minories Beer Garden",description);
 		two.addItem(new CarriableItem("Plastic Cup","A cup made of plastic. It looks more like a goblet"));
@@ -44,7 +45,7 @@ public class Data_Process {
 		Location sixteen = new Location("in Starbuck's Toilet","");
 		start.addExit(new OrdinaryExit("North", two, true));
 		start.addExit(new OrdinaryExit("South", three, true));
-		start.addExit(new CloseableExit("Storeroom Door","storeroom door",fifteen,true,"This is a rather sturdy door to a store room"));
+		start.addExit(new LockableExit("Storeroom Door","storeroom door",fifteen,true,"This is a rather sturdy door to a store room",key));
 		two.addExit(new OrdinaryExit("South",start,true));
 		three.addExit(new OrdinaryExit("South",four,true));
 		three.addExit(new OrdinaryExit("North",eleven,true));

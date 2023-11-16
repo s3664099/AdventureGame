@@ -81,7 +81,7 @@ public class LockableExit extends CloseableExit implements Exit {
 
 	public String lockUnlock(CarriableItem item, String action) {
 		this.locked = !this.locked;
-		return String.format("You %s the %s with the %s", action, this.getDescription(), this.key.getName());
+		return String.format("You %s the %s with the %s", action, this.getName(), this.key.getName());
 	}
 
 	//Flags that the exit can be opened/closed

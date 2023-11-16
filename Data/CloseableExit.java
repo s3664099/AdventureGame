@@ -87,7 +87,7 @@ public class CloseableExit extends AbstractExit implements Exit {
 	}
 	
 	public boolean getLocked() {
-		return true;
+		return false;
 	}
 	
 	public boolean isLockable() {

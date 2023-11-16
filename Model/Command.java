@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
  * Updated: 13 October 2023
- * Version: 0.11
+ * Version: 0.12
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -39,14 +39,14 @@ public class Command {
 		String verb = commands[0];
 		
 		if (commands.length>1) {
-			noun = commabds[1];
+			noun = commands[1];
 		}
 				
 		//Goes through the verbs
 		if (verb.equals("go")) {
 			response = changeLocation(noun);
 			this.displayLocation = true;
-		} else if (verb].equals("open") || verb.equals("close")) {
+		} else if (verb.equals("open") || verb.equals("close")) {
 			response = openExit(noun,verb);
 		} else if (verb.equals("i") || (verb.equals("inventory")
 					|| (verb.equals("inv")))) {
@@ -76,12 +76,12 @@ public class Command {
 			} else {
 				response = switchList(inventory,location.getItems(),commands[1], "I dropped the",false);
 			}			
-		} else if (verb.equals("unlock")) {
+		} else if (verb.equals("unlock") || verb.equals("lock")) {
 
 			if (commands.length == 1) {
 				response = "I need a verb";
 			} else {
-				response = unlock(inventory,location.getExits(),location.getItems(), noun);
+				response = unlock(inventory,location.getExits(),location.getItems(), noun, verb);
 			}
 		}
 		
@@ -192,51 +192,34 @@ public class Command {
 		} else {
 			
 			//Is the exit openable?
-			if (exit.isOpenable()) {
-				
-				//Is the exit open - if not the exit is opened.
-				if (exit.getOpen()) {
-					exit.openClose();
-					response = response.format("You open the %s",exit.getName());
-				} else {
-					response = response.format("The %s is already open",exit.getName());
+			if (exit.isOpenable() && !exit.getLocked()) {
+
+				if (verb.equals("open")) {
+					//Is the exit open - if not the exit is opened.
+					if (exit.getOpen()) {
+						exit.openClose();
+						response = response.format("You open the %s",exit.getName());
+					} else {
+						response = response.format("The %s is already open",exit.getName());
+					}
+				} else if (verb.equals("close")) {
+					//Is the exit open - if not the exit is opened.
+					if (!exit.getOpen()) {
+						exit.openClose();
+						response = response.format("You close the %s",exit.getName());
+					} else {
+						response = response.format("The %s is already closed",exit.getName());
+					}					
 				}
+			} else if (exit.getLocked()) {
+				response = response.format("The %s is locked",exit.getName());
 			} else {
 				response = response.format("You cannot open the %s", exit.getName());
 			}
 		}
 		return response;
 	}
-	
-	//Method for closing an exit
-	private String closeExit(String command) {
 		
-		response = response.format("You cannot close the %s",command);
-		
-		Exit exit = getExits(command);
-		
-		//Checks if the exit is present
-		if (exit == null) {
-			response = response.format("I do not see a ", command);
-		} else {
-			
-			//Is the exit openable?
-			if (exit.isOpenable()) {
-				
-				//Is the exit open - if not the exit is opened.
-				if (!exit.getOpen()) {
-					exit.openClose();
-					response = response.format("You close the %s",exit.getName());
-				} else {
-					response = response.format("The %s is already closed",exit.getName());
-				}
-			} else {
-				response = response.format("You cannot close the %s", exit.getName());
-			}
-		}
-		return response;
-	}
-	
 	private String look(String[] commands, Location location) {
 		String response = "";
 		
@@ -301,32 +284,37 @@ public class Command {
 		return response;
 	}
 	
-	private String unlock(ArrayList<Item> inventory, ArrayList<Exit>exits,ArrayList<Item>items,String command) {
+	private String unlock(ArrayList<Item> inventory, ArrayList<Exit>exits,ArrayList<Item>items,String command, String verb) {
 		response = "I do not see that here";
 		boolean found = false;
 		
 		for (Exit exit:exits) {
 			for (String noun:exit.getCommands()) {
-								
-				if (command.equals(noun) && (found)) {
-					if (exit.getLocked()) {
-						for (Item item:inventory) {
-							if (item == exit.getKey()) {
-								response = exit.lockUnlock((CarriableItem) item, command);
-								found = true;
-							} else {
-								response = "You do not have a key that fits";
-								found = true;
+				if (command.equals(noun) && (!found)) {
+					for (Item item:inventory) {
+						if (item == exit.getKey()) {
+							found = true;
+							if (verb.equals("unlock")) {
+								if (exit.getLocked()) {
+									response = exit.lockUnlock((CarriableItem) item, verb);
+								} else {
+									response = response.format("The %s is already unlocked",exit.getName());
+								}
+							} else if (verb.equals("lock")) {
+								if (!exit.getLocked()) {
+									response = exit.lockUnlock((CarriableItem) item, verb);
+								} else {
+									response = response.format("The %s is already locked",exit.getName());
+								}								
 							}
 						}
-					} else {
-						response = String.format("The %s is not locked", exit.getName());
+					}
+					if (!found) {
+						response = "You don't have the key";
 					}
 				}
 			}
 		}
-		
-		
 		return response;
 	}
 }
@@ -341,5 +329,6 @@ public class Command {
  * 9 October 2023 - Added ability to take items from a container once looked in them.
  * 10 October 2023 - Reworked take and drop so only one item is taken and dropped. 
  * 11 October 2023 - Started Unlock Command  
- * 13 October 2023 - Began working on the unlock command        
+ * 13 October 2023 - Began working on the unlock command    
+ * 16 November 2023 - Tightend code to make open/close lock/unlock the same function    
  */
