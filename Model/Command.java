@@ -35,22 +35,21 @@ public class Command {
 		//Standard response
 		response = "I'm sorry, I do not understand";
 		
-		String verb = "";
+		String noun = "";
+		String verb = commands[0];
 		
 		if (commands.length>1) {
-			verb = commands[1];
+			noun = commabds[1];
 		}
 				
 		//Goes through the verbs
-		if (commands[0].equals("go")) {
-			response = changeLocation(verb);
+		if (verb.equals("go")) {
+			response = changeLocation(noun);
 			this.displayLocation = true;
-		} else if (commands[0].equals("open")) {
-			response = openExit(verb);
-		} else if (commands[0].equals("close")) {
-			response = closeExit(verb);
-		} else if (commands[0].equals("i") || (commands[0].equals("inventory")
-					|| (commands[0].equals("inv")))) {
+		} else if (verb].equals("open") || verb.equals("close")) {
+			response = openExit(noun,verb);
+		} else if (verb.equals("i") || (verb.equals("inventory")
+					|| (verb.equals("inv")))) {
 			
 			if (inventory.size() == 0) {
 				response = "I am carrying nothing";
@@ -60,9 +59,9 @@ public class Command {
 					response = response.format("%s %s", response, item.getName());
 				}
 			}
-		} else if (commands[0].equals("look")) {
+		} else if (verb.equals("look")) {
 			response = look(commands,location);
-		} else if ((commands[0].equals("take")) ||(commands[0].equals("get"))) {
+		} else if ((verb.equals("take")) ||(verb.equals("get"))) {
 			
 			if (commands.length == 1) {
 				response = "I need a verb";
@@ -70,19 +69,19 @@ public class Command {
 				response = switchList(location.getItems(), inventory, commands[1], "I picked up the",false);
 			}
 			
-		} else if (commands[0].equals("drop")) {
+		} else if (verb.equals("drop")) {
 			
 			if (commands.length == 1) {
 				response = "I need a verb";
 			} else {
 				response = switchList(inventory,location.getItems(),commands[1], "I dropped the",false);
 			}			
-		} else if (commands[0].equals("unlock")) {
+		} else if (verb.equals("unlock")) {
 
 			if (commands.length == 1) {
 				response = "I need a verb";
 			} else {
-				response = unlock(inventory,location.getExits(),location.getItems(), commands[1]);
+				response = unlock(inventory,location.getExits(),location.getItems(), noun);
 			}
 		}
 		
@@ -181,7 +180,7 @@ public class Command {
 	}
 	
 	//Method to open an exit
-	private String openExit(String command) {
+	private String openExit(String command,String verb) {
 		
 		response = response.format("You cannot open the %s",command);
 		
