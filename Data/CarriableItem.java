@@ -28,6 +28,40 @@ public class CarriableItem extends AbstractItem implements Item {
 		super.updateItem(name, description);
 	}
 
+	//Methods for containers
+	@Override
+	public boolean getCloseable() {
+		return false;
+	}
+
+	@Override
+	public boolean getClosed() {
+		return false;
+	}
+
+	@Override
+	public boolean getLockable() {
+		return false;
+	}
+
+	@Override
+	public boolean getLocked() {
+		return false;
+	}
+
+	@Override
+	public void setClosed() {		
+	}
+
+	@Override
+	public void setLocked() {		
+	}
+
+	@Override
+	public boolean checkKey(Item key) {
+		return false;
+	}
+
 }
 
 /* 25 August 2023 - Created file.

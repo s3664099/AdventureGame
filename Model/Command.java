@@ -233,6 +233,7 @@ public class Command {
 			ArrayList<Exit> exits = location.getExits();
 			ArrayList<Item> items = location.getItems();
 			
+			//Exits
 			for (Exit exit:exits) {
 				ArrayList<String> nouns = exit.getCommands();
 				
@@ -243,6 +244,7 @@ public class Command {
 				}
 			}
 			
+			//Items
 			if (response.length()==0) {
 				for (Item item:items) {
 					String[] nouns = item.getNouns();

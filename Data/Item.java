@@ -16,6 +16,13 @@ public interface Item {
 	public String[] getNouns();
 	public String getName();
 	public void updateItem(String name, String description);
+	public boolean getCloseable();
+	public boolean getClosed();
+	public boolean getLockable();
+	public boolean getLocked();
+	public void setClosed();
+	public void setLocked();
+	public boolean checkKey(Item key);
 };
 
 /* 12 September 2023 - Created File

@@ -7,3 +7,7 @@ Java as the main language.
 
 ##23 August 2023##
 I have gone back to redo this game, so this is the new one that I have started to write.
+
+##8 December 2023##
+Well, I haven't actually written all that much here. So I'll pretty much say that I'm up to the closeable
+and lockable items.
