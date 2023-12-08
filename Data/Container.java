@@ -17,6 +17,7 @@ public class Container extends ImmoveableItem implements Item {
 	private boolean locked = false;
 	private boolean closed = false;
 	private boolean haveViewed = false;
+	private Item key;
 	
 	public Container(String name, String description) {
 		super(name,description);
@@ -29,6 +30,16 @@ public class Container extends ImmoveableItem implements Item {
 		this.lockable = lockable;
 		this.locked = locked;
 		this.closed = closed;
+	}
+
+	public Container(String name, String description, boolean closeable, boolean lockable,
+			boolean locked, boolean closed, Item key) {
+		super(name, description);
+		this.closeable = closeable;
+		this.lockable = lockable;
+		this.locked = locked;
+		this.closed = closed;
+		this.key = key;
 	}
 
 	@Override
@@ -94,9 +105,47 @@ public class Container extends ImmoveableItem implements Item {
 		return haveViewed;
 	}
 	
-	//Lock/Unlock
-	//Open/Close
-
+	//checks if the container is closeable
+	public boolean getCloseable() {
+		return closeable;
+	}
+	
+	//Checks if it is closed
+	public boolean getClosed() {
+		return closed;
+	}
+	
+	//Checks if the container is lockable
+	public boolean getLockable() {
+		return lockable;
+	}
+	
+	//Checks if the container is locked
+	public boolean getLocked() {
+		return locked;
+	}
+	
+	//Opens/closes the container
+	public void setClosed() {
+		this.closed = !closed;	
+	}
+	
+	//Locks/Unlocks the container
+	public void setLocked() {
+		this.locked = !locked;
+	}
+	
+	//Checks that the key is the correct key
+	public boolean checkKey(Item key) {
+		
+		boolean hasKey = false;
+		
+		if (key.equals(this.key)) {
+			hasKey = true;
+		}
+		
+		return hasKey;
+	}
 }
 
 /* 5 October 2023 Created File
