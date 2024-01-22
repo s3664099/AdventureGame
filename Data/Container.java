@@ -2,7 +2,7 @@
  * Created: 5 October 2023
  * Updated: 9 October 2023
  * Version: 0.1
- * Class for items that can't be picked up and carried.
+ * Class for items that can contain other items. Cannot be carried
  */
 
 package Data;
@@ -56,7 +56,7 @@ public class Container extends ImmoveableItem implements Item {
 	public String getDescription() {
 		String response = super.getDescription();
 		
-		if (!closed) {
+		if ((!closed) && (!locked)) {
 			response = response.format("%s. The %s contains",super.getDescription(),super.getName());
 			int length = 0;
 		

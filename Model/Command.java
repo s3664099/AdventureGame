@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 13 October 2023
- * Version: 0.12
+ * Updated: 22 January 2024
+ * Version: 0.11
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -286,16 +286,25 @@ public class Command {
 		return response;
 	}
 	
-	private String unlock(ArrayList<Item> inventory, ArrayList<Exit>exits,ArrayList<Item>items,String command, String verb) {
+	private String unlock(ArrayList<Item> inventory, ArrayList<Exit>exits, ArrayList<Item>items,String command, String verb) {
+	
 		response = "I do not see that here";
 		boolean found = false;
+		boolean foundItem = false;
 		
+		//Checks to see if the player is attempting to unlock an exit
 		for (Exit exit:exits) {
 			for (String noun:exit.getCommands()) {
+				
+				//The item is an exit in the area
 				if (command.equals(noun) && (!found)) {
+					foundItem = true;
 					for (Item item:inventory) {
+						
 						if (item == exit.getKey()) {
 							found = true;
+							
+							//Acts on either lock/unlock, which does the opposite.
 							if (verb.equals("unlock")) {
 								if (exit.getLocked()) {
 									response = exit.lockUnlock((CarriableItem) item, verb);
@@ -317,6 +326,52 @@ public class Command {
 				}
 			}
 		}
+		
+		//It wasn't an exit, so we now check the items.
+		if (!foundItem) {
+			for (Item container:items) {
+				for (String noun:container.getNouns()) {
+					
+					//The container is an item in the area
+					if (command.equals(noun) && (!found)) {
+
+						//The container isn't lockable
+						if(!container.getLockable()) {
+							response = response.format("The %s isn't lockable",container.getName());
+						} else {
+							
+							//Checks if player has the key
+							for (Item item:inventory) {
+								if (container.checkKey(item)) {
+									found = true;
+								
+									//Acts on either lock/unlock, which does the opposite.
+									if (verb.equals("unlock")) {
+										if (container.getLocked()) {
+											container.setLocked();
+											response = response.format("You unlock the %s",container.getName());
+										} else {
+											response = response.format("The %s is already unlocked",container.getName());
+										}
+									} else if (verb.equals("lock")) {
+										if (!container.getLocked()) {
+											container.setLocked();
+											response = response.format("You lock the %s",container.getName());
+										} else {
+											response = response.format("The %s is already locked",container.getName());
+										}
+									}								
+								}
+							}
+							if (!found) {
+								response = "You don't have the key";
+							}		
+						}
+					}
+				}
+			}
+		}
+		
 		return response;
 	}
 }
@@ -333,4 +388,5 @@ public class Command {
  * 11 October 2023 - Started Unlock Command  
  * 13 October 2023 - Began working on the unlock command    
  * 16 November 2023 - Tightend code to make open/close lock/unlock the same function    
+ * 22 January 2023 - Added the lock/unlock for the containers
  */

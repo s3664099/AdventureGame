@@ -7,9 +7,6 @@
 
 //TODO: Create Closeable Containers
 //			- Made part of container - checks if it is closeable before open/close
-//TODO: Create lockable Containers
-//			- Made part of container - checks if it is lockable before lock/unlock
-//			- Also need to confirm that player carries the key
 //TODO: Develop Moveable Items
 //TODO: Add Treasure and Treasure Drop
 //TODO: Add Save & Load
