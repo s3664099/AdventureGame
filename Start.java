@@ -5,13 +5,14 @@
  * This is the launcher. It should not need to be updated.
  */
 
-//TODO: Create Closeable Containers
-//			- Made part of container - checks if it is closeable before open/close
 //TODO: Develop Moveable Items
+//		- Add Moveable boolean, hidden Exit, hidden item
 //TODO: Add Treasure and Treasure Drop
 //TODO: Add Save & Load
-//TODO: Begin Building Other Game
+//TODO: Add function in look that it reveals an item/exit
+//TODO: Create a game that uses everything we have (openable containers/Lockable containers/moveable items/Look items exits)
 //TODO: Implement multi word parser
+//TODO: Begin Building Other Game
 
 import Model.Main;
 

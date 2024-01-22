@@ -11,3 +11,7 @@ I have gone back to redo this game, so this is the new one that I have started t
 ##8 December 2023##
 Well, I haven't actually written all that much here. So I'll pretty much say that I'm up to the closeable
 and lockable items.
+
+##22 January 2023##
+Actually, it's been a while since I've touched this program. Anyway, I've added the lock/unlock and
+the open/close for the containers. I will now move onto moveable items.

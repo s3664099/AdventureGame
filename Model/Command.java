@@ -136,6 +136,28 @@ public class Command {
 		return response;
 	}
 	
+	//Checks if the item is available
+	private Item getItems(String command) {
+		
+		Item item = null;
+		
+		//Gets all items from location
+		ArrayList<Item> items = currentLocation.getItems();
+		
+		for (Item itemSearch:items) {
+			
+			//Gets the commands
+			for (String x:itemSearch.getNouns()) {
+				
+				if (command.equals(x)) {
+					item = itemSearch;
+				}
+			}		
+		}
+		return item;
+	}
+	
+	//Checks if the exit is available
 	private Exit getExits(String command) {
 		
 		Exit exit = null;
@@ -179,17 +201,15 @@ public class Command {
 		return response;
 	}
 	
-	//Method to open an exit
+	//Method to open an exit/container
 	private String openExit(String command,String verb) {
 		
-		response = response.format("You cannot open the %s",command);
+		response = response.format("You do not see a %s",command);
 		
 		Exit exit = getExits(command);
 		
 		//Checks if the exit is present
-		if (exit == null) {
-			response = response.format("I do not see a ", command);
-		} else {
+		if (exit != null) {
 			
 			//Is the exit openable?
 			if (exit.isOpenable() && !exit.getLocked()) {
@@ -216,7 +236,45 @@ public class Command {
 			} else {
 				response = response.format("You cannot open the %s", exit.getName());
 			}
+
+		//There were no exits
+		} else {
+			
+			Item item = getItems(command);
+
+			//Checks if the exit is present
+			if (item != null) {
+				
+				//Is the exit openable?
+				if (item.getCloseable() && !item.getLocked()) {
+
+					if (verb.equals("open")) {
+						
+						//Is the exit open - if not the exit is opened.
+						if (item.getClosed()) {
+							item.setClosed();
+							response = response.format("You open the %s",item.getName());
+						} else {
+							response = response.format("The %s is already open",item.getName());
+						}
+					} else if (verb.equals("close")) {
+						
+						//Is the exit open - if not the exit is opened.
+						if (!item.getClosed()) {
+							item.setClosed();
+							response = response.format("You close the %s",exit.getName());
+						} else {
+							response = response.format("The %s is already closed",exit.getName());
+						}					
+					}
+				} else if (item.getLocked()) {
+					response = response.format("The %s is locked",exit.getName());
+				} else {
+					response = response.format("You cannot open the %s", exit.getName());
+				}
+			}
 		}
+				
 		return response;
 	}
 		
@@ -388,5 +446,5 @@ public class Command {
  * 11 October 2023 - Started Unlock Command  
  * 13 October 2023 - Began working on the unlock command    
  * 16 November 2023 - Tightend code to make open/close lock/unlock the same function    
- * 22 January 2023 - Added the lock/unlock for the containers
+ * 22 January 2023 - Added the lock/unlock and the open/close for the containers
  */
