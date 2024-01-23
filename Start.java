@@ -13,6 +13,7 @@
 //TODO: Create a game that uses everything we have (openable containers/Lockable containers/moveable items/Look items exits)
 //TODO: Implement multi word parser
 //TODO: Begin Building Other Game
+//TODO; Maybe have the moveable item hide multiple things, and can be moved multiple times
 
 import Model.Main;
 
