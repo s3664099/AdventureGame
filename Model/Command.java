@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 22 January 2024
- * Version: 0.11
+ * Updated: 24 January 2024
+ * Version: 0.12
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -454,20 +454,41 @@ public class Command {
 			
 			for (String noun:item.getNouns()) {
 				
-				if (verb.equals(noun)) {
+				if ((verb.equals(noun)) && (!foundItem)) {
 					if ((!item.getMoveable()) || (item.getMoved())) {
 						response = response.format("I cannot move the %s", item.getName());
 					} else {
+						
+						//Flags the item that has been moved and adds the hidden item to the location
 						item.setMoved();
-						//Checks if there is an exit or a location hidden, and adds it to the current location
+						foundItem = true;
+						if (item.getHiddenItem() != null) {
+							location.addItem(item.getHiddenItem());
+							response = response.format("You move the %s and discover a %s",
+									item.getName(),item.getHiddenItem().getName());
+						} else {
+							location.addExit(item.getHiddenExit());
+							response = response.format("You move the %s and discover a %s",
+									item.getName(),item.getHiddenExit().getName());						
+						}
 					}
 				}
 				
 			}
-			
 		}
 		
-		return "";
+		if(!foundItem) {
+			for (Exit exit:location.getExits()) {
+				for (String noun:exit.getCommands()) {
+					if ((verb.equals(noun)) && (!foundItem)) {
+						response = response.format("You cannot move the %s",exit.getName());
+						foundItem = true;
+					}
+				}
+			}
+		}
+		
+		return response;
 	}
 }
 
@@ -483,5 +504,6 @@ public class Command {
  * 11 October 2023 - Started Unlock Command  
  * 13 October 2023 - Began working on the unlock command    
  * 16 November 2023 - Tightend code to make open/close lock/unlock the same function    
- * 22 January 2023 - Added the lock/unlock and the open/close for the containers
+ * 22 January 2024 - Added the lock/unlock and the open/close for the containers
+ * 24 January 2024 - Added the function to move an item to reveal a hidden item.
  */
