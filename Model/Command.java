@@ -83,6 +83,14 @@ public class Command {
 			} else {
 				response = unlock(inventory,location.getExits(),location.getItems(), noun, verb);
 			}
+		} else if (verb.equals("move")) {
+			
+			if (commands.length == 1) {
+				response = "I need a verb";
+			} else {
+				response = move(location,noun);
+			}
+			
 		}
 		
 		return response;
@@ -431,6 +439,35 @@ public class Command {
 		}
 		
 		return response;
+	}
+	
+	//Function to move an item that can be moved
+	private String move(Location location, String verb) {
+		
+		ArrayList<Item> items = location.getItems();
+		ArrayList<Exit> exits = location.getExits();
+		String response = "";
+		response = response.format("I do not see a %s here", verb);
+		Boolean foundItem = false;
+		
+		for (Item item:items) {
+			
+			for (String noun:item.getNouns()) {
+				
+				if (verb.equals(noun)) {
+					if ((!item.getMoveable()) || (item.getMoved())) {
+						response = response.format("I cannot move the %s", item.getName());
+					} else {
+						item.setMoved();
+						//Checks if there is an exit or a location hidden, and adds it to the current location
+					}
+				}
+				
+			}
+			
+		}
+		
+		return "";
 	}
 }
 
