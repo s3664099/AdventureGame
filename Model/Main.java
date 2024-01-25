@@ -1,7 +1,7 @@
 /* Main Function
  * Created: 25 August 2023
- * Updated: 8 September 2023
- * Version: 0.3
+ * Updated: 25 January 2024
+ * Version: 0.4
  * This is the main routine for the game
  */
 
@@ -20,6 +20,7 @@ public class Main {
 	String query = "Tell me what to do: ";
 	String command;
 	ArrayList<Item> inventory = new ArrayList<Item>();
+	int score = 0;
 
 	public void run() {
 		
@@ -39,6 +40,7 @@ public class Main {
 			command = input.getCommand(query);
 			String[] commands = parser.parseCommand(command);
 			display.displayResponse(processor.processCommand(commands,data,inventory));
+			this.score += processor.getScore();
 			data = processor.getCurrentLocation();
 		}
 	}
@@ -48,4 +50,5 @@ public class Main {
  * 27 August 2023 - Added Comments
  * 8 September 2023 - Reconfigured code to pass responses to view and retrieve location
  *                    from processor
+ * 25 January 2024 - Added score for treasures
  */

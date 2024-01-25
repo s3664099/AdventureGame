@@ -1,7 +1,7 @@
 /* Location Class
  * Created: 25 August 2023
- * Updated: 15 September 2023
- * Version: 0.8
+ * Updated: 25 January 2024
+ * Version: 0.9
  * The class that holds the details of the locations and handles
  * any actions that deal with the location
  */
@@ -17,6 +17,7 @@ public class Location {
 	private ArrayList<Exit> exits;
 	private ArrayList<Item> items;
 	private boolean firstVisit = true;
+	private boolean treasureStore = false;
 	
 	public Location(String name, String description) {
 		this.name = name;
@@ -119,6 +120,14 @@ public class Location {
 		}
 		return foundNoun;	
 	}
+	
+	public void setTreasureStore() {
+		this.treasureStore = !this.treasureStore;
+	}
+	
+	public boolean getTreasureStore() {
+		return this.treasureStore;
+	}
 } 
 /* 25 August 2023 - Created file
 * 27 August 2023 - Added comments
@@ -130,5 +139,6 @@ public class Location {
 * 8 September 2023 - Removed command processing from class. Added detailed description
 *                    to the location.
 * 15 September 2023 - Added methods to handle items, and reduced to single item list. 
-* 					  reworked display method to handle all displays                  
+* 					  reworked display method to handle all displays
+* 25 January 2024 - Added methods to handle treasure stores                
 */

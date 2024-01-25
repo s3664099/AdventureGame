@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 24 January 2024
- * Version: 0.12
+ * Updated: 25 January 2024
+ * Version: 0.13
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -20,6 +20,7 @@ public class Command {
 	private Location currentLocation;
 	private String response = "";
 	private boolean displayLocation = true;
+	private int score = 0;
 	
 	public Location getCurrentLocation() {
 		return currentLocation;
@@ -67,6 +68,7 @@ public class Command {
 				response = "I need a verb";
 			} else {
 				response = switchList(location.getItems(), inventory, commands[1], "I picked up the",false);
+				this.score = changeScore(false,verb,inventory,location); 
 			}
 			
 		} else if (verb.equals("drop")) {
@@ -75,6 +77,7 @@ public class Command {
 				response = "I need a verb";
 			} else {
 				response = switchList(inventory,location.getItems(),commands[1], "I dropped the",false);
+				this.score = changeScore(true,verb,inventory,location); 
 			}			
 		} else if (verb.equals("unlock") || verb.equals("lock")) {
 
@@ -490,6 +493,58 @@ public class Command {
 		
 		return response;
 	}
+	
+	//Handles increasing/decreasing the score based on whether the player is taking an item from
+	//a treasure store, or dropping it.
+	private int changeScore(boolean action,String verb, ArrayList<Item> items,Location location) {
+		
+		int score = 0;
+		
+		//Drop action
+		if (action) {
+			
+			//If the player in the treasure store
+			if (location.getTreasureStore()) {
+				
+				//Checks if the item is a treasure
+				for (Item item:items) {
+					for (String noun:item.getNouns()) {
+						if (noun.equals(verb)) {
+							if (item.getTreasure()) {
+								score =1;
+							}
+						}
+					}
+				}
+			}
+		
+		//The player is removing a treasure
+		} else {
+			
+			//If the player in the treasure store
+			if (location.getTreasureStore()) {
+				
+				//Checks if the item is a treasure
+				for (Item item:items) {
+					for (String noun:item.getNouns()) {
+						if (noun.equals(verb)) {
+							if (item.getTreasure()) {
+								score =-1;
+							}
+						}
+					}
+				}
+			}			
+		}
+		return score;
+	}
+	
+	//Gets the score and resets it to zero
+	public int getScore() {
+		int score = this.score;
+		this.score = 0;
+		return score;
+	}
 }
 
 /* 25 August 2023 - Created File
@@ -505,5 +560,6 @@ public class Command {
  * 13 October 2023 - Began working on the unlock command    
  * 16 November 2023 - Tightend code to make open/close lock/unlock the same function    
  * 22 January 2024 - Added the lock/unlock and the open/close for the containers
- * 24 January 2024 - Added the function to move an item to reveal a hidden item.
+ * 24 January 2024 - Added the function to move an item
+ * 25 January 2024 - Added scoring for treasures
  */
