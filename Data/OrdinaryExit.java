@@ -1,15 +1,16 @@
 /* Ordinary Exit Class
  * Created: 25 August 2023
- * Updated: 13 October 2023
- * Version 0.8
+ * Updated: 26 January 2024
+ * Version 0.9
  * Class to handle everything to do with an exit.
  */
 
 package Data;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class OrdinaryExit extends AbstractExit implements Exit {
+public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
 	
 	//Standard Exit
 	public OrdinaryExit(String name, Location destination, boolean direction) {
@@ -104,4 +105,5 @@ public class OrdinaryExit extends AbstractExit implements Exit {
  * 12 September 2023 - Added functionality to handle exit description
  * 11 October 2023 - Added lockable function
  * 13 October 2023 - Added methods for exits to close and lock
+ * 26 January 2024 - Made Object Serializable
 */

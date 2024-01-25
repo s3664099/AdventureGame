@@ -59,3 +59,11 @@ though we only need to do what is needed for a particular game, and can add furt
 
 **24 January 2024**
 Added the move functionality to the game
+
+**25 January 2024**
+Added a system for collecting and storing treasures, and also scoring based on these treasures. This is a very simplistic scoring
+system, and only takes into account treasures stored at a specific location. Most adventure games really don't need a scoring system
+however, some complicated ones have used scoring to determine how much a player has achieved.
+
+**26 January 2024**
+Started creating the save/load functionality by making classes serializable

@@ -1,15 +1,16 @@
 /* Moveable Item Class
  * Created: 5 October 2023
- * Updated: 23 January 2024
- * Version: 0.1
+ * Updated: 25 January 2024
+ * Version: 0.2
  * Class for items that hide exits and items.
  */
 
 package Data;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class MoveableItem extends ImmoveableItem implements Item {
+public class MoveableItem extends ImmoveableItem implements Item, Serializable {
 	
 	Exit exit;
 	Item item;
@@ -64,4 +65,5 @@ public class MoveableItem extends ImmoveableItem implements Item {
 
 /* 5 October 2023 - created class
  * 23 January 2024 - Added functionality
+ * 26 January 2024 - Made class serializable
 */

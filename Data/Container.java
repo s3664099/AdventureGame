@@ -1,15 +1,16 @@
 /* Container Class
  * Created: 5 October 2023
- * Updated: 9 October 2023
- * Version: 0.1
+ * Updated: 25 January 2024
+ * Version: 0.2
  * Class for items that can contain other items. Cannot be carried
  */
 
 package Data;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Container extends ImmoveableItem implements Item {
+public class Container extends ImmoveableItem implements Item,Serializable {
 	
 	private ArrayList<Item> contents = new ArrayList<Item>();
 	private boolean lockable = false;
@@ -150,4 +151,5 @@ public class Container extends ImmoveableItem implements Item {
 
 /* 5 October 2023 Created File
  * 9 October 2023 Added functionality to Container
+ * 25 January 2024 - Made Class Serializable
 */

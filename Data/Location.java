@@ -8,8 +8,9 @@
 
 package Data;
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Location {
+public class Location implements Serializable {
 
 	private String name;
 	private String description;
@@ -140,5 +141,5 @@ public class Location {
 *                    to the location.
 * 15 September 2023 - Added methods to handle items, and reduced to single item list. 
 * 					  reworked display method to handle all displays
-* 25 January 2024 - Added methods to handle treasure stores                
+* 25 January 2024 - Added methods to handle treasure stores. Made class serializable              
 */

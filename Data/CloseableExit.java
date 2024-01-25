@@ -1,15 +1,16 @@
 /* CloseableExit Class
  * Created: 4 September 2023
- * Updated: 13 October 2023
- * Version 0.7
+ * Updated: 25 January 2024
+ * Version 0.8
  * Class to handle and exit that can be closed
  */
 
 package Data;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class CloseableExit extends AbstractExit implements Exit {
+public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 	
 	private boolean closed;
 		
@@ -111,4 +112,5 @@ public class CloseableExit extends AbstractExit implements Exit {
  * 12 September 2023 - Added functionality to handle exit descriptions
  * 11 October 2023 - Added check for lockable
  * 13 October 2023 - Added unimplemented methods
+ * 25 January 2024 - Made Class Serializable
  */

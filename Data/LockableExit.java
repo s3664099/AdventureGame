@@ -1,6 +1,6 @@
 /* LockableExit Class
  * Created: 11 October 2023
- * Updated: 13 October 2023
+ * Updated: 26 January 2024
  * Version 0.1
  * Class to handle and exit that can be locked
  */
@@ -8,8 +8,9 @@
 package Data;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class LockableExit extends CloseableExit implements Exit {
+public class LockableExit extends CloseableExit implements Exit,Serializable {
 	
 	private boolean locked;
 	private CarriableItem key;
@@ -106,4 +107,5 @@ public class LockableExit extends CloseableExit implements Exit {
 
 /* 11 October 2023 - Created File
  * 13 October 2023 - Added Lockable specific methods
+ * 26 January 2024 - Made class serializable
 */

@@ -1,13 +1,14 @@
 /* Exit Interface
  * Created: 5 September 2023
- * Updated: 13 October 2023
- * Version 0.4
+ * Updated: 25 January 2024
+ * Version 0.5
  * Interface to govern exits
  */
 
 package Data;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
 public interface Exit {
 
@@ -31,4 +32,5 @@ public interface Exit {
  * 12 September 2023 - Added functionality to handle exit description
  * 11 October 2023 - Added lockable functions
  * 13 October 2023 - Added methods for lock and close
+ * 25 January 2024 - Made class serializable
 */

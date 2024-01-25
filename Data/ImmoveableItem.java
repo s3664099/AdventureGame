@@ -1,15 +1,16 @@
 /* Immoveable Item Class
  * Created: 25 August 2023
- * Updated: 23 January 2024
- * Version: 0.4
+ * Updated: 26 January 2024
+ * Version: 0.5
  * Class for items that can't be picked up and carried.
  */
 
 package Data;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class ImmoveableItem extends AbstractItem implements Item {
+public class ImmoveableItem extends AbstractItem implements Item,Serializable {
 	
 	public ImmoveableItem(String name, String description) {
 		super(name,description);
@@ -100,4 +101,5 @@ public class ImmoveableItem extends AbstractItem implements Item {
  * 27 August 2023 - Added Comments
  * 14 September 2023 - Began adding item methods.
  * 23 January 2024 - Added methods to handle the moveable items
+ * 25 January 2024 - Made class serialisable.
 */
