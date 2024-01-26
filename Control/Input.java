@@ -1,7 +1,7 @@
 /* Name: Input Class
  * Created: 25 August 2023
- * Updated: 7 September 2023
- * Version: 0.3
+ * Updated: 26 January 2024
+ * Version: 0.4
  * This takes the user input and returns the command.
  * At this stage the parser consists of only a verb and a noun.
  */
@@ -71,10 +71,35 @@ public class Input {
 		
 		return command;
 	}
+	
+	public boolean getYesNo() {
+		
+		//Consider moving to the control function
+		boolean correctResponse = false;
+		boolean writeFile = false;
+		
+		while (!correctResponse) {
+			String query = input.nextLine();
+			
+			if (query.toLowerCase().equals("y")) {
+				correctResponse = true;
+			} else if (query.toLowerCase().equals("n")) {
+				correctResponse = true;
+				writeFile = true;
+			}
+			
+			if (!correctResponse) {
+				System.out.println("Please enter Y or N");
+			}
+		}
+		
+		return writeFile;
+	}
 }
 
 /*
  * 25 August 2023 - Created file
  * 27 August 2023 - Added Comments
  * 7 September 2023 - Added method to allow single word/letter movement for directions
+ * 26 January 2024 - Added method to get a yes or no response
 */

@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 25 January 2024
- * Version: 0.13
+ * Updated: 26 January 2024
+ * Version: 0.14
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -17,6 +17,7 @@ import Data.Container;
 import Data.Exit;
 import Data.Item;
 import Data.Location;
+import Control.Input;
 
 public class Command {
 	
@@ -573,10 +574,13 @@ public class Command {
 		
 		//Checks if the name is already being used.
 		if (checkDirectory(saveName)) {
-			
+						
 			//If it is, asks if the user would like to overwrite it
 			System.out.printf("The file %s already exists, do you wish to overwrite it (Y/n)?",saveName);
 			
+			Input query = new Input();
+			writeFile = query.getYesNo();
+						
 		} else {
 			writeFile = true;
 		}
@@ -599,7 +603,7 @@ public class Command {
 			}
 		}
 				
-		return "";
+		return response;
 	}
 	
 	//Checks the directory to see if the file name exists
@@ -631,4 +635,5 @@ public class Command {
  * 22 January 2024 - Added the lock/unlock and the open/close for the containers
  * 24 January 2024 - Added the function to move an item
  * 25 January 2024 - Added scoring for treasures
+ * 26 January 2024 - Added the save function
  */
