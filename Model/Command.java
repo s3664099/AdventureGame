@@ -8,6 +8,9 @@
 package Model;
 
 import java.util.ArrayList;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.IOException;
 
 import Data.CarriableItem;
 import Data.Container;
@@ -21,13 +24,14 @@ public class Command {
 	private String response = "";
 	private boolean displayLocation = true;
 	private int score = 0;
+	private ArrayList<Item> inventory;
 	
 	public Location getCurrentLocation() {
 		return currentLocation;
 	}
 	
 	//Executes the command
-	public String processCommand(String [] commands, Location location, ArrayList<Item> inventory) {
+	public String processCommand(String [] commands, Location location, ArrayList<Item> inventory,int score) {
 		
 		//Sets the location
 		this.currentLocation = location;
@@ -94,6 +98,22 @@ public class Command {
 				response = move(location,noun);
 			}
 			
+		} else if (verb.equals("save")) {
+			
+			if (commands.length == 1) {
+				response = "Please include a name for the saved game";
+			} else {
+				
+				response = saveGame(location,inventory,score);
+			}
+		} else if (verb.equals("load")) {
+			
+			//Calls the load game function.
+			//If only one command, displays a list of the games
+			//If two commands, checks the list with the 2nd word, and if available loads it
+			//If not available, displays list of games, and asks player to chose one of them.
+			//Set a success/fail flag to check if the load was a success.
+			//Set a Location object to hold the object when loaded
 		}
 		
 		return response;
@@ -544,6 +564,17 @@ public class Command {
 		int score = this.score;
 		this.score = 0;
 		return score;
+	}
+	
+	//save Game method
+	public String saveGame(Location location, ArrayList<Item> inventory, int score) {
+
+		//Checks if the name is already being used.
+		//If it is, asks if the user would like to overwrite it
+		//Adds the inventory and score to the location.
+		//Otherwise creates a new file.
+		
+		return "";
 	}
 }
 

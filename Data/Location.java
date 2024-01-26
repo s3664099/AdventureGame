@@ -17,6 +17,8 @@ public class Location implements Serializable {
 	private ArrayList<String> nouns;
 	private ArrayList<Exit> exits;
 	private ArrayList<Item> items;
+	private ArrayList<Item> inventory;
+	private int score;
 	private boolean firstVisit = true;
 	private boolean treasureStore = false;
 	
@@ -129,6 +131,27 @@ public class Location implements Serializable {
 	public boolean getTreasureStore() {
 		return this.treasureStore;
 	}
+	
+	//Saves the players details when the game is saved
+	public void savePlayer(ArrayList<Item> inventory,int score) {
+		this.inventory = inventory;
+		this.score = score;
+	}
+	
+	//Loads player's score and inventory. Clears it afterwards
+	public ArrayList<Item> getInventory() {
+		
+		ArrayList<Item> inventory = this.inventory;
+		this.inventory = null;
+		
+		return inventory;
+	}
+	
+	public int getScore() {
+		int score = this.score;
+		this.score = 0;
+		return score;
+	}
 } 
 /* 25 August 2023 - Created file
 * 27 August 2023 - Added comments
@@ -141,5 +164,6 @@ public class Location implements Serializable {
 *                    to the location.
 * 15 September 2023 - Added methods to handle items, and reduced to single item list. 
 * 					  reworked display method to handle all displays
-* 25 January 2024 - Added methods to handle treasure stores. Made class serializable              
+* 25 January 2024 - Added methods to handle treasure stores. Made class serializable. Added inventory to store
+*                   player's inventory when saving. Also score              
 */
