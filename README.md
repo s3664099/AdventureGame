@@ -36,6 +36,7 @@ The current verbs are:
 - lock/unlock
 - move
 - inventory
+- save
 
 ## Update List ##
 
@@ -66,4 +67,5 @@ system, and only takes into account treasures stored at a specific location. Mos
 however, some complicated ones have used scoring to determine how much a player has achieved.
 
 **26 January 2024**
-Started creating the save/load functionality by making classes serializable
+Started creating the save/load functionality by making classes serializable. Added the save method, though still need to add the
+query if the file already exists

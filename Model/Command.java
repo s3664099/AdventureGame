@@ -104,7 +104,7 @@ public class Command {
 				response = "Please include a name for the saved game";
 			} else {
 				
-				response = saveGame(location,inventory,score);
+				response = saveGame(location,inventory,score,noun);
 			}
 		} else if (verb.equals("load")) {
 			
@@ -567,14 +567,52 @@ public class Command {
 	}
 	
 	//save Game method
-	public String saveGame(Location location, ArrayList<Item> inventory, int score) {
+	public String saveGame(Location location, ArrayList<Item> inventory, int score, String saveName) {
 
-		//Checks if the name is already being used.
-		//If it is, asks if the user would like to overwrite it
-		//Adds the inventory and score to the location.
-		//Otherwise creates a new file.
+		boolean writeFile = false;
 		
+		//Checks if the name is already being used.
+		if (checkDirectory(saveName)) {
+			
+			//If it is, asks if the user would like to overwrite it
+			System.out.printf("The file %s already exists, do you wish to overwrite it (Y/n)?",saveName);
+			
+		} else {
+			writeFile = true;
+		}
+		
+		if(writeFile) {
+			
+			//Adds the inventory and score to the location.
+			location.savePlayer(inventory, score);
+			
+			//Writes file
+			try {
+				FileOutputStream file = new FileOutputStream(saveName+".sav");
+				ObjectOutputStream out = new ObjectOutputStream(file);
+				out.writeObject(location);
+				out.close();
+				file.close();
+				response = response.format("Game saved as %s.sav",saveName);
+			} catch (IOException e) {
+				response = "Game failed to save";
+			}
+		}
+				
 		return "";
+	}
+	
+	//Checks the directory to see if the file name exists
+	private boolean checkDirectory(String fileName) {
+		
+		boolean found = false;
+		return found;
+	}
+	
+	//Returns all the files in the directory as a string
+	private String getFiles() {
+		String fileList = "";
+		return fileList;
 	}
 }
 
