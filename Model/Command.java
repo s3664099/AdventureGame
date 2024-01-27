@@ -1,13 +1,14 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 26 January 2024
- * Version: 0.14
+ * Updated: 27 January 2024
+ * Version: 0.15
  * Class that handles fuctions that deal with commands that are entered.
  */
 
 package Model;
 
 import java.util.ArrayList;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.IOException;
@@ -571,28 +572,36 @@ public class Command {
 	public String saveGame(Location location, ArrayList<Item> inventory, int score, String saveName) {
 
 		boolean writeFile = false;
-		
-		//Checks if the name is already being used.
-		if (checkDirectory(saveName)) {
-						
+				
+		//Adds the inventory and score to the location.
+		location.savePlayer(inventory, score);
+				
+		File saveGameDirectory = new File("savegames");
+				
+		//Checks to see if the directory exists. If it doesn't it creates the directory
+		if(!saveGameDirectory.exists()) {
+			saveGameDirectory.mkdir();
+		}
+				
+		File saveFile = new File(saveGameDirectory+"/"+saveName+".sav");
+				
+		//Checks to see if the file exists
+		if (saveFile.exists()) {
+					
 			//If it is, asks if the user would like to overwrite it
-			System.out.printf("The file %s already exists, do you wish to overwrite it (Y/n)?",saveName);
-			
+			System.out.printf("The file %s already exists, do you wish to overwrite it (Y/n)? ",saveName);
+					
 			Input query = new Input();
 			writeFile = query.getYesNo();
-						
 		} else {
 			writeFile = true;
 		}
 		
-		if(writeFile) {
+		//Writes file	
+		if (writeFile) {
 			
-			//Adds the inventory and score to the location.
-			location.savePlayer(inventory, score);
-			
-			//Writes file
 			try {
-				FileOutputStream file = new FileOutputStream(saveName+".sav");
+				FileOutputStream file = new FileOutputStream(saveGameDirectory+"/"+saveName+".sav");
 				ObjectOutputStream out = new ObjectOutputStream(file);
 				out.writeObject(location);
 				out.close();
@@ -600,23 +609,13 @@ public class Command {
 				response = response.format("Game saved as %s.sav",saveName);
 			} catch (IOException e) {
 				response = "Game failed to save";
+				e.printStackTrace();
 			}
+		} else {
+			response = "Game not saved";
 		}
 				
 		return response;
-	}
-	
-	//Checks the directory to see if the file name exists
-	private boolean checkDirectory(String fileName) {
-		
-		boolean found = false;
-		return found;
-	}
-	
-	//Returns all the files in the directory as a string
-	private String getFiles() {
-		String fileList = "";
-		return fileList;
 	}
 }
 
@@ -636,4 +635,5 @@ public class Command {
  * 24 January 2024 - Added the function to move an item
  * 25 January 2024 - Added scoring for treasures
  * 26 January 2024 - Added the save function
+ * 27 January 2024 - Save game works, and tested.
  */

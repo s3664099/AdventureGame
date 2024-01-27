@@ -37,6 +37,7 @@ public class Main {
 			if(processor.displayLocation()) {
 				display.display(data);
 			}
+			
 			command = input.getCommand(query);
 			String[] commands = parser.parseCommand(command);
 			display.displayResponse(processor.processCommand(commands,data,inventory,score));

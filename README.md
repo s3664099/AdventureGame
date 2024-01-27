@@ -69,3 +69,6 @@ however, some complicated ones have used scoring to determine how much a player 
 **26 January 2024**
 Started creating the save/load functionality by making classes serializable. Added the save method, though still need to add the
 query if the file already exists
+
+**27 January 2024**
+Got save game working, and tested correctly. Saved games are saved in a separate folder. Need load game to test if it loads correctly

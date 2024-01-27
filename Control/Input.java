@@ -1,7 +1,7 @@
 /* Name: Input Class
  * Created: 25 August 2023
- * Updated: 26 January 2024
- * Version: 0.4
+ * Updated: 27 January 2024
+ * Version: 0.5
  * This takes the user input and returns the command.
  * At this stage the parser consists of only a verb and a noun.
  */
@@ -83,16 +83,16 @@ public class Input {
 			
 			if (query.toLowerCase().equals("y")) {
 				correctResponse = true;
+				writeFile = true;
 			} else if (query.toLowerCase().equals("n")) {
 				correctResponse = true;
-				writeFile = true;
 			}
 			
 			if (!correctResponse) {
 				System.out.println("Please enter Y or N");
 			}
 		}
-		
+				
 		return writeFile;
 	}
 }
@@ -102,4 +102,5 @@ public class Input {
  * 27 August 2023 - Added Comments
  * 7 September 2023 - Added method to allow single word/letter movement for directions
  * 26 January 2024 - Added method to get a yes or no response
+ * 27 January 2024 - Fixed the Y/N reponse so that Y sends true, not N
 */
