@@ -142,6 +142,7 @@ public class Location implements Serializable {
 	public ArrayList<Item> getInventory() {
 		
 		ArrayList<Item> inventory = this.inventory;
+			
 		this.inventory = null;
 		
 		return inventory;

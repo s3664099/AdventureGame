@@ -1,21 +1,30 @@
 /* Abstract Exit Class
  * Created: 5 September 2023
- * Updated: 12 September 2023
- * Version 0.2
+ * Updated: 27 January 2024
+ * Version 0.3
  * Class to handle everything to do with an exit.
  */
 
 package Data;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.io.Serializable;;
 
-public abstract class AbstractExit {
+public abstract class AbstractExit implements Serializable {
 	
 	private String name;
 	private String description = "There is nothing special";
 	private Location destination;
 	private boolean direction;
 	private ArrayList<String> commands = new ArrayList<String>();
+
+	public AbstractExit() {}
+	
+	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+	    in.defaultReadObject();
+	}
 	
 	public AbstractExit(String description, Location destination, boolean direction) {
 		 
@@ -64,4 +73,5 @@ public abstract class AbstractExit {
 /* 5 September 2023 - Created File
  * 6 September 2023 - Completed class with getters and setters
  * 12 September 2023 - Added functionality to handle exit description
+ * 27 January 2024 - Made class serializable
  */ 

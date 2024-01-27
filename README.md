@@ -37,6 +37,7 @@ The current verbs are:
 - move
 - inventory
 - save
+- load
 
 ## Update List ##
 
@@ -71,4 +72,5 @@ Started creating the save/load functionality by making classes serializable. Add
 query if the file already exists
 
 **27 January 2024**
-Got save game working, and tested correctly. Saved games are saved in a separate folder. Need load game to test if it loads correctly
+Got save game working, and tested correctly. Saved games are saved in a separate folder. Need load game to test if it loads correctly.
+Now have the load game working correctly, and I do not need to unpack all of the classes either. I am absolutely stoked.

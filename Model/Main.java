@@ -41,8 +41,15 @@ public class Main {
 			command = input.getCommand(query);
 			String[] commands = parser.parseCommand(command);
 			display.displayResponse(processor.processCommand(commands,data,inventory,score));
-			this.score += processor.getScore();
-			data = processor.getCurrentLocation();
+			
+			//Checks if the values have been cleared, if not, loads them.
+			if (processor.getCurrentLocation() != null) {
+				data = processor.getCurrentLocation();
+			}
+			
+			if (processor.getScore() != 0) {
+				this.score += processor.getScore();
+			}
 		}
 	}
 }

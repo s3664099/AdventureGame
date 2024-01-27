@@ -9,9 +9,11 @@ package Model;
 
 import java.util.ArrayList;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 
 import Data.CarriableItem;
 import Data.Container;
@@ -31,7 +33,7 @@ public class Command {
 	public Location getCurrentLocation() {
 		return currentLocation;
 	}
-	
+		
 	//Executes the command
 	public String processCommand(String [] commands, Location location, ArrayList<Item> inventory,int score) {
 		
@@ -83,7 +85,7 @@ public class Command {
 				response = "I need a verb";
 			} else {
 				response = switchList(inventory,location.getItems(),commands[1], "I dropped the",false);
-				this.score = changeScore(true,verb,inventory,location); 
+				this.score = changeScore(true,verb,inventory,location);
 			}			
 		} else if (verb.equals("unlock") || verb.equals("lock")) {
 
@@ -102,20 +104,25 @@ public class Command {
 			
 		} else if (verb.equals("save")) {
 			
+			//Checks if there is a name, and calls the save game function
 			if (commands.length == 1) {
 				response = "Please include a name for the saved game";
 			} else {
-				
 				response = saveGame(location,inventory,score,noun);
 			}
+			
 		} else if (verb.equals("load")) {
 			
-			//Calls the load game function.
-			//If only one command, displays a list of the games
-			//If two commands, checks the list with the 2nd word, and if available loads it
-			//If not available, displays list of games, and asks player to chose one of them.
-			//Set a success/fail flag to check if the load was a success.
-			//Set a Location object to hold the object when loaded
+			//Checks if there is a name, and calls the load game function
+			if (commands.length == 1) {
+				
+				//If only one name, displays a list of save game files.
+				response = getGameList();
+				
+			} else {
+				response = loadGame(noun);
+			}
+			
 		}
 		
 		return response;
@@ -575,7 +582,7 @@ public class Command {
 				
 		//Adds the inventory and score to the location.
 		location.savePlayer(inventory, score);
-				
+		
 		File saveGameDirectory = new File("savegames");
 				
 		//Checks to see if the directory exists. If it doesn't it creates the directory
@@ -617,6 +624,60 @@ public class Command {
 				
 		return response;
 	}
+	
+	//Load Game Function
+	private String loadGame(String gameName) {
+
+		response = "";
+		
+		boolean loadFile = false;
+				
+		//Checks to see if the file exists
+		File saveGameDirectory = new File("savegames");				
+		File saveFile = new File(saveGameDirectory+"/"+gameName+".sav");		
+		
+		//If not available, displays list of games
+		if (!saveFile.exists()) {			
+			response = response.format("Sorry %s does not exist. The files that exist are %n%s", gameName,getGameList());
+		} else {
+			loadFile = true;
+		}
+		
+		if (loadFile) {
+		
+			//Attempts to load the file
+			try {
+				FileInputStream file = new FileInputStream(saveGameDirectory+"/"+gameName+".sav");
+				ObjectInputStream fileIn = new ObjectInputStream(file);
+				
+				//Load successful. Sets location, inventory & score
+				this.currentLocation = (Location) fileIn.readObject();
+				this.score = this.currentLocation.getScore();
+				
+				if (this.currentLocation.getInventory() != null) {
+					this.inventory = this.currentLocation.getInventory();
+				}
+				
+				fileIn.close();
+				file.close();
+				response = response.format("%s.sav successfully loaded",gameName);
+							
+			//Location failed to load
+			} catch (IOException|ClassNotFoundException e) {
+				response = response.format("%s.sav failed to load",gameName);
+				e.printStackTrace();
+			}
+			
+		}
+		return response;
+	}
+	
+	//Get load game list
+	private String getGameList() {
+		response = "";
+		
+		return response;
+	}
 }
 
 /* 25 August 2023 - Created File
@@ -635,5 +696,5 @@ public class Command {
  * 24 January 2024 - Added the function to move an item
  * 25 January 2024 - Added scoring for treasures
  * 26 January 2024 - Added the save function
- * 27 January 2024 - Save game works, and tested.
+ * 27 January 2024 - Save game works, and tested. Load game works, and is tested too.
  */
