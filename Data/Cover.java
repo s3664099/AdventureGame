@@ -86,11 +86,6 @@ public class Cover extends ImmoveableItem implements Item,Serializable {
 		return false;
 	}
 
-	@Override
-	public Exit getHiddenExit() {
-		return null;
-	}
-
 	//Checks if there are any hidden exits of items
 	//True: check for items
 	//False: check for exits
@@ -120,10 +115,31 @@ public class Cover extends ImmoveableItem implements Item,Serializable {
 	//Removes a hidden item. Sends null if no item available
 	@Override
 	public Item getHiddenItem() {
-		return null;
+		
+		Item returnItem = null;
+		
+		if (hiddenItems.size()>0) {
+			int itemPosition = (int)(Math.random() * hiddenItems.size());
+			returnItem = hiddenItems.remove(itemPosition);
+		}
+		
+		return returnItem;
 	}
 
 	//Removes a hidden exits. Sends null if no exit available
+	@Override
+	public Exit getHiddenExit() {
+		
+		Exit returnExit = null;
+		
+		if (hiddenExits.size()>0) {
+			int itemPosition = (int)(Math.random() * hiddenExits.size());
+			returnExit = hiddenExits.remove(itemPosition);
+		}
+		
+		return returnExit;
+	}
+
 	@Override
 	public boolean getMoved() {
 		return false;

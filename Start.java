@@ -5,6 +5,7 @@
  * This is the launcher. It should not need to be updated.
  */
 
+//      - Add the function to load and display contents of save directory
 //TODO: Add function in look that it reveals an item/exit
 //TODO: Create a game that uses everything we have (openable containers/Lockable containers/moveable items/Look items exits)
 //TODO: Implement multi word parser
