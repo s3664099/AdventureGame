@@ -1,7 +1,7 @@
 /* Item Interface
  * Created: 12 September 2023
- * Updated: 25 January 2024
- * Version: 0.4
+ * Updated: 28 January 2024
+ * Version: 0.5
  * The main class for objects. Since we can't call it an object (reserved word)
  * we have to call it a thing.
  */
@@ -30,10 +30,12 @@ public interface Item {
 	public Item getHiddenItem();
 	public void setTreasure();
 	public boolean getTreasure();
+	public boolean checkIsCover();
 };
 
 /* 12 September 2023 - Created File
  * 14 September 2023 - Began to add methods
  * 23 Janaury 2024 - Added methods for moveable items
  * 25 January 2024 - Added functions to handle treasures
+ * 28 January 2024 - Added functions for covers
  */
