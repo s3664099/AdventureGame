@@ -150,9 +150,5 @@ public class Cover extends ImmoveableItem implements Item,Serializable {
 
 }
 
-/* 25 August 2023 - Created file
- * 27 August 2023 - Added Comments
- * 14 September 2023 - Began adding item methods.
- * 23 January 2024 - Added methods to handle the moveable items
- * 25 January 2024 - Made class serialisable.
+/* 28 January 2024 - Created file
 */

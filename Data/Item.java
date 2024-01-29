@@ -31,6 +31,7 @@ public interface Item {
 	public void setTreasure();
 	public boolean getTreasure();
 	public boolean checkIsCover();
+	public boolean checkHidden(boolean whatItems);
 };
 
 /* 12 September 2023 - Created File

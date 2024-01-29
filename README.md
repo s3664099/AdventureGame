@@ -74,3 +74,7 @@ query if the file already exists
 **27 January 2024**
 Got save game working, and tested correctly. Saved games are saved in a separate folder. Need load game to test if it loads correctly.
 Now have the load game working correctly, and I do not need to unpack all of the classes either. I am absolutely stoked.
+
+**28 January 2024**
+Basically working on the functionality where if a player looks at an item, if it is hiding an item or exit, it will reveal it. I do not
+believe it necessarily needs to be a carriable item either.

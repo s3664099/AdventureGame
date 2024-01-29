@@ -349,7 +349,55 @@ public class Command {
 					
 					for (String noun:nouns) {
 						if (noun.equals(commands[1])) {
+							
 							response = item.getDescription();
+							
+							//Is the item hiding something
+							if (item.checkIsCover()) {
+								
+								int noTypes = 0;
+								int objectType = 0;
+								
+								//Checks whether item hiding items, exits, or both
+								if (item.checkHidden(false)) {
+									noTypes +=1;
+									objectType = 1;
+								} else if (item.checkHidden(true)) {
+									noTypes +=1;
+									objectType = 2;
+								}
+								
+								//Picks either a random item or exit
+								if (noTypes == 2) {
+									
+									int option = (int)(Math.random()*noTypes);
+									
+									if (option == 0) {
+										objectType = 1;
+									} else {
+										objectType = 2;
+									}									
+								}
+								
+								//Selects a random object from the list
+								if (objectType == 1) {
+									int index = (int)(Math.random()*items.size());
+									Item foundItem = items.remove(index);
+									response = response.format("%s%nYou found %s",response,foundItem.getName());
+									location.addItem(foundItem);
+								
+								//Selects a random exit from the list
+								} else if (objectType == 2) {
+									int index = (int)(Math.random()*exits.size());
+									Exit foundExit = exits.remove(index);
+									response = response.format("%s%nYou found %s",response,foundExit.getName());
+									location.addExit(foundExit);
+								}
+								
+								//Checks if the item is to be removed from the location
+								//if the exit and item lists are empty. If so, removes the item
+								
+							} 
 						}
 					}
 				}

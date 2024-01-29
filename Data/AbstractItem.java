@@ -59,6 +59,10 @@ public class AbstractItem implements Serializable {
 	public boolean checkIsCover() {
 		return false;
 	}
+	
+	public boolean checkHidden(boolean whatItems) {
+		return false;
+	}
 }
 
 /* 25 August 2023 - Created File
