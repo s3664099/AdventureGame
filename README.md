@@ -78,3 +78,8 @@ Now have the load game working correctly, and I do not need to unpack all of the
 **28 January 2024**
 Basically working on the functionality where if a player looks at an item, if it is hiding an item or exit, it will reveal it. I do not
 believe it necessarily needs to be a carriable item either.
+
+**29 January 2024**
+Finished the function where you can look at an object an reveal either and item or an object. I call it a cover. Of course the commands are
+simplistic, and I will consider a more complex parser later, including more than just a noun/verb (though that can be tricky if we want to
+make nonsensical comments nonsensical)

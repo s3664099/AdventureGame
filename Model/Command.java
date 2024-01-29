@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 27 January 2024
- * Version: 0.15
+ * Updated: 29 January 2024
+ * Version: 0.16
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -331,6 +331,10 @@ public class Command {
 			ArrayList<Exit> exits = location.getExits();
 			ArrayList<Item> items = location.getItems();
 			
+			boolean removeItem = false;
+			int itemIndex = 0;
+			int index = 0;
+			
 			//Exits
 			for (Exit exit:exits) {
 				ArrayList<String> nouns = exit.getCommands();
@@ -351,6 +355,7 @@ public class Command {
 						if (noun.equals(commands[1])) {
 							
 							response = item.getDescription();
+							itemIndex = index;
 							
 							//Is the item hiding something
 							if (item.checkIsCover()) {
@@ -381,29 +386,40 @@ public class Command {
 								
 								//Selects a random object from the list
 								if (objectType == 1) {
-									int index = (int)(Math.random()*items.size());
-									Item foundItem = items.remove(index);
+									
+									Item foundItem = item.getHiddenItem();
 									response = response.format("%s%nYou found %s",response,foundItem.getName());
 									location.addItem(foundItem);
 								
 								//Selects a random exit from the list
 								} else if (objectType == 2) {
-									int index = (int)(Math.random()*exits.size());
-									Exit foundExit = exits.remove(index);
+									
+									Exit foundExit = item.getHiddenExit();
 									response = response.format("%s%nYou found %s",response,foundExit.getName());
 									location.addExit(foundExit);
 								}
 								
 								//Checks if the item is to be removed from the location
-								//if the exit and item lists are empty. If so, removes the item
+								if (item.checkRemove()) {
 								
+									//if the exit and item lists are empty. If so it flags to remove the item
+									if ((!item.checkHidden(true)) && (!item.checkHidden(false))) {
+										removeItem = true;
+									}
+								}
 							} 
 						}
 					}
+					index ++;
 				}
 			}
+			
+			//Checks if the item is to be removed, and removes it.
+			if (removeItem) {
+				items.remove(itemIndex);
+			}
 		}
-		
+				
 		if (response.length()==0) {
 			response = "I do not see that";
 		}
@@ -422,11 +438,8 @@ public class Command {
 					response = response.substring(0,i+1) + "\n" + response.substring(i+1);
 					position = 0;
 					space = false;
-				}
-				
+				}	
 			}
-			
-			
 		}
 		
 		return response;
@@ -745,4 +758,5 @@ public class Command {
  * 25 January 2024 - Added scoring for treasures
  * 26 January 2024 - Added the save function
  * 27 January 2024 - Save game works, and tested. Load game works, and is tested too.
+ * 29 January 2024 - Completed the cover functionality
  */

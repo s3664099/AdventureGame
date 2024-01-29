@@ -1,7 +1,7 @@
 /* Abstract Item Class
  * Created: 25 August 2023
- * Updated: 28 January 2024
- * Version: 0.6
+ * Updated: 29 January 2024
+ * Version: 0.7
  * The main class for objects. Since we can't call it an object (reserved word)
  * we have to call it a thing.
  */
@@ -63,6 +63,10 @@ public class AbstractItem implements Serializable {
 	public boolean checkHidden(boolean whatItems) {
 		return false;
 	}
+	
+	public boolean checkRemove() {
+		return false;
+	}
 }
 
 /* 25 August 2023 - Created File
@@ -71,4 +75,5 @@ public class AbstractItem implements Serializable {
 * 25 January 2024 - Added methods to handle treasures
 * 27 January 2024 - Made class serializable
 * 28 January 2024 - Added function for cover
+* 29 January 2024 - Added further functions for cover
 */
