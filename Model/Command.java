@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 29 January 2024
- * Version: 0.16
+ * Updated: 30 January 2024
+ * Version: 0.17
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.io.ObjectOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -737,6 +738,28 @@ public class Command {
 	private String getGameList() {
 		response = "";
 		
+		File saveGameDirectory = new File("savegames");
+		
+		//Checks if the directory exists
+		if ((saveGameDirectory.exists()) && (saveGameDirectory.isDirectory())) {
+			File[] savFiles = saveGameDirectory.listFiles( new FilenameFilter() {
+				public boolean accept(File dir, String name) {
+					return name.toLowerCase().endsWith(".sav");
+				};
+			});
+			
+			//Returns a list of saved games
+			response = response.format("The available save games are:%n");
+			
+			for (File file:savFiles) {
+				response = response.format("%s%s%n", response,file.getName());
+			}
+			
+			if (savFiles.length == 0) {
+				response = response.format("%sEmpty", response);
+			}
+		}
+		
 		return response;
 	}
 }
@@ -759,4 +782,5 @@ public class Command {
  * 26 January 2024 - Added the save function
  * 27 January 2024 - Save game works, and tested. Load game works, and is tested too.
  * 29 January 2024 - Completed the cover functionality
+ * 30 January 2024 - Displays list of saved games if player doesn't enter correct name
  */

@@ -83,3 +83,8 @@ believe it necessarily needs to be a carriable item either.
 Finished the function where you can look at an object an reveal either and item or an object. I call it a cover. Of course the commands are
 simplistic, and I will consider a more complex parser later, including more than just a noun/verb (though that can be tricky if we want to
 make nonsensical comments nonsensical)
+
+**30 January 2024**
+Effectively completed first part of the game. We should be able to make a basic adventure game with everything available. The final part
+was to create a game that makes sure that everything works. Of course, I just realised that there is technically no way to win, or an end case,
+so I probably should add something.

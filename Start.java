@@ -5,9 +5,11 @@
  * This is the launcher. It should not need to be updated.
  */
 
-//      - Add the function to load and display contents of save directory
 //TODO: Create a game that uses everything we have (openable containers/Lockable containers/moveable items/Look items exits)
+//TODO: Add Basic Ending - then increase the version.
 //TODO: Implement multi word parser
+//TODO: Use command (Can also be applied to lock/unlock - also shovels and stuff).
+//TODO: Commands embedded in objects/exits
 //TODO: Begin Building Other Game
 //TODO; Maybe have the moveable item hide multiple things, and can be moved multiple times
 //      Consider add scores when certain actions are performed
