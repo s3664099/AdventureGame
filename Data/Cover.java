@@ -12,8 +12,8 @@ import java.io.Serializable;
 
 public class Cover extends ImmoveableItem implements Item,Serializable {
 	
-	ArrayList<Exit> hiddenExits;
-	ArrayList<Item> hiddenItems;
+	ArrayList<Exit> hiddenExits = new ArrayList<Exit>();
+	ArrayList<Item> hiddenItems = new ArrayList<Item>();
 	private boolean isCover = true;
 	private boolean removeObject;
 	
@@ -83,7 +83,7 @@ public class Cover extends ImmoveableItem implements Item,Serializable {
 
 	@Override
 	public boolean getMoveable() {
-		return false;
+		return isCover;
 	}
 
 	//Checks if there are any hidden exits of items

@@ -550,6 +550,8 @@ public class Command {
 				
 				if ((verb.equals(noun)) && (!foundItem)) {
 					if ((!item.getMoveable()) || (item.getMoved())) {
+						System.out.println(item.getMoveable());
+						System.out.println(item.getMoved());
 						response = response.format("I cannot move the %s", item.getName());
 					} else {
 						
@@ -561,9 +563,10 @@ public class Command {
 							response = response.format("You move the %s and discover a %s",
 									item.getName(),item.getHiddenItem().getName());
 						} else {
-							location.addExit(item.getHiddenExit());
+							Exit exit = item.getHiddenExit();
+							location.addExit(exit);
 							response = response.format("You move the %s and discover a %s",
-									item.getName(),item.getHiddenExit().getName());						
+									item.getName(),exit.getName());						
 						}
 					}
 				}
