@@ -88,3 +88,7 @@ make nonsensical comments nonsensical)
 Effectively completed first part of the game. We should be able to make a basic adventure game with everything available. The final part
 was to create a game that makes sure that everything works. Of course, I just realised that there is technically no way to win, or an end case,
 so I probably should add something.
+
+**22 February 2024**
+Fixed some issued that arose with the cover functionality. Need to add the functionality where it removes the item from the list if it 
+disappears.

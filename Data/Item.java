@@ -33,6 +33,8 @@ public interface Item {
 	public boolean checkIsCover();
 	public boolean checkHidden(boolean whatItems);
 	public boolean checkRemove();
+	public boolean checkHiddenExits();
+	public boolean checkHiddenItems();
 };
 
 /* 12 September 2023 - Created File

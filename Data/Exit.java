@@ -1,7 +1,7 @@
 /* Exit Interface
  * Created: 5 September 2023
- * Updated: 25 January 2024
- * Version 0.5
+ * Updated: 21 February 2024
+ * Version 0.6
  * Interface to govern exits
  */
 
@@ -25,6 +25,7 @@ public interface Exit {
 	boolean getLocked();
 	Item getKey();
 	String lockUnlock(CarriableItem item, String action);
+	void addDescription(String string);
 }
 
 /*
@@ -33,4 +34,5 @@ public interface Exit {
  * 11 October 2023 - Added lockable functions
  * 13 October 2023 - Added methods for lock and close
  * 25 January 2024 - Made class serializable
+ * 21 February 2024 - Added an addDescription method
 */

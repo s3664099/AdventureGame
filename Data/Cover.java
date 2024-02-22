@@ -1,7 +1,7 @@
 /* Cover Item Class
  * Created: 28 January 2024
- * Updated: 28 January 2024
- * Version: 0.0
+ * Updated: 21 February 2024
+ * Version: 0.1
  * Class for items either cover items or exits
  */
 
@@ -139,6 +139,32 @@ public class Cover extends ImmoveableItem implements Item,Serializable {
 		
 		return returnExit;
 	}
+	
+	//Checks if there are any exits
+	public boolean checkHiddenExits() {
+		
+		boolean hasExits = false;
+		
+		System.out.println(hiddenExits.size());
+		
+		if (hiddenExits.size()>0) {
+			hasExits = true;
+		}
+		
+		return hasExits;
+	}
+
+	//Checks if there are any exits
+	public boolean checkHiddenItems() {
+		
+		boolean hasItems = false;
+		
+		if (hiddenItems.size()>0) {
+			hasItems = true;
+		}
+		
+		return hasItems;
+	}
 
 	@Override
 	public boolean getMoved() {
@@ -151,4 +177,5 @@ public class Cover extends ImmoveableItem implements Item,Serializable {
 }
 
 /* 28 January 2024 - Created file
+ * 21 February 2024 - Added methods to make the class work properly
 */

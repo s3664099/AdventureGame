@@ -1,7 +1,7 @@
 /* Ordinary Exit Class
  * Created: 25 August 2023
- * Updated: 26 January 2024
- * Version 0.9
+ * Updated: 21 February 2024
+ * Version 0.10
  * Class to handle everything to do with an exit.
  */
 
@@ -22,6 +22,10 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
 	public OrdinaryExit(String name, String command, Location destination, 
 						boolean direction, String description) {
 		super(name, destination, direction, command, description);
+	}
+	
+	public void addDescription(String description) {
+		super.addDescription(description);
 	}
 	
 	//Exit is always moveable
@@ -106,4 +110,5 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
  * 11 October 2023 - Added lockable function
  * 13 October 2023 - Added methods for exits to close and lock
  * 26 January 2024 - Made Object Serializable
+ * 21 February 2024 - Added an add description method
 */

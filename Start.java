@@ -6,6 +6,9 @@
  */
 
 //TODO: Create a game that uses everything we have (openable containers/Lockable containers/moveable items/Look items exits)
+//		Debugging Cover Function
+//			- Add the function that removes the cover from the list if it is marked to disappear
+
 //TODO: Create a talk to module sort of like the one in NWN
 //TODO: Add Basic Ending - then increase the version.
 //TODO: Implement multi word parser

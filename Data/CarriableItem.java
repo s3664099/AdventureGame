@@ -94,6 +94,18 @@ public class CarriableItem extends AbstractItem implements Item, Serializable {
 		
 	}
 
+	@Override
+	public boolean checkHiddenExits() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean checkHiddenItems() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
 
 /* 25 August 2023 - Created file.

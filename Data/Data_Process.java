@@ -12,7 +12,9 @@ public class Data_Process {
 		Location two = new Location("Cellar","The cellar is incredibly dusty and covered in cobwebs");
 		Location three = new Location("Alcove","A small alcove hidden behind a tapestry");
 		Exit hole = new OrdinaryExit("Down",two,true);
+		hole.addDescription("a hole in the floor");
 		Exit alcove = new OrdinaryExit("North",three,true);
+		alcove.addDescription("a hidden passage");
 		start.addItem(new Cover("Rug","A persian rug that has seen better days",hole,false));
 		start.addItem(new Cover("Curtain","A dark green curtian that has been stained with age",alcove,true));
 		/*description = "The Minories Pub in London beckons adventurers with its historic charm, wooden beams, and a well-stocked bar. \nInside, you'll find a cozy haven where tales of epic journeys and daring quests are shared.";

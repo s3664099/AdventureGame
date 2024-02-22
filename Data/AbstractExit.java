@@ -1,7 +1,7 @@
 /* Abstract Exit Class
  * Created: 5 September 2023
- * Updated: 27 January 2024
- * Version 0.3
+ * Updated: 21 February 2024
+ * Version 0.4
  * Class to handle everything to do with an exit.
  */
 
@@ -50,6 +50,10 @@ public abstract class AbstractExit implements Serializable {
 		}
 	}
 	
+	public void addDescription(String description) {
+		this.description = description;
+	}
+	
 	public String getName() {
 		return this.name;
 	}
@@ -74,4 +78,5 @@ public abstract class AbstractExit implements Serializable {
  * 6 September 2023 - Completed class with getters and setters
  * 12 September 2023 - Added functionality to handle exit description
  * 27 January 2024 - Made class serializable
+ * 21 February 2024 - Added an add description method
  */ 

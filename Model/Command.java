@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 30 January 2024
- * Version: 0.17
+ * Updated:21 February 2024
+ * Version: 0.18
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -550,27 +550,30 @@ public class Command {
 				
 				if ((verb.equals(noun)) && (!foundItem)) {
 					if ((!item.getMoveable()) || (item.getMoved())) {
-						System.out.println(item.getMoveable());
-						System.out.println(item.getMoved());
 						response = response.format("I cannot move the %s", item.getName());
 					} else {
 						
 						//Flags the item that has been moved and adds the hidden item to the location
 						item.setMoved();
 						foundItem = true;
-						if (item.getHiddenItem() != null) {
+
+						if (item.checkHiddenItems()) {
 							location.addItem(item.getHiddenItem());
 							response = response.format("You move the %s and discover a %s",
 									item.getName(),item.getHiddenItem().getName());
 						} else {
-							Exit exit = item.getHiddenExit();
-							location.addExit(exit);
-							response = response.format("You move the %s and discover a %s",
-									item.getName(),exit.getName());						
+							if (item.checkHiddenExits()) {
+								Exit exit = item.getHiddenExit();
+								location.addExit(exit);
+								response = response.format("You move the %s and discover a %s",
+									item.getName(),exit.getDescription());						
+							} else {
+								response = response.format("You move the %s and don't find anything",
+										item.getName());
+							}
 						}
 					}
-				}
-				
+				}	
 			}
 		}
 		
@@ -786,4 +789,5 @@ public class Command {
  * 27 January 2024 - Save game works, and tested. Load game works, and is tested too.
  * 29 January 2024 - Completed the cover functionality
  * 30 January 2024 - Displays list of saved games if player doesn't enter correct name
+ * 21 February 2024 - Fixed some issues with the move functionality
  */
