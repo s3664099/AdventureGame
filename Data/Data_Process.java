@@ -17,6 +17,8 @@ public class Data_Process {
 		alcove.addDescription("a hidden passage");
 		start.addItem(new Cover("Rug","A persian rug that has seen better days",hole,false));
 		start.addItem(new Cover("Curtain","A dark green curtian that has been stained with age",alcove,true));
+
+		
 		/*description = "The Minories Pub in London beckons adventurers with its historic charm, wooden beams, and a well-stocked bar. \nInside, you'll find a cozy haven where tales of epic journeys and daring quests are shared.";
 		start = new Location("in the Minories",description);
 		start.addItem(new ImmoveableItem("Bar","The bar is a focal point of conviviality, adorned with a rich mahogany countertop that's been \ngracefully worn by countless patrons over the years."));

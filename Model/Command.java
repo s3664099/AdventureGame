@@ -539,10 +539,13 @@ public class Command {
 	private String move(Location location, String verb) {
 		
 		ArrayList<Item> items = location.getItems();
-		ArrayList<Exit> exits = location.getExits();
 		String response = "";
 		response = response.format("I do not see a %s here", verb);
 		Boolean foundItem = false;
+		Boolean itemRemoved = false;
+		Boolean exitRemoved = false;
+		int itemIndex = 0;
+		int itemRemove = -1;
 		
 		for (Item item:items) {
 			
@@ -561,19 +564,41 @@ public class Command {
 							location.addItem(item.getHiddenItem());
 							response = response.format("You move the %s and discover a %s",
 									item.getName(),item.getHiddenItem().getName());
+							itemRemoved = true;
 						} else {
 							if (item.checkHiddenExits()) {
 								Exit exit = item.getHiddenExit();
 								location.addExit(exit);
 								response = response.format("You move the %s and discover a %s",
-									item.getName(),exit.getDescription());						
+									item.getName(),exit.getDescription());
+								exitRemoved = true;
 							} else {
 								response = response.format("You move the %s and don't find anything",
 										item.getName());
 							}
 						}
+						
+						//Checks if item to be removed
+						if (item.checkRemove()) {
+							
+							//Has an item been removed and there are no exits
+							if ((itemRemoved) && (!item.checkHiddenItems())) {
+								if (!item.checkHiddenExits()) {
+									itemRemove = itemIndex;
+								}
+							}
+							
+							//Has an exit been removed and there are no items
+							if ((exitRemoved) && (!item.checkHiddenExits())) {
+								System.out.println("Remove Exit");
+								if (!item.checkHiddenItems()) {
+									itemRemove = itemIndex;
+								}
+							}
+						}
 					}
-				}	
+				}
+				itemIndex ++;
 			}
 		}
 		
@@ -586,6 +611,11 @@ public class Command {
 					}
 				}
 			}
+		}
+
+		//Checks if the item is to be removed. If so, removes the item from the list
+		if (itemRemove != -1) {
+			items.remove(itemRemove);
 		}
 		
 		return response;

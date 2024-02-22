@@ -144,9 +144,7 @@ public class Cover extends ImmoveableItem implements Item,Serializable {
 	public boolean checkHiddenExits() {
 		
 		boolean hasExits = false;
-		
-		System.out.println(hiddenExits.size());
-		
+				
 		if (hiddenExits.size()>0) {
 			hasExits = true;
 		}
