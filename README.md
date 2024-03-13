@@ -92,3 +92,6 @@ so I probably should add something.
 **22 February 2024**
 Fixed some issued that arose with the cover functionality. Need to add the functionality where it removes the item from the list if it 
 disappears. The item is now removed if flagged to be removed. Need to test with items, multiple items, multiple exits, and exits and items
+
+**13 March 2024**
+The multiple exits in a cover works. Added function to add more exits and items to a cover.

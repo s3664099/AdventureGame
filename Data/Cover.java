@@ -1,7 +1,7 @@
 /* Cover Item Class
  * Created: 28 January 2024
- * Updated: 21 February 2024
- * Version: 0.1
+ * Updated: 13 March 2024
+ * Version: 0.2
  * Class for items either cover items or exits
  */
 
@@ -37,6 +37,16 @@ public class Cover extends ImmoveableItem implements Item,Serializable {
 		this.hiddenExits.add(hiddenExit);
 		this.hiddenItems.add(hiddenItem);
 		this.removeObject = remove;
+	}
+	
+	//Adds another exit to the cover
+	public void addExit(Exit hiddenExit) {
+		this.hiddenExits.add(hiddenExit);
+	}
+	
+	//Adds another item to the cover
+	public void addItem(Item hiddenItem) {
+		this.hiddenItems.add(hiddenItem);
 	}
 
 	@Override
@@ -176,4 +186,5 @@ public class Cover extends ImmoveableItem implements Item,Serializable {
 
 /* 28 January 2024 - Created file
  * 21 February 2024 - Added methods to make the class work properly
+ * 13 March 2024 - Added methods to add more hidden items and exits
 */

@@ -67,6 +67,10 @@ public class AbstractItem implements Serializable {
 	public boolean checkRemove() {
 		return false;
 	}
+	
+	public void addExit(Exit hiddenExit) {}
+	
+	public void addItem(Item hiddenItem) {}
 }
 
 /* 25 August 2023 - Created File
@@ -76,4 +80,5 @@ public class AbstractItem implements Serializable {
 * 27 January 2024 - Made class serializable
 * 28 January 2024 - Added function for cover
 * 29 January 2024 - Added further functions for cover
+* 13 March 2024 - Added blank functions for adding items and exits
 */

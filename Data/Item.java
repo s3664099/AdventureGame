@@ -1,7 +1,7 @@
 /* Item Interface
  * Created: 12 September 2023
- * Updated: 29 January 2024
- * Version: 0.6
+ * Updated: 13 March 2024
+ * Version: 0.7
  * The main class for objects. Since we can't call it an object (reserved word)
  * we have to call it a thing.
  */
@@ -35,6 +35,8 @@ public interface Item {
 	public boolean checkRemove();
 	public boolean checkHiddenExits();
 	public boolean checkHiddenItems();
+	public void addExit(Exit hiddenExit);
+	public void addItem(Item hiddenItem);
 };
 
 /* 12 September 2023 - Created File
@@ -43,4 +45,5 @@ public interface Item {
  * 25 January 2024 - Added functions to handle treasures
  * 28 January 2024 - Added functions for covers
  * 29 January 2024 - Added further functions for covers
+ * 13 March 2024 - Added function definitions for adding items and exits
  */

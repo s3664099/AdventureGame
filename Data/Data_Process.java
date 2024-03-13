@@ -11,11 +11,16 @@ public class Data_Process {
 		start = new Location("In an office","An office of a consulting detective. The room is dark and dingy, and little light permeates the shadows");
 		Location two = new Location("Cellar","The cellar is incredibly dusty and covered in cobwebs");
 		Location three = new Location("Alcove","A small alcove hidden behind a tapestry");
+		Location four = new Location("Second Cellar","The cellar is incredibly dusty and covered in cobwebs");
 		Exit hole = new OrdinaryExit("Down",two,true);
-		hole.addDescription("a hole in the floor");
+		hole.addDescription("hole in the floor");
+		Exit hole2 = new OrdinaryExit("Hole",four,true);
+		hole2.addDescription("another hole in the floor");
 		Exit alcove = new OrdinaryExit("North",three,true);
 		alcove.addDescription("a hidden passage");
-		start.addItem(new Cover("Rug","A persian rug that has seen better days",hole,false));
+		Item cover = new Cover("Rug","A persian rug that has seen better days",hole,false);
+		cover.addExit(hole2);
+		start.addItem(cover);
 		start.addItem(new Cover("Curtain","A dark green curtian that has been stained with age",alcove,true));
 
 		
