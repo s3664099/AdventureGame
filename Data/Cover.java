@@ -186,5 +186,5 @@ public class Cover extends ImmoveableItem implements Item,Serializable {
 
 /* 28 January 2024 - Created file
  * 21 February 2024 - Added methods to make the class work properly
- * 13 March 2024 - Added methods to add more hidden items and exits
+ * 13 March 2024 - Added methods to add more hidden items
 */

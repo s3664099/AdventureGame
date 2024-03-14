@@ -95,3 +95,6 @@ disappears. The item is now removed if flagged to be removed. Need to test with 
 
 **13 March 2024**
 The multiple exits in a cover works. Added function to add more exits and items to a cover.
+
+**14 March 2024**
+The cover for items now works. Includes multiple items.

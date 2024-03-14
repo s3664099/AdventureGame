@@ -7,9 +7,8 @@
 
 //TODO: Create a game that uses everything we have (openable containers/Lockable containers/moveable items/Look items exits)
 //		Debugging Cover Function
-//			- Check with item
-//			- Check with Multiple items
 //			- Check with exits & items
+//			- Check with multiple exits and items
 
 //TODO: Create a talk to module sort of like the one in NWN
 //TODO: Add Basic Ending - then increase the version.

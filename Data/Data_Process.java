@@ -22,7 +22,12 @@ public class Data_Process {
 		cover.addExit(hole2);
 		start.addItem(cover);
 		start.addItem(new Cover("Curtain","A dark green curtian that has been stained with age",alcove,true));
-
+		CarriableItem top = new CarriableItem("Pyjama Top","A stripped flanalette shirt normally used as sleepwear");
+		CarriableItem pants = new CarriableItem("Pyjama Pants","A pair of stripped flanalette pants");
+		Item quilt = new Cover("Quilt","A down filled bed spread. It looks toasty warm",top,true);
+		quilt.addItem(pants);
+		Item bed = new Cover("Bed","A sturdy wooden bed",quilt,false);
+		start.addItem(bed);
 		
 		/*description = "The Minories Pub in London beckons adventurers with its historic charm, wooden beams, and a well-stocked bar. \nInside, you'll find a cozy haven where tales of epic journeys and daring quests are shared.";
 		start = new Location("in the Minories",description);

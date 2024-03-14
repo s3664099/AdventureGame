@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated:21 February 2024
- * Version: 0.18
+ * Updated:14 March 2024
+ * Version: 0.19
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -541,6 +541,7 @@ public class Command {
 		ArrayList<Item> items = location.getItems();
 		String response = "";
 		response = response.format("I do not see a %s here", verb);
+		Item hiddenItem = null;
 		Boolean foundItem = false;
 		Boolean itemRemoved = false;
 		Boolean exitRemoved = false;
@@ -548,9 +549,9 @@ public class Command {
 		int itemRemove = -1;
 		
 		for (Item item:items) {
-			
+						
 			for (String noun:item.getNouns()) {
-				
+							
 				if ((verb.equals(noun)) && (!foundItem)) {
 					if ((!item.getMoveable()) || (item.getMoved())) {
 						response = response.format("I cannot move the %s", item.getName());
@@ -561,9 +562,9 @@ public class Command {
 						foundItem = true;
 
 						if (item.checkHiddenItems()) {
-							location.addItem(item.getHiddenItem());
+							hiddenItem = item.getHiddenItem();
 							response = response.format("You move the %s and discover a %s",
-									item.getName(),item.getHiddenItem().getName());
+									item.getName(),hiddenItem.getName());
 							itemRemoved = true;
 						} else {
 							if (item.checkHiddenExits()) {
@@ -580,7 +581,7 @@ public class Command {
 						
 						//Checks if item to be removed
 						if (item.checkRemove()) {
-							
+
 							//Has an item been removed and there are no exits
 							if ((itemRemoved) && (!item.checkHiddenItems())) {
 								if (!item.checkHiddenExits()) {
@@ -590,7 +591,6 @@ public class Command {
 							
 							//Has an exit been removed and there are no items
 							if ((exitRemoved) && (!item.checkHiddenExits())) {
-								System.out.println("Remove Exit");
 								if (!item.checkHiddenItems()) {
 									itemRemove = itemIndex;
 								}
@@ -611,6 +611,10 @@ public class Command {
 					}
 				}
 			}
+		}
+		
+		if (itemRemoved) {
+			location.addItem(hiddenItem);
 		}
 
 		//Checks if the item is to be removed. If so, removes the item from the list
@@ -820,4 +824,5 @@ public class Command {
  * 29 January 2024 - Completed the cover functionality
  * 30 January 2024 - Displays list of saved games if player doesn't enter correct name
  * 21 February 2024 - Fixed some issues with the move functionality
+ * 14 March 2024 - Fixed issue with finding items under a cover
  */
