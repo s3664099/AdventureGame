@@ -100,4 +100,4 @@ The multiple exits in a cover works. Added function to add more exits and items 
 The cover for items now works. Includes multiple items.
 
 **21 March 2024**
-The cover functions now work perfectly (though not as random as I liked, but at least it works)
+The cover functions now work perfectly (though not as random as I liked, but at least it works). Added ability to examine items carried.

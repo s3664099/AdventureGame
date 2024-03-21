@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated:14 March 2024
- * Version: 0.19
+ * Updated:21 March 2024
+ * Version: 0.20
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -70,7 +70,7 @@ public class Command {
 				}
 			}
 		} else if (verb.equals("look")) {
-			response = look(commands,location);
+			response = look(commands,location,inventory);
 		} else if ((verb.equals("take")) ||(verb.equals("get"))) {
 			
 			if (commands.length == 1) {
@@ -319,7 +319,7 @@ public class Command {
 		return response;
 	}
 		
-	private String look(String[] commands, Location location) {
+	private String look(String[] commands, Location location, ArrayList<Item> inventory) {
 		String response = "";
 		
 		//Is the player just looking around the room
@@ -343,6 +343,20 @@ public class Command {
 				for (String noun:nouns) {
 					if (noun.equals(commands[1])) {
 						response = exit.getDescription();
+					}
+				}
+			}
+			
+			//Inventory
+			if (response.length()==0) {
+				for (Item item:inventory) {
+					String[] nouns = item.getNouns();
+					
+					for (String noun:nouns) {
+						if (noun.equals(commands[1])) {
+							response = item.getDescription();
+							itemIndex = index;
+						}
 					}
 				}
 			}
@@ -825,4 +839,5 @@ public class Command {
  * 30 January 2024 - Displays list of saved games if player doesn't enter correct name
  * 21 February 2024 - Fixed some issues with the move functionality
  * 14 March 2024 - Fixed issue with finding items under a cover
+ * 21 March 2024 - Allowed ability to examine items carried
  */

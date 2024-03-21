@@ -5,10 +5,7 @@
  * This is the launcher. It should not need to be updated.
  */
 
-//TODO: Create a game that uses everything we have (openable containers/Lockable containers)
-//		Lockable Conatiner
-
-//      Be able to examine object carried
+//TODO: Fix issues that have arisen
 //      Be able to close an object
 //		open box when locked shouldn't crash
 
