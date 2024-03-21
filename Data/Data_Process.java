@@ -20,8 +20,8 @@ public class Data_Process {
 		hole2.addDescription("another hole in the floor");
 		Exit alcove = new OrdinaryExit("North",three,true);
 		Exit hole3 = new OrdinaryExit("Trapdoor",six,true);
-		hole3.addDescription("a sturdy wooden trapdoor");
-		alcove.addDescription("a hidden passage");
+		hole3.addDescription("sturdy wooden trapdoor");
+		alcove.addDescription("hidden passage");
 		CarriableItem coat = new CarriableItem("Puffer Jacket","It's fairly cheap and nasty, but still warm");
 		CarriableItem dress = new CarriableItem("Dress","A floral dress. It has certainly seen better days");
 		Item cover = new Cover("Rug","A persian rug that has seen better days",hole,false);
@@ -42,6 +42,10 @@ public class Data_Process {
 		quilt.addItem(pants);
 		Item bed = new Cover("Bed","A sturdy wooden bed",quilt,false);
 		start.addItem(bed);
+		Container box = new Container("Box","A cardboard box",true,true,true,true,ring);
+		CarriableItem paper = new CarriableItem("Newspaper","An old newsper dating back five years");
+		box.addItem(paper);
+		two.addItem(box);
 		
 		/*description = "The Minories Pub in London beckons adventurers with its historic charm, wooden beams, and a well-stocked bar. \nInside, you'll find a cozy haven where tales of epic journeys and daring quests are shared.";
 		start = new Location("in the Minories",description);

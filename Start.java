@@ -6,9 +6,11 @@
  */
 
 //TODO: Create a game that uses everything we have (openable containers/Lockable containers)
-//		Containers
-//		Openable Items
-//		Lockable Items
+//		Lockable Conatiner
+
+//      Be able to examine object carried
+//      Be able to close an object
+//		open box when locked shouldn't crash
 
 //TODO: Create a talk to module sort of like the one in NWN
 //TODO: Add Basic Ending - then increase the version.
