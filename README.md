@@ -104,4 +104,4 @@ The cover functions now work perfectly (though not as random as I liked, but at 
 
 **23 March 2024**
 Fixed errors with containers. Now can close and lock containers. Cannot lock and open container or exit, and cannot take an item from a
-closed container.
+closed container. Started working on conversations

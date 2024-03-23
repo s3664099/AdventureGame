@@ -5,12 +5,12 @@
  * This is the launcher. It should not need to be updated.
  */
 
-//TODO: Fix issues that have arisenmov
-// When something is locked, it should be automatically closed
-// When something is closed, you can't take anything from it.
-
 //TODO: Create a talk to module sort of like the one in NWN
-//TODO: Add Basic Ending - then increase the version.
+		//Create class called query - holds option & conversation
+		//All responses have an end query - will save the current conversation so as to
+		//continue.
+
+//TODO: Add Basic Ending - Also a Quit - then increase the version.
 //TODO: Implement multi word parser
 //      And and then to create multiple commands
 //      Full Object Command
@@ -19,8 +19,7 @@
 //TODO: Commands embedded in objects/exits
 //TODO: Option to select Games to Play
 //TODO: Begin Building Other Game
-//TODO; Maybe have the moveable item hide multiple things, and can be moved multiple times
-//      Consider add scores when certain actions are performed
+//TODO; Consider add scores when certain actions are performed
 //      Possible to have the treasure store moved (or even have a character to give them to)
 //TODO: v2 - A graphical interface.
 
