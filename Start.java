@@ -5,9 +5,9 @@
  * This is the launcher. It should not need to be updated.
  */
 
-//TODO: Fix issues that have arisen
-//      Be able to close an object
-//		open box when locked shouldn't crash
+//TODO: Fix issues that have arisenmov
+// When something is locked, it should be automatically closed
+// When something is closed, you can't take anything from it.
 
 //TODO: Create a talk to module sort of like the one in NWN
 //TODO: Add Basic Ending - then increase the version.

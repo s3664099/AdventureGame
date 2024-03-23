@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated:21 March 2024
- * Version: 0.20
+ * Updated:23 March 2024
+ * Version: 0.21
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -160,7 +160,7 @@ public class Command {
 						response = "I cannot pick that up";
 					}
 				} else if ((item instanceof Container) && (!itemTaken)) {
-					if (((Container) item).getViewed()) {
+					if ((((Container) item).getViewed()) && (!((Container) item).getClosed())) {
 						
 						ArrayList<Item> contents = ((Container) item).getContents();
 						response = this.switchList(contents,listTwo,command,statement,itemTaken);
@@ -303,15 +303,15 @@ public class Command {
 						//Is the exit open - if not the exit is opened.
 						if (!item.getClosed()) {
 							item.setClosed();
-							response = response.format("You close the %s",exit.getName());
+							response = response.format("You close the %s",item.getName());
 						} else {
-							response = response.format("The %s is already closed",exit.getName());
+							response = response.format("The %s is already closed",item.getName());
 						}					
 					}
 				} else if (item.getLocked()) {
-					response = response.format("The %s is locked",exit.getName());
+					response = response.format("The %s is locked",item.getName());
 				} else {
-					response = response.format("You cannot open the %s", exit.getName());
+					response = response.format("You cannot open the %s", item.getName());
 				}
 			}
 		}
@@ -487,7 +487,14 @@ public class Command {
 								}
 							} else if (verb.equals("lock")) {
 								if (!exit.getLocked()) {
-									response = exit.lockUnlock((CarriableItem) item, verb);
+									
+									//If exit is open, cannot be locked
+									if (!exit.getOpen()) {
+										response = response.format("The %s is open. Please close it first", exit.getName());
+									} else {
+										response = exit.lockUnlock((CarriableItem) item, verb);
+									}
+									
 								} else {
 									response = response.format("The %s is already locked",exit.getName());
 								}								
@@ -521,16 +528,27 @@ public class Command {
 								
 									//Acts on either lock/unlock, which does the opposite.
 									if (verb.equals("unlock")) {
+										
+										//Checks if the container is already locked.
 										if (container.getLocked()) {
 											container.setLocked();
 											response = response.format("You unlock the %s",container.getName());
 										} else {
 											response = response.format("The %s is already unlocked",container.getName());
 										}
+										
 									} else if (verb.equals("lock")) {
+										
+										//Checks if the container is already locked
 										if (!container.getLocked()) {
+											
+											//Checks if the container is open. Cannot lock and open conmtainer
+											if (!container.getClosed()) {
+												response = response.format("The %s is still open. Please close it first", container.getName());
+											} else {
 											container.setLocked();
 											response = response.format("You lock the %s",container.getName());
+											}
 										} else {
 											response = response.format("The %s is already locked",container.getName());
 										}
@@ -840,4 +858,7 @@ public class Command {
  * 21 February 2024 - Fixed some issues with the move functionality
  * 14 March 2024 - Fixed issue with finding items under a cover
  * 21 March 2024 - Allowed ability to examine items carried
+ * 23 March 2024 - Fixed error causing the game to crash when opening - changed exit to
+ * 					item for item. Changed code so cannot lock and open container/exit
+ * 					prevented picking up and item from a closed container
  */

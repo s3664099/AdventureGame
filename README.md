@@ -101,3 +101,7 @@ The cover for items now works. Includes multiple items.
 
 **21 March 2024**
 The cover functions now work perfectly (though not as random as I liked, but at least it works). Added ability to examine items carried.
+
+**23 March 2024**
+Fixed errors with containers. Now can close and lock containers. Cannot lock and open container or exit, and cannot take an item from a
+closed container.

@@ -28,8 +28,8 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 					boolean locked, boolean closed) {
 		super(name, description);
 		this.closeable = closeable;
-		this.lockable = lockable;
-		this.locked = locked;
+		this.lockable = false;
+		this.locked = false;
 		this.closed = closed;
 	}
 
