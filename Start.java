@@ -9,7 +9,9 @@
 		//Create class called query - holds option & conversation
 		//All responses have an end query - will save the current conversation so as to
 		//continue.
-
+//TODO: Move the check for item, and check for exit for separate function
+//		Test basic talk
+//		Create complex talk structure		
 //TODO: Add Basic Ending - Also a Quit - then increase the version.
 //TODO: Implement multi word parser
 //      And and then to create multiple commands

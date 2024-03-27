@@ -1,7 +1,7 @@
 /* Conversation
  * Created: 23 March 2024
- * Updated: 23 March 2024
- * Version: 0.0
+ * Updated: 27 March 2024
+ * Version: 0.1
  * Class for conversations.
  */
 
@@ -26,7 +26,24 @@ public class Conversation {
 	public void addQuery(Query query) {
 		this.queries.add(query);
 	}
+	
+	public String getResponse() {
+		return this.response;
+	}
+	
+	//Checks to see if there are any queries
+	public boolean checkQueries() {
+		
+		boolean queries = false;
+		
+		if (this.queries.size()>0) {
+			queries = true;
+		}
+		
+		return queries;
+	}
 }
 
 /* 23 March 2024 - Created file
+ * Added getter for response, and also check to see if there are any queries
 */

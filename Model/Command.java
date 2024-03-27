@@ -124,6 +124,8 @@ public class Command {
 				response = loadGame(noun);
 			}
 			
+		} else if ((verb.equals("talk")) || (verb.equals("speak"))) {
+			response = conversation(noun, location.getItems());
 		}
 		
 		return response;
@@ -829,6 +831,22 @@ public class Command {
 			
 			if (savFiles.length == 0) {
 				response = response.format("%sEmpty", response);
+			}
+		}
+		
+		return response;
+	}
+	
+	//Basic conversation function
+	private String conversation(String verb, ArrayList<Item> items) {
+		String response = "I dont see that here";
+		
+		//Checks if the item is a treasure
+		for (Item item:items) {
+			for (String noun:item.getNouns()) {
+				if (noun.equals(verb)) {
+					response = item.talk().getResponse();
+				}
 			}
 		}
 		

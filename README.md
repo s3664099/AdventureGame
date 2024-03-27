@@ -105,3 +105,6 @@ The cover functions now work perfectly (though not as random as I liked, but at 
 **23 March 2024**
 Fixed errors with containers. Now can close and lock containers. Cannot lock and open container or exit, and cannot take an item from a
 closed container. Started working on conversations
+
+**27 March 2024**
+Started working on the conversation functionality. Completed the basic (single response) conversation, but not tested

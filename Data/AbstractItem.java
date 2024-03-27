@@ -1,7 +1,7 @@
 /* Abstract Item Class
  * Created: 25 August 2023
- * Updated: 29 January 2024
- * Version: 0.7
+ * Updated: 27 March 2024
+ * Version: 0.8
  * The main class for objects. Since we can't call it an object (reserved word)
  * we have to call it a thing.
  */
@@ -71,6 +71,16 @@ public class AbstractItem implements Serializable {
 	public void addExit(Exit hiddenExit) {}
 	
 	public void addItem(Item hiddenItem) {}
+	
+	//Basic response when user attempts to speak to an object
+	public Conversation talk() {
+
+		String response = "";
+		response = response.format("The %s doesn't respond.", this.getName());
+		Conversation conversation = new Conversation(response);
+		
+		return conversation;
+	}
 }
 
 /* 25 August 2023 - Created File
@@ -81,4 +91,5 @@ public class AbstractItem implements Serializable {
 * 28 January 2024 - Added function for cover
 * 29 January 2024 - Added further functions for cover
 * 13 March 2024 - Added blank functions for adding items and exits
+* 27 March 2024 - Added the talk function
 */
