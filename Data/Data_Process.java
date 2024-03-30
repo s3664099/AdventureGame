@@ -14,6 +14,9 @@ public class Data_Process {
 		Location four = new Location("Second Cellar","The cellar is incredibly dusty and covered in cobwebs");
 		Location five = new Location("Wardrobe","The cellar is incredibly dusty and covered in cobwebs");
 		Location six = new Location("Wine Cellar","The cellar is full of racks containing, no doubt, some very expensive wine");
+		Conversation whoreResponse = new Conversation("Fuck off!");
+		Item whore = new Being("Whore","A skank convered in tattoos smoking a cigarette. A scow is on her face",whoreResponse);
+		start.addItem(whore);
 		Exit hole = new OrdinaryExit("Down",two,true);
 		hole.addDescription("hole in the floor");
 		Exit hole2 = new OrdinaryExit("Hole",four,true);

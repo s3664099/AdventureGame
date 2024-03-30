@@ -108,3 +108,6 @@ closed container. Started working on conversations
 
 **27 March 2024**
 Started working on the conversation functionality. Completed the basic (single response) conversation, but not tested
+
+**30 March 2024**
+Tested the talk function, and fixed up the response variable.

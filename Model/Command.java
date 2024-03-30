@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated:23 March 2024
- * Version: 0.21
+ * Updated:30 March 2024
+ * Version: 0.23
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -845,7 +845,7 @@ public class Command {
 		for (Item item:items) {
 			for (String noun:item.getNouns()) {
 				if (noun.equals(verb)) {
-					response = item.talk().getResponse();
+					response = response.format("%s: %s",item.getName(),item.talk().getResponse());
 				}
 			}
 		}
@@ -879,4 +879,6 @@ public class Command {
  * 23 March 2024 - Fixed error causing the game to crash when opening - changed exit to
  * 					item for item. Changed code so cannot lock and open container/exit
  * 					prevented picking up and item from a closed container
+ * 27 March 2024 - Added the talk functionality. Completed a single response.
+ * 30 March 2024 - Fixed up the response to the talk function
  */
