@@ -1,7 +1,7 @@
 /* Being
  * Created: 23 March 2024
- * Updated: 23 March 2024
- * Version: 0.0
+ * Updated: 4 April 2024
+ * Version: 0.1
  * Class for creatures.
  */
 
@@ -13,14 +13,20 @@ import java.io.Serializable;
 public class Being extends AbstractItem implements Item,Serializable {
 	
 	Conversation conversation;
+	Boolean extended;
 	
-	public Being(String name, String description, Conversation conversation) {
+	public Being(String name, String description, Conversation conversation, Boolean extended) {
 		super(name,description);
 		this.conversation = conversation;
+		this.extended = extended;
 	}
 	
 	public Conversation talk() {
 		return conversation;
+	}
+	
+	public boolean getExtended() {
+		return this.extended;
 	}
 
 	@Override
@@ -117,4 +123,5 @@ public class Being extends AbstractItem implements Item,Serializable {
 }
 
 /* 23 March 2024 - Created file
+ * 4 April 2024 - Added boolean to advise whether conversation extended of not
 */

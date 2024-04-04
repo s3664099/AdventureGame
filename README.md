@@ -111,3 +111,6 @@ Started working on the conversation functionality. Completed the basic (single r
 
 **30 March 2024**
 Tested the talk function, and fixed up the response variable.
+
+**4 April 2024**
+Added a boolean to determine whether conversation extended or not

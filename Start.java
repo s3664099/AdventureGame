@@ -11,6 +11,8 @@
 //TODO: Move the check for item, and check for exit for separate function
 //		Create complex talk structure		
 //TODO: Add Basic Ending - Also a Quit - then increase the version.
+//TODO: Add a function that converts one now to another, but if the other noun is used it 
+//		makes it invalid.
 //TODO: Implement multi word parser
 //      And and then to create multiple commands
 //      Full Object Command

@@ -131,6 +131,20 @@ public class Command {
 		return response;
 	}
 	
+	private Item findItem(String command, ArrayList<Item> itemList) {
+		Item foundItem = null;
+		
+		for (Item item:itemList) {
+			for (String noun:item.getNouns()) {
+				if((command.equals(noun)) && (foundItem == null)) {
+					foundItem = item;
+				}
+			}
+		}
+		
+		return foundItem;
+	}
+	
 	//Method to move item from one list to another
 	private String switchList(ArrayList<Item> listOne, ArrayList<Item> listTwo, String command, String statement, boolean itemTaken) {
 
@@ -845,7 +859,12 @@ public class Command {
 		for (Item item:items) {
 			for (String noun:item.getNouns()) {
 				if (noun.equals(verb)) {
-					response = response.format("%s: %s",item.getName(),item.talk().getResponse());
+					
+					if (!item.getExtended()) {
+						response = response.format("%s: %s",item.getName(),item.talk().getResponse());
+					} else {
+						
+					}
 				}
 			}
 		}
