@@ -14,10 +14,12 @@ public class Being extends AbstractItem implements Item,Serializable {
 	
 	Conversation conversation;
 	Boolean extended;
+	static Conversation conversationStart;
 	
 	public Being(String name, String description, Conversation conversation, Boolean extended) {
 		super(name,description);
 		this.conversation = conversation;
+		this.conversationStart = conversation;
 		this.extended = extended;
 	}
 	
@@ -123,5 +125,6 @@ public class Being extends AbstractItem implements Item,Serializable {
 }
 
 /* 23 March 2024 - Created file
- * 4 April 2024 - Added boolean to advise whether conversation extended of not
+ * 4 April 2024 - Added boolean to advise whether conversation extended of not. Added
+ * 		static conversation to hold the start
 */
