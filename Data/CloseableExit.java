@@ -1,7 +1,7 @@
 /* CloseableExit Class
  * Created: 4 September 2023
- * Updated: 25 January 2024
- * Version 0.8
+ * Updated: 7 April 2024
+ * Version 0.9
  * Class to handle and exit that can be closed
  */
 
@@ -13,6 +13,8 @@ import java.io.Serializable;
 public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 	
 	private boolean closed;
+	private Item item;
+	private boolean itemRevealed;
 		
 	//Exit with multiple commands
 	public CloseableExit(String name, String command, Location destination, 
@@ -20,6 +22,7 @@ public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 	
 		super(name, destination, false, command, description);
 		this.closed = closed;
+		this.itemRevealed = false;
 
 	}
 	
@@ -104,6 +107,18 @@ public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 	public String lockUnlock(CarriableItem item, String action) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public void setItem(boolean itemRevealed) {
+		this.itemRevealed = itemRevealed;
+	}
+	
+	public Item getItem() {
+		return this.item;
+	}
+	
+	public boolean checkItem() {
+		return this.itemRevealed;
 	}
 }
 

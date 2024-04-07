@@ -1,7 +1,7 @@
 /* Abstract Exit Class
  * Created: 5 September 2023
- * Updated: 21 February 2024
- * Version 0.4
+ * Updated: 7 April 2024
+ * Version 0.5
  * Class to handle everything to do with an exit.
  */
 
@@ -73,10 +73,21 @@ public abstract class AbstractExit implements Serializable {
 	public boolean getDirection() {
 		return direction;
 	}
+	
+	public boolean checkItem() {
+		return false;
+	}
+	
+	public Item getItem() {
+		return null;
+	}
+	
+	public void setItem(boolean updateReveal) {}
 }
 /* 5 September 2023 - Created File
  * 6 September 2023 - Completed class with getters and setters
  * 12 September 2023 - Added functionality to handle exit description
  * 27 January 2024 - Made class serializable
  * 21 February 2024 - Added an add description method
+ * 7 April 2024 - Added functions for items (namely people) to be revealed
  */ 

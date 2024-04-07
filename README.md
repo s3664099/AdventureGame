@@ -115,4 +115,7 @@ Started working on the conversation functionality. Completed the basic (single r
 Tested the talk function, and fixed up the response variable.
 
 **4 April 2024**
-Added a boolean to determine whether conversation extended or not. Started building extended conversations
+Added a boolean to determine whether conversation extended or not. Started building extended conversations 
+
+**7 April 2024**
+Added ability of items to be revealed when closeable exits are opened.

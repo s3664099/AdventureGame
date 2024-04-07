@@ -1,7 +1,7 @@
 /* LockableExit Class
  * Created: 11 October 2023
- * Updated: 26 January 2024
- * Version 0.1
+ * Updated: 7 April 2024
+ * Version 0.2
  * Class to handle and exit that can be locked
  */
 
@@ -15,6 +15,8 @@ public class LockableExit extends CloseableExit implements Exit,Serializable {
 	private boolean locked;
 	private CarriableItem key;
 	private boolean lockable = true;
+	private Item item;
+	private boolean itemRevealed;	
 		
 	//Exit with multiple commands
 	public LockableExit(String name, String command, Location destination, 
@@ -23,6 +25,7 @@ public class LockableExit extends CloseableExit implements Exit,Serializable {
 		super(name, command, destination, true, description);
 		this.locked = closed;
 		this.key = key;
+		this.itemRevealed = false;
 
 	}
 	
@@ -103,9 +106,22 @@ public class LockableExit extends CloseableExit implements Exit,Serializable {
 	public Item getKey() {
 		return key;
 	}
+	
+	public boolean checkItem() {
+		return super.checkItem();
+	}
+	
+	public void setItem(boolean updateReveal) {
+		super.setItem(updateReveal);
+	}
+	
+	public Item getItem() {
+		return super.getItem();
+	}
 }
 
 /* 11 October 2023 - Created File
  * 13 October 2023 - Added Lockable specific methods
  * 26 January 2024 - Made class serializable
+ * 7 April 2024 - Added functions for items to be revealed
 */
