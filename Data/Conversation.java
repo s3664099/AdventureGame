@@ -1,13 +1,14 @@
 /* Conversation
  * Created: 23 March 2024
- * Updated: 4 March 2024
- * Version: 0.2
+ * Updated: 18 April 2024
+ * Version: 0.3
  * Class for conversations.
  */
 
 package Data;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Conversation {
 
@@ -57,15 +58,46 @@ public class Conversation {
 		}
 		System.out.printf("%d%s%n",noQueries,this.endConvo);
 		
+		
 		//Request input that checks if it is a valid input
 		//If valid gets the convo from the query or ends.
 		//If end, then saves where the convo is upto
-		//If finish can either restart the convo, or have a blunt response and resets extended
+		//If finish can either restart the convo, or have a blunt response and resets extended		
+	}
+	
+	private int getInput(int noQueries) {
 		
+		boolean validInput = false;
+		int input = 0;
+		
+		Scanner query = new Scanner(System.in);
+		int response;
+		
+		while (!validInput) {
+			
+			//Checks if input is a numbers
+			try {
+				input = Integer.parseInt(query.nextLine());
+				
+				//Checks that it is within the value
+				if ((input <1) && (input>noQueries)) {
+					System.out.printf("Please enter a value between 1 and %s",noQueries);
+				} else {
+					validInput = true;
+				}
+			} catch (NumberFormatException e) {
+				
+                // Input is not a valid integer
+                System.out.println("Input must be an integer.");
+            }
+		}
+
+		return input;
 	}
 }
 
 /* 23 March 2024 - Created file
  * Added getter for response, and also check to see if there are any queries
  * 4 April 2024 - Added functions for extended conversation
+ * 18 April 2024 - Added function to take user input
 */

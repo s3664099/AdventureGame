@@ -25,6 +25,17 @@ public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 		this.itemRevealed = false;
 
 	}
+
+	//Exit with multiple commands
+	public CloseableExit(String name, String command, Location destination, 
+						boolean closed, String description,Item item) {
+	
+		super(name, destination, false, command, description);
+		this.closed = closed;
+		this.itemRevealed = true;
+		this.item = item;
+
+	}
 	
 	//Returns the description of what happens when attempt to move
 	public String moveDescription(String command) {
