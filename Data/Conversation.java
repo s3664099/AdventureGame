@@ -1,7 +1,7 @@
 /* Conversation
  * Created: 23 March 2024
- * Updated: 18 April 2024
- * Version: 0.3
+ * Updated: 9 May 2024
+ * Version: 0.4
  * Class for conversations.
  */
 
@@ -13,17 +13,25 @@ import java.util.Scanner;
 public class Conversation {
 
 	String response;
-	ArrayList<Query> queries;
+	ArrayList<Query> queries = new ArrayList<Query>();
 	Conversation upto;
 	String endConvo;
 	
+	//Constructor where there is only a response
 	public Conversation(String response) {
 		this.response = response;
 	}
 	
+	//Constructor that includes queries
 	public Conversation(String response, ArrayList<Query> queries, String endConvo) {
 		this.response = response;
 		this.queries = queries;
+		this.endConvo = endConvo;
+	}
+
+	//Constructor that doesn't include queries
+	public Conversation(String response, String endConvo) {
+		this.response = response;
 		this.endConvo = endConvo;
 	}
 	
@@ -50,19 +58,29 @@ public class Conversation {
 	public void displayConversation() {
 		
 		int noQueries = 1;
-		System.out.print(this.getResponse());
+		System.out.printf("%s%n",this.getResponse());
 		
 		for( Query query:queries) {
-			System.out.printf("%d%s%n",noQueries,query.getQuery());
+			System.out.printf("%d) %s%n",noQueries,query.getQuery());
 			noQueries += 1;
 		}
-		System.out.printf("%d%s%n",noQueries,this.endConvo);
 		
+		int input = getInput(noQueries);
 		
-		//Request input that checks if it is a valid input
-		//If valid gets the convo from the query or ends.
-		//If end, then saves where the convo is upto
-		//If finish can either restart the convo, or have a blunt response and resets extended		
+		Query selectedQuery = null;
+		
+		for (int i = 0;i<queries.size();i++) {
+			
+			if ((input - 1) == i) {
+				selectedQuery = queries.get(i);
+			}
+		}
+		
+		if (selectedQuery.getConversation() == null) {
+			System.out.println(this.endConvo);
+		} else {
+			selectedQuery.getConversation().displayConversation();		
+		}
 	}
 	
 	private int getInput(int noQueries) {
@@ -70,6 +88,7 @@ public class Conversation {
 		boolean validInput = false;
 		int input = 0;
 		
+		System.out.println("How do you respond: ");
 		Scanner query = new Scanner(System.in);
 		int response;
 		
@@ -100,4 +119,5 @@ public class Conversation {
  * Added getter for response, and also check to see if there are any queries
  * 4 April 2024 - Added functions for extended conversation
  * 18 April 2024 - Added function to take user input
+ * 9 May 2024 - The queries now work
 */

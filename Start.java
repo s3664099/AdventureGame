@@ -5,9 +5,9 @@
  * This is the launcher. It should not need to be updated.
  */
 
-//TODO: Create a talk to module sort of like the one in NWN
-		//All responses have an end query - will save the current conversation so as to
-		//continue.
+//TODO: Convseration
+//		Add variable if being leaves at end of convo
+//		If convo ends end convo
 //TODO: Move the check for item, and check for exit for separate function
 //		Create complex talk structure		
 //TODO: Add Basic Ending - Also a Quit - then increase the version.

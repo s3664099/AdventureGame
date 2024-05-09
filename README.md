@@ -119,3 +119,6 @@ Added a boolean to determine whether conversation extended or not. Started build
 
 **7 April 2024**
 Added ability of items to be revealed when closeable exits are opened.
+
+**9 May 2024**
+The basic conversation is now complete

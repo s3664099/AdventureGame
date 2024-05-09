@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated:30 March 2024
- * Version: 0.23
+ * Updated: 9 May 2024
+ * Version: 0.24
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -863,7 +863,7 @@ public class Command {
 					if (!item.getExtended()) {
 						response = response.format("%s: %s",item.getName(),item.talk().getResponse());
 					} else {
-						
+						item.talk().displayConversation();
 					}
 				}
 			}
@@ -900,4 +900,5 @@ public class Command {
  * 					prevented picking up and item from a closed container
  * 27 March 2024 - Added the talk functionality. Completed a single response.
  * 30 March 2024 - Fixed up the response to the talk function
+ * 9 May 2024 - Finished basic conversation
  */
