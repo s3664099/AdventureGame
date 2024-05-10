@@ -2,9 +2,9 @@ package Data;
 
 public class Data_Process {
 	
-	Location start;
-	String description;
-	Container container;
+	private Location start;
+	private String description;
+	private Container container;
 	
 	public Data_Process() {
 		

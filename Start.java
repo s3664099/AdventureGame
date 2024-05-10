@@ -6,10 +6,9 @@
  */
 
 //TODO: Convseration
-//		Add variable if being leaves at end of convo
-//		If convo ends end convo
+//		Have being refuce to 
+//		Have convo save where convo leaves off
 //TODO: Move the check for item, and check for exit for separate function
-//		Create complex talk structure		
 //TODO: Add Basic Ending - Also a Quit - then increase the version.
 //TODO: Add a function that converts one now to another, but if the other noun is used it 
 //		makes it invalid.

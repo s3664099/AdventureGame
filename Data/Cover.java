@@ -1,7 +1,7 @@
 /* Cover Item Class
  * Created: 28 January 2024
- * Updated: 13 March 2024
- * Version: 0.2
+ * Updated: 10 May 2024
+ * Version: 0.3
  * Class for items either cover items or exits
  */
 
@@ -12,8 +12,8 @@ import java.io.Serializable;
 
 public class Cover extends ImmoveableItem implements Item,Serializable {
 	
-	ArrayList<Exit> hiddenExits = new ArrayList<Exit>();
-	ArrayList<Item> hiddenItems = new ArrayList<Item>();
+	private ArrayList<Exit> hiddenExits = new ArrayList<Exit>();
+	private ArrayList<Item> hiddenItems = new ArrayList<Item>();
 	private boolean isCover = true;
 	private boolean removeObject;
 	
@@ -187,4 +187,5 @@ public class Cover extends ImmoveableItem implements Item,Serializable {
 /* 28 January 2024 - Created file
  * 21 February 2024 - Added methods to make the class work properly
  * 13 March 2024 - Added methods to add more hidden items
+ * 10 May 2024 - Made Variables private
 */

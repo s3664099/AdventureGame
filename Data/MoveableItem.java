@@ -1,7 +1,7 @@
 /* Moveable Item Class
  * Created: 5 October 2023
- * Updated: 25 January 2024
- * Version: 0.2
+ * Updated: 10 May 2024
+ * Version: 0.3
  * Class for items that hide exits and items.
  */
 
@@ -12,10 +12,10 @@ import java.io.Serializable;
 
 public class MoveableItem extends ImmoveableItem implements Item, Serializable {
 	
-	Exit exit;
-	Item item;
-	boolean isMoveable = true;
-	boolean hasMoved = false;
+	private Exit exit;
+	private Item item;
+	private boolean isMoveable = true;
+	private boolean hasMoved = false;
 	
 	public MoveableItem(String name, String description, Exit exit) {
 		super(name,description);
@@ -66,4 +66,5 @@ public class MoveableItem extends ImmoveableItem implements Item, Serializable {
 /* 5 October 2023 - created class
  * 23 January 2024 - Added functionality
  * 26 January 2024 - Made class serializable
+ * 10 May 2024 - May variables private
 */
