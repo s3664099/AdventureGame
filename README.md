@@ -122,3 +122,6 @@ Added ability of items to be revealed when closeable exits are opened.
 
 **9 May 2024**
 The basic conversation is now complete
+
+**10 May 2024**
+Made variables private. Added end conversation, and have being leave if flagged.

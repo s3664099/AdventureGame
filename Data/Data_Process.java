@@ -16,6 +16,7 @@ public class Data_Process {
 		Query query = new Query("Yes",response);
 		convo.addQuery(query);
 		query = new Query("No");
+		query.setEndConvo("leave");
 		convo.addQuery(query);
 		
 		Item woman = new Being("Worried Woman","",convo,true);

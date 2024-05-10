@@ -854,18 +854,35 @@ public class Command {
 	//Basic conversation function
 	private String conversation(String verb, ArrayList<Item> items) {
 		String response = "I dont see that here";
+		String endConvo = "";
+		ArrayList<String> endConv = new ArrayList<String>();
+		int itemNo = 0;
+		int itemFound = 0;
 		
 		//Checks if the item is a treasure
 		for (Item item:items) {
 			for (String noun:item.getNouns()) {
 				if (noun.equals(verb)) {
 					
+					itemFound = itemNo;
+					
 					if (!item.getExtended()) {
 						response = response.format("%s: %s",item.getName(),item.talk().getResponse());
 					} else {
-						item.talk().displayConversation();
+						endConv = item.talk().displayConversation();
 					}
 				}
+			}
+			itemNo ++;
+		}
+		
+		//Conversation has come to an end
+		if (endConv.size() == 2) {
+			response = endConv.get(0);
+			
+			//Will the being leave at the end
+			if (endConv.get(1).equals("leave")) {
+				items.remove(itemFound);
 			}
 		}
 		

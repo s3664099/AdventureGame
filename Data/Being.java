@@ -1,7 +1,7 @@
 /* Being
  * Created: 23 March 2024
- * Updated: 4 April 2024
- * Version: 0.1
+ * Updated: 10 April 2024
+ * Version: 0.2
  * Class for creatures.
  */
 
@@ -12,9 +12,9 @@ import java.io.Serializable;
 
 public class Being extends AbstractItem implements Item,Serializable {
 	
-	Conversation conversation;
-	Boolean extended;
-	static Conversation conversationStart;
+	private Conversation conversation;
+	private Boolean extended;
+	private static Conversation conversationStart;
 	
 	public Being(String name, String description, Conversation conversation, Boolean extended) {
 		super(name,description);
@@ -127,4 +127,5 @@ public class Being extends AbstractItem implements Item,Serializable {
 /* 23 March 2024 - Created file
  * 4 April 2024 - Added boolean to advise whether conversation extended of not. Added
  * 		static conversation to hold the start
+ * 9 May 2024 - Made variables private. Added end convo functionality
 */

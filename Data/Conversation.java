@@ -1,7 +1,7 @@
 /* Conversation
  * Created: 23 March 2024
- * Updated: 9 May 2024
- * Version: 0.4
+ * Updated: 10 May 2024
+ * Version: 0.5
  * Class for conversations.
  */
 
@@ -12,10 +12,11 @@ import java.util.Scanner;
 
 public class Conversation {
 
-	String response;
-	ArrayList<Query> queries = new ArrayList<Query>();
-	Conversation upto;
-	String endConvo;
+	private String response;
+	private ArrayList<Query> queries = new ArrayList<Query>();
+	private Conversation upto;
+	private String endConvo = "";
+	private ArrayList<String> endResponse = new ArrayList<String>();
 	
 	//Constructor where there is only a response
 	public Conversation(String response) {
@@ -55,7 +56,7 @@ public class Conversation {
 		return queries;
 	}
 	
-	public void displayConversation() {
+	public ArrayList<String> displayConversation() {
 		
 		int noQueries = 1;
 		System.out.printf("%s%n",this.getResponse());
@@ -76,11 +77,15 @@ public class Conversation {
 			}
 		}
 		
+		//Checks if the conversation is the end and if it is returns a end convo list
 		if (selectedQuery.getConversation() == null) {
-			System.out.println(this.endConvo);
+			this.endResponse.add(endConvo);
+			this.endResponse.add(selectedQuery.getEndConvo());
 		} else {
-			selectedQuery.getConversation().displayConversation();		
+			this.endResponse = selectedQuery.getConversation().displayConversation();		
 		}
+		
+		return this.endResponse;
 	}
 	
 	private int getInput(int noQueries) {
@@ -120,4 +125,5 @@ public class Conversation {
  * 4 April 2024 - Added functions for extended conversation
  * 18 April 2024 - Added function to take user input
  * 9 May 2024 - The queries now work
+ * 10 May 2024 - Made variables private. Added arraylist for response
 */
