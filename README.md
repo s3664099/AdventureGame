@@ -125,3 +125,6 @@ The basic conversation is now complete
 
 **10 May 2024**
 Made variables private. Added end conversation, and have being leave if flagged.
+
+**11 May 2024**
+Added functionality so that a conversation can change, such that an extended conversation becomes a single line

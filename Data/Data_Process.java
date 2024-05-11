@@ -12,8 +12,13 @@ public class Data_Process {
 		Location hall = new Location("In a hall","A hallway in an 18th Century building in the heart of London. There is a door leading to your office and stairs leading down to the street");
 		Conversation convo = new Conversation("I need some help, will you help me","Okay, bye");
 		Conversation response = new Conversation("Good, I'm tired, can I sleep here");
+		Conversation sleep = new Conversation("Please leave me alone, I'm tired",
+				"Thank you very much, now I have to find a place to sleep");
 		
-		Query query = new Query("Yes",response);
+		Query query = new Query("Sure",sleep);
+		query.setEndConvo("finish");
+		response.addQuery(query);
+		query = new Query("Yes",response);
 		convo.addQuery(query);
 		query = new Query("No");
 		query.setEndConvo("leave");
@@ -22,8 +27,6 @@ public class Data_Process {
 		Item woman = new Being("Worried Woman","",convo,true);
 		Exit door = new CloseableExit("Door","Door",hall,true,"The door is a sturdy wooden door leading to the hall",woman);
 		start.addItem(woman);
-		
-		
 	}
 	
 	public Location start() {

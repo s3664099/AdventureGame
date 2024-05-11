@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 9 May 2024
- * Version: 0.24
+ * Updated: 11 May 2024
+ * Version: 0.25
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -883,6 +883,9 @@ public class Command {
 			//Will the being leave at the end
 			if (endConv.get(1).equals("leave")) {
 				items.remove(itemFound);
+			} else if (endConv.get(1).equals("finish")) {
+				items.get(itemFound).setExtended();
+				System.out.println("Hi");
 			}
 		}
 		
@@ -918,4 +921,5 @@ public class Command {
  * 27 March 2024 - Added the talk functionality. Completed a single response.
  * 30 March 2024 - Fixed up the response to the talk function
  * 9 May 2024 - Finished basic conversation
+ * 10 May 2024 - Added functionality for a conversation to end
  */

@@ -1,7 +1,7 @@
 /* Conversation
  * Created: 23 March 2024
- * Updated: 10 May 2024
- * Version: 0.5
+ * Updated: 11 May 2024
+ * Version: 0.6
  * Class for conversations.
  */
 
@@ -81,11 +81,29 @@ public class Conversation {
 		if (selectedQuery.getConversation() == null) {
 			this.endResponse.add(endConvo);
 			this.endResponse.add(selectedQuery.getEndConvo());
+
+		//Checks if there are no queries, and if so, sets this convo as the new conve
+		//And clears the queries
+		} else if (selectedQuery.getConversation().getNoQueries() == 0) {
+			this.endResponse.add(this.endConvo);
+			System.out.println(this.endConvo);
+			this.endResponse.add(selectedQuery.getEndConvo());
+			clearConvo(selectedQuery.getConversation().getResponse());
+			
 		} else {
-			this.endResponse = selectedQuery.getConversation().displayConversation();		
+			this.endResponse = selectedQuery.getConversation().displayConversation();
+			
+			//Checks if the convo now has no queries, and if so, clears this convo as well
+			if(this.endResponse.get(1).equals("finish")) {
+				clearConvo(selectedQuery.getConversation().getResponse());
+			}
 		}
-		
 		return this.endResponse;
+	}
+	
+	private void clearConvo(String response) {
+		this.response = response;
+		this.queries = new ArrayList<Query>();
 	}
 	
 	private int getInput(int noQueries) {
@@ -115,8 +133,12 @@ public class Conversation {
                 System.out.println("Input must be an integer.");
             }
 		}
-
 		return input;
+	}
+	
+	//Gets the number of queries
+	public int getNoQueries() {
+		return queries.size();
 	}
 }
 
@@ -126,4 +148,5 @@ public class Conversation {
  * 18 April 2024 - Added function to take user input
  * 9 May 2024 - The queries now work
  * 10 May 2024 - Made variables private. Added arraylist for response
+ * 11 May 2024 - Added functionality to end conversation
 */

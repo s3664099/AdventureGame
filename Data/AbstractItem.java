@@ -1,7 +1,7 @@
 /* Abstract Item Class
  * Created: 25 August 2023
- * Updated: 4 April 2024
- * Version: 0.9
+ * Updated: 11 May 2024
+ * Version: 0.10
  * The main class for objects. Since we can't call it an object (reserved word)
  * we have to call it a thing.
  */
@@ -85,6 +85,8 @@ public class AbstractItem implements Serializable {
 	public boolean getExtended() {
 		return false;
 	}
+	
+	public void setExtended() {}
 }
 
 /* 25 August 2023 - Created File
@@ -97,4 +99,5 @@ public class AbstractItem implements Serializable {
 * 13 March 2024 - Added blank functions for adding items and exits
 * 27 March 2024 - Added the talk function
 * 4 April 2024 - Added function to determine whether conversation is extended.
+* 11 May 2024 - Added functionality so to change whether a conversation is extended or not.
 */

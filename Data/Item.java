@@ -1,7 +1,7 @@
 /* Item Interface
  * Created: 12 September 2023
- * Updated: 4 April 2024
- * Version: 0.9
+ * Updated: 11 May 2024
+ * Version: 0.10
  * The main class for objects. Since we can't call it an object (reserved word)
  * we have to call it a thing.
  */
@@ -26,6 +26,7 @@ public interface Item {
 	public boolean getMoveable();
 	public boolean getMoved();
 	public boolean getExtended();
+	public void setExtended();
 	public void setMoved();
 	public Exit getHiddenExit();
 	public Item getHiddenItem();
@@ -50,4 +51,5 @@ public interface Item {
  * 13 March 2024 - Added function definitions for adding items and exits
  * 27 March 2024 - Added the talk function
  * 4 March 2024 - Added function to determine whether conversation is extended
+ * 11 May 2024 - Added setExtended function definition
  */
