@@ -15,6 +15,8 @@ public class Data_Process {
 		Conversation sleep = new Conversation("Please leave me alone, I'm tired",
 				"Thank you very much, now I have to find a place to sleep");
 		
+		//Add a test for the end conversation
+		
 		Query query = new Query("Sure",sleep);
 		query.setEndConvo("finish");
 		response.addQuery(query);

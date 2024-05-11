@@ -66,7 +66,12 @@ public class Conversation {
 			noQueries += 1;
 		}
 		
-		int input = getInput(noQueries);
+		//If there a queries, adds an end conversation query
+		if (noQueries>0) {
+			System.out.printf("%d) End Conversation",noQueries);
+		}
+		
+		int input = getInput(noQueries+1);
 		
 		Query selectedQuery = null;
 		
@@ -88,6 +93,11 @@ public class Conversation {
 			this.endResponse.add(selectedQuery.getConversation().endConvo);
 			this.endResponse.add(selectedQuery.getEndConvo());
 			clearConvo(selectedQuery.getConversation().getResponse());
+		
+		//End Conversation
+		} else if (input==queries.size()) {
+			this.endResponse.add("We will continue some other time");
+			this.endResponse.add("end");
 			
 		} else {
 			this.endResponse = selectedQuery.getConversation().displayConversation();
@@ -95,9 +105,21 @@ public class Conversation {
 			//Checks if the convo now has no queries, and if so, clears this convo as well
 			if(this.endResponse.get(1).equals("finish")) {
 				clearConvo(selectedQuery.getConversation().getResponse());
+			} else if (this.endResponse.get(1).equals("end")) {
+				clearConvo(selectedQuery.getConversation().getResponse());
+				
+				//Goes through the queries from the previous conversation, and adds the
+				//to the current one.
+				for (Query query:selectedQuery.getConversation().getQueries()) {
+					queries.add(query);
+				}
 			}
 		}
 		return this.endResponse;
+	}
+	
+	public ArrayList<Query> getQueries() {
+		return this.queries;
 	}
 	
 	private void clearConvo(String response) {
@@ -147,5 +169,5 @@ public class Conversation {
  * 18 April 2024 - Added function to take user input
  * 9 May 2024 - The queries now work
  * 10 May 2024 - Made variables private. Added arraylist for response
- * 11 May 2024 - Added functionality to end conversation
+ * 11 May 2024 - Added functionality to end conversation. Started building end conversation
 */

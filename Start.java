@@ -1,4 +1,4 @@
-/* Title: Launcherl
+/* Title: Launcher
  * Initial: 25 August 2023
  * Updated: 27 August 2023
  * Version: 0.2
