@@ -85,8 +85,7 @@ public class Conversation {
 		//Checks if there are no queries, and if so, sets this convo as the new conve
 		//And clears the queries
 		} else if (selectedQuery.getConversation().getNoQueries() == 0) {
-			this.endResponse.add(this.endConvo);
-			System.out.println(this.endConvo);
+			this.endResponse.add(selectedQuery.getConversation().endConvo);
 			this.endResponse.add(selectedQuery.getEndConvo());
 			clearConvo(selectedQuery.getConversation().getResponse());
 			

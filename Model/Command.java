@@ -885,10 +885,8 @@ public class Command {
 				items.remove(itemFound);
 			} else if (endConv.get(1).equals("finish")) {
 				items.get(itemFound).setExtended();
-				System.out.println("Hi");
 			}
 		}
-		
 		return response;
 	}
 }
