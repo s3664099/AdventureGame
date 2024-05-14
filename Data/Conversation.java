@@ -1,7 +1,7 @@
 /* Conversation
  * Created: 23 March 2024
- * Updated: 11 May 2024
- * Version: 0.6
+ * Updated: 14 May 2024
+ * Version: 0.7
  * Class for conversations.
  */
 
@@ -88,20 +88,26 @@ public class Conversation {
 			this.endResponse.add("We will continue some other time");
 			this.endResponse.add("end");
 			
+			System.out.println("One");
+			
 		//Checks if there are no queries, and if so, sets this convo as the new conve
 		//And clears the queries
 		} else if (selectedQuery.getConversation().getNoQueries() == 0) {
-			this.endResponse.add(selectedQuery.getConversation().endConvo);
+
+			this.endResponse.add(selectedQuery.getConversation().getResponse());
 			this.endResponse.add(selectedQuery.getEndConvo());
-			clearConvo(selectedQuery.getConversation().getResponse());
-		
+						
+			if (selectedQuery.getEndConvo().length() != 0) {
+				clearConvo(selectedQuery.getConversation().getResponse());
+			}
+					
 		//Checks if the conversation is the end and if it is returns a end convo list
 		} else if (selectedQuery.getConversation() == null) {
 			this.endResponse.add(endConvo);
 			this.endResponse.add(selectedQuery.getEndConvo());
 		} else {
 			this.endResponse = selectedQuery.getConversation().displayConversation();
-			
+						
 			//Checks if the convo now has no queries, and if so, clears this convo as well
 			if(this.endResponse.get(1).equals("finish")) {
 				clearConvo(selectedQuery.getConversation().getResponse());
@@ -115,6 +121,8 @@ public class Conversation {
 				}
 			}
 		}
+		
+		
 		return this.endResponse;
 	}
 	
@@ -170,4 +178,5 @@ public class Conversation {
  * 9 May 2024 - The queries now work
  * 10 May 2024 - Made variables private. Added arraylist for response
  * 11 May 2024 - Added functionality to end conversation. Started building end conversation
+ * 14 May 2024 - Fixing issue with last reply
 */

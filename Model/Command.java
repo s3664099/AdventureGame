@@ -887,6 +887,9 @@ public class Command {
 				items.get(itemFound).setExtended();
 			}
 		}
+		
+		System.out.println(items.get(itemFound).getExtended());
+		
 		return response;
 	}
 }

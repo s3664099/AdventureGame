@@ -19,7 +19,11 @@ public class Data_Process {
 		query.addConversation(convo);
 		query = new Query("Pretty good, and you?");
 		convo.addQuery(query);
-		convo = new Conversation("Yeah, I'm doing quite well as well");
+		convo = new Conversation("Yeah, I'm doing quite well as well. What is your name?");
+		query.addConversation(convo);
+		query = new Query("I'm Jack and you?");
+		convo.addQuery(query);
+		convo = new Conversation("I'm Jance, so, what do you do for a crust?");
 		query.addConversation(convo);
 				
 		Exit door = new CloseableExit("Door","Door",hall,true,"The door is a sturdy wooden door leading to the hall",woman);
