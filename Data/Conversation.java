@@ -68,7 +68,7 @@ public class Conversation {
 		
 		//If there a queries, adds an end conversation query
 		if (noQueries>0) {
-			System.out.printf("%d) End Conversation",noQueries);
+			System.out.printf("%d) End Conversation%n",noQueries);
 		}
 		
 		int input = getInput(noQueries+1);
@@ -82,11 +82,12 @@ public class Conversation {
 			}
 		}
 		
-		//Checks if the conversation is the end and if it is returns a end convo list
-		if (selectedQuery.getConversation() == null) {
-			this.endResponse.add(endConvo);
-			this.endResponse.add(selectedQuery.getEndConvo());
+		//End Conversation
+		if (input==queries.size()+1) {
 
+			this.endResponse.add("We will continue some other time");
+			this.endResponse.add("end");
+			
 		//Checks if there are no queries, and if so, sets this convo as the new conve
 		//And clears the queries
 		} else if (selectedQuery.getConversation().getNoQueries() == 0) {
@@ -94,11 +95,10 @@ public class Conversation {
 			this.endResponse.add(selectedQuery.getEndConvo());
 			clearConvo(selectedQuery.getConversation().getResponse());
 		
-		//End Conversation
-		} else if (input==queries.size()) {
-			this.endResponse.add("We will continue some other time");
-			this.endResponse.add("end");
-			
+		//Checks if the conversation is the end and if it is returns a end convo list
+		} else if (selectedQuery.getConversation() == null) {
+			this.endResponse.add(endConvo);
+			this.endResponse.add(selectedQuery.getEndConvo());
 		} else {
 			this.endResponse = selectedQuery.getConversation().displayConversation();
 			

@@ -1,7 +1,7 @@
 /* Query
  * Created: 23 March 2024
- * Updated: 10 May 2024
- * Version: 0.3
+ * Updated: 14 May 2024
+ * Version: 0.4
  * Options for conversation.
  */
 
@@ -33,6 +33,10 @@ public class Query {
 		return question;
 	}
 	
+	public void addConversation(Conversation conversation) {
+		this.conversation = conversation;
+	}
+	
 	public void setEndConvo(String endConvo) {
 		this.end = endConvo;
 	}
@@ -48,4 +52,5 @@ public class Query {
  * 9 May 2024 - Queries now work
  * 10 May 2024 - Added end conversation boolean with setters & getters. Made variables 
  * 				 private
+ * 14 May 2024 - Added function to add a conversation to the query.
 */

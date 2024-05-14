@@ -129,3 +129,6 @@ Made variables private. Added end conversation, and have being leave if flagged.
 **11 May 2024**
 Added functionality so that a conversation can change, such that an extended conversation becomes a single line. Started 
 building end conversation.
+
+**14 May 2024**
+Fixed error with the ending conversation being in the wrong spot in the for statements
