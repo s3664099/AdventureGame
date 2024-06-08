@@ -859,7 +859,7 @@ public class Command {
 		int itemNo = 0;
 		int itemFound = 0;
 		
-		//Checks if the item is a treasure
+		//Checks if the item is a person
 		for (Item item:items) {
 			for (String noun:item.getNouns()) {
 				if (noun.equals(verb)) {
@@ -875,7 +875,7 @@ public class Command {
 			}
 			itemNo ++;
 		}
-		
+				
 		//Conversation has come to an end
 		if (endConv.size() == 2) {
 			response = endConv.get(0);

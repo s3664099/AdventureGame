@@ -1,7 +1,7 @@
 /* Conversation
  * Created: 23 March 2024
- * Updated: 14 May 2024
- * Version: 0.7
+ * Updated: 8 June 2024
+ * Version: 0.8
  * Class for conversations.
  */
 
@@ -74,7 +74,7 @@ public class Conversation {
 		int input = getInput(noQueries+1);
 		
 		Query selectedQuery = null;
-		
+				
 		for (int i = 0;i<queries.size();i++) {
 			
 			if ((input - 1) == i) {
@@ -82,14 +82,14 @@ public class Conversation {
 			}
 		}
 		
+		this.endResponse.clear();
+		
 		//End Conversation
 		if (input==queries.size()+1) {
 
 			this.endResponse.add("We will continue some other time");
 			this.endResponse.add("end");
-			
-			System.out.println("One");
-			
+						
 		//Checks if there are no queries, and if so, sets this convo as the new conve
 		//And clears the queries
 		} else if (selectedQuery.getConversation().getNoQueries() == 0) {
@@ -142,7 +142,6 @@ public class Conversation {
 		
 		System.out.println("How do you respond: ");
 		Scanner query = new Scanner(System.in);
-		int response;
 		
 		while (!validInput) {
 			
@@ -179,4 +178,5 @@ public class Conversation {
  * 10 May 2024 - Made variables private. Added arraylist for response
  * 11 May 2024 - Added functionality to end conversation. Started building end conversation
  * 14 May 2024 - Fixing issue with last reply
+ * 8 June 2024 - Cleared the array.
 */
