@@ -5,10 +5,8 @@
  * This is the launcher. It should not need to be updated.
  */
 
-//TODO: Convseration
-//		Have being refuse to continue talking if break off
-//TODO: Move the check for item, and check for exit for separate function
 //TODO: Add Basic Ending - Also a Quit - then increase the version.
+//TODO: Move the check for item, and check for exit for separate function
 //TODO: Add a function that converts one now to another, but if the other noun is used it 
 //		makes it invalid.
 //TODO: Implement multi word parser

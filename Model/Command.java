@@ -18,6 +18,7 @@ import java.io.ObjectInputStream;
 
 import Data.CarriableItem;
 import Data.Container;
+import Data.Conversation;
 import Data.Exit;
 import Data.Item;
 import Data.Location;
@@ -885,11 +886,19 @@ public class Command {
 				items.remove(itemFound);
 			} else if (endConv.get(1).equals("finish")) {
 				items.get(itemFound).setExtended();
-			}
+			} else if (endConv.get(1).equals("end")) {
+				
+				//Checks if the being has an adverse reaction to ending the conversation
+				if (items.get(itemFound).getLeave().equals("pissed")) {					
+					response = items.get(itemFound).getLeaveConvo();
+				} else if (items.get(itemFound).getLeave().equals("leave")) {
+					response = items.get(itemFound).getLeaveConvo();
+					items.remove(itemFound);
+				}
+
+			}			
 		}
-		
-		System.out.println(items.get(itemFound).getExtended());
-		
+				
 		return response;
 	}
 }

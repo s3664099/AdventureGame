@@ -1,7 +1,7 @@
 /* Abstract Item Class
  * Created: 25 August 2023
- * Updated: 11 May 2024
- * Version: 0.10
+ * Updated: 8 June 2024
+ * Version: 0.11
  * The main class for objects. Since we can't call it an object (reserved word)
  * we have to call it a thing.
  */
@@ -87,6 +87,28 @@ public class AbstractItem implements Serializable {
 	}
 	
 	public void setExtended() {}
+	
+	public void getLeave(String leave) {}
+
+	public String getLeave() {
+		return "";
+	}
+	
+	public void getLeaveConvo(String leaveConvo) {}
+	
+	public String getLeaveConvo() {
+		return "";
+	}
+	
+	public void setLeave(String leave) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setLeaveConvo(String leaveConvo, Conversation endConversation) {
+		// TODO Auto-generated method stub
+		
+	}
 }
 
 /* 25 August 2023 - Created File
@@ -100,4 +122,5 @@ public class AbstractItem implements Serializable {
 * 27 March 2024 - Added the talk function
 * 4 April 2024 - Added function to determine whether conversation is extended.
 * 11 May 2024 - Added functionality so to change whether a conversation is extended or not.
+* 8 June 2024 - Added leave conversation methods
 */

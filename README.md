@@ -134,4 +134,5 @@ building end conversation.
 Fixed error with the ending conversation being in the wrong spot in the for statements
 
 **8 June 2024**
-Fixed error with the queries not continuing if end the conversation early. Cleared the endConv array.
+Fixed error with the queries not continuing if end the conversation early. Cleared the endConv array. Finished conversation
+functions.

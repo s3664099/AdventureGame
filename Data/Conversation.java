@@ -67,7 +67,7 @@ public class Conversation {
 		}
 		
 		//If there a queries, adds an end conversation query
-		if (noQueries>0) {
+		if (noQueries>1) {
 			System.out.printf("%d) End Conversation%n",noQueries);
 		}
 		

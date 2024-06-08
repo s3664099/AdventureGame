@@ -1,7 +1,7 @@
 /* Being
  * Created: 23 March 2024
- * Updated: 11 May 2024
- * Version: 0.3
+ * Updated: 8 June 2024
+ * Version: 0.4
  * Class for creatures.
  */
 
@@ -15,12 +15,38 @@ public class Being extends AbstractItem implements Item,Serializable {
 	private Conversation conversation;
 	private Boolean extended;
 	private static Conversation conversationStart;
+	private String leave = "ok";
+	private String leaveConvo;
+	private String leaveResponse;
+	private Conversation endCoversation;
 	
 	public Being(String name, String description, Conversation conversation, Boolean extended) {
 		super(name,description);
 		this.conversation = conversation;
 		this.conversationStart = conversation;
 		this.extended = extended;
+	}
+	
+	public void setLeave(String leave) {
+		this.leave = leave;
+	}
+	
+	public String getLeave() {
+		return leave;
+	}
+	
+	//Sets a conversation if the user no longer wishes to talk.
+	public void setLeaveConvo(String leaveConvo, Conversation endConversation) {
+		this.leaveConvo = leaveConvo;
+		this.endCoversation = endConversation;
+	}
+	
+	//Leave function for when the being no longer wishes to talk.
+	public String getLeaveConvo() {
+		
+		this.extended = !this.extended;
+		this.conversation = this.endCoversation;
+		return this.leaveConvo;
 	}
 	
 	public Conversation talk() {
@@ -125,7 +151,6 @@ public class Being extends AbstractItem implements Item,Serializable {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 }
 
 /* 23 March 2024 - Created file
@@ -133,4 +158,5 @@ public class Being extends AbstractItem implements Item,Serializable {
  * 		static conversation to hold the start
  * 10 May 2024 - Made variables private. Added end convo functionality
  * 11 May 2024 - Added set extended function to change whether conversation is extended
+ * 8 June 2024 - Added the leave conversation
 */

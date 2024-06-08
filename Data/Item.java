@@ -1,7 +1,7 @@
 /* Item Interface
  * Created: 12 September 2023
- * Updated: 11 May 2024
- * Version: 0.10
+ * Updated: 8 June 2024
+ * Version: 0.11
  * The main class for objects. Since we can't call it an object (reserved word)
  * we have to call it a thing.
  */
@@ -40,6 +40,10 @@ public interface Item {
 	public void addExit(Exit hiddenExit);
 	public void addItem(Item hiddenItem);
 	public Conversation talk();
+	public void setLeave(String leave);
+	public String getLeave();
+	public void setLeaveConvo(String leaveConvo, Conversation endConversation);
+	public String getLeaveConvo();
 };
 
 /* 12 September 2023 - Created File
@@ -52,4 +56,5 @@ public interface Item {
  * 27 March 2024 - Added the talk function
  * 4 March 2024 - Added function to determine whether conversation is extended
  * 11 May 2024 - Added setExtended function definition
+ * 8 June 2024 - Added leave convo methods
  */

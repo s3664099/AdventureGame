@@ -105,7 +105,6 @@ public class CarriableItem extends AbstractItem implements Item, Serializable {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 }
 
 /* 25 August 2023 - Created file.
