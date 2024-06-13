@@ -56,13 +56,12 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 	
 	public String getDescription() {
 		String response = super.getDescription();
-		
+				
 		if ((!closed) && (!locked)) {
 			response = response.format("%s. The %s contains",super.getDescription(),super.getName());
 			int length = 0;
 		
 			for (Item content:contents) {
-				
 				String article = "a";
 				
 				char firstChar = content.getName().charAt(0);
@@ -94,11 +93,11 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 	}
 	
 	public void addItem(CarriableItem item) {
-		
 		contents.add(item);
 	}
 	
 	public ArrayList<Item> getContents() {
+		
 		return contents;
 	}
 		

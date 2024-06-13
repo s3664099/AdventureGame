@@ -12,9 +12,15 @@ public class Data_Process {
 	public Data_Process() {
 		
 		start = new Location("In an office","An office of a consulting detective. The room is dark and dingy, and little light permeates the shadows");
-			//Key in desk opens door
+		Container desk = new Container("Desk","A large mahogany desk sitting across from the door. The desk is covered in papers",true,false,false,true);
+		CarriableItem doorKey = new CarriableItem("Key","A brass key with the word 'door' carved into the head");
+		desk.addItem(doorKey);
+		start.addItem(desk);
 		Location hall = new Location("In a hall","A hallway in an 18th Century building in the heart of London. There is a door leading to your office and stairs leading down to the street");
-			//Hooker - Can't enter room while Hooker present. Get rid of hooker to enter
+		LockableExit door = new LockableExit("Door","door",hall,true,"A flimsy door that leads to the hall",doorKey);
+		start.addExit(door);
+		
+		//Hooker - Can't enter room while Hooker present. Get rid of hooker to enter
 		//Hooker Room - Dildo
 		//A Street in Soho
 		//Soho Park
