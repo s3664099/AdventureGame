@@ -6,6 +6,8 @@
  */
 
 //TODO: Add Basic Ending - Also a Quit - then increase the version.
+//TODO: Added a score for entering a room. Also make a room the finish room - finishes
+//		game when player enters the room.
 //TODO: Move the check for item, and check for exit for separate function
 //TODO: Add a function that converts one now to another, but if the other noun is used it 
 //		makes it invalid.
