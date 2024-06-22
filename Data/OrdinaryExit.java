@@ -14,7 +14,6 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
 	
 	//Standard Exit
 	public OrdinaryExit(String name, Location destination, boolean direction) {
-		
 		super(name, destination, direction);
 	}
 		
