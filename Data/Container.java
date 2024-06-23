@@ -1,7 +1,7 @@
 /* Container Class
  * Created: 5 October 2023
- * Updated: 25 January 2024
- * Version: 0.2
+ * Updated: 23 June 2024
+ * Version: 0.3
  * Class for items that can contain other items. Cannot be carried
  */
 
@@ -24,20 +24,19 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 		super(name,description);
 	}
 	
-	public Container(String name, String description, boolean closeable, boolean lockable,
-					boolean locked, boolean closed) {
+	public Container(String name, String description, boolean closed) {
 		super(name, description);
-		this.closeable = closeable;
+		this.closeable = true;
 		this.lockable = false;
 		this.locked = false;
 		this.closed = closed;
 	}
 
-	public Container(String name, String description, boolean closeable, boolean lockable,
-			boolean locked, boolean closed, Item key) {
+	public Container(String name, String description, boolean locked, 
+					 boolean closed, Item key) {
 		super(name, description);
 		this.closeable = closeable;
-		this.lockable = lockable;
+		this.lockable = true;
 		this.locked = locked;
 		this.closed = closed;
 		this.key = key;
@@ -151,4 +150,6 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 /* 5 October 2023 Created File
  * 9 October 2023 Added functionality to Container
  * 25 January 2024 - Made Class Serializable
+ * 23 June 2024 - Changed the constructors to hard code the closeable and
+ *                lockable status of the container.
 */

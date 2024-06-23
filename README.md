@@ -136,3 +136,6 @@ Fixed error with the ending conversation being in the wrong spot in the for stat
 **8 June 2024**
 Fixed error with the queries not continuing if end the conversation early. Cleared the endConv array. Finished conversation
 functions.
+
+**23 June 2024**
+Added details for the exit and item classes.

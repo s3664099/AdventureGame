@@ -22,7 +22,9 @@
 //TODO; Consider add scores when certain actions are performed
 //      Possible to have the treasure store moved (or even have a character to give them to)
 //TODO: v2 - A graphical interface.
-//TOFO: For exits, add a response variable so that a unique response can be discplayed.
+//TODO: For exits, add a response variable so that a unique response can be discplayed.
+//TODO: Consider dropping moveable item and simply using cover. In this sense we can add
+//		A verb that need to be used to move the item.
 
 import Model.Main;
 

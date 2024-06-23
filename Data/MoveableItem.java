@@ -60,7 +60,6 @@ public class MoveableItem extends ImmoveableItem implements Item, Serializable {
 	public Item getItem() {
 		return item;
 	}
-
 }
 
 /* 5 October 2023 - created class
