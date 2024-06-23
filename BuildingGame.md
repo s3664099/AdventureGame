@@ -50,8 +50,34 @@ the name). It also contains a parameter to hold a description for the exit, whis
 more detailed than the name, and may/may not contain clues.
 
 ### closeableExit ###
-	
+	This class involves exits that can be closed, though aren't lockable (such as a curtain). Using this method has an open boolean which
+flags whether the place is open/closed. The moveDirection method will check if the exit is open, and will display the appropriate response.
+There is also a method that will block the movemenr if it is closed. There are two constructors - one will set the open/close boolean, and
+another will add an item, though it is not clear what this item is used for.
 
+### lockableExit ###
+	This class involves exits that can be locked. The constructor, in addition to the other parameters, will take a boolean that says whether
+it is currently locked (usually it will be, but sometimes it might not be) and an object which is the key. This object will need to be in the
+player's possession to be able to unlock the exit. The item that is passed into the constructor must be a carriable item. 
+
+## Item ##
+	Items, like exits, have an interface and an abstract class. The difference between an item and an exit is that you can't move through
+them. You could say that items are anything that aren't exits, but that doesn't really make sense considering that exits are a class of their
+own. Like exits, there are a number of types of items, which I will go through one by one.
+
+### ImoveableItem ###
+
+### CarriableItem ###
+
+### MoveableItem ###
+
+### Container ###
+
+### Cover ###
+
+### Being ###
+
+## Conversation ##
 
 *Constructor -*
 
