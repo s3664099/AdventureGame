@@ -45,7 +45,7 @@ public class Data_Process3 {
 		quilt.addItem(pants);
 		Item bed = new Cover("Bed","A sturdy wooden bed",quilt,false);
 		start.addItem(bed);
-		Container box = new Container("Box","A cardboard box",true,true,true,true,ring);
+		Container box = new Container("Box","A cardboard box",true,true,ring);
 		CarriableItem paper = new CarriableItem("Newspaper","An old newsper dating back five years");
 		box.addItem(paper);
 		two.addItem(box);

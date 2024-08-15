@@ -12,7 +12,7 @@ public class Data_Process {
 	public Data_Process() {
 		
 		start = new Location("In an office","An office of a consulting detective. The room is dark and dingy, and little light permeates the shadows");
-		Container desk = new Container("Desk","A large mahogany desk sitting across from the door. The desk is covered in papers",true,false,false,true);
+		Container desk = new Container("Desk","A large mahogany desk sitting across from the door. The desk is covered in papers",true);
 		CarriableItem doorKey = new CarriableItem("Key","A brass key with the word 'door' carved into the head");
 		desk.addItem(doorKey);
 		start.addItem(desk);
