@@ -173,6 +173,48 @@ wish to speak with the player if the conversation has been terminated early.
 This changes the extended boolean, such as if the initial conversation has ended and 
 
 ## Conversation ##
-*public Conversation(String response)*
+
+*Constructor Conversation(String response)*
+*Constructor Conversation(String response, ArrayList<Query> queries, String endConvo)*
+*Constructor Conversation(String response, String endConvo)*
+
+This class handles conversations. One of the constructors is just a simple response, however the second one
+is used for a more complex conversation which includes queries. These are actually made up of multiple
+conversation classes, where selecting a query will take the player to that specific conversation, and those
+queries (or a simple one while will end the conversation).
+
+*public void addQuery(Query query)*
+This adds a new query to the conversation
+
+## Query ##
+
+*Constructor Query(String question, Conversation conversation)*
+*Constructor Query(String question)*
+
+This creates a query. The constructor either just adds a query, or it adds the query and the conversation that
+it produces.public void addConversation(Conversation conversation)*
+
+*public void addConversation(Conversation conversation)*
+This adds a conversation to the query.
+
+*public void setEndConvo(String endConvo)*
+This adds an end conversation to the query.
 
 ## Basic Commands ##
+
+These are the current commands, and any synonyms.
+
+Go 				North, N, South, S, East, E, West, W, Up, U, Down, D
+Open
+Close
+Inventory
+Look
+Take 			Get
+Drop
+Unlock
+Lock
+Move
+Save
+Load
+Talk
+Speak
