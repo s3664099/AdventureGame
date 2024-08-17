@@ -1,7 +1,7 @@
 /* Main Function
  * Created: 25 August 2023
- * Updated: 26 January 2024
- * Version: 0.5
+ * Updated: 17 August 2024
+ * Version: 0.7
  * This is the main routine for the game
  */
 
@@ -29,10 +29,11 @@ public class Main {
 		Location data = game_data.start();
 		Input input = new Input();
 		Parser parser = new Parser();
-		Command processor = new Command();
+		Command processor = new Command(game_data.getScore());
 		String response = "";
+		boolean gameRunning = true;
 		
-		while (true) {
+		while (gameRunning) {
 			
 			if(processor.displayLocation()) {
 				display.display(data);
@@ -40,16 +41,14 @@ public class Main {
 			
 			command = input.getCommand(query);
 			String[] commands = parser.parseCommand(command);
-			display.displayResponse(processor.processCommand(commands,data,inventory,score));
+			gameRunning = display.displayResponse(processor.processCommand(commands,data,inventory,score));
 			
 			//Checks if the values have been cleared, if not, loads them.
 			if (processor.getCurrentLocation() != null) {
 				data = processor.getCurrentLocation();
 			}
 			
-			if (processor.getScore() != 0) {
-				this.score += processor.getScore();
-			}
+			
 		}
 	}
 }
@@ -60,4 +59,5 @@ public class Main {
  *                    from processor
  * 25 January 2024 - Added score for treasures
  * 26 January 2024 - sent score to command for saving
+ * 17 August 2024 - Added score functionality and ability to end game
  */

@@ -1,7 +1,7 @@
 /* Display Class
  * Created: 25 August 2023
- * Updated: 15 September 2023
- * Version: 0.4
+ * Updated: 17 August 2024
+ * Version: 0.5
  * View class to display details on the console.
  */
 
@@ -21,8 +21,18 @@ public class Display_Text {
 	}
 	
 	//Displays response to the command
-	public void displayResponse(String response) {
-		System.out.println(response);
+	public boolean displayResponse(String response) {
+		
+		boolean continueGame = true;
+		
+		if (response.equals("END")) {
+			continueGame = false;
+			System.out.println("Game terminated");
+		} else {
+			System.out.println(response);
+		}
+		
+		return continueGame;
 	}
 	
 	private void clear() {
@@ -38,4 +48,5 @@ public class Display_Text {
 * 8 September 2023 - Added method to display responses
 * 15 September 2023 - Changed description method to display items. Added check to not
 * 					  display exits or items if there are none.
+* 17 August 2024 - Added ability to end game
 */

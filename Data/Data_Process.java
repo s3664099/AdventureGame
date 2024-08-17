@@ -5,11 +5,14 @@ public class Data_Process {
 	private Location start;
 	private String description;
 	private Container container;
+	private int topScore;
 	
 	//Get three treasures and return them to the office.
 	//When three treasures are there, game ends.
 	
 	public Data_Process() {
+		
+		this.topScore = 1;
 		
 		start = new Location("In an office","An office of a consulting detective. The room is dark and dingy, and little light permeates the shadows");
 		start.setTreasureStore();
@@ -37,5 +40,9 @@ public class Data_Process {
 	
 	public Location start() {
 		return start;
+	}
+	
+	public int getScore() {
+		return this.topScore;
 	}
 }

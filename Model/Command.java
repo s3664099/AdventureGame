@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 11 May 2024
- * Version: 0.25
+ * Updated: 17 August 2024
+ * Version: 0.26
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -30,7 +30,12 @@ public class Command {
 	private String response = "";
 	private boolean displayLocation = true;
 	private int score = 0;
+	private int topScore = 0;
 	private ArrayList<Item> inventory;
+	
+	public Command(int topScore) {
+		this.topScore = topScore;
+	}
 	
 	public Location getCurrentLocation() {
 		return currentLocation;
@@ -127,11 +132,20 @@ public class Command {
 			
 		} else if ((verb.equals("talk")) || (verb.equals("speak"))) {
 			response = conversation(noun, location.getItems());
-		} else if ((verb.equals("score"))) {
-			response = response.format("Your score is %s",this.score);
+		} else if (verb.equals("score")) {
+			response = response.format("Your score is %s/%s",this.score,this.topScore);
+		} else if (verb.equals("quit")) {
+			response = "END";
 		}
 		
 		return response;
+	}
+	
+	//Checks if the player has completed the game
+	public boolean checkScore() {
+		
+		boolean success = false;
+		return success;
 	}
 	
 	private Item findItem(String command, ArrayList<Item> itemList) {
@@ -934,4 +948,5 @@ public class Command {
  * 30 March 2024 - Fixed up the response to the talk function
  * 9 May 2024 - Finished basic conversation
  * 10 May 2024 - Added functionality for a conversation to end
+ * 17 August 2024 - Added the score command
  */

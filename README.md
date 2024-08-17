@@ -139,3 +139,6 @@ functions.
 
 **23 June 2024**
 Added details for the exit and item classes.
+
+**17 August 2024**
+Added quit command and finishing functionality
