@@ -127,6 +127,8 @@ public class Command {
 			
 		} else if ((verb.equals("talk")) || (verb.equals("speak"))) {
 			response = conversation(noun, location.getItems());
+		} else if ((verb.equals("score"))) {
+			response = response.format("Your score is %s",this.score);
 		}
 		
 		return response;

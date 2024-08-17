@@ -12,6 +12,7 @@ public class Data_Process {
 	public Data_Process() {
 		
 		start = new Location("In an office","An office of a consulting detective. The room is dark and dingy, and little light permeates the shadows");
+		start.setTreasureStore();
 		Container desk = new Container("Desk","A large mahogany desk sitting across from the door. The desk is covered in papers",true);
 		CarriableItem doorKey = new CarriableItem("Key","A brass key with the word 'door' carved into the head");
 		desk.addItem(doorKey);
@@ -19,6 +20,8 @@ public class Data_Process {
 		Location hall = new Location("In a hall","A hallway in an 18th Century building in the heart of London. There is a door leading to your office and stairs leading down to the street");
 		LockableExit door = new LockableExit("Door","door",hall,true,"A flimsy door that leads to the hall",doorKey);
 		start.addExit(door);
+		CarriableItem card = new CarriableItem("Card","A Gold American Express credit card");
+		card.setTreasure();
 		
 		//Hooker - Can't enter room while Hooker present. Get rid of hooker to enter
 		//Hooker Room - Dildo
