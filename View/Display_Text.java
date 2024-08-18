@@ -1,7 +1,7 @@
 /* Display Class
  * Created: 25 August 2023
  * Updated: 17 August 2024
- * Version: 0.5
+ * Version: 1.0
  * View class to display details on the console.
  */
 

@@ -1,7 +1,7 @@
 /* Exit Interface
  * Created: 5 September 2023
  * Updated: 7 April 2024
- * Version 0.7
+ * Version 1.0
  * Interface to govern exits
  */
 

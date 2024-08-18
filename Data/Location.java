@@ -1,7 +1,7 @@
 /* Location Class
  * Created: 25 August 2023
  * Updated: 25 January 2024
- * Version: 0.9
+ * Version: 1.0
  * The class that holds the details of the locations and handles
  * any actions that deal with the location
  */

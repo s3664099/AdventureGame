@@ -1,7 +1,7 @@
 /* Title: Parser Class
  * Created: 25 August 2023
  * Updated: 27 August 2023
- * Version: 0.2
+ * Version: 1.0
  * 
  * This processes the command. At this stage it is only a two work
  * command - noun and verb. Ideally, it will eventually process larger commands.

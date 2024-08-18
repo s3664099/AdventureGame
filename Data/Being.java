@@ -1,7 +1,7 @@
 /* Being
  * Created: 23 March 2024
  * Updated: 8 June 2024
- * Version: 0.4
+ * Version: 1.0
  * Class for creatures.
  */
 

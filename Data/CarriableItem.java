@@ -1,6 +1,7 @@
 /* Carriable Item Class
  * Created: 25 August 2023
  * Updated: 25 January 2024
+ * Version: 1.0
  * The class for things that can be picked up and carried
  */
 

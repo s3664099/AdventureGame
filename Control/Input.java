@@ -1,7 +1,7 @@
 /* Name: Input Class
  * Created: 25 August 2023
  * Updated: 27 January 2024
- * Version: 0.5
+ * Version: 1.0
  * This takes the user input and returns the command.
  * At this stage the parser consists of only a verb and a noun.
  */

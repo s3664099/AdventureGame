@@ -1,7 +1,7 @@
 /* LockableExit Class
  * Created: 11 October 2023
  * Updated: 7 April 2024
- * Version 0.2
+ * Version 1.0
  * Class to handle and exit that can be locked
  */
 

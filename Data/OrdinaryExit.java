@@ -1,7 +1,7 @@
 /* Ordinary Exit Class
  * Created: 25 August 2023
  * Updated: 21 February 2024
- * Version 0.10
+ * Version 1.0
  * Class to handle everything to do with an exit.
  */
 

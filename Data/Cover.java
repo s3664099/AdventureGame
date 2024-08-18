@@ -1,7 +1,7 @@
 /* Cover Item Class
  * Created: 28 January 2024
  * Updated: 10 May 2024
- * Version: 0.3
+ * Version: 1.0
  * Class for items either cover items or exits
  */
 

@@ -1,7 +1,7 @@
 /* Query
  * Created: 23 March 2024
  * Updated: 14 May 2024
- * Version: 0.4
+ * Version: 1.0
  * Options for conversation.
  */
 

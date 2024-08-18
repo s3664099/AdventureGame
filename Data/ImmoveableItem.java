@@ -1,7 +1,7 @@
 /* Immoveable Item Class
  * Created: 25 August 2023
  * Updated: 26 January 2024
- * Version: 0.5
+ * Version: 1.0
  * Class for items that can't be picked up and carried.
  */
 

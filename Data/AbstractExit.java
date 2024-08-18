@@ -1,7 +1,7 @@
 /* Abstract Exit Class
  * Created: 5 September 2023
  * Updated: 7 April 2024
- * Version 0.5
+ * Version 1.0
  * Class to handle everything to do with an exit.
  */
 

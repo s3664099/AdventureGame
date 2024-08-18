@@ -1,7 +1,7 @@
 /* Container Class
  * Created: 5 October 2023
  * Updated: 23 June 2024
- * Version: 0.3
+ * Version: 1.0
  * Class for items that can contain other items. Cannot be carried
  */
 

@@ -1,7 +1,7 @@
 /* CloseableExit Class
  * Created: 4 September 2023
  * Updated: 7 April 2024
- * Version 0.9
+ * Version 1.0
  * Class to handle and exit that can be closed
  */
 

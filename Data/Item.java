@@ -1,7 +1,7 @@
 /* Item Interface
  * Created: 12 September 2023
  * Updated: 8 June 2024
- * Version: 0.11
+ * Version: 1.0
  * The main class for objects. Since we can't call it an object (reserved word)
  * we have to call it a thing.
  */
