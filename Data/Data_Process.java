@@ -25,6 +25,10 @@ public class Data_Process {
 		start.addExit(door);
 		CarriableItem card = new CarriableItem("Card","A Gold American Express credit card");
 		card.setTreasure();
+		hall.addItem(card);
+		door = new LockableExit("Door","door",start,false,"A flimsy door that leads into your office.",doorKey);
+		door.openClose();
+		hall.addExit(door);
 		
 		//Hooker - Can't enter room while Hooker present. Get rid of hooker to enter
 		//Hooker Room - Dildo

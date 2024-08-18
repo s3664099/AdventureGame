@@ -74,6 +74,10 @@ is open, and will display the appropriate response. There is also a method that 
 is closed. There are two constructors - one will set the open/close boolean, and another will add an item, 
 though it is not clear what this item is used for.
 
+*public void openClose()*
+
+You can use this method to set the initial open/closed state of a closeable door.
+
 ### lockableExit ###
 
 *Constructor LockableExit(String name, String command, Location destination, boolean closed, 

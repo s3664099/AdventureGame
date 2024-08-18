@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 17 August 2024
- * Version: 0.26
+ * Updated: 18 August 2024
+ * Version: 0.27
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -83,7 +83,7 @@ public class Command {
 				response = "I need a verb";
 			} else {
 				response = switchList(location.getItems(), inventory, commands[1], "I picked up the",false);
-				this.score = changeScore(false,verb,inventory,location); 
+				this.score = changeScore(false,commands[1],inventory,location); 
 			}
 			
 		} else if (verb.equals("drop")) {
@@ -92,7 +92,9 @@ public class Command {
 				response = "I need a verb";
 			} else {
 				response = switchList(inventory,location.getItems(),commands[1], "I dropped the",false);
-				this.score = changeScore(true,verb,inventory,location);
+				System.out.println(this.score);
+				this.score = changeScore(true,commands[1],location.getItems(),location);
+				System.out.println(this.score);
 			}			
 		} else if (verb.equals("unlock") || verb.equals("lock")) {
 
@@ -695,7 +697,7 @@ public class Command {
 	private int changeScore(boolean action,String verb, ArrayList<Item> items,Location location) {
 		
 		int score = 0;
-		
+				
 		//Drop action
 		if (action) {
 			
@@ -949,4 +951,5 @@ public class Command {
  * 9 May 2024 - Finished basic conversation
  * 10 May 2024 - Added functionality for a conversation to end
  * 17 August 2024 - Added the score command
+ * 18 August 2024 - Scoring by dropping items now works.
  */
