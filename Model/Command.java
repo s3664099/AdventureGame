@@ -744,6 +744,19 @@ public class Command {
 		return score;
 	}
 	
+	//Compares the score to determine whether the game is completed
+	public boolean compareScore() {
+		
+		boolean gameOver = false;
+		
+		if (this.score == this.topScore) {
+			gameOver = true;
+		}
+		
+		return gameOver;
+		
+	}
+	
 	//save Game method
 	public String saveGame(Location location, ArrayList<Item> inventory, int score, String saveName) {
 
@@ -951,5 +964,6 @@ public class Command {
  * 9 May 2024 - Finished basic conversation
  * 10 May 2024 - Added functionality for a conversation to end
  * 17 August 2024 - Added the score command
- * 18 August 2024 - Scoring by dropping items now works.
+ * 18 August 2024 - Scoring by dropping items now works. Added function to compare
+ * 					player score.
  */

@@ -1,7 +1,7 @@
 /* Main Function
  * Created: 25 August 2023
- * Updated: 17 August 2024
- * Version: 0.7
+ * Updated: 18 August 2024
+ * Version: 0.8
  * This is the main routine for the game
  */
 
@@ -48,7 +48,10 @@ public class Main {
 				data = processor.getCurrentLocation();
 			}
 			
-			
+			if (processor.compareScore()) {
+				gameRunning = false;
+				System.out.println("Congratulations, you can collected all the treasures");
+			}			
 		}
 	}
 }
@@ -60,4 +63,5 @@ public class Main {
  * 25 January 2024 - Added score for treasures
  * 26 January 2024 - sent score to command for saving
  * 17 August 2024 - Added score functionality and ability to end game
+ * 18 August 2024 - Added check for an end game
  */

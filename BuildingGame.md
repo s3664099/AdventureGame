@@ -11,6 +11,9 @@ hidden.
 
 When creating objects, the actual types of object needs to be created.
 
+Further, a top score will need to added as well. At this stage the only way to complete a game is to 
+collect all of the treasures and place them where the treasures are to be stored.
+
 ## Location ##
 
 *Constructor - Location <name> = new Location(Location Name, Location Description)*
