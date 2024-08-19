@@ -5,8 +5,6 @@
  * This is the launcher. It should not need to be updated.
  */
 
-//TODO: Added a score for entering a room. Also make a room the finish room - finishes
-//		game when player enters the room.
 //TODO: Move the check for item, and check for exit for separate function
 //TODO: Implement multi word parser
 //      And and then to create multiple commands

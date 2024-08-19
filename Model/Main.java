@@ -1,7 +1,7 @@
 /* Main Function
  * Created: 25 August 2023
- * Updated: 18 August 2024
- * Version: 0.8
+ * Updated: 19 August 2024
+ * Version: 1.1
  * This is the main routine for the game
  */
 
@@ -48,10 +48,17 @@ public class Main {
 				data = processor.getCurrentLocation();
 			}
 			
+			//Checks if the player has reached the top score
 			if (processor.compareScore()) {
 				gameRunning = false;
 				System.out.println("Congratulations, you can collected all the treasures");
-			}			
+			}
+			
+			//Checks if the player has entered a room that is an end condition
+			if (processor.getCurrentLocation().checkEnd()) {
+				gameRunning = false;
+				System.out.println(processor.getCurrentLocation().getEndComment());
+			}
 		}
 	}
 }
@@ -64,4 +71,5 @@ public class Main {
  * 26 January 2024 - sent score to command for saving
  * 17 August 2024 - Added score functionality and ability to end game
  * 18 August 2024 - Added check for an end game
+ * 19 August 2024 - Added check to see if player entered room with end condition
  */

@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 18 August 2024
- * Version: 0.27
+ * Updated: 19 August 2024
+ * Version: 1.1
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -270,6 +270,10 @@ public class Command {
 			response = exit.moveDescription(command);
 			if (exit.haveMoved()) {
 				currentLocation = exit.getDestination();
+				
+				if (currentLocation.checkScore()) {
+					this.score ++;
+				}
 			}
 				
 		}
@@ -966,4 +970,5 @@ public class Command {
  * 17 August 2024 - Added the score command
  * 18 August 2024 - Scoring by dropping items now works. Added function to compare
  * 					player score.
+ * 19 August 2024 - Added code to increase score for entering room.
  */

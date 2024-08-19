@@ -12,7 +12,7 @@ public class Data_Process {
 	
 	public Data_Process() {
 		
-		this.topScore = 1;
+		this.topScore = 2;
 		
 		start = new Location("In an office","An office of a consulting detective. The room is dark and dingy, and little light permeates the shadows");
 		start.setTreasureStore();
@@ -29,6 +29,10 @@ public class Data_Process {
 		door = new LockableExit("Door","door",start,false,"A flimsy door that leads into your office.",doorKey);
 		door.openClose();
 		hall.addExit(door);
+		hall.setScore();
+		Location street = new Location("On the Street","","You got hit by a car!");
+		OrdinaryExit stairs = new OrdinaryExit("Stairs",street,false);
+		hall.addExit(stairs);
 		
 		//Hooker - Can't enter room while Hooker present. Get rid of hooker to enter
 		//Hooker Room - Dildo
