@@ -22,6 +22,12 @@ This builds the basic location. The constructor takes two strings, one for the b
 detailed description. The first time a player goes into the location the full description is display. 
 Afterwards only the brief name is displayed, If the player 'looks' then the description will be displayed.
 
+*Constructor - public Location(String name, String description, String endComment)*
+
+This constructor is used to create a room where if the player enters it, it triggers an end condition. This
+room could be a room where the player dies, or where, by entering the room, the player finishes the game.
+And end comment is included in the room.
+
 *Add Exit addExit(exit)*
 
 This function adds an exit to the location. Exits are objects explained further below. The method takes an exit 
@@ -34,6 +40,11 @@ This function adds an item to the location. Items are objects explained further 
 *Set Treasure Store setTreasureStore()*
 
 This method sets the location as a place to store treasures.
+
+*setScore()*
+
+This method is used to set the room to give the player a score upon entering it. The player will only
+recieve the score the first time the room is entered.
 
 ## Exit ##
 Exit has an abstract class and an interface. Honestly, I really don't know why, but I suspect it is to make it 

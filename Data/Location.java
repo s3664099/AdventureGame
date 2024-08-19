@@ -1,7 +1,7 @@
 /* Location Class
  * Created: 25 August 2023
- * Updated: 25 January 2024
- * Version: 1.0
+ * Updated: 19 August 2024
+ * Version: 1.1
  * The class that holds the details of the locations and handles
  * any actions that deal with the location
  */
@@ -21,6 +21,9 @@ public class Location implements Serializable {
 	private int score;
 	private boolean firstVisit = true;
 	private boolean treasureStore = false;
+	private boolean scoreRoom = false;
+	private boolean endRoom = false;
+	private String endComment;
 	
 	public Location(String name, String description) {
 		this.name = name;
@@ -28,6 +31,16 @@ public class Location implements Serializable {
 		this.nouns = new ArrayList<String>();
 		this.exits = new ArrayList<Exit>();
 		this.items = new ArrayList<Item>();
+	}
+	
+	public Location(String name, String description, String endComment) {
+		this.name = name;
+		this.description = description;
+		this.nouns = new ArrayList<String>();
+		this.exits = new ArrayList<Exit>();
+		this.items = new ArrayList<Item>();
+		this.endRoom = true;
+		this.endComment = endComment;
 	}
 	
 	public void addExit(Exit exit) {
@@ -153,6 +166,33 @@ public class Location implements Serializable {
 		this.score = 0;
 		return score;
 	}
+	
+	//Makes the room a score room
+	public void setScore() {
+		this.scoreRoom = !this.scoreRoom;
+	}
+	
+	//Checks if the room is a score room
+	public boolean checkScore() {
+		
+		boolean isScore = false;
+		
+		if (scoreRoom) {
+			isScore = true;
+			this.scoreRoom = !this.scoreRoom;
+		}
+		
+		return isScore;
+	}
+	
+	//Checks if this is an end room
+	public boolean checkEnd() {
+		return this.scoreRoom;
+	}
+	
+	public String getEndComment() {
+		return this.endComment;
+	}
 } 
 /* 25 August 2023 - Created file
 * 27 August 2023 - Added comments
@@ -166,5 +206,7 @@ public class Location implements Serializable {
 * 15 September 2023 - Added methods to handle items, and reduced to single item list. 
 * 					  reworked display method to handle all displays
 * 25 January 2024 - Added methods to handle treasure stores. Made class serializable. Added inventory to store
-*                   player's inventory when saving. Also score              
+*                   player's inventory when saving. Also score 
+* 19 August 2024 - Added scoring for entering a room and also creating an end condition
+* 					for entering a room           
 */

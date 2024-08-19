@@ -142,3 +142,9 @@ Added details for the exit and item classes.
 
 **17 August 2024**
 Added quit command and finishing functionality
+
+**28 August 2024**
+Completed testing and increased version to version 1
+
+**19 August 2024**
+Added scoring and end game features for entering a room.
