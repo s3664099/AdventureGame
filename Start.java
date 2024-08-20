@@ -7,9 +7,10 @@
 
 //TODO: Move the check for item, and check for exit for separate function
 //TODO: Implement multi word parser
-//		Split Commas and then remove and/then from the beginningh
 //		Split and and then remove then
 //		Split then
+//		If the action is not a cardinal direction or look, then the verb will be the
+//		first verb.
 //      Full Object Command
 //      Complex Commands - use x in x, unlock x with x
 //TODO: Use command (Can also be applied to lock/unlock - also shovels and stuff).

@@ -24,12 +24,16 @@ public class Input {
 		
 		String command = "";
 		ArrayList<String> actions = new ArrayList<String>();
-		
+				
 		//Checks if there are any valid commands in the list
 		while (actions.size() == 0) {
 			
 			System.out.print(query);
 			command = input.nextLine();
+			
+			//Strips of starting words
+			command = removeWords("please", command.toLowerCase());
+			command = removeWords("can you",command);
 			
 			String[] commands = splitCommands(command);
 			
@@ -57,8 +61,30 @@ public class Input {
 	private String[] splitCommands(String command) {
 		
 		String[] commands = command.split(",");
-		return commands;
+		int count = 0;
 		
+		//Strips extraneous words
+		for (String action:commands) {
+			action = removeWords("and",action.trim());
+			action = removeWords("then",action.trim());
+			action = removeWords("please",action.trim());
+			action = removeWords("can you",action.trim());
+			commands[count] = action;
+			count ++;
+		}
+		
+		return commands;
+	}
+	
+	//Removes words from the beginning of the string
+	private String removeWords(String word, String action) {
+		
+		if(action.startsWith(word+" ")) {
+			action = action.substring(word.length(), action.length());
+			action = action.trim();
+		}
+		
+		return action;
 	}
 	
 	//Confirms that the command is only two works
