@@ -148,3 +148,6 @@ Completed testing and increased version to version 1
 
 **19 August 2024**
 Added scoring and end game features for entering a room.
+
+**20 August 2024**
+Working on multiple commands and more complex parser

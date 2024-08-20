@@ -7,7 +7,9 @@
 
 //TODO: Move the check for item, and check for exit for separate function
 //TODO: Implement multi word parser
-//      And and then to create multiple commands
+//		Split Commas and then remove and/then from the beginningh
+//		Split and and then remove then
+//		Split then
 //      Full Object Command
 //      Complex Commands - use x in x, unlock x with x
 //TODO: Use command (Can also be applied to lock/unlock - also shovels and stuff).

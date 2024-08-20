@@ -1,7 +1,7 @@
 /* Main Function
  * Created: 25 August 2023
- * Updated: 19 August 2024
- * Version: 1.1
+ * Updated: 20 August 2024
+ * Version: 1.2
  * This is the main routine for the game
  */
 
@@ -18,7 +18,7 @@ import View.Display_Text;
 public class Main {
 	
 	String query = "Tell me what to do: ";
-	String command;
+	ArrayList<String> command;
 	ArrayList<Item> inventory = new ArrayList<Item>();
 	int score = 0;
 
@@ -40,8 +40,12 @@ public class Main {
 			}
 			
 			command = input.getCommand(query);
-			String[] commands = parser.parseCommand(command);
-			gameRunning = display.displayResponse(processor.processCommand(commands,data,inventory,score));
+			
+			//Cycles through the list of commands and executes them.
+			for (String action:command) {
+				String[] commands = parser.parseCommand(action);
+				gameRunning = display.displayResponse(processor.processCommand(commands,data,inventory,score));
+			}
 			
 			//Checks if the values have been cleared, if not, loads them.
 			if (processor.getCurrentLocation() != null) {
@@ -72,4 +76,5 @@ public class Main {
  * 17 August 2024 - Added score functionality and ability to end game
  * 18 August 2024 - Added check for an end game
  * 19 August 2024 - Added check to see if player entered room with end condition
+ * 20 August 2024 - Added ability to enter multiple commands
  */

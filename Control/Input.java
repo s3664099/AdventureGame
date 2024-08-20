@@ -1,12 +1,13 @@
 /* Name: Input Class
  * Created: 25 August 2023
- * Updated: 27 January 2024
- * Version: 1.0
+ * Updated: 20 August 2024
+ * Version: 1.1
  * This takes the user input and returns the command.
  * At this stage the parser consists of only a verb and a noun.
  */
 
 package Control;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Input {
@@ -19,19 +20,45 @@ public class Input {
 	}
 	
 	//Gets the user command. Takes a string that the is question to ask the user
-	public String getCommand(String query) {
+	public ArrayList<String> getCommand(String query) {
 		
 		String command = "";
-		boolean validCommand = false;
+		ArrayList<String> actions = new ArrayList<String>();
 		
-		while (!validCommand) {
+		//Checks if there are any valid commands in the list
+		while (actions.size() == 0) {
+			
 			System.out.print(query);
 			command = input.nextLine();
-			command = cardinalDirections(command);
-			validCommand = validateString(command);
+			
+			String[] commands = splitCommands(command);
+			
+			for (String action:commands) {
+				
+				boolean validCommand = false;
+				action = action.trim();
+				action = cardinalDirections(action);
+				validCommand = validateString(action);
+					
+				if (validCommand) {
+					actions.add(action);
+				}
+			}
+			
+			if (actions.size()==0) {
+				System.out.println("Please enter a valid action");
+			}
 		}
 		
-		return command;
+		return actions;
+	}
+	
+	//Splits multiple commands based on a comma separation.
+	private String[] splitCommands(String command) {
+		
+		String[] commands = command.split(",");
+		return commands;
+		
 	}
 	
 	//Confirms that the command is only two works
@@ -103,4 +130,5 @@ public class Input {
  * 7 September 2023 - Added method to allow single word/letter movement for directions
  * 26 January 2024 - Added method to get a yes or no response
  * 27 January 2024 - Fixed the Y/N reponse so that Y sends true, not N
+ * 20 August 2024 - Added ability to enter multiple commands.
 */
