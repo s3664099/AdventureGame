@@ -7,8 +7,6 @@
 
 //TODO: Move the check for item, and check for exit for separate function
 //TODO: Implement multi word parser
-//		Split and and then remove then
-//		Split then
 //		Checks if the command is a go, and if so runs through the movement functions
 //      Add note that if doing multiple commands on a line, then the command needs to
 //      be split with comma, and, then, or and then.
@@ -16,6 +14,7 @@
 //		first verb.
 //		strip off any instances of 'the' before the object
 //      Full Object Command
+//      Add ne.nw.se.sw
 //      Complex Commands - use x in x, unlock x with x
 //TODO: Use command (Can also be applied to lock/unlock - also shovels and stuff).
 //TODO: Commands embedded in objects/exits

@@ -33,41 +33,45 @@ public class Main {
 		String response = "";
 		boolean gameRunning = true;
 		
+		if(processor.displayLocation()) {
+			display.display(data);
+		}		
+		
 		while (gameRunning) {
-			
-			if(processor.displayLocation()) {
-				display.display(data);
-			}
-			
+						
 			command = input.getCommand(query);
 			
 			//Cycles through the list of commands and executes them.
 			for (String action:command) {
+			
 				String[] commands = parser.parseCommand(action);
 				gameRunning = display.displayResponse(processor.processCommand(commands,data,inventory,score));
-			}
+				
+				//Checks if the values have been cleared, if not, loads them.
+				if (processor.getCurrentLocation() != null) {
+					data = processor.getCurrentLocation();
+				}
+				
+				if (commands[0].equals("go")) {
+					display.display(data);
+				}
+
+				//Checks if the player has reached the top score
+				if (processor.compareScore()) {
+					gameRunning = false;
+					System.out.println("Congratulations, you can collected all the treasures");
+				}
 			
-			//Checks if the values have been cleared, if not, loads them.
-			if (processor.getCurrentLocation() != null) {
-				data = processor.getCurrentLocation();
-			}
-			
-			//Checks if the player has reached the top score
-			if (processor.compareScore()) {
-				gameRunning = false;
-				System.out.println("Congratulations, you can collected all the treasures");
-			}
-			
-			System.out.println(processor.getCurrentLocation().checkEnd());
-			//Checks if the player has entered a room that is an end condition
-			if (processor.getCurrentLocation().checkEnd()) {
-				gameRunning = false;
-				System.out.println(processor.getCurrentLocation().getEndComment());
+				//Checks if the player has entered a room that is an end condition
+				if (processor.getCurrentLocation().checkEnd()) {
+					gameRunning = false;
+					System.out.println(processor.getCurrentLocation().getEndComment());
+				}
 			}
 		}
 	}
 }
-
+	
 /* 25 August 2023 - Created File
  * 27 August 2023 - Added Comments
  * 8 September 2023 - Reconfigured code to pass responses to view and retrieve location

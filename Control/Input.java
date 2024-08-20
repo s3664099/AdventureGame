@@ -42,9 +42,9 @@ public class Input {
 				boolean validCommand = false;
 				action = action.trim();
 				action = cardinalDirections(action);
-				validCommand = validateString(action);
-					
-				if (validCommand) {
+				
+				//Removes blank strings
+				if (action.length()>0) {
 					actions.add(action);
 				}
 			}
@@ -60,19 +60,17 @@ public class Input {
 	//Splits multiple commands based on a comma separation.
 	private String[] splitCommands(String command) {
 		
-		String[] commands = command.split(",");
+		String[] commands = command.split(",| and | then ");
 		int count = 0;
 		
 		//Strips extraneous words
 		for (String action:commands) {
-			action = removeWords("and",action.trim());
 			action = removeWords("then",action.trim());
 			action = removeWords("please",action.trim());
 			action = removeWords("can you",action.trim());
 			commands[count] = action;
 			count ++;
 		}
-		
 		return commands;
 	}
 	
@@ -86,23 +84,7 @@ public class Input {
 		
 		return action;
 	}
-	
-	//Confirms that the command is only two works
-	private boolean validateString(String command) {
-
-		boolean validCommand = false;
 		
-		String[] lenCommand = command.split(" ");
-		
-		if ((lenCommand.length<3) && (command.length()>0)) {
-			validCommand = true;
-		} else {
-			System.out.println("Command has to be less than three words and not empty");
-		}
-		
-		return validCommand;
-	}
-	
 	//Reconfigures movement command for cardinal directions
 	private String cardinalDirections(String command) {
 		
@@ -121,7 +103,6 @@ public class Input {
 		} else if ((command.equals("d")) || (command.equals("down"))) {
 			command = "go down";
 		}
-		
 		return command;
 	}
 	
@@ -156,5 +137,6 @@ public class Input {
  * 7 September 2023 - Added method to allow single word/letter movement for directions
  * 26 January 2024 - Added method to get a yes or no response
  * 27 January 2024 - Fixed the Y/N reponse so that Y sends true, not N
- * 20 August 2024 - Added ability to enter multiple commands.
+ * 20 August 2024 - Added ability to enter multiple commands. Removed Validate command
+ * 					since only validates two words.
 */
