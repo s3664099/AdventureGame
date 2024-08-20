@@ -1,7 +1,7 @@
 /* Location Class
  * Created: 25 August 2023
- * Updated: 19 August 2024
- * Version: 1.1
+ * Updated: 20 August 2024
+ * Version: 1.2
  * The class that holds the details of the locations and handles
  * any actions that deal with the location
  */
@@ -187,7 +187,7 @@ public class Location implements Serializable {
 	
 	//Checks if this is an end room
 	public boolean checkEnd() {
-		return this.scoreRoom;
+		return this.endRoom;
 	}
 	
 	public String getEndComment() {
@@ -208,5 +208,6 @@ public class Location implements Serializable {
 * 25 January 2024 - Added methods to handle treasure stores. Made class serializable. Added inventory to store
 *                   player's inventory when saving. Also score 
 * 19 August 2024 - Added scoring for entering a room and also creating an end condition
-* 					for entering a room           
+* 					for entering a room
+* 20 August 2024 - End condition now works.         
 */

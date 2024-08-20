@@ -9,8 +9,12 @@
 //TODO: Implement multi word parser
 //		Split and and then remove then
 //		Split then
+//		Checks if the command is a go, and if so runs through the movement functions
+//      Add note that if doing multiple commands on a line, then the command needs to
+//      be split with comma, and, then, or and then.
 //		If the action is not a cardinal direction or look, then the verb will be the
 //		first verb.
+//		strip off any instances of 'the' before the object
 //      Full Object Command
 //      Complex Commands - use x in x, unlock x with x
 //TODO: Use command (Can also be applied to lock/unlock - also shovels and stuff).

@@ -58,6 +58,7 @@ public class Main {
 				System.out.println("Congratulations, you can collected all the treasures");
 			}
 			
+			System.out.println(processor.getCurrentLocation().checkEnd());
 			//Checks if the player has entered a room that is an end condition
 			if (processor.getCurrentLocation().checkEnd()) {
 				gameRunning = false;
