@@ -23,6 +23,11 @@ public class Data_Process {
 		Location hall = new Location("In a hall","A hallway in an 18th Century building in the heart of London. There is a door leading to your office and stairs leading down to the street");
 		LockableExit door = new LockableExit("Door","door",hall,true,"A flimsy door that leads to the hall",doorKey);
 		start.addExit(door);
+		Location kitchen = new Location("In the kitchen","This office has a kitchen");
+		OrdinaryExit north = new OrdinaryExit("North",kitchen,false);
+		OrdinaryExit south = new OrdinaryExit("South",start,false);
+		kitchen.addExit(south);
+		start.addExit(north);
 		CarriableItem card = new CarriableItem("Card","A Gold American Express credit card");
 		card.setTreasure();
 		hall.addItem(card);

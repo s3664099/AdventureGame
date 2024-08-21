@@ -26,10 +26,11 @@ public class Parser {
 		//If the word move being used instead of go?
 		if (commands[0].equals("move") && checkCardinals(commands)) {
 			commands[0] = "go";
+			parsedCommands[0] = "go";
 		}
 		
 		//Checks the cardinal directions. Accepts and removes 'to the'
-		if (commands[0].equals("go") || checkCardinals(commands)) {
+		if (commands[0].equals("go") && checkCardinals(commands)) {
 			
 			if (commands[1].equals("to") && commands[2].equals("the")) {
 				parsedCommands[0] = commands[0];
@@ -44,9 +45,9 @@ public class Parser {
 	private boolean checkCardinals(String[] commands) {
 
 		boolean validCardinal = false;
-		
+				
 		for (String cardinal:cardinals) {	
-			if (commands[commands.length].equals(cardinal)) {
+			if (commands[commands.length-1].equals(cardinal)) {
 				validCardinal = true;
 			}
 		}
