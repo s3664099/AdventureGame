@@ -53,10 +53,6 @@ public class Command {
 		
 		String noun = commands[1];
 		String verb = commands[0];
-		
-		System.out.println(noun);
-		System.out.println(verb);
-		System.out.println(noun.length());
 						
 		//Goes through the verbs
 		if (verb.equals("go")) {
@@ -75,7 +71,7 @@ public class Command {
 					response = response.format("%s %s", response, item.getName());
 				}
 			}
-		} else if (verb.equals("look") && noun.length()==0) {
+		} else if (verb.equals("look")) {
 			response = look(commands,location,inventory);
 		} else if ((verb.equals("take")) ||(verb.equals("get"))) {
 			
@@ -362,7 +358,7 @@ public class Command {
 		String response = "";
 		
 		//Is the player just looking around the room
-		if ((commands.length==1) || (commands[1].equals("around")) ||
+		if ((commands[1].length()==0) || (commands[1].equals("around")) ||
 			 (commands[1].equals("room")) || (commands[1].equals("location"))) {
 			response = response.format("%s%n=======================",location.getName(true));
 		} else {
