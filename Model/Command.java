@@ -51,13 +51,13 @@ public class Command {
 		//Standard response
 		response = "I'm sorry, I do not understand";
 		
-		String noun = "";
+		String noun = commands[1];
 		String verb = commands[0];
 		
-		if (commands.length>1) {
-			noun = commands[1];
-		}
-				
+		System.out.println(noun);
+		System.out.println(verb);
+		System.out.println(noun.length());
+						
 		//Goes through the verbs
 		if (verb.equals("go")) {
 			response = changeLocation(noun);
@@ -75,7 +75,7 @@ public class Command {
 					response = response.format("%s %s", response, item.getName());
 				}
 			}
-		} else if (verb.equals("look")) {
+		} else if (verb.equals("look") && noun.length()==0) {
 			response = look(commands,location,inventory);
 		} else if ((verb.equals("take")) ||(verb.equals("get"))) {
 			
