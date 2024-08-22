@@ -59,6 +59,17 @@ public class Parser {
 		}
 		
 		//Pick up/put down.
+		if (commands[0].equals("pick") && commands.length>1) {
+			if (commands[1].equals("up")) {
+				commands[0] = "take";
+				command = command.substring(3,command.length());
+			}
+		} else if (commands[0].equals("put") && commands.length>1) {
+			if (commands[1].equals("down")) {
+				commands[0] = "drop";
+				command = command.substring(5,command.length());
+			}
+		}
 
 		//Strips 'the' from the object
 		if (command.length()>4 && command.substring(0,4).equals("the ")) {

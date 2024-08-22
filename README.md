@@ -151,3 +151,6 @@ Added scoring and end game features for entering a room.
 
 **20 August 2024**
 Working on multiple commands and more complex parser
+
+**22 August 2024**
+Completed complex parser for look, take, drop & go

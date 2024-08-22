@@ -88,9 +88,7 @@ public class Command {
 				response = "I need a verb";
 			} else {
 				response = switchList(inventory,location.getItems(),commands[1], "I dropped the",false);
-				System.out.println(this.score);
 				this.score = changeScore(true,commands[1],location.getItems(),location);
-				System.out.println(this.score);
 			}			
 		} else if (verb.equals("unlock") || verb.equals("lock")) {
 
