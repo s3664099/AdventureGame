@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 19 August 2024
- * Version: 1.1
+ * Updated: 22 August 2024
+ * Version: 1.2
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -471,7 +471,7 @@ public class Command {
 		}
 				
 		if (response.length()==0) {
-			response = "I do not see that";
+			response = "I don't quite understand what you mean";
 		}
 		
 		int position = 0;
@@ -967,4 +967,5 @@ public class Command {
  * 18 August 2024 - Scoring by dropping items now works. Added function to compare
  * 					player score.
  * 19 August 2024 - Added code to increase score for entering room.
+ * 22 August 2024 - Modified look command to handle new parser
  */

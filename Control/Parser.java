@@ -58,6 +58,18 @@ public class Parser {
 		}
 		
 		System.out.println(command);
+		
+		//Handles look command
+		if (commands[0].equals("look") && commands.length>0) {
+			if (commands[1].equals("around") && commands.length>1) {
+				if (commands[2].equals("room") || commands[2].equals("location")) {
+					command = command.substring(7,command.length());
+				}
+			} else if (command.length() >3 && commands[1].equals("at")) {
+				command = command.substring(3,command.length());
+			}
+			System.out.println(command);
+		}
 
 		//Strips 'the' from the object
 		if (command.length()>4 && command.substring(0,4).equals("the ")) {
