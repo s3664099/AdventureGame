@@ -1,7 +1,7 @@
 /* Item Interface
  * Created: 12 September 2023
- * Updated: 8 June 2024
- * Version: 1.0
+ * Updated: 24 August 2024
+ * Version: 1.1
  * The main class for objects. Since we can't call it an object (reserved word)
  * we have to call it a thing.
  */
@@ -37,6 +37,7 @@ public interface Item {
 	public boolean checkRemove();
 	public boolean checkHiddenExits();
 	public boolean checkHiddenItems();
+	public boolean equals(String command);
 	public void addExit(Exit hiddenExit);
 	public void addItem(Item hiddenItem);
 	public Conversation talk();
@@ -57,4 +58,5 @@ public interface Item {
  * 4 March 2024 - Added function to determine whether conversation is extended
  * 11 May 2024 - Added setExtended function definition
  * 8 June 2024 - Added leave convo methods
+ * 24 August 2024 - Added the equals method
  */

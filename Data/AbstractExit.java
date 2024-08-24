@@ -1,7 +1,7 @@
 /* Abstract Exit Class
  * Created: 5 September 2023
- * Updated: 7 April 2024
- * Version 1.0
+ * Updated: 24 August 2024
+ * Version 1.1
  * Class to handle everything to do with an exit.
  */
 
@@ -83,6 +83,19 @@ public abstract class AbstractExit implements Serializable {
 	}
 	
 	public void setItem(boolean updateReveal) {}
+	
+	public boolean equals (String command) {
+		
+		//Takes the command and the description
+		//Splits them
+		//If the last of each equals then continues the check.
+		//If the command is only a single then true and releases
+		//Then moves through each of the description and the command
+		//If the other strings in the command match then releases
+		//Otherwise sends a false.
+		
+		return true;
+	}
 }
 /* 5 September 2023 - Created File
  * 6 September 2023 - Completed class with getters and setters
@@ -90,4 +103,5 @@ public abstract class AbstractExit implements Serializable {
  * 27 January 2024 - Made class serializable
  * 21 February 2024 - Added an add description method
  * 7 April 2024 - Added functions for items (namely people) to be revealed
+ * 24 August 2024 - Added outline for the equals command
  */ 

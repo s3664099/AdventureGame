@@ -1,7 +1,7 @@
 /* Abstract Item Class
  * Created: 25 August 2023
- * Updated: 8 June 2024
- * Version: 1.0
+ * Updated: 24 August 2024
+ * Version: 1.1
  * The main class for objects. Since we can't call it an object (reserved word)
  * we have to call it a thing.
  */
@@ -107,7 +107,19 @@ public class AbstractItem implements Serializable {
 
 	public void setLeaveConvo(String leaveConvo, Conversation endConversation) {
 		// TODO Auto-generated method stub
+	}
+	
+	public boolean equals (String command) {
 		
+		//Takes the command and the description
+		//Splits them
+		//If the last of each equals then continues the check.
+		//If the command is only a single then true and releases
+		//Then moves through each of the description and the command
+		//If the other strings in the command match then releases
+		//Otherwise sends a false.
+		
+		return true;
 	}
 }
 
@@ -123,4 +135,5 @@ public class AbstractItem implements Serializable {
 * 4 April 2024 - Added function to determine whether conversation is extended.
 * 11 May 2024 - Added functionality so to change whether a conversation is extended or not.
 * 8 June 2024 - Added leave conversation methods
+* 24 August 2024 - Added outline for equals command
 */

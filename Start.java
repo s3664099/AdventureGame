@@ -7,7 +7,7 @@
 
 //TODO: Move the check for item, and check for exit for separate function
 //TODO: Implement multi word parser
-//      Full Object Command
+//      Full Object Command (possibly overright equals)
 //      Add ne.nw.se.sw
 //      Complex Commands - use x in x, unlock x with x
 //TODO: Use command (Can also be applied to lock/unlock - also shovels and stuff).
