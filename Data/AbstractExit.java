@@ -86,15 +86,27 @@ public abstract class AbstractExit implements Serializable {
 	
 	public boolean equals (String command) {
 		
-		//Takes the command and the description
-		//Splits them
+		String[] names = this.name.toLowerCase().split(" ");
+		String[] commands = command.toLowerCase().split(" ");
+		boolean match = false;
+		
+		//Checks if the length of the command is greater than the name
+		if (names.length>=commands.length) {
+			
+			//Does the last word of each match
+			if (names[names.length-1].equals(commands[commands.length-1])) {
+				match = true;
+			}
+		}
+		
+		
 		//If the last of each equals then continues the check.
 		//If the command is only a single then true and releases
 		//Then moves through each of the description and the command
 		//If the other strings in the command match then releases
 		//Otherwise sends a false.
 		
-		return true;
+		return match;
 	}
 }
 /* 5 September 2023 - Created File

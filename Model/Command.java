@@ -237,6 +237,12 @@ public class Command {
 		
 		for (Exit exitSearch:exits) {
 			
+			if (exitSearch.equals(command)) {
+				System.out.println("Yes");
+			} else {
+				System.out.println("No");
+			}
+			
 			//Gets the commands
 			for (String x:exitSearch.getCommands()) {
 				
