@@ -90,18 +90,35 @@ public abstract class AbstractExit implements Serializable {
 		String[] commands = command.toLowerCase().split(" ");
 		boolean match = false;
 		
-		//Checks if the length of the command is greater than the name
+		//Checks if the length of the words in the name is greater than the command
 		if (names.length>=commands.length) {
 			
 			//Does the last word of each match
 			if (names[names.length-1].equals(commands[commands.length-1])) {
-				match = true;
+				
+				//If command only a single word
+				if (names.length == 1) {
+					match = true;
+				} else {
+					
+					int wordsCounted = 0;
+					int commandWords = 0;
+					
+					while(wordsCounted<names.length) {
+						if (names[wordsCounted].equals(commands[commandWords])) {
+							commandWords += 1;
+						}
+						wordsCounted += 1;
+					}
+					
+					if (commandWords == commands.length) {
+						match = true;
+					}
+				}
 			}
 		}
 		
 		
-		//If the last of each equals then continues the check.
-		//If the command is only a single then true and releases
 		//Then moves through each of the description and the command
 		//If the other strings in the command match then releases
 		//Otherwise sends a false.

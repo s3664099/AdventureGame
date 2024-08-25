@@ -21,7 +21,7 @@ public class Data_Process {
 		desk.addItem(doorKey);
 		start.addItem(desk);
 		Location hall = new Location("In a hall","A hallway in an 18th Century building in the heart of London. There is a door leading to your office and stairs leading down to the street");
-		LockableExit door = new LockableExit("Door","door",hall,true,"A flimsy door that leads to the hall",doorKey);
+		LockableExit door = new LockableExit("Big Blue Mahogany Door","door",hall,true,"A flimsy door that leads to the hall",doorKey);
 		start.addExit(door);
 		Location kitchen = new Location("In the kitchen","This office has a kitchen");
 		OrdinaryExit north = new OrdinaryExit("North",kitchen,false);
