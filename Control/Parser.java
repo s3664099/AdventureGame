@@ -1,7 +1,7 @@
 /* Title: Parser Class
  * Created: 25 August 2023
- * Updated: 22 August 2024
- * Version: 1.2
+ * Updated: 26 August 2024
+ * Version: 1.3
  * 
  * This processes the command. At this stage it is only a two work
  * command - noun and verb. Ideally, it will eventually process larger commands.
@@ -18,13 +18,27 @@ public class Parser {
 	public String[] parseCommand(String command) {
 		
 		String[] commands = command.split(" ");
-		command = command.substring(commands[0].length(), command.length()).trim();
+		command = command.substring(commands[0].length(),command.length()).trim();
 		
 		//If the word move being used instead of go?
 		if (commands[0].equals("move") && checkCardinals(commands)) {
 			commands[0] = "go";
 		} else if (commands[0].equals("move") && commands.length>2) {
 			commands[0] = "go";
+		}
+		
+		//Inventory
+		if ((commands[0].equals("take") || commands[0].equals("get") && (
+			command.equals("inventory") || command.equals("my inventory")))) {
+			
+			commands = new String[]{"inventory"};
+			
+		} else if ((commands[0].equals("i") || commands[0].equals("inv")) && 
+					(commands.length == 1)) {
+			commands[0] = "inventory";
+		} else if (commands[0].equals("what") || (command.equals("am i carrying") ||
+				command.equals("am i carrying?"))) {
+			commands = new String[]{"inventory"};
 		}
 		
 		//Checks number of words in command
@@ -102,4 +116,5 @@ public class Parser {
  * 21 August 2024 - Started building English Language parser with go command
  * 22 August 2024 - Added more functionality to the parser. Strips 'the' and more comples
  * 					move command.
+ * 26 August 2024 - Moved parsing for the inventory command here, and added to it.
 */

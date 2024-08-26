@@ -55,14 +55,18 @@ public class Command {
 		String verb = commands[0];
 						
 		//Goes through the verbs
+		
+		//Go
 		if (verb.equals("go")) {
 			response = changeLocation(noun);
 			this.displayLocation = true;
+		
+		//Open/Close
 		} else if (verb.equals("open") || verb.equals("close")) {
 			response = openExit(noun,verb);
-		} else if (verb.equals("i") || (verb.equals("inventory")
-					|| (verb.equals("inv")))) {
-			
+		
+		//Inventory
+		} else if (verb.equals("inventory")) {
 			if (inventory.size() == 0) {
 				response = "I am carrying nothing";
 			} else {
@@ -74,7 +78,6 @@ public class Command {
 		} else if (verb.equals("look")) {
 			response = look(commands,location,inventory);
 		} else if ((verb.equals("take")) ||(verb.equals("get"))) {
-			
 			if (commands.length == 1) {
 				response = "I need a verb";
 			} else {
