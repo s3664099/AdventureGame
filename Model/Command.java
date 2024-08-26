@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 22 August 2024
- * Version: 1.2
+ * Updated: 26 August 2024
+ * Version: 1.3
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -75,8 +75,12 @@ public class Command {
 					response = response.format("%s %s", response, item.getName());
 				}
 			}
+		
+		//Look
 		} else if (verb.equals("look")) {
 			response = look(commands,location,inventory);
+
+		//Take/Get
 		} else if ((verb.equals("take")) ||(verb.equals("get"))) {
 			if (commands.length == 1) {
 				response = "I need a verb";
@@ -85,6 +89,7 @@ public class Command {
 				this.score = changeScore(false,commands[1],inventory,location); 
 			}
 			
+		//Drop
 		} else if (verb.equals("drop")) {
 			
 			if (commands.length == 1) {
@@ -92,7 +97,9 @@ public class Command {
 			} else {
 				response = switchList(inventory,location.getItems(),commands[1], "I dropped the",false);
 				this.score = changeScore(true,commands[1],location.getItems(),location);
-			}			
+			}
+		
+		//Lock/Unlock
 		} else if (verb.equals("unlock") || verb.equals("lock")) {
 
 			if (commands.length == 1) {
@@ -100,6 +107,8 @@ public class Command {
 			} else {
 				response = unlock(inventory,location.getExits(),location.getItems(), noun, verb);
 			}
+
+		//Move
 		} else if (verb.equals("move")) {
 			
 			if (commands.length == 1) {
@@ -107,7 +116,8 @@ public class Command {
 			} else {
 				response = move(location,noun);
 			}
-			
+
+		//Save/Load Game
 		} else if (verb.equals("save")) {
 			
 			//Checks if there is a name, and calls the save game function
@@ -128,11 +138,16 @@ public class Command {
 			} else {
 				response = loadGame(noun);
 			}
-			
+
+		//Conversation
 		} else if ((verb.equals("talk")) || (verb.equals("speak"))) {
 			response = conversation(noun, location.getItems());
+
+		//Scoring
 		} else if (verb.equals("score")) {
 			response = response.format("Your score is %s/%s",this.score,this.topScore);
+
+		//End Game
 		} else if (verb.equals("quit")) {
 			response = "END";
 		}
@@ -964,4 +979,5 @@ public class Command {
  * 					player score.
  * 19 August 2024 - Added code to increase score for entering room.
  * 22 August 2024 - Modified look command to handle new parser
+ * 26 August 2024 - Added comments to main method and moved inventory parsing out
  */
