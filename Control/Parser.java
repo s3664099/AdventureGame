@@ -56,10 +56,10 @@ public class Parser {
 				command = command.substring(8,command.length());
 			}
 		}
-		
+		 
 		//Handles look command
-		if (commands[0].equals("look") && commands.length>0) {
-			if (commands[1].equals("around") && commands.length>1) {
+		if (commands.length>0 && commands[0].equals("look")) {
+			if (commands.length>1 && commands[1].equals("around")) {
 				if (commands[2].equals("room") || commands[2].equals("location")) {
 					command = command.substring(7,command.length());
 				}
@@ -116,5 +116,6 @@ public class Parser {
  * 21 August 2024 - Started building English Language parser with go command
  * 22 August 2024 - Added more functionality to the parser. Strips 'the' and more comples
  * 					move command.
- * 26 August 2024 - Moved parsing for the inventory command here, and added to it.
+ * 26 August 2024 - Moved parsing for the inventory command here, and added to it. Fixed
+ * 					error with look.
 */

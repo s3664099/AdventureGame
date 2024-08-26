@@ -379,25 +379,17 @@ public class Command {
 			
 			//Exits
 			for (Exit exit:exits) {
-				ArrayList<String> nouns = exit.getCommands();
-				
-				for (String noun:nouns) {
-					if (noun.equals(commands[1])) {
-						response = exit.getDescription();
-					}
+				if (exit.equals(commands[1])) {
+					response = exit.getDescription();
 				}
 			}
 			
 			//Inventory
 			if (response.length()==0) {
 				for (Item item:inventory) {
-					String[] nouns = item.getNouns();
-					
-					for (String noun:nouns) {
-						if (noun.equals(commands[1])) {
-							response = item.getDescription();
-							itemIndex = index;
-						}
+					if (item.equals(commands[1])) {
+						response = item.getDescription();
+						itemIndex = index;
 					}
 				}
 			}
@@ -405,63 +397,60 @@ public class Command {
 			//Items
 			if (response.length()==0) {
 				for (Item item:items) {
-					String[] nouns = item.getNouns();
 					
-					for (String noun:nouns) {
-						if (noun.equals(commands[1])) {
+					if (item.equals(commands[1])) {
+													
+						response = item.getDescription();
+						itemIndex = index;
 							
-							response = item.getDescription();
-							itemIndex = index;
-							
-							//Is the item hiding something
-							if (item.checkIsCover()) {
+						//Is the item hiding something
+						if (item.checkIsCover()) {
 								
-								int noTypes = 0;
-								int objectType = 0;
+							int noTypes = 0;
+							int objectType = 0;
 								
-								//Checks whether item hiding items, exits, or both
-								if (item.checkHidden(false)) {
-									noTypes +=1;
+							//Checks whether item hiding items, exits, or both
+							if (item.checkHidden(false)) {
+								noTypes +=1;
+								objectType = 1;
+							} else if (item.checkHidden(true)) {
+								noTypes +=1;
+								objectType = 2;
+							}
+								
+							//Picks either a random item or exit
+							if (noTypes == 2) {
+									
+								int option = (int)(Math.random()*noTypes);
+									
+								if (option == 0) {
 									objectType = 1;
-								} else if (item.checkHidden(true)) {
-									noTypes +=1;
+								} else {
 									objectType = 2;
-								}
+								}									
+							}
 								
-								//Picks either a random item or exit
-								if (noTypes == 2) {
+							//Selects a random object from the list
+							if (objectType == 1) {
 									
-									int option = (int)(Math.random()*noTypes);
+								Item foundItem = item.getHiddenItem();
+								response = response.format("%s%nYou found %s",response,foundItem.getName());
+								location.addItem(foundItem);
+								
+							//Selects a random exit from the list
+							} else if (objectType == 2) {
 									
-									if (option == 0) {
-										objectType = 1;
-									} else {
-										objectType = 2;
-									}									
-								}
+								Exit foundExit = item.getHiddenExit();
+								response = response.format("%s%nYou found %s",response,foundExit.getName());
+								location.addExit(foundExit);
+							}
 								
-								//Selects a random object from the list
-								if (objectType == 1) {
-									
-									Item foundItem = item.getHiddenItem();
-									response = response.format("%s%nYou found %s",response,foundItem.getName());
-									location.addItem(foundItem);
+							//Checks if the item is to be removed from the location
+							if (item.checkRemove()) {
 								
-								//Selects a random exit from the list
-								} else if (objectType == 2) {
-									
-									Exit foundExit = item.getHiddenExit();
-									response = response.format("%s%nYou found %s",response,foundExit.getName());
-									location.addExit(foundExit);
-								}
-								
-								//Checks if the item is to be removed from the location
-								if (item.checkRemove()) {
-								
-									//if the exit and item lists are empty. If so it flags to remove the item
-									if ((!item.checkHidden(true)) && (!item.checkHidden(false))) {
-										removeItem = true;
-									}
+								//if the exit and item lists are empty. If so it flags to remove the item
+								if ((!item.checkHidden(true)) && (!item.checkHidden(false))) {
+									removeItem = true;
 								}
 							} 
 						}
@@ -975,4 +964,5 @@ public class Command {
  * 19 August 2024 - Added code to increase score for entering room.
  * 22 August 2024 - Modified look command to handle new parser
  * 26 August 2024 - Added comments to main method and moved inventory parsing out
+ * 					Updated look to handle multi word objects
  */
