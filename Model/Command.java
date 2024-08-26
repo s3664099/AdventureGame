@@ -84,7 +84,7 @@ public class Command {
 			if (commands.length == 1) {
 				response = "I need a verb";
 			} else {
-				response = switchList(location.getItems(), inventory, commands[1], "I picked up the",false);
+				response = switchList(location.getItems(), inventory, commands[1], "I picked up the",false,true);
 				this.score = changeScore(false,commands[1],inventory,location); 
 			}
 			
@@ -94,7 +94,7 @@ public class Command {
 			if (commands.length == 1) {
 				response = "I need a verb";
 			} else {
-				response = switchList(inventory,location.getItems(),commands[1], "I dropped the",false);
+				response = switchList(inventory,location.getItems(),commands[1], "I dropped the",false,false);
 				this.score = changeScore(true,commands[1],location.getItems(),location);
 			}
 		
@@ -176,41 +176,42 @@ public class Command {
 	}
 	
 	//Method to move item from one list to another
-	private String switchList(ArrayList<Item> listOne, ArrayList<Item> listTwo, String command, String statement, boolean itemTaken) {
+	private String switchList(ArrayList<Item> listOne, ArrayList<Item> listTwo, String command, String statement, boolean itemTaken,boolean taking) {
 
 		//Sets counter for items
 		int itemNo = -1;
 		int itemFound = -1;
 		
-		String response = "I don't see that here";
+		String response;
+		
+		if (taking) {
+			response = "I don't see that here";
+		} else {
+			response = "I'm not carrying that";
+		}
 		
 		//Goes through the items at the location
 		for (Item item: listOne) {
 			
 			itemNo +=1;
 			
-			for (String noun:item.getNouns()) {
-								
-				//Is the item in this location
-				if ((command.equals(noun)) && (!itemTaken)) {
-					
-					//Is it a carriable item.
-					if (item instanceof CarriableItem) {
+			if (item.equals(command) && !itemTaken) {
+			
+				if (item instanceof CarriableItem) {
 
-						//Add it to the player's inventory
-						itemFound = itemNo;
-						listTwo.add(item);
-						response = response.format("%s %s",statement, item.getName());
-						itemTaken = true;
-					} else {
+					//Add it to the player's inventory
+					itemFound = itemNo;
+					listTwo.add(item);
+					response = response.format("%s %s",statement, item.getName());
+					itemTaken = true;
+				} else {
 						response = "I cannot pick that up";
-					}
-				} else if ((item instanceof Container) && (!itemTaken)) {
-					if ((((Container) item).getViewed()) && (!((Container) item).getClosed())) {
+				}
+			} else if ((item instanceof Container) && (!itemTaken)) {
+				if ((((Container) item).getViewed()) && (!((Container) item).getClosed())) {
 						
-						ArrayList<Item> contents = ((Container) item).getContents();
-						response = this.switchList(contents,listTwo,command,statement,itemTaken);
-					}					
+					ArrayList<Item> contents = ((Container) item).getContents();
+					response = this.switchList(contents,listTwo,command,statement,itemTaken,taking);
 				} 
 			}
 		}

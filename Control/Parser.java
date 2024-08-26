@@ -26,10 +26,10 @@ public class Parser {
 		} else if (commands[0].equals("move") && commands.length>2) {
 			commands[0] = "go";
 		}
-		
+				
 		//Inventory
-		if ((commands[0].equals("take") || commands[0].equals("get") && (
-			command.equals("inventory") || command.equals("my inventory")))) {
+		if ((commands[0].equals("take") || commands[0].equals("get")) && (
+			command.equals("inventory") || command.equals("my inventory"))) {
 			
 			commands = new String[]{"inventory"};
 			
@@ -93,7 +93,7 @@ public class Parser {
 		
 		parsedCommands[0] = commands[0];
 		parsedCommands[1] = command;
-				
+		
 		return parsedCommands;
 	}
 	
