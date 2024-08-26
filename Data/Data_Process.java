@@ -16,8 +16,8 @@ public class Data_Process {
 		
 		start = new Location("In an office","An office of a consulting detective. The room is dark and dingy, and little light permeates the shadows");
 		start.setTreasureStore();
-		Container desk = new Container("Desk","A large mahogany desk sitting across from the door. The desk is covered in papers",true);
-		CarriableItem doorKey = new CarriableItem("Key","A brass key with the word 'door' carved into the head");
+		Container desk = new Container("Large Old Mahogany Desk","A large mahogany desk sitting across from the door. The desk is covered in papers",true);
+		CarriableItem doorKey = new CarriableItem("Small Modern Brass Key","A brass key with the word 'door' carved into the head");
 		desk.addItem(doorKey);
 		start.addItem(desk);
 		Location hall = new Location("In a hall","A hallway in an 18th Century building in the heart of London. There is a door leading to your office and stairs leading down to the street");

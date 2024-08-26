@@ -51,10 +51,9 @@ public class Command {
 		//Standard response
 		response = "I'm sorry, I do not understand";
 		
+		//Goes through the verbs
 		String noun = commands[1];
 		String verb = commands[0];
-						
-		//Goes through the verbs
 		
 		//Go
 		if (verb.equals("go")) {
@@ -233,14 +232,9 @@ public class Command {
 		ArrayList<Item> items = currentLocation.getItems();
 		
 		for (Item itemSearch:items) {
-			
-			//Gets the commands
-			for (String x:itemSearch.getNouns()) {
-				
-				if (command.equals(x)) {
-					item = itemSearch;
-				}
-			}		
+			if (itemSearch.equals(command)) {
+				item = itemSearch;
+			} 	
 		}
 		return item;
 	}
@@ -254,7 +248,6 @@ public class Command {
 		ArrayList<Exit> exits = currentLocation.getExits();
 		
 		for (Exit exitSearch:exits) {
-			
 			if (exitSearch.equals(command)) {
 				exit = exitSearch;
 			} 
@@ -381,6 +374,8 @@ public class Command {
 			boolean removeItem = false;
 			int itemIndex = 0;
 			int index = 0;
+			
+			System.out.println(commands[1]);
 			
 			//Exits
 			for (Exit exit:exits) {

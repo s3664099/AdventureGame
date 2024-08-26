@@ -1,7 +1,7 @@
 /* Abstract Exit Class
  * Created: 5 September 2023
- * Updated: 24 August 2024
- * Version 1.1
+ * Updated: 25 August 2024
+ * Version 1.2
  * Class to handle everything to do with an exit.
  */
 
@@ -116,13 +116,7 @@ public abstract class AbstractExit implements Serializable {
 					}
 				}
 			}
-		}
-		
-		
-		//Then moves through each of the description and the command
-		//If the other strings in the command match then releases
-		//Otherwise sends a false.
-		
+		}		
 		return match;
 	}
 }
@@ -132,5 +126,6 @@ public abstract class AbstractExit implements Serializable {
  * 27 January 2024 - Made class serializable
  * 21 February 2024 - Added an add description method
  * 7 April 2024 - Added functions for items (namely people) to be revealed
- * 24 August 2024 - Added outline for the equals command
+ * 24 August 2024 - Added outline for the equals method
+ * 25 August 2024 - Added equals method
  */ 

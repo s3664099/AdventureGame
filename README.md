@@ -155,5 +155,8 @@ Working on multiple commands and more complex parser
 **22 August 2024**
 Completed complex parser for look, take, drop & go
 
-**26 August 2024**
+**25 August 2024**
 Using adjectives for exits now works.
+
+**26 August 2024**
+Adding adjectives for items
