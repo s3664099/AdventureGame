@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 26 August 2024
- * Version: 1.3
+ * Updated: 27 August 2024
+ * Version: 1.4
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -499,39 +499,38 @@ public class Command {
 		
 		//Checks to see if the player is attempting to unlock an exit
 		for (Exit exit:exits) {
-			for (String noun:exit.getCommands()) {
+			
+			if (exit.equals(command)) {
 				
-				//The item is an exit in the area
-				if (command.equals(noun) && (!found)) {
-					foundItem = true;
-					for (Item item:inventory) {
+				foundItem = true;
+				for (Item item:inventory) {
 						
-						if (item == exit.getKey()) {
-							found = true;
+					if (item == exit.getKey()) {
+						found = true;
 							
-							//Acts on either lock/unlock, which does the opposite.
-							if (verb.equals("unlock")) {
-								if (exit.getLocked()) {
-									response = exit.lockUnlock((CarriableItem) item, verb);
-								} else {
-									response = response.format("The %s is already unlocked",exit.getName());
-								}
-							} else if (verb.equals("lock")) {
-								if (!exit.getLocked()) {
-									
-									//If exit is open, cannot be locked
-									if (!exit.getOpen()) {
-										response = response.format("The %s is open. Please close it first", exit.getName());
-									} else {
-										response = exit.lockUnlock((CarriableItem) item, verb);
-									}
-									
-								} else {
-									response = response.format("The %s is already locked",exit.getName());
-								}								
+						//Acts on either lock/unlock, which does the opposite.
+						if (verb.equals("unlock")) {
+							if (exit.getLocked()) {
+								response = exit.lockUnlock((CarriableItem) item, verb);
+							} else {
+								response = response.format("The %s is already unlocked",exit.getName());
 							}
+						} else if (verb.equals("lock")) {
+							if (!exit.getLocked()) {
+									
+								//If exit is open, cannot be locked
+								if (!exit.getOpen()) {
+									response = response.format("The %s is open. Please close it first", exit.getName());
+								} else {
+									response = exit.lockUnlock((CarriableItem) item, verb);
+								}
+									
+							} else {
+								response = response.format("The %s is already locked",exit.getName());
+							}								
 						}
 					}
+					
 					if (!found) {
 						response = "You don't have the key";
 					}
@@ -542,47 +541,43 @@ public class Command {
 		//It wasn't an exit, so we now check the items.
 		if (!foundItem) {
 			for (Item container:items) {
-				for (String noun:container.getNouns()) {
+				if (container.equals(command)) {
 					
-					//The container is an item in the area
-					if (command.equals(noun) && (!found)) {
-
-						//The container isn't lockable
-						if(!container.getLockable()) {
-							response = response.format("The %s isn't lockable",container.getName());
-						} else {
+					//The container isn't lockable
+					if(!container.getLockable()) {
+						response = response.format("The %s isn't lockable",container.getName());
+					} else {
 							
-							//Checks if player has the key
-							for (Item item:inventory) {
-								if (container.checkKey(item)) {
-									found = true;
+						//Checks if player has the key
+						for (Item item:inventory) {
+							if (container.checkKey(item)) {
+								found = true;
 								
-									//Acts on either lock/unlock, which does the opposite.
-									if (verb.equals("unlock")) {
+								//Acts on either lock/unlock, which does the opposite.
+								if (verb.equals("unlock")) {
 										
-										//Checks if the container is already locked.
-										if (container.getLocked()) {
-											container.setLocked();
-											response = response.format("You unlock the %s",container.getName());
-										} else {
-											response = response.format("The %s is already unlocked",container.getName());
-										}
+									//Checks if the container is already locked.
+									if (container.getLocked()) {
+										container.setLocked();
+										response = response.format("You unlock the %s",container.getName());
+									} else {
+										response = response.format("The %s is already unlocked",container.getName());
+									}
 										
-									} else if (verb.equals("lock")) {
+								} else if (verb.equals("lock")) {
 										
-										//Checks if the container is already locked
-										if (!container.getLocked()) {
+									//Checks if the container is already locked
+									if (!container.getLocked()) {
 											
-											//Checks if the container is open. Cannot lock and open conmtainer
-											if (!container.getClosed()) {
-												response = response.format("The %s is still open. Please close it first", container.getName());
-											} else {
+										//Checks if the container is open. Cannot lock and open conmtainer
+										if (!container.getClosed()) {
+											response = response.format("The %s is still open. Please close it first", container.getName());
+										} else {
 											container.setLocked();
 											response = response.format("You lock the %s",container.getName());
-											}
-										} else {
-											response = response.format("The %s is already locked",container.getName());
 										}
+									} else {
+										response = response.format("The %s is already locked",container.getName());
 									}								
 								}
 							}
@@ -599,11 +594,11 @@ public class Command {
 	}
 	
 	//Function to move an item that can be moved
-	private String move(Location location, String verb) {
+	private String move(Location location, String command) {
 		
 		ArrayList<Item> items = location.getItems();
 		String response = "";
-		response = response.format("I do not see a %s here", verb);
+		response = response.format("I do not see a %s here", command);
 		Item hiddenItem = null;
 		Boolean foundItem = false;
 		Boolean itemRemoved = false;
@@ -612,51 +607,49 @@ public class Command {
 		int itemRemove = -1;
 		
 		for (Item item:items) {
+			
+			if (item.equals(command)) {
+				
+				if ((!item.getMoveable()) || (item.getMoved())) {
+					response = response.format("I cannot move the %s", item.getName());
+				} else {
 						
-			for (String noun:item.getNouns()) {
-							
-				if ((verb.equals(noun)) && (!foundItem)) {
-					if ((!item.getMoveable()) || (item.getMoved())) {
-						response = response.format("I cannot move the %s", item.getName());
-					} else {
-						
-						//Flags the item that has been moved and adds the hidden item to the location
-						item.setMoved();
-						foundItem = true;
+					//Flags the item that has been moved and adds the hidden item to the location
+					item.setMoved();
+					foundItem = true;
 
-						if (item.checkHiddenItems()) {
-							hiddenItem = item.getHiddenItem();
+					if (item.checkHiddenItems()) {
+						hiddenItem = item.getHiddenItem();
+						response = response.format("You move the %s and discover a %s",
+								item.getName(),hiddenItem.getName());
+						itemRemoved = true;
+					} else {
+						if (item.checkHiddenExits()) {
+							Exit exit = item.getHiddenExit();
+							location.addExit(exit);
 							response = response.format("You move the %s and discover a %s",
-									item.getName(),hiddenItem.getName());
-							itemRemoved = true;
+								item.getName(),exit.getDescription());
+							exitRemoved = true;
 						} else {
-							if (item.checkHiddenExits()) {
-								Exit exit = item.getHiddenExit();
-								location.addExit(exit);
-								response = response.format("You move the %s and discover a %s",
-									item.getName(),exit.getDescription());
-								exitRemoved = true;
-							} else {
-								response = response.format("You move the %s and don't find anything",
-										item.getName());
+							response = response.format("You move the %s and don't find anything",
+									item.getName());
+						}
+					}
+						
+					//Checks if item to be removed
+					if (item.checkRemove()) {
+
+						//Has an item been removed and there are no exits
+						if ((itemRemoved) && (!item.checkHiddenItems())) {
+							if (!item.checkHiddenExits()) {
+								itemRemove = itemIndex;
 							}
 						}
-						
-						//Checks if item to be removed
-						if (item.checkRemove()) {
-
-							//Has an item been removed and there are no exits
-							if ((itemRemoved) && (!item.checkHiddenItems())) {
-								if (!item.checkHiddenExits()) {
-									itemRemove = itemIndex;
-								}
-							}
 							
-							//Has an exit been removed and there are no items
-							if ((exitRemoved) && (!item.checkHiddenExits())) {
-								if (!item.checkHiddenItems()) {
-									itemRemove = itemIndex;
-								}
+						//Has an exit been removed and there are no items
+						if ((exitRemoved) && (!item.checkHiddenExits())) {
+							if (!item.checkHiddenItems()) {
+								itemRemove = itemIndex;
 							}
 						}
 					}
@@ -667,11 +660,9 @@ public class Command {
 		
 		if(!foundItem) {
 			for (Exit exit:location.getExits()) {
-				for (String noun:exit.getCommands()) {
-					if ((verb.equals(noun)) && (!foundItem)) {
-						response = response.format("You cannot move the %s",exit.getName());
-						foundItem = true;
-					}
+				if (exit.equals(command)) {
+					response = response.format("You cannot move the %s",exit.getName());
+					foundItem = true;
 				}
 			}
 		}
@@ -966,4 +957,5 @@ public class Command {
  * 22 August 2024 - Modified look command to handle new parser
  * 26 August 2024 - Added comments to main method and moved inventory parsing out
  * 					Updated look to handle multi word objects
+ * 27 August 2024 - Updated the lock/unlock and move commands
  */
