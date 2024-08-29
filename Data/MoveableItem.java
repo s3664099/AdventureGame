@@ -1,7 +1,7 @@
 /* Moveable Item Class
  * Created: 5 October 2023
- * Updated: 10 May 2024
- * Version: 1.0
+ * Updated: 29 August 2024
+ * Version: 1.1
  * Class for items that hide exits and items.
  */
 
@@ -60,10 +60,51 @@ public class MoveableItem extends ImmoveableItem implements Item, Serializable {
 	public Item getItem() {
 		return item;
 	}
+	
+	public Exit getHiddenExit() {
+		
+		Exit hiddenExit = this.exit;
+		this.exit = null;
+		
+		return hiddenExit;
+	}
+	
+	public Item getHiddenItem() {
+		
+		Item hiddenItem = this.item;
+		this.item = null;
+		
+		return hiddenItem;
+	}
+	
+	@Override
+	public boolean checkHiddenExits() {
+
+		boolean foundExit = false;
+		
+		if (this.exit != null) {
+			foundExit = true;
+		}
+		return foundExit;
+	}
+
+	@Override
+	public boolean checkHiddenItems() {
+
+		boolean foundItem = false;
+		
+		if (this.item != null) {
+			foundItem = true;
+		}
+		
+		return foundItem;
+	}	
 }
 
 /* 5 October 2023 - created class
  * 23 January 2024 - Added functionality
  * 26 January 2024 - Made class serializable
  * 10 May 2024 - May variables private
+ * 29 Aug 2024 - Fixed problem where items/exits not being revealed. Added necessary
+ * 				 methods.
 */

@@ -26,7 +26,10 @@ public class Data_Process {
 		Location kitchen = new Location("In the kitchen","This office has a kitchen");
 		OrdinaryExit north = new OrdinaryExit("North",kitchen,false);
 		OrdinaryExit south = new OrdinaryExit("South",start,false);
+		ImmoveableItem rug = new ImmoveableItem("Colourful Persian Rug","This looks pretty expensive. A shame it is nailed to the floor");
+		MoveableItem table = new MoveableItem("Dirty Kitchen Table","This table looks like it has seen better days, back in the 60s",rug);
 		kitchen.addExit(south);
+		kitchen.addItem(table);
 		start.addExit(north);
 		CarriableItem card = new CarriableItem("Card","A Gold American Express credit card");
 		card.setTreasure();

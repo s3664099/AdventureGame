@@ -605,7 +605,7 @@ public class Command {
 		Boolean exitRemoved = false;
 		int itemIndex = 0;
 		int itemRemove = -1;
-		
+				
 		for (Item item:items) {
 			
 			if (item.equals(command)) {

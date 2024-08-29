@@ -103,7 +103,6 @@ public class ImmoveableItem extends AbstractItem implements Item,Serializable {
 
 	@Override
 	public boolean checkHiddenItems() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }
