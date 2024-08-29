@@ -6,7 +6,7 @@
  */
 
 //TODO: Implement multi word parser
-//			Test move
+//			Fix multiple words for move
 //			Conversation
 //			ChangeScore
 //      Add ne.nw.se.sw

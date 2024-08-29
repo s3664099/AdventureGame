@@ -1,7 +1,7 @@
 /* Title: Parser Class
  * Created: 25 August 2023
- * Updated: 26 August 2024
- * Version: 1.3
+ * Updated: 29 August 2024
+ * Version: 1.4
  * 
  * This processes the command. At this stage it is only a two work
  * command - noun and verb. Ideally, it will eventually process larger commands.
@@ -23,7 +23,7 @@ public class Parser {
 		//If the word move being used instead of go?
 		if (commands[0].equals("move") && checkCardinals(commands)) {
 			commands[0] = "go";
-		} else if (commands[0].equals("move") && commands.length>2) {
+		} else if (commands[0].equals("move") && commands[1].equals("through")) {
 			commands[0] = "go";
 		}
 				
@@ -118,4 +118,5 @@ public class Parser {
  * 					move command.
  * 26 August 2024 - Moved parsing for the inventory command here, and added to it. Fixed
  * 					error with look.
+ * 29 August 2024 - Fixed problem with move command for moving objects
 */
