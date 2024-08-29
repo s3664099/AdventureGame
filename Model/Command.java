@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 27 August 2024
- * Version: 1.4
+ * Updated: 29 August 2024
+ * Version: 1.5
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -375,9 +375,7 @@ public class Command {
 			boolean removeItem = false;
 			int itemIndex = 0;
 			int index = 0;
-			
-			System.out.println(commands[1]);
-			
+						
 			//Exits
 			for (Exit exit:exits) {
 				if (exit.equals(commands[1])) {
@@ -880,16 +878,14 @@ public class Command {
 		
 		//Checks if the item is a person
 		for (Item item:items) {
-			for (String noun:item.getNouns()) {
-				if (noun.equals(verb)) {
+			if (item.equals(verb)) {
+				
+				itemFound = itemNo;
 					
-					itemFound = itemNo;
-					
-					if (!item.getExtended()) {
-						response = response.format("%s: %s",item.getName(),item.talk().getResponse());
-					} else {
-						endConv = item.talk().displayConversation();
-					}
+				if (!item.getExtended()) {
+					response = response.format("%s: %s",item.getName(),item.talk().getResponse());
+				} else {
+					endConv = item.talk().displayConversation();
 				}
 			}
 			itemNo ++;
@@ -958,4 +954,5 @@ public class Command {
  * 26 August 2024 - Added comments to main method and moved inventory parsing out
  * 					Updated look to handle multi word objects
  * 27 August 2024 - Updated the lock/unlock and move commands
+ * 29 August 2024 - Updated Conversation
  */
