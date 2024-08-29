@@ -91,6 +91,15 @@ public class Parser {
 			System.out.println(command);
 		}
 		
+		//Processes talk/speak command
+		if ((commands[0].equals("talk") || commands[0].equals("speak")) && commands.length>1) {
+			if ((commands[1].equals("to")) && commands.length>2) {
+				command = command.substring(3,command.length());
+			} else if ((commands[1].equals("with")) && commands.length>2) {
+				command = command.substring(5,command.length());
+			}
+		}
+		
 		parsedCommands[0] = commands[0];
 		parsedCommands[1] = command;
 		

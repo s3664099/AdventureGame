@@ -6,7 +6,6 @@
  */
 
 //TODO: Implement multi word parser
-//			Conversation
 //      Add ne.nw.se.sw
 //		Add ability to take and drop all. Also look all/everything
 //      Complex Commands - use x in x, unlock x with x
