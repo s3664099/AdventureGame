@@ -1,7 +1,7 @@
 /* Title: Parser Class
  * Created: 25 August 2023
- * Updated: 29 August 2024
- * Version: 1.4
+ * Updated: 31 August 2024
+ * Version: 1.5
  * 
  * This processes the command. At this stage it is only a two work
  * command - noun and verb. Ideally, it will eventually process larger commands.
@@ -11,7 +11,9 @@ package Control;
 
 public class Parser {
 	
-	String[] cardinals = {"north","south","east","west","up","down"};
+	String[] cardinals = {"north","south","east","west","up","down","northeast",
+							"northwest","southeast","southwest","north-east",
+							"north-west","south-east","south-west"};
 	String parsedCommands[] = {"","",""}; 
 	
 	//Turns the command into verb noun formation
@@ -128,4 +130,5 @@ public class Parser {
  * 26 August 2024 - Moved parsing for the inventory command here, and added to it. Fixed
  * 					error with look.
  * 29 August 2024 - Fixed problem with move command for moving objects
+ * 31 August 2024 - Added ne,nw,se,sw
 */
