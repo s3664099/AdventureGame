@@ -57,6 +57,18 @@ public class Parser {
 										 && commands[1].equals("through")) {
 				command = command.substring(8,command.length());
 			}
+			
+			if (commands[0].equals("go")) {
+				if (command.equals("north-east")) {
+					command = "northeast";
+				} else if (command.equals("north-west")) {
+					command = "northwest";
+				} else if (command.equals("south-east")) {
+					command = "southeast";
+				} else if (command.equals("south-west")) {
+					command = "southwest";
+				}
+			}
 		}
 		 
 		//Handles look command

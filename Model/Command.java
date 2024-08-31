@@ -54,7 +54,7 @@ public class Command {
 		//Goes through the verbs
 		String noun = commands[1];
 		String verb = commands[0];
-		
+				
 		//Go
 		if (verb.equals("go")) {
 			response = changeLocation(noun);

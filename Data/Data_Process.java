@@ -44,6 +44,11 @@ public class Data_Process {
 		Conversation hooker = new Conversation("Where's my 50 quid from last time?");
 		Being being = new Being("Dirty skanky hooker","A hooker with a cigarette in her mouth, dressed rather skantily, stands in the door opposite yours",hooker,false);
 		hall.addItem(being);
+		Location window = new Location("At the end of the hall","The end of the hallway. There is a window that looks out onto the street below");
+		OrdinaryExit ne = new OrdinaryExit("Northeast",window,false);
+		OrdinaryExit sw = new OrdinaryExit("Southwest",hall,false);
+		hall.addExit(ne);
+		window.addExit(sw);
 		
 		//Hooker - Can't enter room while Hooker present. Get rid of hooker to enter
 		//Hooker Room - Dildo
