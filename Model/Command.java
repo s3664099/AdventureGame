@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 29 August 2024
- * Version: 1.5
+ * Updated: 1 September 2024
+ * Version: 1.6
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -180,9 +180,9 @@ public class Command {
 
 		//Sets counter for items
 		int itemNo = -1;
-		int itemFound = -1;
-		
+		ArrayList<Integer> itemsFound = new ArrayList<Integer>();
 		String response;
+		boolean allSelected = false;
 		
 		if (taking) {
 			response = "I don't see that here";
@@ -190,26 +190,43 @@ public class Command {
 			response = "I'm not carrying that";
 		}
 		
+		//Sets up if player picking all everythinmg in the room
+		if (command.equals("all") || command.equals("everything")) {
+			response = "";
+			allSelected = true;
+		}
+		
 		//Goes through the items at the location
 		for (Item item: listOne) {
 			
 			itemNo +=1;
 			
-			if (item.equals(command) && !itemTaken) {
-			
+			if ((item.equals(command) && !itemTaken) || (allSelected)) {
+				
 				if (item instanceof CarriableItem) {
-
+					
 					//Add it to the player's inventory
-					itemFound = itemNo;
+					itemsFound.add(itemNo);
 					listTwo.add(item);
-					response = response.format("%s %s",statement, item.getName());
-					itemTaken = true;
+					
+					if (itemsFound.size()==1) {
+						response = response.format("%s %s",statement, item.getName());
+					} else {
+						response = response.format("%s, %s %s",response, statement, item.getName());
+					}
+					
+					if (item.equals(command)) {
+						itemTaken = true;
+					}
+					
 				} else {
+					
+					if (!allSelected) {
 						response = "I cannot pick that up";
+					}
 				}
 			} else if ((item instanceof Container) && (!itemTaken)) {
 				if ((((Container) item).getViewed()) && (!((Container) item).getClosed())) {
-						
 					ArrayList<Item> contents = ((Container) item).getContents();
 					response = this.switchList(contents,listTwo,command,statement,itemTaken,taking);
 				} 
@@ -217,8 +234,20 @@ public class Command {
 		}
 		
 		//Has an item been picked up - Remove it from the location
-		if (itemFound != -1) {
-			listOne.remove(itemFound);
+		if (itemsFound.size()>0) {
+			
+			for (int i=itemsFound.size()-1;i>=0;i--) {
+				int itemIndex = itemsFound.get(i);
+				listOne.remove(itemIndex);				
+			}
+			
+		} else if (allSelected) {
+
+			if (taking) {
+				response = "I don't see anything here I can take";
+			} else {
+				response = "I'm not carrying anything";
+			}		
 		}
 		
 		return response;
@@ -955,4 +984,5 @@ public class Command {
  * 					Updated look to handle multi word objects
  * 27 August 2024 - Updated the lock/unlock and move commands
  * 29 August 2024 - Updated Conversation
+ * 1 September 2024 - Added ability to pick/drop all items.
  */

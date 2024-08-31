@@ -32,8 +32,12 @@ public class Data_Process {
 		kitchen.addItem(table);
 		start.addExit(north);
 		CarriableItem card = new CarriableItem("Card","A Gold American Express credit card");
+		CarriableItem leaflet = new CarriableItem("Leaflet","An advertisment for curtian installation");
+		CarriableItem note = new CarriableItem("Note","It looks like it is from your landlord");
 		card.setTreasure();
 		hall.addItem(card);
+		hall.addItem(note);
+		hall.addItem(leaflet);
 		door = new LockableExit("Door","door",start,false,"A flimsy door that leads into your office.",doorKey);
 		door.openClose();
 		hall.addExit(door);

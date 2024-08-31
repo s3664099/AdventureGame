@@ -6,7 +6,7 @@
  */
 
 //TODO: Implement multi word parser
-//		Add ability to take and drop all. Also look all/everything
+//		Also look all/everything
 //      Complex Commands - use x in x, unlock x with x
 //TODO: Use command (Can also be applied to lock/unlock - also shovels and stuff).
 //TODO: Commands embedded in objects/exits

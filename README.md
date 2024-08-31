@@ -163,3 +163,6 @@ Adding adjectives for items
 
 **31 August 2024**
 Added diagonal directions
+
+**1 September 2024**
+Added ability to take and drop all.
