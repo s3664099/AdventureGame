@@ -1,7 +1,7 @@
 /* Name: Input Class
  * Created: 25 August 2023
- * Updated: 20 August 2024
- * Version: 1.1
+ * Updated: 31 August 2024
+ * Version: 1.2
  * This takes the user input and returns the command.
  * At this stage the parser consists of only a verb and a noun.
  */
@@ -102,7 +102,16 @@ public class Input {
 			command = "go up";
 		} else if ((command.equals("d")) || (command.equals("down"))) {
 			command = "go down";
+		} else if ((command.equals("ne") || (command.equals("northeast") || command.equals("north-east")))) {
+			command = "go northeast";
+		} else if ((command.equals("nw") || (command.equals("northwest") || command.equals("north-west")))) {
+			command = "go northwest";
+		} else if ((command.equals("se") || (command.equals("southeast") || command.equals("south-east")))) {
+			command = "go southeast";
+		} else if ((command.equals("sw") || (command.equals("southwest") || command.equals("south-west")))) {
+			command = "go southwest";
 		}
+		
 		return command;
 	}
 	
@@ -139,4 +148,5 @@ public class Input {
  * 27 January 2024 - Fixed the Y/N reponse so that Y sends true, not N
  * 20 August 2024 - Added ability to enter multiple commands. Removed Validate command
  * 					since only validates two words.
+ * 31 August 2024 - Added diagonal directions
 */

@@ -160,3 +160,6 @@ Using adjectives for exits now works.
 
 **26 August 2024**
 Adding adjectives for items
+
+**31 August 2024**
+Added diagonal directions

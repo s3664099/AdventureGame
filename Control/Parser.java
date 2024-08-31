@@ -18,10 +18,10 @@ public class Parser {
 	
 	//Turns the command into verb noun formation
 	public String[] parseCommand(String command) {
-		
+				
 		String[] commands = command.split(" ");
 		command = command.substring(commands[0].length(),command.length()).trim();
-		
+				
 		//If the word move being used instead of go?
 		if (commands[0].equals("move") && checkCardinals(commands)) {
 			commands[0] = "go";

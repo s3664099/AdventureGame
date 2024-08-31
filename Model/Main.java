@@ -55,7 +55,7 @@ public class Main {
 				if (commands[0].equals("go")) {
 					display.display(data);
 				}
-
+				
 				//Checks if the player has reached the top score
 				if (processor.compareScore()) {
 					gameRunning = false;
