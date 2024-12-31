@@ -1,7 +1,7 @@
 /* Title: Parser Class
  * Created: 25 August 2023
- * Updated: 31 August 2024
- * Version: 1.5
+ * Updated: 31 December 2024
+ * Version: 1.6
  * 
  * This processes the command. At this stage it is only a two work
  * command - noun and verb. Ideally, it will eventually process larger commands.
@@ -74,10 +74,11 @@ public class Parser {
 		//Handles look command
 		if (commands.length>0 && commands[0].equals("look")) {
 			if (commands.length>1 && commands[1].equals("around")) {
-				if (commands[2].equals("room") || commands[2].equals("location")) {
+				if (commands.length>2 && (commands[2].equals("room") || 
+										  commands[2].equals("location"))) {
 					command = command.substring(7,command.length());
 				}
-			} else if (command.length() >3 && commands[1].equals("at")) {
+			} else if (command.length()>2 && commands[1].equals("at")) {
 				command = command.substring(3,command.length());
 			}
 			
@@ -143,4 +144,5 @@ public class Parser {
  * 					error with look.
  * 29 August 2024 - Fixed problem with move command for moving objects
  * 31 August 2024 - Added ne,nw,se,sw
+ * 31 December 2024 - Fixed problem where look around/look room wasn't working
 */
