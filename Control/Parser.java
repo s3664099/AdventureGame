@@ -9,6 +9,8 @@
 
 package Control;
 
+import Model.UserCommand;
+
 public class Parser {
 	
 	String[] cardinals = {"north","south","east","west","up","down","northeast",
@@ -17,8 +19,9 @@ public class Parser {
 	String parsedCommands[] = {"","",""}; 
 	
 	//Turns the command into verb noun formation
-	public String[] parseCommand(String command) {
-				
+	public UserCommand parseCommand(String command) {
+		
+		UserCommand userCommand = new UserCommand();
 		String[] commands = command.split(" ");
 		command = command.substring(commands[0].length(),command.length()).trim();
 				
@@ -83,11 +86,13 @@ public class Parser {
 			} else if (commands.length>2 && commands[1].equals("at") && !checkCardinals(commands)) {
 				command = command.substring(3,command.length());
 			} else if (commands.length>2 && commands[1].equals("in") && !checkCardinals(commands)) {
-				command = command.substring(3,command.length())+"-in";
+				command = command.substring(3,command.length());
+				userCommand.setInside();
 			} else if (commands.length>2 && commands[1].equals("inside") && !checkCardinals(commands)) {
 				command = command.substring(7,command.length())+"-in";
 			} else if (commands.length>2 && commands[1].equals("through") && !checkCardinals(commands)) {
-				command = command.substring(7,command.length())+"-thr";
+				command = command.substring(7,command.length());
+				userCommand.setThrough();
 			} else if (commands.length>3 && commands[1].equals("to") &&
 						commands[2].equals("the") && checkCardinals(commands)) {
 				command = command.substring(7,command.length());
@@ -125,10 +130,9 @@ public class Parser {
 			}
 		}
 		
-		parsedCommands[0] = commands[0];
-		parsedCommands[1] = command;
+		userCommand.setCommand(commands[0], command);
 		
-		return parsedCommands;
+		return userCommand;
 	}
 	
 	//Checks if the last word is a cardinal direction

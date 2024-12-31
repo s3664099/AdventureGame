@@ -42,7 +42,7 @@ public class Command {
 	}
 		
 	//Executes the command
-	public String processCommand(String [] commands, Location location, ArrayList<Item> inventory,int score) {
+	public String processCommand(UserCommand command, Location location, ArrayList<Item> inventory,int score) {
 		
 		//Sets the location
 		this.currentLocation = location;
@@ -52,8 +52,8 @@ public class Command {
 		response = "I'm sorry, I do not understand";
 		
 		//Goes through the verbs
-		String noun = commands[1];
-		String verb = commands[0];
+		String noun = command.getSubject();
+		String verb = command.getObject();
 				
 		//Go
 		if (verb.equals("go")) {
@@ -77,32 +77,32 @@ public class Command {
 		
 		//Look
 		} else if (verb.equals("look")) {
-			response = look(commands,location,inventory);
+			response = look(command,location,inventory);
 
 		//Take/Get
 		} else if ((verb.equals("take")) ||(verb.equals("get"))) {
-			if (commands.length == 1) {
-				response = "I need a verb";
+			if (noun.length() == 0) {
+				response = "I need a noun";
 			} else {
-				response = switchList(location.getItems(), inventory, commands[1], "I picked up the",false,true);
-				this.score = changeScore(false,commands[1],inventory,location); 
+				response = switchList(location.getItems(), inventory, noun, "I picked up the",false,true);
+				this.score = changeScore(false,noun,inventory,location); 
 			}
 			
 		//Drop
 		} else if (verb.equals("drop")) {
 			
-			if (commands.length == 1) {
-				response = "I need a verb";
+			if (noun.length() == 0) {
+				response = "I need a noun";
 			} else {
-				response = switchList(inventory,location.getItems(),commands[1], "I dropped the",false,false);
-				this.score = changeScore(true,commands[1],location.getItems(),location);
+				response = switchList(inventory,location.getItems(),noun, "I dropped the",false,false);
+				this.score = changeScore(true,noun,location.getItems(),location);
 			}
 		
 		//Lock/Unlock
 		} else if (verb.equals("unlock") || verb.equals("lock")) {
 
-			if (commands.length == 1) {
-				response = "I need a verb";
+			if (noun.length()==0) {
+				response = "I need a noun";
 			} else {
 				response = unlock(inventory,location.getExits(),location.getItems(), noun, verb);
 			}
@@ -110,8 +110,8 @@ public class Command {
 		//Move
 		} else if (verb.equals("move")) {
 			
-			if (commands.length == 1) {
-				response = "I need a verb";
+			if (noun.length()==0) {
+				response = "I need a noun";
 			} else {
 				response = move(location,noun);
 			}
@@ -120,7 +120,7 @@ public class Command {
 		} else if (verb.equals("save")) {
 			
 			//Checks if there is a name, and calls the save game function
-			if (commands.length == 1) {
+			if (noun.length()==0) {
 				response = "Please include a name for the saved game";
 			} else {
 				response = saveGame(location,inventory,score,noun);
@@ -129,7 +129,7 @@ public class Command {
 		} else if (verb.equals("load")) {
 			
 			//Checks if there is a name, and calls the load game function
-			if (commands.length == 1) {
+			if (noun.length()==0) {
 				
 				//If only one name, displays a list of save game files.
 				response = getGameList();
@@ -388,25 +388,25 @@ public class Command {
 		return response;
 	}
 		
-	private String look(String[] commands, Location location, ArrayList<Item> inventory) {
+	private String look(String noun, Location location, ArrayList<Item> inventory) {
 		String response = "";
 		
 		//Is the player just looking around the room
-		if ((commands[1].length()==0) || (commands[1].equals("around")) ||
-			 (commands[1].equals("room")) || (commands[1].equals("location"))) {
+		if ((noun.length()==0) || (noun.equals("around")) ||
+			 (noun.equals("room")) || (noun.equals("location"))) {
 			response = response.format("%s%n=======================",location.getName(true));
 		} else {
 			
 			boolean lookAll = false;
 			boolean lookInside = false;
 			
-			if (commands[1].equals("all")||commands[1].equals("everything")) {
+			if (noun.equals("all")||noun.equals("everything")) {
 				lookAll = true;
 				response = "You look at everything:";
 			}
 			
 			//Checks end of command to see if -in exists, and flags look inside
-			if (commands[1].length()>4) {
+			if (command.getSubject().length()>4) {
 				if (commands[1].substring(commands[1].length()-3,commands[1].length()).equals("-in")) {
 					lookInside = true;
 					commands[1] = commands[1].substring(0,commands[1].length()-3);

@@ -44,15 +44,15 @@ public class Main {
 			//Cycles through the list of commands and executes them.
 			for (String action:command) {
 			
-				String[] commands = parser.parseCommand(action);
-				gameRunning = display.displayResponse(processor.processCommand(commands,data,inventory,score));
+				UserCommand command = parser.parseCommand(action);
+				gameRunning = display.displayResponse(processor.processCommand(command,data,inventory,score));
 				
 				//Checks if the values have been cleared, if not, loads them.
 				if (processor.getCurrentLocation() != null) {
 					data = processor.getCurrentLocation();
 				}
 				
-				if (commands[0].equals("go")) {
+				if (command.getVerb().equals("go")) {
 					display.display(data);
 				}
 				

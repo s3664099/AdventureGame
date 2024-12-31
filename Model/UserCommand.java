@@ -22,12 +22,28 @@ public class UserCommand {
 		this.subject = subject;
 		this.object = object;
 	}
-	
+
 	public void setCommand(String verb,String subject) {
 		this.verb = verb;
 		this.subject = subject;
 	}
 	
+	public void setInside() {
+		this.lookInside = !this.lookInside;
+	}
+	
+	public void setAround() {
+		this.lookAround = !this.lookAround;
+	}
+	
+	public void setThrough() {
+		this.lookThrough = !this.lookThrough;
+	}
+	
+	public void setCardinal() {
+		this.isCardinal = !this.isCardinal;
+	}
+		
 	public String getVerb() {
 		return this.verb;
 	}
