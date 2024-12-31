@@ -53,7 +53,7 @@ public class Command {
 		
 		//Goes through the verbs
 		String noun = command.getSubject();
-		String verb = command.getObject();
+		String verb = command.getVerb();
 				
 		//Go
 		if (verb.equals("go")) {
@@ -388,8 +388,9 @@ public class Command {
 		return response;
 	}
 		
-	private String look(String noun, Location location, ArrayList<Item> inventory) {
+	private String look(UserCommand command, Location location, ArrayList<Item> inventory) {
 		String response = "";
+		String noun = command.getSubject();
 		
 		//Is the player just looking around the room
 		if ((noun.length()==0) || (noun.equals("around")) ||
@@ -398,21 +399,12 @@ public class Command {
 		} else {
 			
 			boolean lookAll = false;
-			boolean lookInside = false;
 			
 			if (noun.equals("all")||noun.equals("everything")) {
 				lookAll = true;
 				response = "You look at everything:";
 			}
-			
-			//Checks end of command to see if -in exists, and flags look inside
-			if (command.getSubject().length()>4) {
-				if (commands[1].substring(commands[1].length()-3,commands[1].length()).equals("-in")) {
-					lookInside = true;
-					commands[1] = commands[1].substring(0,commands[1].length()-3);
-				}
-			}
-			
+						
 			//Checks if the player is looking at the exit/Items
 			ArrayList<Exit> exits = location.getExits();
 			ArrayList<Item> items = location.getItems();
@@ -423,9 +415,8 @@ public class Command {
 						
 			//Exits
 			for (Exit exit:exits) {
-				
-				if (!lookInside) {
-					if (exit.equals(commands[1])) {
+				if (!command.getInside()) {
+					if (exit.equals(noun)) {
 						response = exit.getDescription();
 					} else if (lookAll) {
 						response = response.format("%s%n%s: %s", response,exit.getName(),exit.getDescription());
@@ -436,7 +427,7 @@ public class Command {
 			//Inventory
 			if (response.length()==0 || lookAll) {
 				for (Item item:inventory) {
-					if (item.equals(commands[1])) {
+					if (item.equals(noun)) {
 						response = item.getDescription();
 						itemIndex = index;
 					} else if (lookAll) {
@@ -450,11 +441,11 @@ public class Command {
 			if (response.length()==0 || lookAll) {
 				for (Item item:items) {
 					
-					if (item.equals(commands[1])) {
+					if (item.equals(noun)) {
 						
-						if (lookInside && (item.getClosed() || item.getLocked())) {
+						if (command.getInside() && (item.getClosed() || item.getLocked())) {
 							response = "I'm sorry, it is closed";
-						} else if (item.checkIsCover() || item.getCloseable() || !lookInside) {
+						} else if (item.checkIsCover() || item.getCloseable() || !command.getInside()) {
 							response = item.getDescription();
 							itemIndex = index;
 						} else {

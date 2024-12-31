@@ -12,7 +12,6 @@ public class UserCommand {
 	private String verb;
 	private String subject;
 	private String object;
-	private boolean lookAround = false;
 	private boolean lookInside = false;
 	private boolean isCardinal = false;
 	private boolean lookThrough = false;
@@ -31,11 +30,7 @@ public class UserCommand {
 	public void setInside() {
 		this.lookInside = !this.lookInside;
 	}
-	
-	public void setAround() {
-		this.lookAround = !this.lookAround;
-	}
-	
+		
 	public void setThrough() {
 		this.lookThrough = !this.lookThrough;
 	}
@@ -54,6 +49,10 @@ public class UserCommand {
 	
 	public String getObject() {
 		return this.object;
+	}
+	
+	public boolean getInside() {
+		return this.lookInside;
 	}
 }
 
