@@ -406,9 +406,11 @@ public class Command {
 			}
 			
 			//Checks end of command to see if -in exists, and flags look inside
-			if (commands[1].substring(commands[1].length()-3,commands[1].length()).equals("-in")) {
-				lookInside = true;
-				commands[1] = commands[1].substring(0,commands[1].length()-3);
+			if (commands[1].length()>4) {
+				if (commands[1].substring(commands[1].length()-3,commands[1].length()).equals("-in")) {
+					lookInside = true;
+					commands[1] = commands[1].substring(0,commands[1].length()-3);
+				}
 			}
 			
 			//Checks if the player is looking at the exit/Items
@@ -1016,5 +1018,6 @@ public class Command {
  * 27 August 2024 - Updated the lock/unlock and move commands
  * 29 August 2024 - Updated Conversation
  * 1 September 2024 - Added ability to pick/drop all items.
- * 31 December 2024 - Added the Look at Everything function
+ * 31 December 2024 - Added the Look at Everything function.
+ * 					- Added look in and fixed problem with short nouns
  */

@@ -70,22 +70,29 @@ public class Parser {
 				}
 			}
 		}
-		 
+				 
 		//Handles look command
 		if (commands.length>0 && commands[0].equals("look")) {
 			if (commands.length>1 && commands[1].equals("around")) {
 				if (commands.length>2 && (commands[2].equals("room") || 
-										  commands[2].equals("location"))) {
+										  commands[2].equals("location")
+										  || (commands[2].equals("the") &&
+											  commands[3].equals("room")))) {
 					command = command.substring(7,command.length());
 				}
-			} else if (command.length()>2 && commands[1].equals("at")) {
+			} else if (commands.length>2 && commands[1].equals("at") && !checkCardinals(commands)) {
 				command = command.substring(3,command.length());
-			} else if (command.length()>2 && commands[1].equals("in")) {
+			} else if (commands.length>2 && commands[1].equals("in") && !checkCardinals(commands)) {
 				command = command.substring(3,command.length())+"-in";
-			} else if (command.length()>2 && commands[1].equals("inside")) {
+			} else if (commands.length>2 && commands[1].equals("inside") && !checkCardinals(commands)) {
 				command = command.substring(7,command.length())+"-in";
+			} else if (commands.length>2 && commands[1].equals("through") && !checkCardinals(commands)) {
+				command = command.substring(7,command.length())+"-thr";
+			} else if (commands.length>3 && commands[1].equals("to") &&
+						commands[2].equals("the") && checkCardinals(commands)) {
+				command = command.substring(7,command.length());
 			}
-			
+						
 		//Examine command
 		} else if (commands[0].equals("examine") && commands.length>0) {
 			commands[0] = "look";

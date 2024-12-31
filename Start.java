@@ -5,9 +5,9 @@
  * This is the launcher. It should not need to be updated.
  */
 
+//TODO: Build and implement the class to hold and process the user command
 //TODO: Implement multi word parser
-//		add a look in for containers. Also inside.
-//			look through for non-cardinal directions
+//		add a look through for non-cardinal directions
 //			look to the for cardinal directions
 //				reveals the details of the room (if can).
 //			Consider a special command for under
