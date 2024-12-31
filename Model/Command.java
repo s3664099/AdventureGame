@@ -398,10 +398,17 @@ public class Command {
 		} else {
 			
 			boolean lookAll = false;
+			boolean lookInside = false;
 			
 			if (commands[1].equals("all")||commands[1].equals("everything")) {
 				lookAll = true;
 				response = "You look at everything:";
+			}
+			
+			//Checks end of command to see if -in exists, and flags look inside
+			if (commands[1].substring(commands[1].length()-3,commands[1].length()).equals("-in")) {
+				lookInside = true;
+				commands[1] = commands[1].substring(0,commands[1].length()-3);
 			}
 			
 			//Checks if the player is looking at the exit/Items
@@ -414,10 +421,13 @@ public class Command {
 						
 			//Exits
 			for (Exit exit:exits) {
-				if (exit.equals(commands[1])) {
-					response = exit.getDescription();
-				} else if (lookAll) {
-					response = response.format("%s%n%s: %s", response,exit.getName(),exit.getDescription());
+				
+				if (!lookInside) {
+					if (exit.equals(commands[1])) {
+						response = exit.getDescription();
+					} else if (lookAll) {
+						response = response.format("%s%n%s: %s", response,exit.getName(),exit.getDescription());
+					}
 				}
 			}
 			
@@ -439,9 +449,15 @@ public class Command {
 				for (Item item:items) {
 					
 					if (item.equals(commands[1])) {
-													
-						response = item.getDescription();
-						itemIndex = index;
+						
+						if (lookInside && (item.getClosed() || item.getLocked())) {
+							response = "I'm sorry, it is closed";
+						} else if (item.checkIsCover() || item.getCloseable() || !lookInside) {
+							response = item.getDescription();
+							itemIndex = index;
+						} else {
+							response = "I cannot look inside that";
+						}
 							
 						//Is the item hiding something
 						if (item.checkIsCover()) {

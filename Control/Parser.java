@@ -80,6 +80,10 @@ public class Parser {
 				}
 			} else if (command.length()>2 && commands[1].equals("at")) {
 				command = command.substring(3,command.length());
+			} else if (command.length()>2 && commands[1].equals("in")) {
+				command = command.substring(3,command.length())+"-in";
+			} else if (command.length()>2 && commands[1].equals("inside")) {
+				command = command.substring(7,command.length())+"-in";
 			}
 			
 		//Examine command
@@ -103,7 +107,6 @@ public class Parser {
 		//Strips 'the' from the object
 		if (command.length()>4 && command.substring(0,4).equals("the ")) {
 			command = command.substring(4,command.length());
-			System.out.println(command);
 		}
 		
 		//Processes talk/speak command
@@ -145,4 +148,5 @@ public class Parser {
  * 29 August 2024 - Fixed problem with move command for moving objects
  * 31 August 2024 - Added ne,nw,se,sw
  * 31 December 2024 - Fixed problem where look around/look room wasn't working
+ * 					- added code to look inside something
 */

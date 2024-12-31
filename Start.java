@@ -6,8 +6,10 @@
  */
 
 //TODO: Implement multi word parser
-//		Also look all/everything
 //		add a look in for containers. Also inside.
+//			look through for non-cardinal directions
+//			look to the for cardinal directions
+//				reveals the details of the room (if can).
 //			Consider a special command for under
 //      Complex Commands - use x in x, unlock x with x
 //TODO: Use command (Can also be applied to lock/unlock - also shovels and stuff).
