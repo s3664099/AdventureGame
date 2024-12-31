@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 1 September 2024
- * Version: 1.6
+ * Updated: 31 December 2024
+ * Version: 1.7
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -397,6 +397,13 @@ public class Command {
 			response = response.format("%s%n=======================",location.getName(true));
 		} else {
 			
+			boolean lookAll = false;
+			
+			if (commands[1].equals("all")||commands[1].equals("everything")) {
+				lookAll = true;
+				response = "You look at everything:";
+			}
+			
 			//Checks if the player is looking at the exit/Items
 			ArrayList<Exit> exits = location.getExits();
 			ArrayList<Item> items = location.getItems();
@@ -409,21 +416,26 @@ public class Command {
 			for (Exit exit:exits) {
 				if (exit.equals(commands[1])) {
 					response = exit.getDescription();
+				} else if (lookAll) {
+					response = response.format("%s%n%s: %s", response,exit.getName(),exit.getDescription());
 				}
 			}
 			
 			//Inventory
-			if (response.length()==0) {
+			if (response.length()==0 || lookAll) {
 				for (Item item:inventory) {
 					if (item.equals(commands[1])) {
 						response = item.getDescription();
 						itemIndex = index;
+					} else if (lookAll) {
+						response = response.format("%s%n%s - carrying: %s", 
+									response,item.getName(),item.getDescription());		
 					}
 				}
 			}
 			
 			//Items
-			if (response.length()==0) {
+			if (response.length()==0 || lookAll) {
 				for (Item item:items) {
 					
 					if (item.equals(commands[1])) {
@@ -482,6 +494,9 @@ public class Command {
 								}
 							} 
 						}
+					} else if (lookAll) {
+						response = response.format("%s%n%s: %s", 
+								response,item.getName(),item.getDescription());
 					}
 					index ++;
 				}
@@ -985,4 +1000,5 @@ public class Command {
  * 27 August 2024 - Updated the lock/unlock and move commands
  * 29 August 2024 - Updated Conversation
  * 1 September 2024 - Added ability to pick/drop all items.
+ * 31 December 2024 - Added the Look at Everything function
  */

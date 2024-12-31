@@ -7,6 +7,8 @@
 
 //TODO: Implement multi word parser
 //		Also look all/everything
+//		add a look in for containers. Also inside.
+//			Consider a special command for under
 //      Complex Commands - use x in x, unlock x with x
 //TODO: Use command (Can also be applied to lock/unlock - also shovels and stuff).
 //TODO: Commands embedded in objects/exits
