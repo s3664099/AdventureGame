@@ -5,7 +5,7 @@
  * This is the launcher. It should not need to be updated.
  */
 
-//TODO: Build and implement the class to hold and process the user command
+
 //TODO: Implement multi word parser
 //		add a look through for non-cardinal directions
 //			look to the for cardinal directions

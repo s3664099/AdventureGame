@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 31 August 2023
- * Updated: 31 December 2024
- * Version: 1.0
+ * Updated: 2 January 2025
+ * Version: 1.1
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -54,8 +54,16 @@ public class UserCommand {
 	public boolean getInside() {
 		return this.lookInside;
 	}
+	
+	public boolean getThrough() {
+		return this.lookThrough;
+	}
+	
+	public boolean getCardinal() {
+		return this.isCardinal;
+	}
 }
 
 /* 31 December 2024 - Created file
- * 
+ * 2 January 2025 - Added getters from lookThrough and isCardinal
  */

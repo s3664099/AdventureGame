@@ -1,7 +1,7 @@
 /* Title: Parser Class
  * Created: 25 August 2023
- * Updated: 31 December 2024
- * Version: 1.6
+ * Updated: 2 January 2025
+ * Version: 1.7
  * 
  * This processes the command. At this stage it is only a two work
  * command - noun and verb. Ideally, it will eventually process larger commands.
@@ -96,6 +96,9 @@ public class Parser {
 			} else if (commands.length>3 && commands[1].equals("to") &&
 						commands[2].equals("the") && checkCardinals(commands)) {
 				command = command.substring(7,command.length());
+				userCommand.setCardinal();
+			} else if (checkCardinals(commands)) {
+				userCommand.setCardinal();
 			}
 						
 		//Examine command
@@ -160,4 +163,5 @@ public class Parser {
  * 31 August 2024 - Added ne,nw,se,sw
  * 31 December 2024 - Fixed problem where look around/look room wasn't working
  * 					- added code to look inside something
+ * 2 January 2025 - Sets cardinal if looking in a direction
 */

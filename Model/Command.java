@@ -417,6 +417,16 @@ public class Command {
 			for (Exit exit:exits) {
 				if (!command.getInside()) {
 					if (exit.equals(noun)) {
+						
+						//Checks through
+							//Check Open
+								//If open shows what is next
+							//else
+								//Reponds cannot look through a closed .....
+						//Check Cardinal
+							//Shows what is there
+						//else
+						
 						response = exit.getDescription();
 					} else if (lookAll) {
 						response = response.format("%s%n%s: %s", response,exit.getName(),exit.getDescription());
@@ -518,6 +528,10 @@ public class Command {
 		}
 				
 		if (response.length()==0) {
+			
+			//Checks Cardinal
+				//Says cannot look in that direction
+			
 			response = "I don't quite understand what you mean";
 		}
 		
