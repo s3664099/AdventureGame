@@ -1,7 +1,7 @@
 /* Ordinary Exit Class
  * Created: 25 August 2023
- * Updated: 21 February 2024
- * Version 1.0
+ * Updated: 3 January 2025
+ * Version 1.1
  * Class to handle everything to do with an exit.
  */
 
@@ -67,7 +67,7 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
 
 	@Override
 	public boolean getOpen() {
-		return false;
+		return true;
 	}
 
 	//Is the exit openable
@@ -110,4 +110,5 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
  * 13 October 2023 - Added methods for exits to close and lock
  * 26 January 2024 - Made Object Serializable
  * 21 February 2024 - Added an add description method
+ * 3 January 2025 - Changed getOpen to default to true
 */

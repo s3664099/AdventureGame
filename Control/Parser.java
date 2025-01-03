@@ -91,7 +91,7 @@ public class Parser {
 			} else if (commands.length>2 && commands[1].equals("inside") && !checkCardinals(commands)) {
 				command = command.substring(7,command.length())+"-in";
 			} else if (commands.length>2 && commands[1].equals("through") && !checkCardinals(commands)) {
-				command = command.substring(7,command.length());
+				command = command.substring(8,command.length());
 				userCommand.setThrough();
 			} else if (commands.length>3 && commands[1].equals("to") &&
 						commands[2].equals("the") && checkCardinals(commands)) {

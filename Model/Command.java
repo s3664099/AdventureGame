@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 31 December 2024
- * Version: 1.7
+ * Updated: 3 January 2025
+ * Version: 1.8
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -417,7 +417,14 @@ public class Command {
 			for (Exit exit:exits) {
 				if (!command.getInside()) {
 					if (exit.equals(noun)) {
-						
+					
+						if(command.getThrough()) {
+							if (!exit.getOpen()) {
+								response = exit.getDestination().getName(true);
+							} else {
+								response = response.format("You cannot look through a closed %s", exit.getName());
+							}
+						} else {
 						//Checks through
 							//Check Open
 								//If open shows what is next
@@ -425,9 +432,9 @@ public class Command {
 								//Reponds cannot look through a closed .....
 						//Check Cardinal
 							//Shows what is there
-						//else
-						
-						response = exit.getDescription();
+											
+							response = exit.getDescription();
+						}
 					} else if (lookAll) {
 						response = response.format("%s%n%s: %s", response,exit.getName(),exit.getDescription());
 					}
@@ -1025,4 +1032,5 @@ public class Command {
  * 1 September 2024 - Added ability to pick/drop all items.
  * 31 December 2024 - Added the Look at Everything function.
  * 					- Added look in and fixed problem with short nouns
+ * 3 January 2025 - The look through an exit now works.
  */
