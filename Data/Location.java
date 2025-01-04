@@ -161,6 +161,7 @@ public class Location implements Serializable {
 	
 	public int getScore() {
 		int score = this.score;
+		this.score = 0;
 		return score;
 	}
 	
@@ -206,6 +207,6 @@ public class Location implements Serializable {
 *                   player's inventory when saving. Also score 
 * 19 August 2024 - Added scoring for entering a room and also creating an end condition
 * 					for entering a room
-* 20 August 2024 - End condition now works.     
-* 4 January 2025 - Removed code that clears the inventory and score.    
+* 20 August 2024 - End condition now works.  
+* 4 January 2025 - Created temporary fix for retrieving the inventory, though for some strange reason it won't make a deep copy.       
 */

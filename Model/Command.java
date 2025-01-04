@@ -889,7 +889,7 @@ public class Command {
 				//Load successful. Sets location, inventory & score
 				this.currentLocation = (Location) fileIn.readObject();
 				this.score = this.currentLocation.getScore();
-				
+								
 				if (this.currentLocation.getInventory() != null) {
 					this.inventory = this.currentLocation.getInventory();
 				}
