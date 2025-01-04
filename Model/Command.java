@@ -812,7 +812,7 @@ public class Command {
 	}
 	
 	//save Game method
-	public String saveGame(Location location, ArrayList<Item> inventory, int score, String saveName) {
+	private String saveGame(Location location, ArrayList<Item> inventory, int score, String saveName) {
 
 		boolean writeFile = false;
 				
@@ -892,6 +892,10 @@ public class Command {
 				
 				if (this.currentLocation.getInventory() != null) {
 					this.inventory = this.currentLocation.getInventory();
+				}
+				
+				for (Item x:this.inventory) {
+					System.out.println(x.getDescription());
 				}
 				
 				fileIn.close();

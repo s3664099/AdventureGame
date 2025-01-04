@@ -1,7 +1,7 @@
 /* Location Class
  * Created: 25 August 2023
- * Updated: 20 August 2024
- * Version: 1.2
+ * Updated: 4 January 2025
+ * Version: 1.3
  * The class that holds the details of the locations and handles
  * any actions that deal with the location
  */
@@ -156,14 +156,11 @@ public class Location implements Serializable {
 		
 		ArrayList<Item> inventory = this.inventory;
 			
-		this.inventory = null;
-		
 		return inventory;
 	}
 	
 	public int getScore() {
 		int score = this.score;
-		this.score = 0;
 		return score;
 	}
 	
@@ -209,5 +206,6 @@ public class Location implements Serializable {
 *                   player's inventory when saving. Also score 
 * 19 August 2024 - Added scoring for entering a room and also creating an end condition
 * 					for entering a room
-* 20 August 2024 - End condition now works.         
+* 20 August 2024 - End condition now works.     
+* 4 January 2025 - Removed code that clears the inventory and score.    
 */
