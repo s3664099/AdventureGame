@@ -1,13 +1,15 @@
 /* Query
  * Created: 23 March 2024
- * Updated: 14 May 2024
- * Version: 1.0
+ * Updated: 4 January 2025
+ * Version: 1.5
  * Options for conversation.
  */
 
 package Data;
 
-public class Query {
+import java.io.Serializable;
+
+public class Query implements Serializable {
 
 	private String question;
 	private Conversation conversation;
@@ -53,4 +55,5 @@ public class Query {
  * 10 May 2024 - Added end conversation boolean with setters & getters. Made variables 
  * 				 private
  * 14 May 2024 - Added function to add a conversation to the query.
+ * 4 January 2025 - Made Class serializable
 */

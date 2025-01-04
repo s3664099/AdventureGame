@@ -1,8 +1,8 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 3 January 2025
- * Version: 1.8
- * Class that handles fuctions that deal with commands that are entered.
+ * Updated: 4 January 2025
+ * Version: 1.9
+ * Class that handles functions that deal with commands that are entered.
  */
 
 package Model;
@@ -18,7 +18,6 @@ import java.io.ObjectInputStream;
 
 import Data.CarriableItem;
 import Data.Container;
-import Data.Conversation;
 import Data.Exit;
 import Data.Item;
 import Data.Location;
@@ -425,15 +424,11 @@ public class Command {
 								response = response.format("You cannot look through a closed %s", exit.getName());
 							}
 						} else {
-						//Checks through
-							//Check Open
-								//If open shows what is next
-							//else
-								//Reponds cannot look through a closed .....
-						//Check Cardinal
-							//Shows what is there
-											
-							response = exit.getDescription();
+							if (command.getCardinal()) {
+								response = exit.getDestination().getName(true);
+							} else {									
+								response = exit.getDescription();
+							}
 						}
 					} else if (lookAll) {
 						response = response.format("%s%n%s: %s", response,exit.getName(),exit.getDescription());
@@ -1033,4 +1028,5 @@ public class Command {
  * 31 December 2024 - Added the Look at Everything function.
  * 					- Added look in and fixed problem with short nouns
  * 3 January 2025 - The look through an exit now works.
+ * 4 January 2025 - Completed the look through cardinal directions
  */

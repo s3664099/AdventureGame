@@ -1,16 +1,17 @@
 /* Conversation
  * Created: 23 March 2024
- * Updated: 8 June 2024
- * Version: 1.0
+ * Updated: 4 January 2025
+ * Version: 1.1
  * Class for conversations.
  */
 
 package Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Conversation {
+public class Conversation implements Serializable {
 
 	private String response;
 	private ArrayList<Query> queries = new ArrayList<Query>();
@@ -179,4 +180,5 @@ public class Conversation {
  * 11 May 2024 - Added functionality to end conversation. Started building end conversation
  * 14 May 2024 - Fixing issue with last reply
  * 8 June 2024 - Cleared the array.
+ * 4 January 2025 - Made class serializable
 */
