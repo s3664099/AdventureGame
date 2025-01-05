@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 31 August 2023
- * Updated: 2 January 2025
- * Version: 1.1
+ * Updated: 5 January 2025
+ * Version: 1.2
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -15,6 +15,7 @@ public class UserCommand {
 	private boolean lookInside = false;
 	private boolean isCardinal = false;
 	private boolean lookThrough = false;
+	private boolean useWith = false;
 	
 	public void setCommand(String verb,String subject, String object) {
 		this.verb = verb;
@@ -27,6 +28,10 @@ public class UserCommand {
 		this.subject = subject;
 	}
 	
+	public void setObject(String object) {
+		this.object = object;
+	}
+	
 	public void setInside() {
 		this.lookInside = !this.lookInside;
 	}
@@ -37,6 +42,10 @@ public class UserCommand {
 	
 	public void setCardinal() {
 		this.isCardinal = !this.isCardinal;
+	}
+	
+	public void setWith() {
+		this.useWith = !this.useWith;
 	}
 		
 	public String getVerb() {
@@ -62,8 +71,14 @@ public class UserCommand {
 	public boolean getCardinal() {
 		return this.isCardinal;
 	}
+	
+	public boolean getWith() {
+		return this.useWith;
+	}
 }
 
 /* 31 December 2024 - Created file
  * 2 January 2025 - Added getters from lookThrough and isCardinal
+ * 5 January 2025 - Added boolean to flag is user is using a with command
+ * 				  - Added separate method to set the object
  */

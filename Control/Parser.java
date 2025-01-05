@@ -1,7 +1,7 @@
 /* Title: Parser Class
  * Created: 25 August 2023
- * Updated: 2 January 2025
- * Version: 1.7
+ * Updated: 5 January 2025
+ * Version: 1.8
  * 
  * This processes the command. At this stage it is only a two work
  * command - noun and verb. Ideally, it will eventually process larger commands.
@@ -16,7 +16,8 @@ public class Parser {
 	String[] cardinals = {"north","south","east","west","up","down","northeast",
 							"northwest","southeast","southwest","north-east",
 							"north-west","south-east","south-west"};
-	String parsedCommands[] = {"","",""}; 
+	String parsedCommands[] = {"","",""};
+	String object = "";
 	
 	//Turns the command into verb noun formation
 	public UserCommand parseCommand(String command) {
@@ -118,11 +119,11 @@ public class Parser {
 				command = command.substring(5,command.length());
 			}
 		}
-
-		//Strips 'the' from the object
-		if (command.length()>4 && command.substring(0,4).equals("the ")) {
-			command = command.substring(4,command.length());
-		}
+		
+		//Use Command
+			//Splits with on/in
+			//Adds to command and process use in command
+			//Checks the second item, which holds the correct command and the switches the nouns and puts the correct verb
 		
 		//Processes talk/speak command
 		if ((commands[0].equals("talk") || commands[0].equals("speak")) && commands.length>1) {
@@ -131,9 +132,29 @@ public class Parser {
 			} else if ((commands[1].equals("with")) && commands.length>2) {
 				command = command.substring(5,command.length());
 			}
+		} else if (command.contains(" with ")) {
+			String[] splitCommand = command.split(" with ");
+			command = splitCommand[0];
+			object = splitCommand[1];
+			userCommand.setWith();
+		
+		//Sets flag for error if command ends with 'with' and contains no object
+		} else if (command.substring(command.length()-5, command.length()).equals(" with")) {
+			command = command.substring(0,command.length()-5);
+			userCommand.setWith();
+		}
+				
+		//Strips 'the' from the subject
+		if (command.length()>4 && command.substring(0,4).equals("the ")) {
+			command = command.substring(4,command.length());
 		}
 		
-		userCommand.setCommand(commands[0], command);
+		//Strips 'the' from the object
+		if (object.length()>4 && object.substring(0,4).equals("the ")) {
+			object = object.substring(4,command.length());
+		}
+				
+		userCommand.setCommand(commands[0], command,object);
 		
 		return userCommand;
 	}
@@ -164,4 +185,6 @@ public class Parser {
  * 31 December 2024 - Fixed problem where look around/look room wasn't working
  * 					- added code to look inside something
  * 2 January 2025 - Sets cardinal if looking in a direction
+ * 5 January 2025 - Added code to flag where player using 'with'
+ * 
 */

@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 4 January 2025
- * Version: 1.9
+ * Updated: 5 January 2025
+ * Version: 1.10
  * Class that handles functions that deal with commands that are entered.
  */
 
@@ -53,9 +53,14 @@ public class Command {
 		//Goes through the verbs
 		String noun = command.getSubject();
 		String verb = command.getVerb();
-				
+		String object = command.getObject();
+		
+		//Is with being used, but no object
+		if (command.getWith() && object.length()==0) {
+			response = "With what?";
+		
 		//Go
-		if (verb.equals("go")) {
+		} else if (verb.equals("go")) {
 			response = changeLocation(noun);
 			this.displayLocation = true;
 		
@@ -1033,4 +1038,5 @@ public class Command {
  * 					- Added look in and fixed problem with short nouns
  * 3 January 2025 - The look through an exit now works.
  * 4 January 2025 - Completed the look through cardinal directions
+ * 5 January 2025 - Added check to make sure an object is included with 'with'
  */

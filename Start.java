@@ -7,11 +7,12 @@
 
 
 //TODO: Implement multi word parser
-//		add a look through for non-cardinal directions
-//			look to the for cardinal directions
-//				reveals the details of the room (if can).
 //			Consider a special command for under
-//      Complex Commands - use x in x, unlock x with x
+//			Handle the with section here - and if there is a with, will do both of them.
+//				Each of the commands, if with it errors unless unlock
+//				Add a with to carriable items that unless with specific item cannot pick it up
+//				Ditto with open and moveable items
+//      Complex Commands - use x in x
 //TODO: Use command (Can also be applied to lock/unlock - also shovels and stuff).
 //TODO: Commands embedded in objects/exits
 //TODO: Option to select Games to Play
