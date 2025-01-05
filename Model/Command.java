@@ -60,16 +60,16 @@ public class Command {
 			response = "With what?";
 		
 		//Go
-		} else if (verb.equals("go")) {
+		} else if (verb.equals("go") && !command.getWith()) {
 			response = changeLocation(noun);
 			this.displayLocation = true;
 		
 		//Open/Close
-		} else if (verb.equals("open") || verb.equals("close")) {
+		} else if ((verb.equals("open") || verb.equals("close")) && !command.getWith()) {
 			response = openExit(noun,verb);
 		
 		//Inventory
-		} else if (verb.equals("inventory")) {
+		} else if (verb.equals("inventory") && !command.getWith()) {
 			if (inventory.size() == 0) {
 				response = "I am carrying nothing";
 			} else {
@@ -80,11 +80,11 @@ public class Command {
 			}
 		
 		//Look
-		} else if (verb.equals("look")) {
+		} else if (verb.equals("look") && !command.getWith()) {
 			response = look(command,location,inventory);
 
 		//Take/Get
-		} else if ((verb.equals("take")) ||(verb.equals("get"))) {
+		} else if ((verb.equals("take") || verb.equals("get")) && !command.getWith()) {
 			if (noun.length() == 0) {
 				response = "I need a noun";
 			} else {
@@ -93,7 +93,7 @@ public class Command {
 			}
 			
 		//Drop
-		} else if (verb.equals("drop")) {
+		} else if (verb.equals("drop") && !command.getWith()) {
 			
 			if (noun.length() == 0) {
 				response = "I need a noun";
@@ -112,7 +112,7 @@ public class Command {
 			}
 
 		//Move
-		} else if (verb.equals("move")) {
+		} else if (verb.equals("move") && !command.getWith()) {
 			
 			if (noun.length()==0) {
 				response = "I need a noun";
@@ -121,7 +121,7 @@ public class Command {
 			}
 
 		//Save/Load Game
-		} else if (verb.equals("save")) {
+		} else if (verb.equals("save") && !command.getWith()) {
 			
 			//Checks if there is a name, and calls the save game function
 			if (noun.length()==0) {
@@ -130,7 +130,7 @@ public class Command {
 				response = saveGame(location,inventory,score,noun);
 			}
 			
-		} else if (verb.equals("load")) {
+		} else if (verb.equals("load") && !command.getWith()) {
 			
 			//Checks if there is a name, and calls the load game function
 			if (noun.length()==0) {
@@ -147,11 +147,11 @@ public class Command {
 			response = conversation(noun, location.getItems());
 
 		//Scoring
-		} else if (verb.equals("score")) {
+		} else if (verb.equals("score") && noun.length()==0 && !command.getWith()) {
 			response = response.format("Your score is %s/%s",this.score,this.topScore);
 
 		//End Game
-		} else if (verb.equals("quit")) {
+		} else if (verb.equals("quit") && noun.length()==0 && !command.getWith()) {
 			response = "END";
 		}
 		
@@ -1039,4 +1039,5 @@ public class Command {
  * 3 January 2025 - The look through an exit now works.
  * 4 January 2025 - Completed the look through cardinal directions
  * 5 January 2025 - Added check to make sure an object is included with 'with'
+ * 					Added checks to each of the command to see if 'with' being used
  */

@@ -139,7 +139,8 @@ public class Parser {
 			userCommand.setWith();
 		
 		//Sets flag for error if command ends with 'with' and contains no object
-		} else if (command.substring(command.length()-5, command.length()).equals(" with")) {
+		} else if (command.length()>5 &&
+					command.substring(command.length()-5, command.length()).equals(" with")) {
 			command = command.substring(0,command.length()-5);
 			userCommand.setWith();
 		}
