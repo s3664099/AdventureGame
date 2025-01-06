@@ -58,7 +58,7 @@ public class Command {
 		//Is with being used, but no object
 		if (command.getWith() && object.length()==0) {
 			response = "With what?";
-		
+					
 		//Go
 		} else if (verb.equals("go") && !command.getWith()) {
 			response = changeLocation(noun);
@@ -108,7 +108,7 @@ public class Command {
 			if (noun.length()==0) {
 				response = "I need a noun";
 			} else {
-				response = unlock(inventory,location.getExits(),location.getItems(), noun, verb);
+				response = unlock(inventory,location.getExits(),location.getItems(), command);
 			}
 
 		//Move
@@ -563,105 +563,124 @@ public class Command {
 		return response;
 	}
 	
-	private String unlock(ArrayList<Item> inventory, ArrayList<Exit>exits, ArrayList<Item>items,String command, String verb) {
+	private String unlock(ArrayList<Item> inventory, ArrayList<Exit>exits, ArrayList<Item>items, UserCommand command) {
 	
 		response = "I do not see that here";
 		boolean found = false;
 		boolean foundItem = false;
+		String verb = command.getVerb();
+		String subject = command.getSubject();
+		Item key = null;
 		
-		//Checks to see if the player is attempting to unlock an exit
-		for (Exit exit:exits) {
+		//checks if player has included the with object
+		if (!command.getWith()) {
+		
+			response = "with what?";
 			
-			if (exit.equals(command)) {
-				
-				foundItem = true;
-				for (Item item:inventory) {
-						
-					if (item == exit.getKey()) {
-						found = true;
-							
-						//Acts on either lock/unlock, which does the opposite.
-						if (verb.equals("unlock")) {
-							if (exit.getLocked()) {
-								response = exit.lockUnlock((CarriableItem) item, verb);
-							} else {
-								response = response.format("The %s is already unlocked",exit.getName());
-							}
-						} else if (verb.equals("lock")) {
-							if (!exit.getLocked()) {
-									
-								//If exit is open, cannot be locked
-								if (!exit.getOpen()) {
-									response = response.format("The %s is open. Please close it first", exit.getName());
-								} else {
-									response = exit.lockUnlock((CarriableItem) item, verb);
-								}
-									
-							} else {
-								response = response.format("The %s is already locked",exit.getName());
-							}								
-						}
-					}
-					
-					if (!found) {
-						response = "You don't have the key";
-					}
+		} else {
+			
+			//Checks if player is carrying the item
+			for (Item item:inventory) {
+				if (item.equals(command.getObject())) {
+					key = item;
 				}
 			}
-		}
-		
-		//It wasn't an exit, so we now check the items.
-		if (!foundItem) {
-			for (Item container:items) {
-				if (container.equals(command)) {
-					
-					//The container isn't lockable
-					if(!container.getLockable()) {
-						response = response.format("The %s isn't lockable",container.getName());
-					} else {
-							
-						//Checks if player has the key
+			
+			if (key == null) {
+				response = "You don't have it";
+			} else {
+
+				//Checks to see if the player is attempting to unlock an exit
+				for (Exit exit:exits) {
+			
+					if (exit.equals(subject)) {
+				
+						foundItem = true;
 						for (Item item:inventory) {
-							if (container.checkKey(item)) {
+					
+							//If with checks if item in inventory, and item is the key, and activates
+							if (item == exit.getKey()) {
 								found = true;
-								
+							
 								//Acts on either lock/unlock, which does the opposite.
 								if (verb.equals("unlock")) {
-										
-									//Checks if the container is already locked.
-									if (container.getLocked()) {
-										container.setLocked();
-										response = response.format("You unlock the %s",container.getName());
+									if (exit.getLocked()) {
+										response = exit.lockUnlock((CarriableItem) item, verb);
 									} else {
-										response = response.format("The %s is already unlocked",container.getName());
+										response = response.format("The %s is already unlocked",exit.getName());
 									}
-										
 								} else if (verb.equals("lock")) {
-										
-									//Checks if the container is already locked
-									if (!container.getLocked()) {
-											
-										//Checks if the container is open. Cannot lock and open conmtainer
-										if (!container.getClosed()) {
-											response = response.format("The %s is still open. Please close it first", container.getName());
+									if (!exit.getLocked()) {
+									
+										//If exit is open, cannot be locked
+										if (!exit.getOpen()) {
+											response = response.format("The %s is open. Please close it first", exit.getName());
 										} else {
-											container.setLocked();
-											response = response.format("You lock the %s",container.getName());
+											response = exit.lockUnlock((CarriableItem) item, verb);
 										}
+									
 									} else {
-										response = response.format("The %s is already locked",container.getName());
+										response = response.format("The %s is already locked",exit.getName());
 									}								
 								}
 							}
-							if (!found) {
-								response = "You don't have the key";
-							}		
+						}
+					}
+				}
+		
+				//It wasn't an exit, so we now check the items.
+				if (!foundItem) {
+					for (Item container:items) {
+						if (container.equals(subject)) {
+					
+							//The container isn't lockable
+							if(!container.getLockable()) {
+								response = response.format("The %s isn't lockable",container.getName());
+							} else {
+							
+								//Checks if player has the key
+								for (Item item:inventory) {
+									if (container.checkKey(item)) {
+										found = true;
+								
+										//Acts on either lock/unlock, which does the opposite.
+										if (verb.equals("unlock")) {
+										
+											//Checks if the container is already locked.
+											if (container.getLocked()) {
+												container.setLocked();
+												response = response.format("You unlock the %s",container.getName());
+											} else {
+												response = response.format("The %s is already unlocked",container.getName());
+											}
+										
+										} else if (verb.equals("lock")) {
+										
+											//Checks if the container is already locked
+											if (!container.getLocked()) {
+											
+												//Checks if the container is open. Cannot lock and open conmtainer
+												if (!container.getClosed()) {
+													response = response.format("The %s is still open. Please close it first", container.getName());
+												} else {
+													container.setLocked();
+													response = response.format("You lock the %s",container.getName());
+												}
+											} else {
+												response = response.format("The %s is already locked",container.getName());
+											}								
+										}
+									}
+									if (!found) {
+										response = "You don't have the key";
+									}		
+								}
+							}
 						}
 					}
 				}
 			}
 		}
-		
 		return response;
 	}
 	

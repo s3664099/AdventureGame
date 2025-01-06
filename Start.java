@@ -9,7 +9,6 @@
 //TODO: Implement multi word parser
 //			Consider a special command for under
 //			Handle the with section here - and if there is a with, will do both of them.
-//				Each of the commands, if with it errors unless unlock
 //				Add a with to carriable items that unless with specific item cannot pick it up
 //				Ditto with open and moveable items
 //      Complex Commands - use x in x
