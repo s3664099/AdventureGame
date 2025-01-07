@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 5 January 2025
- * Version: 1.10
+ * Updated: 7 January 2025
+ * Version: 1.11
  * Class that handles functions that deal with commands that are entered.
  */
 
@@ -589,40 +589,38 @@ public class Command {
 			if (key == null) {
 				response = "You don't have it";
 			} else {
+				
+				//Checks the Exit - compares the key - if equal then locks/unlocks
 
 				//Checks to see if the player is attempting to unlock an exit
 				for (Exit exit:exits) {
 			
 					if (exit.equals(subject)) {
-				
-						foundItem = true;
-						for (Item item:inventory) {
-					
-							//If with checks if item in inventory, and item is the key, and activates
-							if (item == exit.getKey()) {
-								found = true;
+						
+						if (!key.equals(exit.getKey()) || !exit.isLockable()) {
+							response = "It doesn't work";
+						} else {
 							
-								//Acts on either lock/unlock, which does the opposite.
-								if (verb.equals("unlock")) {
-									if (exit.getLocked()) {
-										response = exit.lockUnlock((CarriableItem) item, verb);
-									} else {
-										response = response.format("The %s is already unlocked",exit.getName());
-									}
-								} else if (verb.equals("lock")) {
-									if (!exit.getLocked()) {
-									
-										//If exit is open, cannot be locked
-										if (!exit.getOpen()) {
-											response = response.format("The %s is open. Please close it first", exit.getName());
-										} else {
-											response = exit.lockUnlock((CarriableItem) item, verb);
-										}
-									
-									} else {
-										response = response.format("The %s is already locked",exit.getName());
-									}								
+							//Acts on either lock/unlock, which does the opposite.
+							if (verb.equals("unlock")) {
+								if (exit.getLocked()) {
+									response = exit.lockUnlock((CarriableItem) key, verb);
+								} else {
+									response = response.format("The %s is already unlocked",exit.getName());
 								}
+							} else if (verb.equals("lock")) {
+								if (!exit.getLocked()) {
+									
+									//If exit is open, cannot be locked
+									if (!exit.getOpen()) {
+										response = response.format("The %s is open. Please close it first", exit.getName());
+									} else {
+										response = exit.lockUnlock((CarriableItem) key, verb);
+									}
+									
+								} else {
+									response = response.format("The %s is already locked",exit.getName());
+								}								
 							}
 						}
 					}
@@ -1059,4 +1057,5 @@ public class Command {
  * 4 January 2025 - Completed the look through cardinal directions
  * 5 January 2025 - Added check to make sure an object is included with 'with'
  * 					Added checks to each of the command to see if 'with' being used
+ * 7 January 2025 - Made the lock/unlock command to require the item to be described.
  */

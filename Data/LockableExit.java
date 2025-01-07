@@ -1,7 +1,7 @@
 /* LockableExit Class
  * Created: 11 October 2023
- * Updated: 7 April 2024
- * Version 1.0
+ * Updated: 7 January 2025
+ * Version 1.1
  * Class to handle and exit that can be locked
  */
 
@@ -14,7 +14,6 @@ public class LockableExit extends CloseableExit implements Exit,Serializable {
 	
 	private boolean locked;
 	private CarriableItem key;
-	private boolean lockable = true;
 	private Item item;
 	private boolean itemRevealed;	
 		
@@ -93,6 +92,10 @@ public class LockableExit extends CloseableExit implements Exit,Serializable {
 	public boolean isOpenable() {
 		return true;
 	}
+	
+	public boolean isLockable() {
+		return true;
+	}
 
 	@Override
 	public String getDescription() {
@@ -124,4 +127,5 @@ public class LockableExit extends CloseableExit implements Exit,Serializable {
  * 13 October 2023 - Added Lockable specific methods
  * 26 January 2024 - Made class serializable
  * 7 April 2024 - Added functions for items to be revealed
+ * 7 January 2025 - Added lockable to confirm that this object can be locked.
 */

@@ -54,6 +54,41 @@ public class Data_Process {
 		hall.addExit(ne);
 		window.addExit(sw);
 		
+		Location library = new Location("In a library", "A cozy library with walls lined with bookshelves. A leather armchair sits in one corner.");
+		Container bookshelf = new Container("Tall Oak Bookshelf", "An old bookshelf filled with dusty tomes and journals.", true);
+		CarriableItem diary = new CarriableItem("Leather-bound Diary", "An old diary with a lock on it. It might contain secrets.");
+		bookshelf.addItem(diary);
+		library.addItem(bookshelf);
+		OrdinaryExit west = new OrdinaryExit("West", library, false);
+		kitchen.addExit(west);
+		library.addExit(south);
+
+		Location storage = new Location("In the storage room", "A small, cluttered room filled with crates and forgotten items.");
+		Container crate = new Container("Wooden Crate", "A large crate covered in cobwebs.", true);
+		CarriableItem flashlight = new CarriableItem("Flashlight", "An old flashlight. It might still work.");
+		crate.addItem(flashlight);
+		storage.addItem(crate);
+		OrdinaryExit east = new OrdinaryExit("East", storage, false);
+		hall.addExit(east);
+		storage.addExit(west);
+
+		Location roof = new Location("On the roof", "A flat rooftop with a great view of the city skyline. The wind is strong up here.");
+		ImmoveableItem antenna = new ImmoveableItem("Rusted Antenna", "An old TV antenna that no longer serves its purpose.");
+		MoveableItem box = new MoveableItem("Small Wooden Box", "A box that seems out of place here. It rattles when moved.", antenna);
+		roof.addItem(box);
+		OrdinaryExit up = new OrdinaryExit("Up", roof, false);
+		window.addExit(up);
+		roof.addExit(sw);
+
+		Location basement = new Location("In the basement", "A damp and dark basement filled with a musty smell.");
+		Container chest = new Container("Iron-bound Chest", "A heavy chest with a large padlock.", true);
+		CarriableItem map = new CarriableItem("Treasure Map", "An old map with faded markings. It might lead to something valuable.");
+		chest.addItem(map);
+		basement.addItem(chest);
+		OrdinaryExit down = new OrdinaryExit("Down", basement, false);
+		//stairs.addExit(down);
+		//basement.addExit(street);
+
 		//Hooker - Can't enter room while Hooker present. Get rid of hooker to enter
 		//Hooker Room - Dildo
 		//A Street in Soho
