@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 7 January 2025
- * Version: 1.11
+ * Updated: 8 January 2025
+ * Version: 1.12
  * Class that handles functions that deal with commands that are entered.
  */
 
@@ -590,13 +590,12 @@ public class Command {
 				response = "You don't have it";
 			} else {
 				
-				//Checks the Exit - compares the key - if equal then locks/unlocks
-
 				//Checks to see if the player is attempting to unlock an exit
 				for (Exit exit:exits) {
 			
 					if (exit.equals(subject)) {
-						
+				
+						//Compares Key
 						if (!key.equals(exit.getKey()) || !exit.isLockable()) {
 							response = "It doesn't work";
 						} else {
@@ -623,6 +622,7 @@ public class Command {
 								}								
 							}
 						}
+						foundItem = true;
 					}
 				}
 		
@@ -632,49 +632,45 @@ public class Command {
 						if (container.equals(subject)) {
 					
 							//The container isn't lockable
-							if(!container.getLockable()) {
-								response = response.format("The %s isn't lockable",container.getName());
+							if(!container.checkKey(key) || !container.getLockable()) {
+								response = "It doesn't work";
 							} else {
-							
-								//Checks if player has the key
-								for (Item item:inventory) {
-									if (container.checkKey(item)) {
-										found = true;
 								
-										//Acts on either lock/unlock, which does the opposite.
-										if (verb.equals("unlock")) {
+								found = true;
+								
+								//Acts on either lock/unlock, which does the opposite.
+								if (verb.equals("unlock")) {
 										
-											//Checks if the container is already locked.
-											if (container.getLocked()) {
-												container.setLocked();
-												response = response.format("You unlock the %s",container.getName());
-											} else {
-												response = response.format("The %s is already unlocked",container.getName());
-											}
-										
-										} else if (verb.equals("lock")) {
-										
-											//Checks if the container is already locked
-											if (!container.getLocked()) {
-											
-												//Checks if the container is open. Cannot lock and open conmtainer
-												if (!container.getClosed()) {
-													response = response.format("The %s is still open. Please close it first", container.getName());
-												} else {
-													container.setLocked();
-													response = response.format("You lock the %s",container.getName());
-												}
-											} else {
-												response = response.format("The %s is already locked",container.getName());
-											}								
-										}
+									//Checks if the container is already locked.
+									if (container.getLocked()) {
+										container.setLocked();
+										response = response.format("You unlock the %s",container.getName());
+									} else {
+										response = response.format("The %s is already unlocked",container.getName());
 									}
-									if (!found) {
-										response = "You don't have the key";
-									}		
+										
+								} else if (verb.equals("lock")) {
+										
+									//Checks if the container is already locked
+									if (!container.getLocked()) {
+											
+										//Checks if the container is open. Cannot lock and open conmtainer
+										if (!container.getClosed()) {
+											response = response.format("The %s is still open. Please close it first", container.getName());
+										} else {
+											container.setLocked();
+											response = response.format("You lock the %s",container.getName());
+										}
+									} else {
+										response = response.format("The %s is already locked",container.getName());
+									}								
 								}
 							}
+							foundItem = true;
 						}
+						
+						//Unlock a carriable item
+						//Unlock/Open a bag - need to exclude a bag from above as can only open/unlock a baq when carrying
 					}
 				}
 			}
@@ -1058,4 +1054,5 @@ public class Command {
  * 5 January 2025 - Added check to make sure an object is included with 'with'
  * 					Added checks to each of the command to see if 'with' being used
  * 7 January 2025 - Made the lock/unlock command to require the item to be described.
+ * 8 January 2025 - Did the unlock for containers
  */

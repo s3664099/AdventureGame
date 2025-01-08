@@ -6,14 +6,24 @@
  */
 
 
+// Check that if close a container can no longer pick up the items inside.
+// One looked in container the item should appear in the display - x contains y
+// No longer displays afterwards if closed
+
+
 //TODO: Implement multi word parser
-//			Consider a special command for under
+//			Read an Item
+//			Test Unlock Object - The Bookcase
 //			Handle the with section here - and if there is a with, will do both of them.
 //				Add a with to carriable items that unless with specific item cannot pick it up
 //				Ditto with open and moveable items
+//				Can unlock a carriable Item (the book)
+//				Do a Bag (can be locked as well, but only open if carried).
+//		Put something in container/bag
 //      Complex Commands - use x in x
 //TODO: Use command (Can also be applied to lock/unlock - also shovels and stuff).
 //TODO: Commands embedded in objects/exits
+//			Consider a special command for under
 //TODO: Option to select Games to Play
 //TODO: Begin Building Other Game
 //TODO; Consider add scores when certain actions are performed
