@@ -545,10 +545,6 @@ public class Command {
 		}
 				
 		if (response.length()==0) {
-			
-			//Checks Cardinal
-				//Says cannot look in that direction
-			
 			response = "I don't quite understand what you mean";
 		}
 		

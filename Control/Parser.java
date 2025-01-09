@@ -1,7 +1,7 @@
 /* Title: Parser Class
  * Created: 25 August 2023
- * Updated: 5 January 2025
- * Version: 1.8
+ * Updated: 9 January 2025
+ * Version: 1.9
  * 
  * This processes the command. At this stage it is only a two work
  * command - noun and verb. Ideally, it will eventually process larger commands.
@@ -144,6 +144,20 @@ public class Parser {
 			command = command.substring(0,command.length()-5);
 			userCommand.setWith();
 		}
+		
+		if (commands[0].equals("put")) {
+			
+			if (command.substring(command.length()-4,command.length()).equals("down")) {
+				commands[0] = "drop";
+				command = command.substring(0,command.length()-5);
+				System.out.println(command);
+			} else if (command.substring(0,4).equals("down")) {
+				commands[0] = "drop";
+				command = command.substring(5,command.length());
+			}
+			
+			//Checks if the string contains in, and if so creates the put in flag
+		}
 				
 		//Strips 'the' from the subject
 		if (command.length()>4 && command.substring(0,4).equals("the ")) {
@@ -187,5 +201,5 @@ public class Parser {
  * 					- added code to look inside something
  * 2 January 2025 - Sets cardinal if looking in a direction
  * 5 January 2025 - Added code to flag where player using 'with'
- * 
+ * 9 Janaury 2025 - Added put down as an form of drop
 */
