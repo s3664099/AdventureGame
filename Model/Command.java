@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 8 January 2025
- * Version: 1.12
+ * Updated: 9 January 2025
+ * Version: 1.13
  * Class that handles functions that deal with commands that are entered.
  */
 
@@ -607,7 +607,7 @@ public class Command {
 				
 						//Compares Key
 						if (!key.equals(exit.getKey()) || !exit.isLockable()) {
-							response = "It doesn't work";
+							response = String.format("The %s doesn't work", key.getName());
 						} else {
 							
 							//Acts on either lock/unlock, which does the opposite.
@@ -643,7 +643,7 @@ public class Command {
 					
 							//The container isn't lockable
 							if(!container.checkKey(key) || !container.getLockable()) {
-								response = "It doesn't work";
+								response = String.format("The %s doesn't work", key.getName());
 							} else {
 								
 								found = true;
@@ -1065,4 +1065,5 @@ public class Command {
  * 					Added checks to each of the command to see if 'with' being used
  * 7 January 2025 - Made the lock/unlock command to require the item to be described.
  * 8 January 2025 - Did the unlock for containers
+ * 9 Janaury 2025 - Added more description to when unlocking doesn't work.
  */

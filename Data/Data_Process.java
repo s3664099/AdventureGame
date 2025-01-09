@@ -34,6 +34,8 @@ public class Data_Process {
 		CarriableItem card = new CarriableItem("Card","A Gold American Express credit card");
 		CarriableItem leaflet = new CarriableItem("Leaflet","An advertisment for curtian installation");
 		CarriableItem note = new CarriableItem("Note","It looks like it is from your landlord");
+		CarriableItem goldKey = new CarriableItem("Gold Key","A small gold key. I wonder what it opens");
+		desk.addItem(goldKey);
 		card.setRead("It has the name of Richard Pickles, but I'm not telling you the number because I don't trust you.");
 		leaflet.setRead("Bob's curtians, make sure you neighbour can't see you dismembering that body");
 		note.setRead("You are way, way, way behind in your rent. Pay me now or, or, or, there will be trouble");
@@ -58,7 +60,7 @@ public class Data_Process {
 		window.addExit(sw);
 		
 		Location library = new Location("In a library", "A cozy library with walls lined with bookshelves. A leather armchair sits in one corner.");
-		Container bookshelf = new Container("Tall Oak Bookshelf", "An old bookshelf filled with dusty tomes and journals.", true);
+		Container bookshelf = new Container("Tall Oak Bookshelf", "An old bookshelf filled with dusty tomes and journals.", true,true,goldKey);		
 		CarriableItem diary = new CarriableItem("Leather-bound Diary", "An old diary with a lock on it. It might contain secrets.");
 		bookshelf.addItem(diary);
 		library.addItem(bookshelf);

@@ -12,8 +12,6 @@
 
 
 //TODO: Implement multi word parser
-//			Read an Item
-//			Test Unlock Object - The Bookcase
 //			Handle the with section here - and if there is a with, will do both of them.
 //				Add a with to carriable items that unless with specific item cannot pick it up
 //				Ditto with open and moveable items
