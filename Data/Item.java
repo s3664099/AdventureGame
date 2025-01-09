@@ -1,7 +1,7 @@
 /* Item Interface
  * Created: 12 September 2023
- * Updated: 24 August 2024
- * Version: 1.1
+ * Updated: 9 January 2025
+ * Version: 1.2
  * The main class for objects. Since we can't call it an object (reserved word)
  * we have to call it a thing.
  */
@@ -45,6 +45,8 @@ public interface Item {
 	public String getLeave();
 	public void setLeaveConvo(String leaveConvo, Conversation endConversation);
 	public String getLeaveConvo();
+	public String readItem();
+	public void setRead(String read);
 };
 
 /* 12 September 2023 - Created File
@@ -59,4 +61,5 @@ public interface Item {
  * 11 May 2024 - Added setExtended function definition
  * 8 June 2024 - Added leave convo methods
  * 24 August 2024 - Added the equals method
+ * 9 Janaury 2025 - Added a read method
  */

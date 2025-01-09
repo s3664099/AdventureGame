@@ -34,6 +34,9 @@ public class Data_Process {
 		CarriableItem card = new CarriableItem("Card","A Gold American Express credit card");
 		CarriableItem leaflet = new CarriableItem("Leaflet","An advertisment for curtian installation");
 		CarriableItem note = new CarriableItem("Note","It looks like it is from your landlord");
+		card.setRead("It has the name of Richard Pickles, but I'm not telling you the number because I don't trust you.");
+		leaflet.setRead("Bob's curtians, make sure you neighbour can't see you dismembering that body");
+		note.setRead("You are way, way, way behind in your rent. Pay me now or, or, or, there will be trouble");
 		card.setTreasure();
 		hall.addItem(card);
 		hall.addItem(note);

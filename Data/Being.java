@@ -1,7 +1,7 @@
 /* Being
  * Created: 23 March 2024
- * Updated: 8 June 2024
- * Version: 1.0
+ * Updated: 9 January 2025
+ * Version: 1.1
  * Class for creatures.
  */
 
@@ -19,6 +19,7 @@ public class Being extends AbstractItem implements Item,Serializable {
 	private String leaveConvo;
 	private String leaveResponse;
 	private Conversation endCoversation;
+	private String read = String.format("Despite your amazing intuition, you are unable to read %s", this.getName());
 	
 	public Being(String name, String description, Conversation conversation, Boolean extended) {
 		super(name,description);
@@ -159,4 +160,5 @@ public class Being extends AbstractItem implements Item,Serializable {
  * 10 May 2024 - Made variables private. Added end convo functionality
  * 11 May 2024 - Added set extended function to change whether conversation is extended
  * 8 June 2024 - Added the leave conversation
+ * 9 January 2025 - Added special read for a being
 */

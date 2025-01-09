@@ -1,7 +1,7 @@
 /* Abstract Item Class
  * Created: 25 August 2023
- * Updated: 26 August 2024
- * Version: 1.2
+ * Updated: 9 January 2025
+ * Version: 1.3
  * The main class for objects. Since we can't call it an object (reserved word)
  * we have to call it a thing.
  */
@@ -17,6 +17,7 @@ public class AbstractItem implements Serializable {
 	private String description;
 	private String[] nouns;
 	private boolean treasure;
+	private String read = "There is nothing to read on this";
 	
 	public AbstractItem() {}
 	
@@ -39,6 +40,14 @@ public class AbstractItem implements Serializable {
 	
 	public String[] getNouns() {
 		return this.nouns;
+	}
+	
+	public void setRead(String read) {
+		this.read = read;
+	}
+	
+	public String readItem() {
+		return this.read;
 	}
 	
 	public void updateItem(String name, String description) {
@@ -160,4 +169,5 @@ public class AbstractItem implements Serializable {
 * 8 June 2024 - Added leave conversation methods
 * 24 August 2024 - Added outline for equals method
 * 26 August 2024 - Added equals method
+* 9 Janaury 2025 - Added read methons (ie read the item)
 */

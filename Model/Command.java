@@ -141,6 +141,16 @@ public class Command {
 			} else {
 				response = loadGame(noun);
 			}
+		
+		} else if (verb.equals("read")) {
+			
+			response = "I'm not carrying that";
+			
+			for (Item item:inventory) {
+				if (item.equals(noun)) {
+					response = item.readItem();
+				}
+			}
 
 		//Conversation
 		} else if ((verb.equals("talk")) || (verb.equals("speak"))) {
