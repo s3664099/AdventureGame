@@ -38,6 +38,10 @@ public class AbstractItem implements Serializable {
 		return name;
 	}
 	
+	public String getBasicName() {
+		return name;
+	}
+	
 	public String[] getNouns() {
 		return this.nouns;
 	}
@@ -169,5 +173,5 @@ public class AbstractItem implements Serializable {
 * 8 June 2024 - Added leave conversation methods
 * 24 August 2024 - Added outline for equals method
 * 26 August 2024 - Added equals method
-* 9 Janaury 2025 - Added read methons (ie read the item)
+* 9 Janaury 2025 - Added read methons (ie read the item). Added basic name so containers list contents
 */

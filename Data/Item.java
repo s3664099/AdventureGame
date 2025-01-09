@@ -15,6 +15,7 @@ public interface Item {
 	public String getDescription();
 	public String[] getNouns();
 	public String getName();
+	public String getBasicName();
 	public void updateItem(String name, String description);
 	public boolean getCloseable();
 	public boolean getClosed();
@@ -61,5 +62,5 @@ public interface Item {
  * 11 May 2024 - Added setExtended function definition
  * 8 June 2024 - Added leave convo methods
  * 24 August 2024 - Added the equals method
- * 9 Janaury 2025 - Added a read method
+ * 9 Janaury 2025 - Added a read method. Added basic name for containers that list contents
  */

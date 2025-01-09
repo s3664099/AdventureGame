@@ -65,15 +65,16 @@ public class Data_Process {
 		bookshelf.addItem(diary);
 		library.addItem(bookshelf);
 		OrdinaryExit west = new OrdinaryExit("West", library, false);
-		kitchen.addExit(west);
-		library.addExit(south);
+		OrdinaryExit east = new OrdinaryExit("east", start, false);
+		start.addExit(west);
+		library.addExit(east);
 
 		Location storage = new Location("In the storage room", "A small, cluttered room filled with crates and forgotten items.");
 		Container crate = new Container("Wooden Crate", "A large crate covered in cobwebs.", true);
 		CarriableItem flashlight = new CarriableItem("Flashlight", "An old flashlight. It might still work.");
 		crate.addItem(flashlight);
 		storage.addItem(crate);
-		OrdinaryExit east = new OrdinaryExit("East", storage, false);
+		east = new OrdinaryExit("East", storage, false);
 		hall.addExit(east);
 		storage.addExit(west);
 

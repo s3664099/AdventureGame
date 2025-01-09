@@ -1,7 +1,7 @@
 /* Container Class
  * Created: 5 October 2023
- * Updated: 23 June 2024
- * Version: 1.0
+ * Updated: 9 Janaury 2025
+ * Version: 1.1
  * Class for items that can contain other items. Cannot be carried
  */
 
@@ -50,12 +50,23 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 
 	@Override
 	public String getName() {
+		String response = super.getName();
+		response = getContents(response);
+		return response;
+	}
+	
+	public String getBasicName() {
 		return super.getName();
 	}
 	
 	public String getDescription() {
 		String response = super.getDescription();
-				
+		response = getContents(response);			
+		return response;
+	}
+	
+	private String getContents(String response) {
+		
 		if ((!closed) && (!locked)) {
 			response = response.format("%s. The %s contains",super.getDescription(),super.getName());
 			int length = 0;
@@ -87,7 +98,6 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 		} else {
 			response = response.format("%s. The %s is closed",response, super.getName());
 		}
-			
 		return response;
 	}
 	
@@ -152,4 +162,5 @@ public class Container extends ImmoveableItem implements Item,Serializable {
  * 25 January 2024 - Made Class Serializable
  * 23 June 2024 - Changed the constructors to hard code the closeable and
  *                lockable status of the container.
+ * 9 January 2025 - added the contents if look at room when container open
 */

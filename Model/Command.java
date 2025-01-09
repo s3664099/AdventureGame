@@ -377,7 +377,7 @@ public class Command {
 						//Is the exit open - if not the exit is opened.
 						if (item.getClosed()) {
 							item.setClosed();
-							response = response.format("You open the %s",item.getName());
+							response = response.format("You open the %s",item.getBasicName());
 						} else {
 							response = response.format("The %s is already open",item.getName());
 						}
@@ -386,7 +386,7 @@ public class Command {
 						//Is the exit open - if not the exit is opened.
 						if (!item.getClosed()) {
 							item.setClosed();
-							response = response.format("You close the %s",item.getName());
+							response = response.format("You close the %s",item.getBasicName());
 						} else {
 							response = response.format("The %s is already closed",item.getName());
 						}					
@@ -650,9 +650,9 @@ public class Command {
 									//Checks if the container is already locked.
 									if (container.getLocked()) {
 										container.setLocked();
-										response = response.format("You unlock the %s",container.getName());
+										response = response.format("You unlock the %s",container.getBasicName());
 									} else {
-										response = response.format("The %s is already unlocked",container.getName());
+										response = response.format("The %s is already unlocked",container.getBasicName());
 									}
 										
 								} else if (verb.equals("lock")) {

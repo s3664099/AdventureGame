@@ -5,19 +5,13 @@
  * This is the launcher. It should not need to be updated.
  */
 
-
-// Check that if close a container can no longer pick up the items inside.
-// One looked in container the item should appear in the display - x contains y
-// No longer displays afterwards if closed
-
-
 //TODO: Implement multi word parser
+//		Put something in container/bag
 //			Handle the with section here - and if there is a with, will do both of them.
 //				Add a with to carriable items that unless with specific item cannot pick it up
 //				Ditto with open and moveable items
 //				Can unlock a carriable Item (the book)
 //				Do a Bag (can be locked as well, but only open if carried).
-//		Put something in container/bag
 //      Complex Commands - use x in x
 //TODO: Use command (Can also be applied to lock/unlock - also shovels and stuff).
 //TODO: Commands embedded in objects/exits
