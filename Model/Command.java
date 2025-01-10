@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 9 January 2025
- * Version: 1.13
+ * Updated: 10 January 2025
+ * Version: 1.14
  * Class that handles functions that deal with commands that are entered.
  */
 
@@ -100,6 +100,15 @@ public class Command {
 			} else {
 				response = switchList(inventory,location.getItems(),noun, "I dropped the",false,false);
 				this.score = changeScore(true,noun,location.getItems(),location);
+			}
+		
+		//Put something in something
+		} else if (verb.equals("put") && command.getPutIn()) {
+			
+			if (object.length()==0) {
+				response = "What should I put it in";
+			} else {
+				response = putIn(inventory,command,location.getItems());
 			}
 		
 		//Lock/Unlock
@@ -264,6 +273,16 @@ public class Command {
 			}		
 		}
 		
+		return response;
+	}
+	
+	//Put an item into a container
+	private String putIn(ArrayList<Item> inventory, UserCommand command, ArrayList<Item> localItems) {
+		response = "I can't do that";
+		
+		String subject = command.getSubject();
+		String object = command.getObject();
+				
 		return response;
 	}
 	
@@ -1062,4 +1081,5 @@ public class Command {
  * 7 January 2025 - Made the lock/unlock command to require the item to be described.
  * 8 January 2025 - Did the unlock for containers
  * 9 Janaury 2025 - Added more description to when unlocking doesn't work.
+ * 10 Junary 2025 - Started the put in functionality
  */
