@@ -1,7 +1,7 @@
 /* Item Interface
  * Created: 12 September 2023
- * Updated: 9 January 2025
- * Version: 1.2
+ * Updated: 11 January 2025
+ * Version: 1.3
  * The main class for objects. Since we can't call it an object (reserved word)
  * we have to call it a thing.
  */
@@ -64,4 +64,5 @@ public interface Item {
  * 8 June 2024 - Added leave convo methods
  * 24 August 2024 - Added the equals method
  * 9 Janaury 2025 - Added a read method. Added basic name for containers that list contents
+ * 11 January 2025 - Added an addItem method
  */

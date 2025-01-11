@@ -6,7 +6,7 @@
  */
 
 //TODO: Implement multi word parser
-//		Put something in container/bag
+//		Put something in bag
 //			Handle the with section here - and if there is a with, will do both of them.
 //				Add a with to carriable items that unless with specific item cannot pick it up
 //				Ditto with open and moveable items

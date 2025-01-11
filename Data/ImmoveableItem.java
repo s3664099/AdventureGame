@@ -1,7 +1,7 @@
 /* Immoveable Item Class
  * Created: 25 August 2023
- * Updated: 26 January 2024
- * Version: 1.0
+ * Updated: 11 January 2025
+ * Version: 1.1
  * Class for items that can't be picked up and carried.
  */
 
@@ -118,4 +118,5 @@ public class ImmoveableItem extends AbstractItem implements Item,Serializable {
  * 14 September 2023 - Began adding item methods.
  * 23 January 2024 - Added methods to handle the moveable items
  * 25 January 2024 - Made class serialisable.
+ * 11 Janaury 2025 - Added an addItem method
 */

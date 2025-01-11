@@ -1,7 +1,7 @@
 /* Container Class
  * Created: 5 October 2023
- * Updated: 9 Janaury 2025
- * Version: 1.1
+ * Updated: 11 Janaury 2025
+ * Version: 1.2
  * Class for items that can contain other items. Cannot be carried
  */
 
@@ -101,15 +101,8 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 		return response;
 	}
 	
-	@Override
 	public void addItem(CarriableItem item) {
-		for (Item thing:contents) {
-			System.out.println(thing.getName());
-		}
 		contents.add(item);
-		for (Item thing:contents) {
-			System.out.println(thing.getName());
-		}
 	}
 	
 	public ArrayList<Item> getContents() {
@@ -170,4 +163,5 @@ public class Container extends ImmoveableItem implements Item,Serializable {
  * 23 June 2024 - Changed the constructors to hard code the closeable and
  *                lockable status of the container.
  * 9 January 2025 - added the contents if look at room when container open
+ * 11 Janaury 2025 - Put item in container now works.
 */

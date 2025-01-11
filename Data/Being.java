@@ -1,7 +1,7 @@
 /* Being
  * Created: 23 March 2024
- * Updated: 9 January 2025
- * Version: 1.1
+ * Updated: 11 January 2025
+ * Version: 1.2
  * Class for creatures.
  */
 
@@ -167,4 +167,5 @@ public class Being extends AbstractItem implements Item,Serializable {
  * 11 May 2024 - Added set extended function to change whether conversation is extended
  * 8 June 2024 - Added the leave conversation
  * 9 January 2025 - Added special read for a being
+ * 11 January 2025 - Added an addItem method
 */

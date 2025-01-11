@@ -282,7 +282,7 @@ public class Command {
 		
 		String subject = command.getSubject();
 		String object = command.getObject();
-		Item subjectItem = null;
+		CarriableItem subjectItem = null;
 		int subjectItemNo = 0;
 		boolean objectPresent = false;
 		
@@ -291,7 +291,7 @@ public class Command {
 			
 			//If found, takes it, and flags that object found
 			if (item.equals(subject)) {
-				subjectItem = item;
+				subjectItem = (CarriableItem) item;
 				
 			//Moves to the next one
 			} else if (subjectItem == null) {
@@ -306,7 +306,7 @@ public class Command {
 				
 				//Found item - has to be a container
 				if (item.equals(object) && item instanceof Container) {
-
+					
 					//Adds the item to the container and removes it from the inventory
 					item.addItem(subjectItem);
 					inventory.remove(subjectItemNo);
