@@ -101,8 +101,15 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 		return response;
 	}
 	
+	@Override
 	public void addItem(CarriableItem item) {
+		for (Item thing:contents) {
+			System.out.println(thing.getName());
+		}
 		contents.add(item);
+		for (Item thing:contents) {
+			System.out.println(thing.getName());
+		}
 	}
 	
 	public ArrayList<Item> getContents() {

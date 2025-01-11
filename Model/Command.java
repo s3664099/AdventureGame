@@ -282,6 +282,48 @@ public class Command {
 		
 		String subject = command.getSubject();
 		String object = command.getObject();
+		Item subjectItem = null;
+		int subjectItemNo = 0;
+		boolean objectPresent = false;
+		
+		//Goes through the inventory to find the item
+		for (Item item:inventory) {
+			
+			//If found, takes it, and flags that object found
+			if (item.equals(subject)) {
+				subjectItem = item;
+				
+			//Moves to the next one
+			} else if (subjectItem == null) {
+				subjectItemNo++;
+			}
+		}
+		
+		//Looks for the container in the room
+		if (subjectItem != null) {
+			
+			for(Item item:localItems) {
+				
+				//Found item - has to be a container
+				if (item.equals(object) && item instanceof Container) {
+
+					//Adds the item to the container and removes it from the inventory
+					item.addItem(subjectItem);
+					inventory.remove(subjectItemNo);
+					objectPresent = true;
+					response = "Done";
+					
+				} else if (item.equals(object)) {
+					response = String.format("I can't put the %s into the %s",subjectItem.getName(),item.getName());
+				}
+			}
+			
+			if (!objectPresent) {
+				response = String.format("I do not see a %s here", object);
+			}
+		} else {
+			response = String.format("I do not have a %s", subject);
+		}
 				
 		return response;
 	}

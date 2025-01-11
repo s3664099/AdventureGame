@@ -105,6 +105,12 @@ public class ImmoveableItem extends AbstractItem implements Item,Serializable {
 	public boolean checkHiddenItems() {
 		return false;
 	}
+
+	@Override
+	public void addItem(CarriableItem item) {
+		// TODO Auto-generated method stub
+		
+	}
 }
 
 /* 25 August 2023 - Created file

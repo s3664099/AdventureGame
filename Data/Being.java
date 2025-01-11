@@ -152,6 +152,12 @@ public class Being extends AbstractItem implements Item,Serializable {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public void addItem(CarriableItem item) {
+		// TODO Auto-generated method stub
+		
+	}
 }
 
 /* 23 March 2024 - Created file

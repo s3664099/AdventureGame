@@ -48,6 +48,7 @@ public interface Item {
 	public String getLeaveConvo();
 	public String readItem();
 	public void setRead(String read);
+	void addItem(CarriableItem item);
 };
 
 /* 12 September 2023 - Created File
