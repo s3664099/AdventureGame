@@ -30,6 +30,8 @@ public class Data_Process {
 		MoveableItem table = new MoveableItem("Dirty Kitchen Table","This table looks like it has seen better days, back in the 60s",rug);
 		kitchen.addExit(south);
 		kitchen.addItem(table);
+		Bag suitcase = new Bag("Suitcase","It is tattered and has seen better days. It is made of leather",true,true,false,false);
+		kitchen.addItem(suitcase);
 		start.addExit(north);
 		CarriableItem card = new CarriableItem("Card","A Gold American Express credit card");
 		CarriableItem leaflet = new CarriableItem("Leaflet","An advertisment for curtian installation");
@@ -62,12 +64,14 @@ public class Data_Process {
 		Location library = new Location("In a library", "A cozy library with walls lined with bookshelves. A leather armchair sits in one corner.");
 		Container bookshelf = new Container("Tall Oak Bookshelf", "An old bookshelf filled with dusty tomes and journals.", true,true,goldKey);		
 		CarriableItem diary = new CarriableItem("Leather-bound Diary", "An old diary with a lock on it. It might contain secrets.");
+		Bag toteBag = new Bag("Tote Bag","A tote bag with a tarten pattern on it");
 		bookshelf.addItem(diary);
 		library.addItem(bookshelf);
 		OrdinaryExit west = new OrdinaryExit("West", library, false);
 		OrdinaryExit east = new OrdinaryExit("east", start, false);
 		start.addExit(west);
 		library.addExit(east);
+		library.addItem(toteBag);
 
 		Location storage = new Location("In the storage room", "A small, cluttered room filled with crates and forgotten items.");
 		Container crate = new Container("Wooden Crate", "A large crate covered in cobwebs.", true);

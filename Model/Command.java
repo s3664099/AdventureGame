@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 10 January 2025
- * Version: 1.14
+ * Updated: 11 January 2025
+ * Version: 1.15
  * Class that handles functions that deal with commands that are entered.
  */
 
@@ -233,9 +233,9 @@ public class Command {
 					listTwo.add(item);
 					
 					if (itemsFound.size()==1) {
-						response = response.format("%s %s",statement, item.getName());
+						response = response.format("%s %s",statement, item.getBasicName());
 					} else {
-						response = response.format("%s, %s %s",response, statement, item.getName());
+						response = response.format("%s, %s %s",response, statement, item.getBasicName());
 					}
 					
 					if (item.equals(command)) {
@@ -1123,5 +1123,6 @@ public class Command {
  * 7 January 2025 - Made the lock/unlock command to require the item to be described.
  * 8 January 2025 - Did the unlock for containers
  * 9 Janaury 2025 - Added more description to when unlocking doesn't work.
- * 10 Junary 2025 - Started the put in functionality
+ * 10 Jaunary 2025 - Started the put in functionality
+ * 11 January 2025 - Used basic name for when picking up and dropping object
  */

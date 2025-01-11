@@ -26,14 +26,9 @@ public class Bag extends CarriableItem implements Item, Serializable {
 	
 	public Bag(String name,String description,boolean closeable,boolean closed,boolean lockable, boolean locked) {
 		super(name,description);
+
 		this.closeable = closeable;
-		this.closed = closed;
-		
-		//Overides a false closeable
-		if (closed) {
-			this.closeable = true;
-		}
-		
+		this.closed = closed;		
 		this.lockable = lockable;
 		this.locked = locked;
 		
@@ -54,6 +49,60 @@ public class Bag extends CarriableItem implements Item, Serializable {
 	public ArrayList<Item> getContents() {
 		return contents;
 	}
+
+	@Override
+	public String getName() {
+		String response = super.getName();
+		response = getContents(response);
+		return response;
+	}
+	
+	public String getBasicName() {
+		return super.getName();
+	}
+	
+	public String getDescription() {
+		String response = super.getDescription();
+		response = getContents(response);			
+		return response;
+	}
+	
+	private String getContents(String response) {
+		
+		if ((!closed) && (!locked)) {
+			response = response.format("%s. The %s contains",super.getDescription(),super.getName());
+			int length = 0;
+		
+			for (Item content:contents) {
+				String article = "a";
+				
+				char firstChar = content.getName().charAt(0);
+				
+				if ((firstChar == 'A') || (firstChar == 'E') || (firstChar == 'I')
+					|| (firstChar == 'O') || (firstChar == 'U')) {
+					article = "an";
+				}
+				
+				if (length == 0) {
+					response = response.format("%s %s %s",response, article, content.getName());
+				} else {
+					response = response.format("%s, %s %s",response,article, content.getName());
+				}
+				length ++;
+			}
+			
+			if (length == 0) {
+				response = response.format("%s nothing.",response);
+			} else {
+				this.haveViewed = true;
+			}
+		
+		} else {
+			response = response.format("%s. The %s is closed",response, super.getName());
+		}
+		return response;
+	}
+	
 }
 
 /* 11 January 2025 - Created File
