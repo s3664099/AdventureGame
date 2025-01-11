@@ -13,7 +13,6 @@
 //				Can unlock a carriable Item (the book)
 //				Do a Bag (can be locked as well, but only open if carried).
 //					If item in bag, have to specifically tell computer to get it from the bag
-//					When do inventory, if bag closed, cannot see inside, otherwise records index and adds details at end
 //      Complex Commands - use x in x
 //TODO: Use command (Can also be applied to lock/unlock - also shovels and stuff).
 //TODO: Commands embedded in objects/exits

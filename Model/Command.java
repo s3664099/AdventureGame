@@ -16,6 +16,7 @@ import java.io.ObjectOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
+import Data.Bag;
 import Data.CarriableItem;
 import Data.Container;
 import Data.Exit;
@@ -305,16 +306,23 @@ public class Command {
 			for(Item item:localItems) {
 				
 				//Found item - has to be a container
-				if (item.equals(object) && item instanceof Container) {
+				if (item.equals(object) && item instanceof Container && !item.getClosed()) {
 					
 					//Adds the item to the container and removes it from the inventory
 					item.addItem(subjectItem);
 					inventory.remove(subjectItemNo);
 					objectPresent = true;
 					response = "Done";
-					
+				
+				} else if (item.equals(object) && item instanceof Container && item.getClosed()) {
+					response = String.format("The %s is closed.", item.getBasicName());
+					objectPresent = true;
+				} else if (item.equals(object) && item instanceof Bag) {
+					response = String.format("You need to be carrying the %s to put the %s into it.", item.getBasicName(),subjectItem.getName());
+					objectPresent = true;
 				} else if (item.equals(object)) {
 					response = String.format("I can't put the %s into the %s",subjectItem.getName(),item.getName());
+					objectPresent = true;
 				}
 			}
 			
@@ -430,8 +438,8 @@ public class Command {
 			//Checks if the exit is present
 			if (item != null) {
 				
-				//Is the exit openable?
-				if (item.getCloseable() && !item.getLocked()) {
+				//Is the item openable?
+				if (item.getCloseable() && !item.getLocked() && !(item instanceof Bag)) {
 
 					if (verb.equals("open")) {
 						
@@ -440,7 +448,7 @@ public class Command {
 							item.setClosed();
 							response = response.format("You open the %s",item.getBasicName());
 						} else {
-							response = response.format("The %s is already open",item.getName());
+							response = response.format("The %s is already open",item.getBasicName());
 						}
 					} else if (verb.equals("close")) {
 						
@@ -449,16 +457,20 @@ public class Command {
 							item.setClosed();
 							response = response.format("You close the %s",item.getBasicName());
 						} else {
-							response = response.format("The %s is already closed",item.getName());
+							response = response.format("The %s is already closed",item.getBasicName());
 						}					
 					}
 				} else if (item.getLocked()) {
-					response = response.format("The %s is locked",item.getName());
+					response = response.format("The %s is locked",item.getBasicName());
+				} else if (item instanceof Bag) {
+					response = response.format("You need to pick the %s up to open it.", item.getBasicName());
 				} else {
 					response = response.format("You cannot open the %s", item.getName());
 				}
 			}
 		}
+		
+		//Go through inventory to check if the item is a bag
 				
 		return response;
 	}
