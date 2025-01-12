@@ -1,7 +1,7 @@
 /* Carriable Item Class
  * Created: 11 January 2025
- * Updated: 11 January 2025
- * Version: 1.0
+ * Updated: 12 January 2025
+ * Version: 1.1
  * The class for a carriable container
  */
 
@@ -26,7 +26,7 @@ public class Bag extends CarriableItem implements Item, Serializable {
 	
 	public Bag(String name,String description,boolean closeable,boolean closed,boolean lockable, boolean locked) {
 		super(name,description);
-
+		
 		this.closeable = closeable;
 		this.closed = closed;		
 		this.lockable = lockable;
@@ -102,9 +102,53 @@ public class Bag extends CarriableItem implements Item, Serializable {
 		}
 		return response;
 	}
+		
+	public boolean getViewed() {
+		return haveViewed;
+	}
 	
+	//checks if the container is closeable
+	public boolean getCloseable() {
+		return closeable;
+	}
+	
+	//Checks if it is closed
+	public boolean getClosed() {
+		return closed;
+	}
+	
+	//Checks if the container is lockable
+	public boolean getLockable() {
+		return lockable;
+	}
+	
+	//Checks if the container is locked
+	public boolean getLocked() {
+		return locked;
+	}
+	
+	//Opens/closes the container
+	public void setClosed() {
+		this.closed = !closed;	
+	}
+	
+	//Locks/Unlocks the container
+	public void setLocked() {
+		this.locked = !locked;
+	}
+	
+	//Checks that the key is the correct key
+	public boolean checkKey(Item key) {
+		
+		boolean hasKey = false;
+		
+		if (key.equals(this.key)) {
+			hasKey = true;
+		}	
+		return hasKey;
+	}	
 }
 
 /* 11 January 2025 - Created File
- *
+ * 12 January 2025 - Added methods to open and close the bag
  */

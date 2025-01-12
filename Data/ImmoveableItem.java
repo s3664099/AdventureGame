@@ -30,7 +30,6 @@ public class ImmoveableItem extends AbstractItem implements Item,Serializable {
 	//Methods for items that are closeable and lockable
 	@Override
 	public boolean getCloseable() {
-
 		return false;
 	}
 

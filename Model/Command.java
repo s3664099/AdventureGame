@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 11 January 2025
- * Version: 1.15
+ * Updated: 12 January 2025
+ * Version: 1.16
  * Class that handles functions that deal with commands that are entered.
  */
 
@@ -47,6 +47,7 @@ public class Command {
 		//Sets the location
 		this.currentLocation = location;
 		this.displayLocation = false;
+		this.inventory = inventory;
 
 		//Standard response
 		response = "I'm sorry, I do not understand";
@@ -327,6 +328,9 @@ public class Command {
 			}
 			
 			if (!objectPresent) {
+				
+				//Goes through inventory and looks for a bag
+				
 				response = String.format("I do not see a %s here", object);
 			}
 		} else {
@@ -349,6 +353,20 @@ public class Command {
 				item = itemSearch;
 			} 	
 		}
+		return item;
+	}
+	
+	//Checks if the item is in player's inventory
+	private Item checkInventory(String command) {
+		
+		Item item = null;
+		
+		for (Item itemSearch:inventory) {
+			if (itemSearch.equals(command)) {
+				item = itemSearch;
+			}
+		}
+		
 		return item;
 	}
 	
@@ -435,43 +453,57 @@ public class Command {
 			
 			Item item = getItems(command);
 
-			//Checks if the exit is present
+			//Checks if the item is present
 			if (item != null) {
 				
 				//Is the item openable?
 				if (item.getCloseable() && !item.getLocked() && !(item instanceof Bag)) {
-
-					if (verb.equals("open")) {
-						
-						//Is the exit open - if not the exit is opened.
-						if (item.getClosed()) {
-							item.setClosed();
-							response = response.format("You open the %s",item.getBasicName());
-						} else {
-							response = response.format("The %s is already open",item.getBasicName());
-						}
-					} else if (verb.equals("close")) {
-						
-						//Is the exit open - if not the exit is opened.
-						if (!item.getClosed()) {
-							item.setClosed();
-							response = response.format("You close the %s",item.getBasicName());
-						} else {
-							response = response.format("The %s is already closed",item.getBasicName());
-						}					
-					}
-				} else if (item.getLocked()) {
-					response = response.format("The %s is locked",item.getBasicName());
+					response = openItem(item,verb);
 				} else if (item instanceof Bag) {
 					response = response.format("You need to pick the %s up to open it.", item.getBasicName());
 				} else {
-					response = response.format("You cannot open the %s", item.getName());
+					response = response.format("You cannot open the %s", item.getBasicName());
+				}
+			} else {
+				
+				item = checkInventory(command);
+				
+				//Checks if the item is being carried
+				if (item != null) {
+					if (item.getCloseable() && !item.getLocked()) {
+						response = openItem(item,verb);
+					} else {
+						response = response.format("You cannot open the %s", item.getBasicName());
+					}
 				}
 			}
 		}
-		
-		//Go through inventory to check if the item is a bag
 				
+		return response;
+	}
+	
+	private String openItem(Item item, String verb) {
+	
+		if (verb.equals("open")) {
+				
+			//Is the exit open - if not the exit is opened.
+			if (item.getClosed()) {
+				item.setClosed();
+				response = response.format("You open the %s",item.getBasicName());
+			} else {
+				response = response.format("The %s is already open",item.getBasicName());
+			}
+		} else if (verb.equals("close")) {
+				
+			//Is the exit open - if not the exit is opened.
+			if (!item.getClosed()) {
+				item.setClosed();
+				response = response.format("You close the %s",item.getBasicName());
+			} else {
+				response = response.format("The %s is already closed",item.getBasicName());
+			}					
+		}
+		
 		return response;
 	}
 		
@@ -1137,4 +1169,5 @@ public class Command {
  * 9 Janaury 2025 - Added more description to when unlocking doesn't work.
  * 10 Jaunary 2025 - Started the put in functionality
  * 11 January 2025 - Used basic name for when picking up and dropping object
+ * 12 January 2025 - Added method to check if player carrying the item. Moved open/close item to separate method. Added open/close bag.
  */

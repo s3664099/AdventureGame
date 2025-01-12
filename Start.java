@@ -6,13 +6,12 @@
  */
 
 //TODO: Implement multi word parser
-//		Put something in bag
-//			Handle the with section here - and if there is a with, will do both of them.
-//				Add a with to carriable items that unless with specific item cannot pick it up
-//				Ditto with open and moveable items
-//				Can unlock a carriable Item (the book)
-//				Do a Bag (can be locked as well, but only open if carried).
-//					If item in bag, have to specifically tell computer to get it from the bag
+//		Handle the with section here - and if there is a with, will do both of them.
+//			Add a with to carriable items that unless with specific item cannot pick it up
+//			Ditto with open and moveable items
+//			Can unlock a carriable Item (the book)
+//			Do a Bag (can be locked as well, but only open if carried).
+//				If item in bag, have to specifically tell computer to get it from the bag
 //      Complex Commands - use x in x
 //TODO: Use command (Can also be applied to lock/unlock - also shovels and stuff).
 //TODO: Commands embedded in objects/exits
