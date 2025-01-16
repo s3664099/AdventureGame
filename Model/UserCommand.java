@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 31 August 2023
- * Updated: 10 January 2025
- * Version: 1.3
+ * Updated: 16 January 2025
+ * Version: 1.4
  * Class that handles fuctions that deal with commands that are entered.
  */
 
@@ -17,6 +17,7 @@ public class UserCommand {
 	private boolean lookThrough = false;
 	private boolean useWith = false;
 	private boolean putIn = false;
+	private boolean from = false;
 	
 	public void setCommand(String verb,String subject, String object) {
 		this.verb = verb;
@@ -52,6 +53,10 @@ public class UserCommand {
 	public void setWith() {
 		this.useWith = !this.useWith;
 	}
+	
+	public void setFrom() {
+		this.from = !this.from;
+	}
 		
 	public String getVerb() {
 		return this.verb;
@@ -84,6 +89,10 @@ public class UserCommand {
 	public boolean getPutIn() {
 		return this.putIn;
 	}
+	
+	public boolean getFrom() {
+		return this.from;
+	}
 }
 
 /* 31 December 2024 - Created file
@@ -91,4 +100,5 @@ public class UserCommand {
  * 5 January 2025 - Added boolean to flag is user is using a with command
  * 				  - Added separate method to set the object
  * 10 January 2025 - Added boolean for the put object in something flag;
+ * 16 January 2025 - Added boolean for taking something from something
  */

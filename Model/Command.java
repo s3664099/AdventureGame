@@ -90,10 +90,52 @@ public class Command {
 			if (noun.length() == 0) {
 				response = "I need a noun";
 			} else {
-				response = switchList(location.getItems(), inventory, noun, "I picked up the",false,true);
-				this.score = changeScore(false,noun,inventory,location); 
+				
+				if(command.getFrom()) {
+					
+					boolean found = false;
+					
+					for (Item item:location.getItems()) {
+						if (item.equals(object) && item instanceof Container && !item.getClosed()) {
+							found = true;
+							response = switchList(((Container) item).getContents(),inventory,noun,"I picked up the",false,true);
+						} else if (item.equals(object) && item instanceof Container && item.getClosed()) {
+							found = true;
+							response = String.format("The %s is closed", item.getBasicName());
+						} else if (item.equals(object) && item instanceof Bag) {
+							response = String.format("I need to be carrying the %s to take anything from it", item.getBasicName());
+							found = true;
+						} else if (item.equals(object)) {
+							response = String.format("I cannot take anything from the %s",item.getBasicName());
+							found = true;
+						}
+					}
+					
+					if (!found) {
+						for (Item item:location.getItems()) {
+							if (item.equals(object) && item instanceof Bag) {
+								found = true;
+								response = switchList(((Bag) item).getContents(),inventory,noun,"I picked up the",false,true);
+							} else if (item.equals(object)) {						
+								response = String.format("I cannot take anything from the %s",item.getBasicName());
+								found = true;
+							}
+						}
+						
+						if (!found) {
+							response = "I don't see that here";
+						}
+					}
+				} else {
+					response = switchList(location.getItems(), inventory, noun, "I picked up the",false,true);
+					this.score = changeScore(false,noun,inventory,location); 
+
+					if (response.length()==0) {
+						response = "I don't see that here";
+					}
+					
+				}
 			}
-			
 		//Drop
 		} else if (verb.equals("drop") && !command.getWith()) {
 			
@@ -206,12 +248,10 @@ public class Command {
 		//Sets counter for items
 		int itemNo = -1;
 		ArrayList<Integer> itemsFound = new ArrayList<Integer>();
-		String response;
+		String response = "";
 		boolean allSelected = false;
 		
-		if (taking) {
-			response = "I don't see that here";
-		} else {
+		if (!taking) {
 			response = "I'm not carrying that";
 		}
 		

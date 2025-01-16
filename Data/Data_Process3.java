@@ -47,8 +47,8 @@ public class Data_Process3 {
 		start.addItem(bed);
 		//Container box = new Container("Box","A cardboard box",true,true,ring);
 		CarriableItem paper = new CarriableItem("Newspaper","An old newsper dating back five years");
-		box.addItem(paper);
-		two.addItem(box);
+		//box.addItem(paper);
+		//two.addItem(box);
 		
 		/*description = "The Minories Pub in London beckons adventurers with its historic charm, wooden beams, and a well-stocked bar. \nInside, you'll find a cozy haven where tales of epic journeys and daring quests are shared.";
 		start = new Location("in the Minories",description);

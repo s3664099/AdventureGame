@@ -1,7 +1,7 @@
 /* Title: Parser Class
  * Created: 25 August 2023
- * Updated: 10 January 2025
- * Version: 1.10
+ * Updated: 16 January 2025
+ * Version: 1.11
  * 
  * This processes the command. At this stage it is only a two work
  * command - noun and verb. Ideally, it will eventually process larger commands.
@@ -107,6 +107,15 @@ public class Parser {
 			commands[0] = "look";
 		}
 		
+		//Take From
+		if ((commands[0].equals("take") || commands[0].equals("get")) && command.contains(" from ")) {
+
+			String[] splitCommand = command.split(" from ");
+			command = splitCommand[0];
+			object = splitCommand[1];
+			userCommand.setFrom();
+		}
+		
 		//Pick up/put down.
 		if (commands[0].equals("pick") && commands.length>1) {
 			if (commands[1].equals("up")) {
@@ -208,4 +217,5 @@ public class Parser {
  * 5 January 2025 - Added code to flag where player using 'with'
  * 9 January 2025 - Added put down as an form of drop
  * 10 January 2025 - Added put in to put something in a container
+ * 16 January 2025 - Added take something from container
 */
