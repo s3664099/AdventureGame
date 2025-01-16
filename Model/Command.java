@@ -255,6 +255,13 @@ public class Command {
 					ArrayList<Item> contents = ((Container) item).getContents();
 					response = this.switchList(contents,listTwo,command,statement,itemTaken,taking);
 				} 
+			} else if ((item instanceof Bag) && (!itemTaken)) {
+				for (Item bagItem: ((Bag) item).getContents()) {
+					if (bagItem.equals(command)) {
+						response = String.format("I have to be carrying the %s in order to take the %s",bagItem.getBasicName(),item.getBasicName());
+						itemTaken = true;
+					}
+				}
 			}
 		}
 		
@@ -1169,5 +1176,5 @@ public class Command {
  * 9 Janaury 2025 - Added more description to when unlocking doesn't work.
  * 10 Jaunary 2025 - Started the put in functionality
  * 11 January 2025 - Used basic name for when picking up and dropping object
- * 12 January 2025 - Added method to check if player carrying the item. Moved open/close item to separate method. Added open/close bag.
+ * 12 January 2025 - Added method to check if player carrying the item. Moved open/close item to separate method. Added open
  */
