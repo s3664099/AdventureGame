@@ -35,8 +35,13 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 	public Container(String name, String description, boolean locked, 
 					 boolean closed, Item key) {
 		super(name, description);
-		this.closeable = closeable;
-		this.lockable = true;
+
+		
+		if (locked) {
+			this.lockable = true;
+		}
+		
+		this.closeable = true;		
 		this.locked = locked;
 		this.closed = closed;
 		this.key = key;

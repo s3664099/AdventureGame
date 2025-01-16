@@ -169,7 +169,10 @@ Added diagonal directions
 **1 September 2024**
 Added ability to take and drop all.
 
-**11 January 2024**
+**11 January 2025**
 Changed the lock and unlock to have to nominate what you are using. Added the with command. Added an object to hold user command
 details. Added ability to push something into a container. Created a bag, which is a container that can be carried. Added a read
 command.
+
+**16 January 2025**
+Completed the bag and can put items into it.

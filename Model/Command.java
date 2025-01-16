@@ -487,6 +487,8 @@ public class Command {
 				//Is the item openable?
 				if (item.getCloseable() && !item.getLocked() && !(item instanceof Bag)) {
 					response = openItem(item,verb);
+				} else if (item.getCloseable() && item.getLocked() && !(item instanceof Bag)) {
+					response = response.format("The %s is locked.", item.getBasicName());
 				} else if (item instanceof Bag) {
 					response = response.format("You need to pick the %s up to open it.", item.getBasicName());
 				} else {
