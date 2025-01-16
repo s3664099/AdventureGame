@@ -1,7 +1,7 @@
 /* Container Class
  * Created: 5 October 2023
- * Updated: 11 Janaury 2025
- * Version: 1.2
+ * Updated: 16 Janaury 2025
+ * Version: 1.3
  * Class for items that can contain other items. Cannot be carried
  */
 
@@ -33,17 +33,24 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 	}
 
 	public Container(String name, String description, boolean locked, 
-					 boolean closed, Item key) {
+					 boolean closed, boolean lockable, boolean closeable, Item key) {
 		super(name, description);
 
-		
-		if (locked) {
-			this.lockable = true;
-		}
-		
-		this.closeable = true;		
+		this.closeable = closeable;
+		this.lockable = lockable;
 		this.locked = locked;
 		this.closed = closed;
+		
+		//Overwrites to prevent conflict
+		if (locked) {
+			this.lockable = true;
+			this.closeable = true;
+			this.closed = true;
+		} else if (closed) {
+			this.closeable = true;
+		}
+		
+		
 		this.key = key;
 	}
 
@@ -118,7 +125,7 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 	public boolean getViewed() {
 		return haveViewed;
 	}
-	
+		
 	//checks if the container is closeable
 	public boolean getCloseable() {
 		return closeable;
@@ -169,4 +176,5 @@ public class Container extends ImmoveableItem implements Item,Serializable {
  *                lockable status of the container.
  * 9 January 2025 - added the contents if look at room when container open
  * 11 Janaury 2025 - Put item in container now works.
+ * 16 January 2025 - Update the constructor
 */

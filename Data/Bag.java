@@ -1,7 +1,7 @@
 /* Carriable Item Class
  * Created: 11 January 2025
- * Updated: 12 January 2025
- * Version: 1.1
+ * Updated: 16 January 2025
+ * Version: 1.2
  * The class for a carriable container
  */
 
@@ -24,13 +24,24 @@ public class Bag extends CarriableItem implements Item, Serializable {
 		super(name, description);	
 	}
 	
-	public Bag(String name,String description,boolean closeable,boolean closed,boolean lockable, boolean locked) {
+	public Bag(String name,String description,boolean closeable,boolean closed,boolean lockable, boolean locked, CarriableItem key) {
 		super(name,description);
 		
 		this.closeable = closeable;
 		this.closed = closed;		
 		this.lockable = lockable;
 		this.locked = locked;
+		
+		//Overwrite to prevent conflict
+		if (locked) {
+			this.lockable = true;
+			this.closeable = true;
+			this.closed = true;
+		} else if (closed) {
+			this.closeable = true;
+		}
+		
+		this.key = key;
 		
 		//Overrides a false lockable
 		if (locked) {
@@ -106,7 +117,7 @@ public class Bag extends CarriableItem implements Item, Serializable {
 	public boolean getViewed() {
 		return haveViewed;
 	}
-	
+		
 	//checks if the container is closeable
 	public boolean getCloseable() {
 		return closeable;
@@ -151,4 +162,5 @@ public class Bag extends CarriableItem implements Item, Serializable {
 
 /* 11 January 2025 - Created File
  * 12 January 2025 - Added methods to open and close the bag
+ * 16 January 2025 - Added a key to the bag
  */

@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 12 January 2025
- * Version: 1.16
+ * Updated: 16 January 2025
+ * Version: 1.17
  * Class that handles functions that deal with commands that are entered.
  */
 
@@ -1200,4 +1200,5 @@ public class Command {
  * 10 Jaunary 2025 - Started the put in functionality
  * 11 January 2025 - Used basic name for when picking up and dropping object
  * 12 January 2025 - Added method to check if player carrying the item. Moved open/close item to separate method. Added open
+ * 16 January 2025 - Added the ability to put an item into a bag.
  */
