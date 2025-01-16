@@ -337,8 +337,29 @@ public class Command {
 			if (!objectPresent) {
 				
 				//Goes through inventory and looks for a bag
+				for (Item item:inventory) {
+					//Found item - has to be a container
+					if (item.equals(object) && item instanceof Bag && !item.getClosed()) {
+						
+						//Adds the item to the container and removes it from the inventory
+						item.addItem(subjectItem);
+						objectPresent = true;
+						response = "Done";
+					
+					} else if (item.equals(object) && item instanceof Container && item.getClosed()) {
+						response = String.format("The %s is closed.", item.getBasicName());
+						objectPresent = true;
+					} else if (item.equals(object)) {
+						response = String.format("I can't put the %s into the %s",subjectItem.getName(),item.getName());
+						objectPresent = true;
+					}					
+				}
 				
-				response = String.format("I do not see a %s here", object);
+				if (objectPresent) {
+					inventory.remove(subjectItemNo);
+				} else {				
+					response = String.format("I do not see a %s here", object);
+				}
 			}
 		} else {
 			response = String.format("I do not have a %s", subject);
