@@ -112,10 +112,16 @@ public class Command {
 					}
 					
 					if (!found) {
-						for (Item item:location.getItems()) {
-							if (item.equals(object) && item instanceof Bag) {
+						
+						//Remove the switchlist from the search
+						
+						for (Item item:inventory) {
+							if (item.equals(object) && item instanceof Bag && !item.getClosed()) {
 								found = true;
 								response = switchList(((Bag) item).getContents(),inventory,noun,"I picked up the",false,true);
+							} else if (item.equals(object) && item instanceof Bag && item.getClosed()) {
+								found = true;
+								response = String.format("The %s is closed", item.getBasicName());
 							} else if (item.equals(object)) {						
 								response = String.format("I cannot take anything from the %s",item.getBasicName());
 								found = true;
