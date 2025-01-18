@@ -1,7 +1,7 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 16 January 2025
- * Version: 1.17
+ * Updated: 18 January 2025
+ * Version: 1.18
  * Class that handles functions that deal with commands that are entered.
  */
 
@@ -113,12 +113,13 @@ public class Command {
 					
 					if (!found) {
 						
-						//Remove the switchlist from the search
+						int itemNo = 0;
+						boolean getItem = false;
 						
 						for (Item item:inventory) {
 							if (item.equals(object) && item instanceof Bag && !item.getClosed()) {
 								found = true;
-								response = switchList(((Bag) item).getContents(),inventory,noun,"I picked up the",false,true);
+								getItem = true;
 							} else if (item.equals(object) && item instanceof Bag && item.getClosed()) {
 								found = true;
 								response = String.format("The %s is closed", item.getBasicName());
@@ -126,10 +127,16 @@ public class Command {
 								response = String.format("I cannot take anything from the %s",item.getBasicName());
 								found = true;
 							}
+							
+							if (!found) {
+								itemNo ++;
+							} 
 						}
 						
 						if (!found) {
 							response = "I don't see that here";
+						} else if (getItem) {
+							response = switchList(((Bag) inventory.get(itemNo)).getContents(),inventory,noun,"I picked up the",false,true);
 						}
 					}
 				} else {
@@ -1247,4 +1254,5 @@ public class Command {
  * 11 January 2025 - Used basic name for when picking up and dropping object
  * 12 January 2025 - Added method to check if player carrying the item. Moved open/close item to separate method. Added open
  * 16 January 2025 - Added the ability to put an item into a bag.
+ * 18 January 2025 - Fixed problem with concurrent array when taking item from bag
  */
