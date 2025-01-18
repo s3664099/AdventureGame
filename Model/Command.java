@@ -77,7 +77,7 @@ public class Command {
 			} else {
 				response = "I am carrying:";
 				for (Item item:inventory) {
-					response = response.format("%s %s", response, item.getName());
+					response = String.format("%s %s", response, item.getName());
 				}
 			}
 		
@@ -91,6 +91,7 @@ public class Command {
 				response = "I need a noun";
 			} else {
 				
+				//Is the player getting something from something
 				if(command.getFrom()) {
 					
 					boolean found = false;
@@ -112,41 +113,46 @@ public class Command {
 					}
 					
 					if (!found) {
+						response = checkInventoryBag(object,noun);
 						
-						int itemNo = 0;
-						boolean getItem = false;
-						
-						for (Item item:inventory) {
-							if (item.equals(object) && item instanceof Bag && !item.getClosed()) {
-								found = true;
-								getItem = true;
-							} else if (item.equals(object) && item instanceof Bag && item.getClosed()) {
-								found = true;
-								response = String.format("The %s is closed", item.getBasicName());
-							} else if (item.equals(object)) {						
-								response = String.format("I cannot take anything from the %s",item.getBasicName());
-								found = true;
-							}
-							
-							if (!found) {
-								itemNo ++;
-							} 
+						if (response.length()==0) {
+							response = "I can't find it";
 						}
 						
-						if (!found) {
-							response = "I don't see that here";
-						} else if (getItem) {
-							response = switchList(((Bag) inventory.get(itemNo)).getContents(),inventory,noun,"I picked up the",false,true);
-						}
 					}
 				} else {
+					
 					response = switchList(location.getItems(), inventory, noun, "I picked up the",false,true);
 					this.score = changeScore(false,noun,inventory,location); 
-
-					if (response.length()==0) {
-						response = "I don't see that here";
-					}
 					
+					//If item not found, checks if the is in a bag the player is carrying
+					if (response.length()==0) {
+						
+						int bagNumber = 0;
+						boolean foundBag = false;
+						
+						for (Item item:inventory) {
+							if (item instanceof Bag && response.length()==0) {
+								for (Item bagItem:((Bag) inventory.get(bagNumber)).getContents()) {
+									if (bagItem.equals(noun)) {
+										foundBag = true;
+									}
+								}
+							}
+							
+							if (!foundBag) {
+								bagNumber ++;
+							}
+						}
+						
+						if (foundBag) {
+							response = checkInventoryBag(inventory.get(bagNumber).getBasicName(),noun);
+						}
+						
+						if (response.length()==0) {
+							response = "I don't see that here";
+						}
+					}
 				}
 			}
 		//Drop
@@ -224,11 +230,43 @@ public class Command {
 
 		//Scoring
 		} else if (verb.equals("score") && noun.length()==0 && !command.getWith()) {
-			response = response.format("Your score is %s/%s",this.score,this.topScore);
+			response = String.format("Your score is %s/%s",this.score,this.topScore);
 
 		//End Game
 		} else if (verb.equals("quit") && noun.length()==0 && !command.getWith()) {
 			response = "END";
+		}
+		
+		return response;
+	}
+	
+	private String checkInventoryBag(String object,String noun) {
+
+		int itemNo = 0;
+		boolean found = false;
+		boolean getItem = false;
+		
+		for (Item item:inventory) {
+			if (item.equals(object) && item instanceof Bag && !item.getClosed()) {
+				found = true;
+				getItem = true;
+			} else if (item.equals(object) && item instanceof Bag && item.getClosed()) {
+				found = true;
+				response = String.format("The %s is closed", item.getBasicName());
+			} else if (item.equals(object)) {						
+				response = String.format("I cannot take anything from the %s",item.getBasicName());
+				found = true;
+			}
+			
+			if (!found) {
+				itemNo ++;
+			} 
+		}
+		
+		if (!found) {
+			response = "";
+		} else if (getItem) {
+			response = switchList(((Bag) inventory.get(itemNo)).getContents(),inventory,noun,"I picked up the",false,true);
 		}
 		
 		return response;
@@ -240,21 +278,7 @@ public class Command {
 		boolean success = false;
 		return success;
 	}
-	
-	private Item findItem(String command, ArrayList<Item> itemList) {
-		Item foundItem = null;
 		
-		for (Item item:itemList) {
-			for (String noun:item.getNouns()) {
-				if((command.equals(noun)) && (foundItem == null)) {
-					foundItem = item;
-				}
-			}
-		}
-		
-		return foundItem;
-	}
-	
 	//Method to move item from one list to another
 	private String switchList(ArrayList<Item> listOne, ArrayList<Item> listTwo, String command, String statement, boolean itemTaken,boolean taking) {
 
@@ -268,7 +292,7 @@ public class Command {
 			response = "I'm not carrying that";
 		}
 		
-		//Sets up if player picking all everythinmg in the room
+		//Sets up if player picking all everything in the room
 		if (command.equals("all") || command.equals("everything")) {
 			response = "";
 			allSelected = true;
@@ -288,9 +312,9 @@ public class Command {
 					listTwo.add(item);
 					
 					if (itemsFound.size()==1) {
-						response = response.format("%s %s",statement, item.getBasicName());
+						response = String.format("%s %s",statement, item.getBasicName());
 					} else {
-						response = response.format("%s, %s %s",response, statement, item.getBasicName());
+						response = String.format("%s, %s %s",response, statement, item.getBasicName());
 					}
 					
 					if (item.equals(command)) {
@@ -496,7 +520,7 @@ public class Command {
 	//Method to open an exit/container
 	private String openExit(String command,String verb) {
 		
-		response = response.format("You do not see a %s",command);
+		response = String.format("You do not see a %s",command);
 		
 		Exit exit = getExits(command);
 		
@@ -510,23 +534,23 @@ public class Command {
 					//Is the exit open - if not the exit is opened.
 					if (exit.getOpen()) {
 						exit.openClose();
-						response = response.format("You open the %s",exit.getName());
+						response = String.format("You open the %s",exit.getName());
 					} else {
-						response = response.format("The %s is already open",exit.getName());
+						response = String.format("The %s is already open",exit.getName());
 					}
 				} else if (verb.equals("close")) {
 					//Is the exit open - if not the exit is opened.
 					if (!exit.getOpen()) {
 						exit.openClose();
-						response = response.format("You close the %s",exit.getName());
+						response = String.format("You close the %s",exit.getName());
 					} else {
-						response = response.format("The %s is already closed",exit.getName());
+						response = String.format("The %s is already closed",exit.getName());
 					}					
 				}
 			} else if (exit.getLocked()) {
-				response = response.format("The %s is locked",exit.getName());
+				response = String.format("The %s is locked",exit.getName());
 			} else {
-				response = response.format("You cannot open the %s", exit.getName());
+				response = String.format("You cannot open the %s", exit.getName());
 			}
 
 		//There were no exits
@@ -541,11 +565,11 @@ public class Command {
 				if (item.getCloseable() && !item.getLocked() && !(item instanceof Bag)) {
 					response = openItem(item,verb);
 				} else if (item.getCloseable() && item.getLocked() && !(item instanceof Bag)) {
-					response = response.format("The %s is locked.", item.getBasicName());
+					response = String.format("The %s is locked.", item.getBasicName());
 				} else if (item instanceof Bag) {
-					response = response.format("You need to pick the %s up to open it.", item.getBasicName());
+					response = String.format("You need to pick the %s up to open it.", item.getBasicName());
 				} else {
-					response = response.format("You cannot open the %s", item.getBasicName());
+					response = String.format("You cannot open the %s", item.getBasicName());
 				}
 			} else {
 				
@@ -556,7 +580,7 @@ public class Command {
 					if (item.getCloseable() && !item.getLocked()) {
 						response = openItem(item,verb);
 					} else {
-						response = response.format("You cannot open the %s", item.getBasicName());
+						response = String.format("You cannot open the %s", item.getBasicName());
 					}
 				}
 			}
@@ -572,18 +596,18 @@ public class Command {
 			//Is the exit open - if not the exit is opened.
 			if (item.getClosed()) {
 				item.setClosed();
-				response = response.format("You open the %s",item.getBasicName());
+				response = String.format("You open the %s",item.getBasicName());
 			} else {
-				response = response.format("The %s is already open",item.getBasicName());
+				response = String.format("The %s is already open",item.getBasicName());
 			}
 		} else if (verb.equals("close")) {
 				
 			//Is the exit open - if not the exit is opened.
 			if (!item.getClosed()) {
 				item.setClosed();
-				response = response.format("You close the %s",item.getBasicName());
+				response = String.format("You close the %s",item.getBasicName());
 			} else {
-				response = response.format("The %s is already closed",item.getBasicName());
+				response = String.format("The %s is already closed",item.getBasicName());
 			}					
 		}
 		
@@ -597,7 +621,7 @@ public class Command {
 		//Is the player just looking around the room
 		if ((noun.length()==0) || (noun.equals("around")) ||
 			 (noun.equals("room")) || (noun.equals("location"))) {
-			response = response.format("%s%n=======================",location.getName(true));
+			response = String.format("%s%n=======================",location.getName(true));
 		} else {
 			
 			boolean lookAll = false;
@@ -624,7 +648,7 @@ public class Command {
 							if (!exit.getOpen()) {
 								response = exit.getDestination().getName(true);
 							} else {
-								response = response.format("You cannot look through a closed %s", exit.getName());
+								response = String.format("You cannot look through a closed %s", exit.getName());
 							}
 						} else {
 							if (command.getCardinal()) {
@@ -634,7 +658,7 @@ public class Command {
 							}
 						}
 					} else if (lookAll) {
-						response = response.format("%s%n%s: %s", response,exit.getName(),exit.getDescription());
+						response = String.format("%s%n%s: %s", response,exit.getName(),exit.getDescription());
 					}
 				}
 			}
@@ -646,7 +670,7 @@ public class Command {
 						response = item.getDescription();
 						itemIndex = index;
 					} else if (lookAll) {
-						response = response.format("%s%n%s - carrying: %s", 
+						response = String.format("%s%n%s - carrying: %s", 
 									response,item.getName(),item.getDescription());		
 					}
 				}
@@ -698,14 +722,14 @@ public class Command {
 							if (objectType == 1) {
 									
 								Item foundItem = item.getHiddenItem();
-								response = response.format("%s%nYou found %s",response,foundItem.getName());
+								response = String.format("%s%nYou found %s",response,foundItem.getName());
 								location.addItem(foundItem);
 								
 							//Selects a random exit from the list
 							} else if (objectType == 2) {
 									
 								Exit foundExit = item.getHiddenExit();
-								response = response.format("%s%nYou found %s",response,foundExit.getName());
+								response = String.format("%s%nYou found %s",response,foundExit.getName());
 								location.addExit(foundExit);
 							}
 								
@@ -719,7 +743,7 @@ public class Command {
 							} 
 						}
 					} else if (lookAll) {
-						response = response.format("%s%n%s: %s", 
+						response = String.format("%s%n%s: %s", 
 								response,item.getName(),item.getDescription());
 					}
 					index ++;
@@ -799,7 +823,7 @@ public class Command {
 								if (exit.getLocked()) {
 									response = exit.lockUnlock((CarriableItem) key, verb);
 								} else {
-									response = response.format("The %s is already unlocked",exit.getName());
+									response = String.format("The %s is already unlocked",exit.getName());
 								}
 							} else if (verb.equals("lock")) {
 								if (!exit.getLocked()) {
@@ -1254,5 +1278,5 @@ public class Command {
  * 11 January 2025 - Used basic name for when picking up and dropping object
  * 12 January 2025 - Added method to check if player carrying the item. Moved open/close item to separate method. Added open
  * 16 January 2025 - Added the ability to put an item into a bag.
- * 18 January 2025 - Fixed problem with concurrent array when taking item from bag
+ * 18 January 2025 - Fixed problem with concurrent array when taking item from bag. Removed warnings. Get item from bag using just items name
  */
