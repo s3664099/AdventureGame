@@ -30,7 +30,6 @@ public class Main {
 		Input input = new Input();
 		Parser parser = new Parser();
 		Command processor = new Command(game_data.getScore());
-		String response = "";
 		boolean gameRunning = true;
 		
 		if(processor.displayLocation()) {

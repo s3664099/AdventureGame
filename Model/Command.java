@@ -784,7 +784,6 @@ public class Command {
 	private String unlock(ArrayList<Item> inventory, ArrayList<Exit>exits, ArrayList<Item>items, UserCommand command) {
 	
 		response = "I do not see that here";
-		boolean found = false;
 		boolean foundItem = false;
 		String verb = command.getVerb();
 		String subject = command.getSubject();
@@ -830,13 +829,13 @@ public class Command {
 									
 									//If exit is open, cannot be locked
 									if (!exit.getOpen()) {
-										response = response.format("The %s is open. Please close it first", exit.getName());
+										response = String.format("The %s is open. Please close it first", exit.getName());
 									} else {
 										response = exit.lockUnlock((CarriableItem) key, verb);
 									}
 									
 								} else {
-									response = response.format("The %s is already locked",exit.getName());
+									response = String.format("The %s is already locked",exit.getName());
 								}								
 							}
 						}
@@ -853,18 +852,16 @@ public class Command {
 							if(!container.checkKey(key) || !container.getLockable()) {
 								response = String.format("The %s doesn't work", key.getName());
 							} else {
-								
-								found = true;
-								
+																
 								//Acts on either lock/unlock, which does the opposite.
 								if (verb.equals("unlock")) {
 										
 									//Checks if the container is already locked.
 									if (container.getLocked()) {
 										container.setLocked();
-										response = response.format("You unlock the %s",container.getBasicName());
+										response = String.format("You unlock the %s",container.getBasicName());
 									} else {
-										response = response.format("The %s is already unlocked",container.getBasicName());
+										response = String.format("The %s is already unlocked",container.getBasicName());
 									}
 										
 								} else if (verb.equals("lock")) {
@@ -874,13 +871,13 @@ public class Command {
 											
 										//Checks if the container is open. Cannot lock and open conmtainer
 										if (!container.getClosed()) {
-											response = response.format("The %s is still open. Please close it first", container.getName());
+											response = String.format("The %s is still open. Please close it first", container.getName());
 										} else {
 											container.setLocked();
-											response = response.format("You lock the %s",container.getName());
+											response = String.format("You lock the %s",container.getName());
 										}
 									} else {
-										response = response.format("The %s is already locked",container.getName());
+										response = String.format("The %s is already locked",container.getName());
 									}								
 								}
 							}
@@ -901,7 +898,7 @@ public class Command {
 		
 		ArrayList<Item> items = location.getItems();
 		String response = "";
-		response = response.format("I do not see a %s here", command);
+		response = String.format("I do not see a %s here", command);
 		Item hiddenItem = null;
 		Boolean foundItem = false;
 		Boolean itemRemoved = false;
@@ -914,7 +911,7 @@ public class Command {
 			if (item.equals(command)) {
 				
 				if ((!item.getMoveable()) || (item.getMoved())) {
-					response = response.format("I cannot move the %s", item.getName());
+					response = String.format("I cannot move the %s", item.getName());
 				} else {
 						
 					//Flags the item that has been moved and adds the hidden item to the location
@@ -923,18 +920,18 @@ public class Command {
 
 					if (item.checkHiddenItems()) {
 						hiddenItem = item.getHiddenItem();
-						response = response.format("You move the %s and discover a %s",
+						response = String.format("You move the %s and discover a %s",
 								item.getName(),hiddenItem.getName());
 						itemRemoved = true;
 					} else {
 						if (item.checkHiddenExits()) {
 							Exit exit = item.getHiddenExit();
 							location.addExit(exit);
-							response = response.format("You move the %s and discover a %s",
+							response = String.format("You move the %s and discover a %s",
 								item.getName(),exit.getDescription());
 							exitRemoved = true;
 						} else {
-							response = response.format("You move the %s and don't find anything",
+							response = String.format("You move the %s and don't find anything",
 									item.getName());
 						}
 					}
@@ -964,7 +961,7 @@ public class Command {
 		if(!foundItem) {
 			for (Exit exit:location.getExits()) {
 				if (exit.equals(command)) {
-					response = response.format("You cannot move the %s",exit.getName());
+					response = String.format("You cannot move the %s",exit.getName());
 					foundItem = true;
 				}
 			}
@@ -1085,7 +1082,7 @@ public class Command {
 				out.writeObject(location);
 				out.close();
 				file.close();
-				response = response.format("Game saved as %s.sav",saveName);
+				response = String.format("Game saved as %s.sav",saveName);
 			} catch (IOException e) {
 				response = "Game failed to save";
 				e.printStackTrace();
@@ -1110,7 +1107,7 @@ public class Command {
 		
 		//If not available, displays list of games
 		if (!saveFile.exists()) {			
-			response = response.format("Sorry %s does not exist. The files that exist are %n%s", gameName,getGameList());
+			response = String.format("Sorry %s does not exist. The files that exist are %n%s", gameName,getGameList());
 		} else {
 			loadFile = true;
 		}
@@ -1136,11 +1133,11 @@ public class Command {
 				
 				fileIn.close();
 				file.close();
-				response = response.format("%s.sav successfully loaded",gameName);
+				response = String.format("%s.sav successfully loaded",gameName);
 							
 			//Location failed to load
 			} catch (IOException|ClassNotFoundException e) {
-				response = response.format("%s.sav failed to load",gameName);
+				response = String.format("%s.sav failed to load",gameName);
 				e.printStackTrace();
 			}
 			
@@ -1163,14 +1160,14 @@ public class Command {
 			});
 			
 			//Returns a list of saved games
-			response = response.format("The available save games are:%n");
+			response = String.format("The available save games are:%n");
 			
 			for (File file:savFiles) {
-				response = response.format("%s%s%n", response,file.getName());
+				response = String.format("%s%s%n", response,file.getName());
 			}
 			
 			if (savFiles.length == 0) {
-				response = response.format("%sEmpty", response);
+				response = String.format("%sEmpty", response);
 			}
 		}
 		
@@ -1179,8 +1176,8 @@ public class Command {
 	
 	//Basic conversation function
 	private String conversation(String verb, ArrayList<Item> items) {
+
 		String response = "I dont see that here";
-		String endConvo = "";
 		ArrayList<String> endConv = new ArrayList<String>();
 		int itemNo = 0;
 		int itemFound = 0;
@@ -1192,7 +1189,7 @@ public class Command {
 				itemFound = itemNo;
 					
 				if (!item.getExtended()) {
-					response = response.format("%s: %s",item.getName(),item.talk().getResponse());
+					response = String.format("%s: %s",item.getName(),item.talk().getResponse());
 				} else {
 					endConv = item.talk().displayConversation();
 				}
