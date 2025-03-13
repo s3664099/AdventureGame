@@ -1,7 +1,7 @@
 /* Main Function
  * Created: 25 August 2023
- * Updated: 20 August 2024
- * Version: 1.2
+ * Updated: 13 March 2025
+ * Version: 1.3
  * This is the main routine for the game
  */
 
@@ -17,19 +17,31 @@ import View.Display_Text;
 
 public class Main {
 	
-	String query = "Tell me what to do: ";
-	ArrayList<String> command;
-	ArrayList<Item> inventory = new ArrayList<Item>();
-	int score = 0;
+	private static final String PROMPT = "Tell me what to do: ";
+	private static final String WIN_MESSAGE = "Congratulations, you have collected all the treasures!";
+	
+	private ArrayList<String> command;
+	private ArrayList<Item> inventory = new ArrayList<Item>();
+	private int score = 0;
+	
+    private final Data_Process gameData;
+    private final Display_Text display;
+    private final Input input;
+    private final Parser parser;
+    private final Command processor;
+	
+	public Main(Data_Process gameData, Display_Text display, Input input, Parser parser, Command processor) {
+		this.gameData = gameData;
+		this.display = display;
+		this.input = input;
+	    this.parser = parser;
+	    this.processor = processor;
+	}
+	
 
-	public void run() {
-		
-		Data_Process game_data = new Data_Process();
-		Display_Text display = new Display_Text();
-		Location data = game_data.start();
-		Input input = new Input();
-		Parser parser = new Parser();
-		Command processor = new Command(game_data.getScore());
+	public void run() throws Exception {
+
+		Location data = gameData.start();
 		boolean gameRunning = true;
 		
 		if(processor.displayLocation()) {
@@ -38,7 +50,7 @@ public class Main {
 		
 		while (gameRunning) {
 						
-			command = input.getCommand(query);
+			command = input.getCommand(PROMPT);
 			
 			//Cycles through the list of commands and executes them.
 			for (String action:command) {
@@ -56,19 +68,26 @@ public class Main {
 				}
 				
 				//Checks if the player has reached the top score
-				if (processor.compareScore()) {
-					gameRunning = false;
-					System.out.println("Congratulations, you can collected all the treasures");
-				}
-			
-				//Checks if the player has entered a room that is an end condition
-				if (processor.getCurrentLocation().checkEnd()) {
-					gameRunning = false;
-					System.out.println(processor.getCurrentLocation().getEndComment());
-				}
+				if (checkEndConditions(data, processor)) {
+	                    gameRunning = false;
+	            }
 			}
 		}
 	}
+	
+    // Helper method to check end conditions
+    private boolean checkEndConditions(Location currentLocation, Command processor) {
+    
+    	if (processor.compareScore()) {
+            System.out.println(WIN_MESSAGE);
+            return true;
+        }
+        if (currentLocation.checkEnd()) {
+            System.out.println(currentLocation.getEndComment());
+            return true;
+        }
+        return false;
+    }
 }
 	
 /* 25 August 2023 - Created File
@@ -81,4 +100,5 @@ public class Main {
  * 18 August 2024 - Added check for an end game
  * 19 August 2024 - Added check to see if player entered room with end condition
  * 20 August 2024 - Added ability to enter multiple commands
+ * 13 March 2025 - Updated code based on recommendations. Moved dependencies to start, and created end condition
  */

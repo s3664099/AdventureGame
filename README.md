@@ -46,6 +46,46 @@ The current verbs are:
 ## Classes ##
 
 ### Default Package ###
+---
+#### Start Class ####
+
+**Overview**  
+The `Start` class is the entry point for launching the adventure game. It initializes the game by creating an instance of the `Main` class and invoking its `run` method to start the game loop.
+
+**Purpose**  
+The primary purpose of the `Start` class is to:  
+- Serve as the launching point for the adventure game.  
+- Initialize the game by creating an instance of the `Main` class.  
+- Start the game by calling the `run` method of the `Main` class.  
+
+**Key Components**  
+
+**1. Instance Variables**  
+- The `Start` class does not have any instance variables. It is a simple class with a single static method.
+
+**2. Methods**  
+- **`public static void main(String[] args)`**:  
+  - The `main` method is the entry point of the application.  
+  - It creates an instance of the `Main` class and calls its `run` method to start the game.  
+
+**Usage**  
+To use the `Start` class, simply execute it as the main class of the application. This will launch the adventure game.
+
+**Best Practices**  
+1. **Error Handling**:  
+   - Add a `try-catch` block to handle exceptions that may occur during the execution of the `Main` class. This ensures the program does not crash unexpectedly and provides meaningful feedback to the user.  
+
+2. **Logging**:  
+   - Integrate a logging framework (e.g., `java.util.logging` or `Log4j`) to track the startup process and runtime events. This helps with debugging and monitoring the game's behavior.  
+
+**Why Use This Class?**  
+- **Simplicity**: The `Start` class is straightforward and easy to understand, making it an ideal entry point for the game.  
+- **Separation of Concerns**: It separates the responsibility of launching the game from the core game logic, which is handled by the `Main` class.  
+- **Standard Entry Point**: The `main` method is the standard entry point for Java applications, making it clear where the program execution begins.  
+
+By using the `Start` class, you ensure a clean and organized way to launch your adventure game while maintaining flexibility for future enhancements.
+
+--- 
 
 ### Control Package ###
 
@@ -190,7 +230,6 @@ command.
 Completed the bag and can put items into it.
 
 
-Here’s the **`README.md` outline** for the `Location` class, following your provided template:
 
 ---
 
@@ -207,67 +246,9 @@ Here’s the **`README.md` outline** for the `Location` class, following your pr
 **2. Methods**
 
 **Usage**
-To use the `Location` class, create an instance with the required parameters and interact with it using the provided methods. For example:
 
-```java
-// Create a location
-String[] prepositions = {"by", "facing", "at", "in", "outside", "beneath", "on"};
-Location forest = new Location("4the furthest depth of the forest1001", prepositions, "forest");
+**Best Practices**
 
-// Check if the location has been visited
-if (forest.getVisited()) {
-    System.out.println("The forest has been visited.");
-}
+**Example**
 
-// Mark the location as viewed
-forest.setViewed();
-
-// Print the location's details
-System.out.println(forest.toString()); // Output: Location{name='by the furthest depth of the forest', exits=[true, false, false, true], visited=false, viewed=true, roomType='forest'}
-```
-
----
-
-### **Best Practices**
-1. **Encapsulation**:
-   - Use the provided getter and setter methods to access or modify the location’s properties.
-2. **Validation**:
-   - Ensure that input parameters (e.g., `name`, `prepositions`, `roomType`) are validated in the constructor to prevent runtime errors.
-3. **Serialization**:
-   - Update the `serialVersionUID` if the class structure changes significantly to avoid compatibility issues during deserialization.
-4. **Debugging**:
-   - Use the `toString()` method for debugging or logging to inspect the location’s state.
-
----
-
-### **Example**
-Here’s an example of how the `Location` class might be used in the game:
-
-```java
-// Create a location
-String[] prepositions = {"by", "facing", "at", "in", "outside", "beneath", "on"};
-Location cave = new Location("2a dark cave0000", prepositions, "cave");
-
-// Print the location's details
-System.out.println(cave.toString()); // Output: Location{name='facing a dark cave', exits=[false, false, false, false], visited=false, viewed=false, roomType='cave'}
-
-// Mark the location as visited
-cave.setVisited();
-
-// Check if the location has been viewed
-if (!cave.getViewed()) {
-    System.out.println("The cave has not been viewed.");
-}
-```
-
----
-
-### **Why Use This Class?**
-- **Centralized Location Management**: Encapsulates all data and behavior related to in-game locations in one place.
-- **Flexibility**: Allows locations to be dynamically updated during gameplay (e.g., marking as visited or viewed).
-- **Serialization Support**: Enables saving and loading of game state, ensuring persistence across sessions.
-- **Debugging and Logging**: The `toString()` method provides a convenient way to inspect location states.
-
----
-
-This `README.md` outline provides a clear and concise overview of the `Location` class, making it easy for developers to understand its purpose, structure, and usage. Let me know if you’d like further refinements! **Danke!** 😊
+**Why Use This Class?**

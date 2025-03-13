@@ -25,7 +25,12 @@
 
 import java.util.logging.Logger;
 
+import Control.Input;
+import Control.Parser;
+import Data.Data_Process;
+import Model.Command;
 import Model.Main;
+import View.Display_Text;
 
 public class Start {
 
@@ -36,10 +41,19 @@ public class Start {
 		logger.info("Starting the adventure game...");
 		
         try {
-            Main main = new Main();
+        	// Initialize dependencies
+            Data_Process gameData = new Data_Process();
+            Display_Text display = new Display_Text();
+            Input input = new Input();
+            Parser parser = new Parser();
+            Command processor = new Command(gameData.getScore());
+        	
+            // Create and run the game
+            Main main = new Main(gameData, display, input, parser, processor);
             main.run();
         } catch (Exception e) {
         	logger.severe("An error occurred while running the game: " + e.getMessage());
+        	e.printStackTrace();
         }
         
 	}
@@ -48,5 +62,5 @@ public class Start {
 /*
  * 25 August 2023 - Created File 
  * 27 August 2023 - Added comments
- * 13 March 2025 - Added error handling and logging
+ * 13 March 2025 - Added error handling and logging. Moved dependencies here
 */
