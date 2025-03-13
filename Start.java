@@ -1,7 +1,7 @@
 /* Title: Launcher
  * Initial: 25 August 2023
- * Updated: 27 August 2023
- * Version: 1.0
+ * Updated: 13 March 2025
+ * Version: 1.2
  * This is the launcher. It should not need to be updated.
  */
 
@@ -10,8 +10,6 @@
 //			Add a with to carriable items that unless with specific item cannot pick it up
 //			Ditto with open and moveable items
 //			Can unlock a carriable Item (the book)
-//			Do a Bag (can be locked as well, but only open if carried).
-//				If item in bag, have to specifically tell computer to get it from the bag
 //      Complex Commands - use x in x
 //TODO: Use command (Can also be applied to lock/unlock - also shovels and stuff).
 //TODO: Commands embedded in objects/exits
@@ -25,18 +23,30 @@
 //TODO: Consider dropping moveable item and simply using cover. In this sense we can add
 //		A verb that need to be used to move the item.
 
+import java.util.logging.Logger;
+
 import Model.Main;
 
 public class Start {
 
+	private static final Logger logger = Logger.getLogger(Start.class.getName());
+	
 	public static void main(String[] args) {
 		
-		Main main = new Main();
-		main.run();
+		logger.info("Starting the adventure game...");
+		
+        try {
+            Main main = new Main();
+            main.run();
+        } catch (Exception e) {
+        	logger.severe("An error occurred while running the game: " + e.getMessage());
+        }
+        
 	}
 }
 
 /*
  * 25 August 2023 - Created File 
  * 27 August 2023 - Added comments
+ * 13 March 2025 - Added error handling and logging
 */

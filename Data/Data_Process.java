@@ -68,7 +68,7 @@ public class Data_Process {
 		bookshelf.addItem(diary);
 		library.addItem(bookshelf);
 		OrdinaryExit west = new OrdinaryExit("West", library, false);
-		OrdinaryExit east = new OrdinaryExit("east", start, false);
+		OrdinaryExit east = new OrdinaryExit("East", start, false);
 		start.addExit(west);
 		library.addExit(east);
 		library.addItem(toteBag);
@@ -96,9 +96,27 @@ public class Data_Process {
 		chest.addItem(map);
 		basement.addItem(chest);
 		OrdinaryExit down = new OrdinaryExit("Down", basement, false);
-		//stairs.addExit(down);
-		//basement.addExit(street);
+		
+		Location garden = new Location("In the garden", "A peaceful garden filled with overgrown plants and flowers. A small fountain trickles in the center.");
+		ImmoveableItem fountain = new ImmoveableItem("Stone Fountain", "A small fountain with water trickling down. It looks like it hasn't been maintained in years.");
+		CarriableItem shovel = new CarriableItem("Rusty Shovel", "A shovel covered in rust. It might still be useful for digging.");
+		garden.addItem(fountain);
+		garden.addItem(shovel);
+		CloseableExit gardenExit = new CloseableExit("Back Door","door", garden, true, "This is a wooden door with a window looking out into the back yard");
+		CloseableExit kitchenExit = new CloseableExit("Back Door","door", kitchen, false, "This is a wooden door with a window looking into the kitchen");
+		kitchen.addExit(gardenExit);
+		garden.addExit(kitchenExit);
 
+		Location study = new Location("In the study", "A quiet study with a large writing desk, a fireplace, and shelves filled with books.");
+		Container writingDesk = new Container("Writing Desk", "A sturdy desk with drawers. It looks like it's been used frequently.", true);
+		CarriableItem letter = new CarriableItem("Sealed Letter", "A letter with a wax seal. It feels important.");
+		writingDesk.addItem(letter);
+		study.addItem(writingDesk);
+		OrdinaryExit studyExit = new OrdinaryExit("West", study, false);
+		OrdinaryExit libraryExit = new OrdinaryExit("East", library, false);
+		library.addExit(studyExit);
+		study.addExit(libraryExit);		
+		
 		//Hooker - Can't enter room while Hooker present. Get rid of hooker to enter
 		//Hooker Room - Dildo
 		//A Street in Soho
