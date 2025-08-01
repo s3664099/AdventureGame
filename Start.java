@@ -5,6 +5,8 @@
  * This is the launcher. It should not need to be updated.
  */
 
+//TODO: Add a game state
+//TODO: Create an initialise class to pass created functions into main class
 //TODO: Implement multi word parser
 //		Handle the with section here - and if there is a with, will do both of them.
 //			Add a with to carriable items that unless with specific item cannot pick it up
@@ -24,6 +26,9 @@
 //		A verb that need to be used to move the item.
 
 import java.util.Objects;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import Data.Data_Process;
@@ -34,7 +39,7 @@ public class Start {
 	private static final Logger logger = Logger.getLogger(Start.class.getName());
 	
 	public static void main(String[] args) {
-		
+
 		logger.setLevel(java.util.logging.Level.FINE);
 		logger.info("Starting the adventure game...");
 		

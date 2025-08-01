@@ -1,12 +1,14 @@
 /* Main Function
  * Created: 25 August 2023
- * Updated: 13 March 2025
- * Version: 1.3
+ * Updated: 2 August 2025
+ * Version: 1.4
  * This is the main routine for the game
  */
 
 package Model;
+import java.util.logging.Logger;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import Control.Input;
 import Control.Parser;
@@ -16,28 +18,34 @@ import Data.Location;
 import View.Display_Text;
 
 public class Main {
+	private static final Logger logger = Logger.getLogger(Main.class.getName());
 	
 	private static final String PROMPT = "Tell me what to do: ";
 	private static final String WIN_MESSAGE = "Congratulations, you have collected all the treasures!";
 	
-	private ArrayList<String> command;
+	private ArrayList<String> playerCommand;
 	private ArrayList<Item> inventory = new ArrayList<Item>();
 	private int score = 0;
 	
     private final Data_Process gameData;
-    private final Display_Text display = new Display_Text();
-    private final Input input = new Input();
-    private final Parser parser = new Parser();
+    private final Display_Text display;
+    private final Input input;
+    private final Parser parser;
     private final Command processor;
 	
 	public Main(Data_Process gameData) {
-		this.gameData = gameData;
-		this.processor = new Command(gameData.getScore());
+		this.gameData = Objects.requireNonNull(gameData,"gameData cannot be null");
+		this.display = new Display_Text();
+		this.input = new Input();
+		this.parser = new Parser();
+		this.processor = new Command(Objects.requireNonNull(gameData.getScore(),"Score missing"));
+		logger.fine("Main game successfully initialised");
 	}
 	
 
 	public void run() throws Exception {
 
+		logger.info("Game started");
 		Location data = gameData.start();
 		boolean gameRunning = true;
 		
@@ -47,26 +55,29 @@ public class Main {
 		
 		while (gameRunning) {
 						
-			command = input.getCommand(PROMPT);
+			playerCommand = input.getCommand(PROMPT);
+			logger.fine("Player command "+playerCommand);
 			
 			//Cycles through the list of commands and executes them.
-			for (String action:command) {
+			for (String commandString:playerCommand) {
 			
-				UserCommand command = parser.parseCommand(action);
-				gameRunning = display.displayResponse(processor.processCommand(command,data,inventory,score));
+				UserCommand userCommand = parser.parseCommand(commandString);
+				gameRunning = display.displayResponse(processor.processCommand(userCommand,data,inventory,score));
 				
 				//Checks if the values have been cleared, if not, loads them.
 				if (processor.getCurrentLocation() != null) {
 					data = processor.getCurrentLocation();
 				}
 				
-				if (command.getVerb().equals("go")) {
+				if (userCommand.getVerb().equals("go")) {
 					display.display(data);
+					logger.fine("Moved to location: " + data.getName(false));
 				}
 				
 				//Checks if the player has reached the top score
 				if (checkEndConditions(data, processor)) {
-	                    gameRunning = false;
+					gameRunning = false;
+					logger.info("Game end condition met");
 	            }
 			}
 		}
@@ -98,4 +109,6 @@ public class Main {
  * 19 August 2024 - Added check to see if player entered room with end condition
  * 20 August 2024 - Added ability to enter multiple commands
  * 13 March 2025 - Updated code based on recommendations. Moved dependencies to start, and created end condition
+ * 2 August 2025 - Started updated the main class based on recommendations.
+ * 				   Added logging and error handling
  */

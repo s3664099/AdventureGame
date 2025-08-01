@@ -1,6 +1,12 @@
 package Data;
 
+import java.util.logging.Logger;
+
+import Model.Main;
+
 public class Data_Process implements AutoCloseable {
+	
+	private static final Logger logger = Logger.getLogger(Main.class.getName());
 	
 	private Location start;
 	private String description;
@@ -139,7 +145,7 @@ public class Data_Process implements AutoCloseable {
 
 	@Override
 	public void close() throws Exception {
-		// TODO Auto-generated method stub
+		logger.fine("Closing game data resources");
 		
 	}
 }
