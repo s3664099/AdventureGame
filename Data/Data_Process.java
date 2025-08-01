@@ -1,6 +1,6 @@
 package Data;
 
-public class Data_Process {
+public class Data_Process implements AutoCloseable {
 	
 	private Location start;
 	private String description;
@@ -135,5 +135,11 @@ public class Data_Process {
 	
 	public int getScore() {
 		return this.topScore;
+	}
+
+	@Override
+	public void close() throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 }

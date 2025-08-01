@@ -93,6 +93,104 @@ By using the `Start` class, you ensure a clean and organized way to launch your 
 
 ### Model Package ###
 
+#### Main Class ####
+
+**Overview**  
+The `Main` class is the core of the adventure game. It manages the game loop, processes player commands, and handles game state, including the player's inventory, score, and current location.
+
+**Purpose**  
+The primary purpose of the `Main` class is to:  
+- Initialize the game by loading data and setting up dependencies.  
+- Process player commands and update the game state accordingly.  
+- Manage the game loop until an end condition is met (e.g., winning the game or reaching a game-over state).  
+
+**Key Components**  
+
+**1. Instance Variables**  
+- **`command`**: A list of commands entered by the player.  
+- **`inventory`**: A list of items the player has collected.  
+- **`score`**: The player's current score.  
+- **`gameData`**: Handles game data and initialization.  
+- **`display`**: Manages text output to the player.  
+- **`input`**: Handles player input.  
+- **`parser`**: Parses player commands into actionable instructions.  
+- **`processor`**: Processes parsed commands and updates the game state.  
+
+**2. Methods**  
+- **`public Main(Data_Process gameData, Display_Text display, Input input, Parser parser, Command processor)`**:  
+  - Constructor that initializes the game with dependencies injected.  
+- **`public void run() throws Exception`**:  
+  - The main game loop. It processes player commands, updates the game state, and checks for end conditions.  
+- **`private boolean checkEndConditions(Location currentLocation, Command processor)`**:  
+  - A helper method that checks if the game should end (e.g., the player wins or loses).  
+
+**Usage**  
+To use the `Main` class, initialize it with the required dependencies and call the `run` method. The `Start` class typically handles this initialization and error handling.
+
+Example:
+```java
+Data_Process gameData = new Data_Process();
+Display_Text display = new Display_Text();
+Input input = new Input();
+Parser parser = new Parser();
+Command processor = new Command(gameData.getScore());
+
+Main main = new Main(gameData, display, input, parser, processor);
+main.run();
+```
+
+**Best Practices**  
+1. **Error Propagation**:  
+   - The `run` method propagates exceptions to the caller (`Start` class), ensuring centralized error handling.  
+
+2. **Encapsulation**:  
+   - Instance variables are private, and dependencies are injected via the constructor. This improves flexibility and testability.  
+
+3. **Separation of Concerns**:  
+   - The `Main` class focuses on game logic, while other classes handle input, output, parsing, and command processing.  
+
+4. **Use Constants**:  
+   - Hardcoded strings (e.g., prompts and messages) are defined as constants for easier maintenance and localization.  
+
+5. **Optimize Redundant Checks**:  
+   - Helper methods like `checkEndConditions` are used to avoid repetitive logic and improve readability.  
+
+**Example**  
+Here’s an example of how the `Main` class is used in conjunction with the `Start` class:
+```java
+public class Start {
+    private static final Logger logger = Logger.getLogger(Start.class.getName());
+
+    public static void main(String[] args) {
+        try {
+            // Initialize dependencies
+            Data_Process gameData = new Data_Process();
+            Display_Text display = new Display_Text();
+            Input input = new Input();
+            Parser parser = new Parser();
+            Command processor = new Command(gameData.getScore());
+
+            // Create and run the game
+            Main main = new Main(gameData, display, input, parser, processor);
+            main.run();
+        } catch (Exception e) {
+            logger.severe("An error occurred while running the game: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+**Why Use This Class?**  
+- **Core Game Logic**: The `Main` class encapsulates the core functionality of the game, making it the central component of the application.  
+- **Modular Design**: By delegating responsibilities to other classes, the `Main` class adheres to the principle of separation of concerns.  
+- **Flexibility**: Dependency injection and error propagation make the class easy to test, extend, and maintain.  
+- **Clear Structure**: The use of helper methods and constants improves readability and organization.  
+
+By using the `Main` class, you ensure a clean and organized implementation of your adventure game's core logic, making it easier to build upon and maintain in the future.
+
+---
+
 ### View Package ###
 
 ## Update List ##

@@ -25,17 +25,14 @@ public class Main {
 	private int score = 0;
 	
     private final Data_Process gameData;
-    private final Display_Text display;
-    private final Input input;
-    private final Parser parser;
+    private final Display_Text display = new Display_Text();
+    private final Input input = new Input();
+    private final Parser parser = new Parser();
     private final Command processor;
 	
-	public Main(Data_Process gameData, Display_Text display, Input input, Parser parser, Command processor) {
+	public Main(Data_Process gameData) {
 		this.gameData = gameData;
-		this.display = display;
-		this.input = input;
-	    this.parser = parser;
-	    this.processor = processor;
+		this.processor = new Command(gameData.getScore());
 	}
 	
 

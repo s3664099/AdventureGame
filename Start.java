@@ -1,7 +1,7 @@
 /* Title: Launcher
  * Initial: 25 August 2023
- * Updated: 13 March 2025
- * Version: 1.2
+ * Updated: 2 August 2025
+ * Version: 1.3
  * This is the launcher. It should not need to be updated.
  */
 
@@ -23,14 +23,11 @@
 //TODO: Consider dropping moveable item and simply using cover. In this sense we can add
 //		A verb that need to be used to move the item.
 
+import java.util.Objects;
 import java.util.logging.Logger;
 
-import Control.Input;
-import Control.Parser;
 import Data.Data_Process;
-import Model.Command;
 import Model.Main;
-import View.Display_Text;
 
 public class Start {
 
@@ -38,24 +35,34 @@ public class Start {
 	
 	public static void main(String[] args) {
 		
+		logger.setLevel(java.util.logging.Level.FINE);
 		logger.info("Starting the adventure game...");
 		
-        try {
-        	// Initialize dependencies
-            Data_Process gameData = new Data_Process();
-            Display_Text display = new Display_Text();
-            Input input = new Input();
-            Parser parser = new Parser();
-            Command processor = new Command(gameData.getScore());
+        try (Data_Process gameData = new Data_Process()){
         	
-            // Create and run the game
-            Main main = new Main(gameData, display, input, parser, processor);
+        	logger.fine("Loading Game Data...");
+            Objects.requireNonNull(gameData,"gameData initialisation failed");
+            logger.fine("Game Data loaded successfully");
+        	
+            logger.fine("Creating Main Game instance ...");
+            Main main = new Main(gameData);
+            Objects.requireNonNull(main,"Main Game creation failed");
+            logger.fine("Game instance ready");
+            
+            logger.fine("Starting game loop");
             main.run();
+            logger.fine("Game loop executed successfully");
+            
+        } catch (NullPointerException e) {
+            logger.severe("CRITICAL: Dependency failed to initialize - " + e.getMessage());
+        } catch (IllegalStateException e) {
+            logger.severe("Game data error: " + e.getMessage());
         } catch (Exception e) {
-        	logger.severe("An error occurred while running the game: " + e.getMessage());
-        	e.printStackTrace();
-        }
-        
+            logger.severe("UNEXPECTED ERROR: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            logger.fine("Startup sequence terminated");
+        }   
 	}
 }
 
@@ -63,4 +70,6 @@ public class Start {
  * 25 August 2023 - Created File 
  * 27 August 2023 - Added comments
  * 13 March 2025 - Added error handling and logging. Moved dependencies here
+ * 2 August 2025 - Moved object creation to main, and added loggers and not null
+ * 				   checks.
 */
