@@ -6,6 +6,7 @@
  */
 
 //TODO: Add a game state
+//TODO: Add Class to hold constants
 //TODO: Implement multi word parser
 //		Handle the with section here - and if there is a with, will do both of them.
 //			Add a with to carriable items that unless with specific item cannot pick it up
@@ -25,9 +26,6 @@
 //		A verb that need to be used to move the item.
 
 import java.util.Objects;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Handler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import Data.Data_Process;

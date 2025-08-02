@@ -46,11 +46,12 @@ public class Main {
 	public void run() throws Exception {
 
 		logger.info("Game started");
-		Location data = gameData.start();
+		Location currentLocation = gameData.start();
 		boolean gameRunning = true;
 		
 		if(processor.displayLocation()) {
-			display.display(data);
+			display.display(currentLocation);
+			logger.fine("Initial location displayed: " + currentLocation);
 		}		
 		
 		while (gameRunning) {
@@ -62,23 +63,33 @@ public class Main {
 			for (String commandString:playerCommand) {
 			
 				UserCommand userCommand = parser.parseCommand(commandString);
-				gameRunning = display.displayResponse(processor.processCommand(userCommand,data,inventory,score));
+                if (userCommand == null || userCommand.getVerb() == null) {
+                    logger.warning("Invalid command: " + commandString);
+                    display.displayResponse("Unknown command. Try again.");
+                } else {
+                	
+                	// --- Execute command ---
+                	gameRunning = display.displayResponse(
+                					processor.processCommand(userCommand,currentLocation,
+                											inventory,score));
+                	
+                	// --- Update location if changed ---
+                	if (processor.getCurrentLocation() != null) {
+                		currentLocation = processor.getCurrentLocation();
+                	}
+                	
+                	// --- Display new location after "go" commands ---
+                	if (userCommand.getVerb().equals("go")) {
+                		display.display(currentLocation);
+                		logger.fine("Moved to location: " + currentLocation.getName(false));
+                	}
 				
-				//Checks if the values have been cleared, if not, loads them.
-				if (processor.getCurrentLocation() != null) {
-					data = processor.getCurrentLocation();
-				}
-				
-				if (userCommand.getVerb().equals("go")) {
-					display.display(data);
-					logger.fine("Moved to location: " + data.getName(false));
-				}
-				
-				//Checks if the player has reached the top score
-				if (checkEndConditions(data, processor)) {
-					gameRunning = false;
-					logger.info("Game end condition met");
-	            }
+                	// --- Check for win/loss conditions ---
+                	if (checkEndConditions(currentLocation, processor)) {
+                		gameRunning = false;
+                		logger.info("Game end condition met");
+                	}
+                }
 			}
 		}
 	}
