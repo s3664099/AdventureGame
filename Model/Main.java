@@ -33,16 +33,16 @@ public class Main {
     private final Parser parser;
     private final Command processor;
 	
-	public Main(Data_Process gameData) {
+	public Main(Data_Process gameData, Display_Text display, Input input, 
+				Parser parser,Command processor) {
 		this.gameData = Objects.requireNonNull(gameData,"gameData cannot be null");
-		this.display = new Display_Text();
-		this.input = new Input();
-		this.parser = new Parser();
-		this.processor = new Command(Objects.requireNonNull(gameData.getScore(),"Score missing"));
+		this.display = display;
+		this.input = input;
+		this.parser = parser;
+		this.processor = processor;
 		logger.fine("Main game successfully initialised");
 	}
 	
-
 	public void run() throws Exception {
 
 		logger.info("Game started");

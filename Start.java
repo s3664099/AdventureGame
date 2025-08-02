@@ -6,7 +6,6 @@
  */
 
 //TODO: Add a game state
-//TODO: Create an initialise class to pass created functions into main class
 //TODO: Implement multi word parser
 //		Handle the with section here - and if there is a with, will do both of them.
 //			Add a with to carriable items that unless with specific item cannot pick it up
@@ -50,7 +49,7 @@ public class Start {
             logger.fine("Game Data loaded successfully");
         	
             logger.fine("Creating Main Game instance ...");
-            Main main = new Main(gameData);
+            Main main = new InitialiseGame().initialiseMain(gameData);
             Objects.requireNonNull(main,"Main Game creation failed");
             logger.fine("Game instance ready");
             
