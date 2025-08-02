@@ -13,12 +13,33 @@ import Data.Data_Process;
 import Model.Command;
 import Model.Main;
 import View.Display_Text;
+import java.util.logging.Logger;
 
 public class InitialiseGame {
 
+	private static final Logger logger = Logger.getLogger(InitialiseGame.class.getName());
+	
+    /**
+     * Initializes and returns a fully configured Main game instance.
+     * @param gameData Pre-loaded game data (must not be null).
+     * @return Configured Main game instance.
+     * @throws NullPointerException if gameData or its score is null.
+     */
 	public Main initialiseMain(Data_Process gameData) {
-		return new Main(gameData,new Display_Text(),new Input(),new Parser(),
-				new Command(Objects.requireNonNull(gameData.getScore(),"Score missing")));
+		
+        Objects.requireNonNull(gameData, "GameData cannot be null");
+        logger.fine("Initializing game dependencies...");
+		
+		Display_Text display = new Display_Text();
+		Input input = new Input();
+		Parser parser = new Parser();
+		
+        Command command = new Command(
+                Objects.requireNonNull(gameData.getScore(), "Game score cannot be null")
+            );
+		
+        logger.fine("Game dependencies initialized successfully");
+        return new Main(gameData, display, input, parser, command);
 	}
 	
 }
