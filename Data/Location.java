@@ -4,10 +4,15 @@
  * Version: 1.4
  * The class that holds the details of the locations and handles
  * any actions that deal with the location
+ * 
+ * The check noun should be done elsewhere
  */
 
 package Data;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 import Model.Player;
 
@@ -19,9 +24,9 @@ public class Location implements Serializable {
 	
 	private final String name;
 	private final String description;
-	private final ArrayList<String> nouns;
-	private final ArrayList<Exit> exits;
-	private final ArrayList<Item> items;
+	private final List<String> nouns;
+	private final List<Exit> exits;
+	private final List<Item> items;
 	private final boolean treasureStore;
 	private final boolean endRoom;
 	private final String endComment;
@@ -30,8 +35,8 @@ public class Location implements Serializable {
 	private boolean scoreRoom = false;
 	
 	public Location(String name, String description) {
-		this.name = name;
-		this.description = description;
+		this.name = Objects.requireNonNull(name, "Name cannot be null");
+		this.description = Objects.requireNonNull(description, "Description cannot be null");
 		this.nouns = new ArrayList<String>();
 		this.exits = new ArrayList<Exit>();
 		this.items = new ArrayList<Item>();
@@ -41,47 +46,46 @@ public class Location implements Serializable {
 	}
 	
 	public Location(String name, String description, String endComment) {
-		this.name = name;
-		this.description = description;
+		this.name = Objects.requireNonNull(name, "Name cannot be null");
+		this.description = Objects.requireNonNull(description, "Description cannot be null");
 		this.nouns = new ArrayList<String>();
 		this.exits = new ArrayList<Exit>();
 		this.items = new ArrayList<Item>();
 		this.treasureStore = false;
 		this.endRoom = true;
-		this.endComment = endComment;
+		this.endComment = Objects.requireNonNull(endComment, "End Comment cannot be null");
 	}
 	
 	public Location(String name, String description, String endComment,boolean treasureStore) {
-		this.name = name;
-		this.description = description;
+		this.name = Objects.requireNonNull(name, "Name cannot be null");
+		this.description = Objects.requireNonNull(description, "Description cannot be null");
 		this.nouns = new ArrayList<String>();
 		this.exits = new ArrayList<Exit>();
 		this.items = new ArrayList<Item>();
-		this.treasureStore = treasureStore;
+		this.treasureStore = Objects.requireNonNull(treasureStore, "Treasure Store Comment cannot be null");
 		this.endRoom = true;
-		this.endComment = endComment;
+		this.endComment = Objects.requireNonNull(endComment, "End Comment cannot be null");
 	}
 	
 	public void addExit(Exit exit) {
-		this.exits.add(exit);
-		this.nouns.add(exit.getName());
+		this.exits.add(Objects.requireNonNull(exit, "Exit Comment cannot be null"));
+		this.nouns.add(Objects.requireNonNull(exit.getName(), "Exit Name Comment cannot be null"));
 	}
 	
-	public ArrayList<Exit> getExits() {
-		return this.exits;
+	public List<Exit> getExits() {
+		 return Collections.unmodifiableList(this.exits);
 	}
 	
-	public ArrayList<String> getNouns() {
-		return this.nouns;
+	public List<String> getNouns() {
+		 return Collections.unmodifiableList(this.nouns);
 	}
 	
-	public void addItem(Item item) {
-		
-		this.items.add(item);
+	public void addItem(Item item) {		
+		this.items.add(Objects.requireNonNull(item, "Item cannot be null"));
 	}
 	
-	public ArrayList<Item> getItems() {
-		return this.items;
+	public List<Item> getItems() {
+		return Collections.unmodifiableList(this.items);
 	}
 	
 	public String getName(boolean displayFull) {
@@ -107,40 +111,15 @@ public class Location implements Serializable {
 	
 	//Returns a list of exits to display
 	private String getExitList() {
-		
-		String exit_list = "";
-		int count = 0;
-		
-		for (Exit exit:this.exits) {
-
-			if (count>0) {
-				exit_list +=", ";
-			}
-			
-			exit_list += exit.getName();
-			count ++;
-		}
-		
-		return exit_list;
-		
+	    StringBuilder sb = new StringBuilder();
+	    exits.forEach(exit -> sb.append(exit.getName()).append(", "));
+	    return sb.length() > 0 ? sb.substring(0, sb.length() - 2) : "";
 	}
 	
 	private String getItemList() {
-		
-		String item_list = "";
-		
-		int count = 0;
-		
-		for (Item item:this.items) {
-
-			if (count>0) {
-				item_list += ", ";
-			}
-			
-			item_list += item.getName();
-			count ++;
-		}
-		return item_list;
+	    StringBuilder sb = new StringBuilder();
+	    items.forEach(item -> sb.append(item.getName()).append(", "));
+	    return sb.length() > 0 ? sb.substring(0, sb.length() - 2) : "";
 	}
 	
 	public boolean checkNoun(String nounCheck) {
@@ -148,7 +127,6 @@ public class Location implements Serializable {
 		boolean foundNoun = false;
 		
 		for (String noun:nouns) {
-			System.out.println(noun);
 			if (nounCheck.equals(noun)) {
 				foundNoun = true;
 			}
@@ -161,7 +139,7 @@ public class Location implements Serializable {
 	}
 	
 	//Saves the players details when the game is saved
-	public void savePlayer(Player player) {
+	public void cachePlayer(Player player) {
 		this.player = player;
 	}
 	
@@ -172,8 +150,8 @@ public class Location implements Serializable {
 	}
 		
 	//Makes the room a score room
-	public void setScore() {
-		this.scoreRoom = !this.scoreRoom;
+	public void setScore(boolean scoreRoom) {
+		this.scoreRoom = scoreRoom;
 	}
 	
 	//Checks if the room is a score room
@@ -216,4 +194,7 @@ public class Location implements Serializable {
 * 20 August 2024 - End condition now works.  
 * 4 January 2025 - Created temporary fix for retrieving the inventory, though for some strange reason it won't make a deep copy.
 * 3 August 2025 - Removed warnings and made non-changing variable final
+* 				- Add null checks
+* 				- Made lists unmodifiable
+* 				- Fixed strings being returned
 */
