@@ -1,29 +1,33 @@
 /* Location Class
  * Created: 25 August 2023
- * Updated: 4 January 2025
- * Version: 1.3
+ * Updated: 3 August 2025
+ * Version: 1.4
  * The class that holds the details of the locations and handles
  * any actions that deal with the location
  */
 
 package Data;
 import java.util.ArrayList;
+
+import Model.Player;
+
 import java.io.Serializable;
 
 public class Location implements Serializable {
 
-	private String name;
-	private String description;
-	private ArrayList<String> nouns;
-	private ArrayList<Exit> exits;
-	private ArrayList<Item> items;
-	private ArrayList<Item> inventory;
-	private int score;
+	private static final long serialVersionUID = -3015577760020605932L;
+	
+	private final String name;
+	private final String description;
+	private final ArrayList<String> nouns;
+	private final ArrayList<Exit> exits;
+	private final ArrayList<Item> items;
+	private final boolean treasureStore;
+	private final boolean endRoom;
+	private final String endComment;
+	private Player player;
 	private boolean firstVisit = true;
-	private boolean treasureStore = false;
 	private boolean scoreRoom = false;
-	private boolean endRoom = false;
-	private String endComment;
 	
 	public Location(String name, String description) {
 		this.name = name;
@@ -31,6 +35,9 @@ public class Location implements Serializable {
 		this.nouns = new ArrayList<String>();
 		this.exits = new ArrayList<Exit>();
 		this.items = new ArrayList<Item>();
+		this.treasureStore = false;
+		this.endRoom = false;
+		this.endComment = "";
 	}
 	
 	public Location(String name, String description, String endComment) {
@@ -39,6 +46,18 @@ public class Location implements Serializable {
 		this.nouns = new ArrayList<String>();
 		this.exits = new ArrayList<Exit>();
 		this.items = new ArrayList<Item>();
+		this.treasureStore = false;
+		this.endRoom = true;
+		this.endComment = endComment;
+	}
+	
+	public Location(String name, String description, String endComment,boolean treasureStore) {
+		this.name = name;
+		this.description = description;
+		this.nouns = new ArrayList<String>();
+		this.exits = new ArrayList<Exit>();
+		this.items = new ArrayList<Item>();
+		this.treasureStore = treasureStore;
 		this.endRoom = true;
 		this.endComment = endComment;
 	}
@@ -71,16 +90,16 @@ public class Location implements Serializable {
 	
 		//Checks if the player has been here before, and if so displays the full description.
 		if ((firstVisit) || (displayFull)) {
-			description = description.format("%s%n%n%s%n",description, this.description);
+			description = String.format("%s%n%n%s%n",description, this.description);
 			firstVisit = false;
 		}
 		
 		if (items.size()>0) {
-			description = description.format("%s%nYou See: %s", description, this.getItemList());
+			description = String.format("%s%nYou See: %s", description, this.getItemList());
 		}
 		
 		if (exits.size()>0) {
-			description = description.format("%s%nExits: %s", description, this.getExitList());
+			description = String.format("%s%nExits: %s", description, this.getExitList());
 		}		
 		
 		return description;
@@ -136,35 +155,22 @@ public class Location implements Serializable {
 		}
 		return foundNoun;	
 	}
-	
-	public void setTreasureStore() {
-		this.treasureStore = !this.treasureStore;
-	}
-	
+		
 	public boolean getTreasureStore() {
 		return this.treasureStore;
 	}
 	
 	//Saves the players details when the game is saved
-	public void savePlayer(ArrayList<Item> inventory,int score) {
-		this.inventory = inventory;
-		this.score = score;
+	public void savePlayer(Player player) {
+		this.player = player;
 	}
 	
 	//Loads player's score and inventory. Clears it afterwards
-	public ArrayList<Item> getInventory() {
+	public Player getPlayer() {		
+		Player player = this.player;
+		return player;
+	}
 		
-		ArrayList<Item> inventory = this.inventory;
-			
-		return inventory;
-	}
-	
-	public int getScore() {
-		int score = this.score;
-		this.score = 0;
-		return score;
-	}
-	
 	//Makes the room a score room
 	public void setScore() {
 		this.scoreRoom = !this.scoreRoom;
@@ -208,5 +214,6 @@ public class Location implements Serializable {
 * 19 August 2024 - Added scoring for entering a room and also creating an end condition
 * 					for entering a room
 * 20 August 2024 - End condition now works.  
-* 4 January 2025 - Created temporary fix for retrieving the inventory, though for some strange reason it won't make a deep copy.       
+* 4 January 2025 - Created temporary fix for retrieving the inventory, though for some strange reason it won't make a deep copy.
+* 3 August 2025 - Removed warnings and made non-changing variable final
 */
