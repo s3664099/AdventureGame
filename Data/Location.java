@@ -1,7 +1,7 @@
 /* Location Class
  * Created: 25 August 2023
- * Updated: 3 August 2025
- * Version: 1.4
+ * Updated: 4 August 2025
+ * Version: 1.5
  * The class that holds the details of the locations and handles
  * any actions that deal with the location
  * 
@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 import Model.Player;
 
@@ -21,6 +22,7 @@ import java.io.Serializable;
 public class Location implements Serializable {
 
 	private static final long serialVersionUID = -3015577760020605932L;
+	private static final Logger logger = Logger.getLogger(Location.class.getName());
 	
 	private final String name;
 	private final String description;
@@ -70,6 +72,7 @@ public class Location implements Serializable {
 	public void addExit(Exit exit) {
 		this.exits.add(Objects.requireNonNull(exit, "Exit Comment cannot be null"));
 		this.nouns.add(Objects.requireNonNull(exit.getName(), "Exit Name Comment cannot be null"));
+		logger.fine("Added exit: " + exit.getName() + " to location: " + this.name);
 	}
 	
 	public List<Exit> getExits() {
@@ -82,6 +85,7 @@ public class Location implements Serializable {
 	
 	public void addItem(Item item) {		
 		this.items.add(Objects.requireNonNull(item, "Item cannot be null"));
+		logger.fine("Added exit: " + item.getName() + " to location: " + this.name);
 	}
 	
 	public List<Item> getItems() {
@@ -125,12 +129,15 @@ public class Location implements Serializable {
 	public boolean checkNoun(String nounCheck) {
 		
 		boolean foundNoun = false;
-		
-		for (String noun:nouns) {
-			if (nounCheck.equals(noun)) {
-				foundNoun = true;
-			}
-		}
+	    if (nounCheck == null || nounCheck.isBlank()) {
+	        logger.warning("Invalid noun check: input was null/empty");
+	    } else {
+	    	for (String noun:nouns) {
+	    		if (nounCheck.equals(noun)) {
+	    			foundNoun = true;
+	    		}
+	    	}
+	    }
 		return foundNoun;	
 	}
 		
@@ -141,6 +148,7 @@ public class Location implements Serializable {
 	//Saves the players details when the game is saved
 	public void cachePlayer(Player player) {
 		this.player = player;
+		logger.fine("Cached player data in location: " + this.name);
 	}
 	
 	//Loads player's score and inventory. Clears it afterwards
@@ -161,7 +169,7 @@ public class Location implements Serializable {
 		
 		if (scoreRoom) {
 			isScore = true;
-			this.scoreRoom = !this.scoreRoom;
+			this.scoreRoom = false;
 		}
 		
 		return isScore;
@@ -197,4 +205,5 @@ public class Location implements Serializable {
 * 				- Add null checks
 * 				- Made lists unmodifiable
 * 				- Fixed strings being returned
+* 4 August 2025 - Added logging
 */
