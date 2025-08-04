@@ -36,38 +36,53 @@ public class Location implements Serializable {
 	private boolean firstVisit = true;
 	private boolean scoreRoom = false;
 	
-	public Location(String name, String description) {
-		this.name = Objects.requireNonNull(name, "Name cannot be null");
-		this.description = Objects.requireNonNull(description, "Description cannot be null");
+	private Location(Builder builder) {
+		this.name = Objects.requireNonNull(builder.name, "Name cannot be null");
+		this.description = Objects.requireNonNull(builder.description, "Description cannot be null");
 		this.nouns = new ArrayList<String>();
 		this.exits = new ArrayList<Exit>();
 		this.items = new ArrayList<Item>();
-		this.treasureStore = false;
-		this.endRoom = false;
-		this.endComment = "";
+		this.treasureStore = builder.treasureStore;
+		this.endRoom = builder.endRoom;
+		this.endComment = Objects.requireNonNull(builder.endComment, "End Comment cannot be null");;
 	}
 	
-	public Location(String name, String description, String endComment) {
-		this.name = Objects.requireNonNull(name, "Name cannot be null");
-		this.description = Objects.requireNonNull(description, "Description cannot be null");
-		this.nouns = new ArrayList<String>();
-		this.exits = new ArrayList<Exit>();
-		this.items = new ArrayList<Item>();
-		this.treasureStore = false;
-		this.endRoom = true;
-		this.endComment = Objects.requireNonNull(endComment, "End Comment cannot be null");
+	//Static builder class
+	public static class Builder {
+        // Required fields
+        private final String name;
+        private final String description;
+        
+        // Optional fields (defaults)
+        private String endComment = "";
+        private boolean treasureStore = false;
+        private boolean endRoom = false;	
+        
+        public Builder(String name, String description) {
+            this.name = Objects.requireNonNull(name);
+            this.description = Objects.requireNonNull(description);
+        }
+
+        public Builder setEndComment(String endComment) {
+            this.endComment = endComment;
+            return this;
+        }
+
+        public Builder setTreasureStore(boolean treasureStore) {
+            this.treasureStore = treasureStore;
+            return this;
+        }
+        
+        public Builder setEndRoom(boolean endRoom) {
+        	this.endRoom = endRoom;
+        	return this;
+        }
+        
+        public Location build() {
+        	return new Location(this);
+        }
 	}
-	
-	public Location(String name, String description, String endComment,boolean treasureStore) {
-		this.name = Objects.requireNonNull(name, "Name cannot be null");
-		this.description = Objects.requireNonNull(description, "Description cannot be null");
-		this.nouns = new ArrayList<String>();
-		this.exits = new ArrayList<Exit>();
-		this.items = new ArrayList<Item>();
-		this.treasureStore = Objects.requireNonNull(treasureStore, "Treasure Store Comment cannot be null");
-		this.endRoom = true;
-		this.endComment = Objects.requireNonNull(endComment, "End Comment cannot be null");
-	}
+
 	
 	public void addExit(Exit exit) {
 		this.exits.add(Objects.requireNonNull(exit, "Exit Comment cannot be null"));
@@ -206,4 +221,5 @@ public class Location implements Serializable {
 * 				- Made lists unmodifiable
 * 				- Fixed strings being returned
 * 4 August 2025 - Added logging
+* 				- Added Builder class
 */
