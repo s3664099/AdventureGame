@@ -1,0 +1,3 @@
+2) Builder Patter
+4) These variables are actually final, so they can only be initialised in the constructor? If I were to use builder would that solve it? How do I keep them final but initialise them outside of the constructor?
+7) The example you have given me will be moved elsewhere. Any other places I should add logging?

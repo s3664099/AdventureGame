@@ -1,13 +1,16 @@
 /* Command Function
  * Created: 25 August 2023
- * Updated: 18 January 2025
- * Version: 1.18
+ * Updated: 4 August 2025
+ * Version: 1.19
  * Class that handles functions that deal with commands that are entered.
+ * 
+ * Update using new Player class (with score and inventory)
  */
 
 package Model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -31,7 +34,7 @@ public class Command {
 	private boolean displayLocation = true;
 	private int score = 0;
 	private int topScore = 0;
-	private ArrayList<Item> inventory;
+	private List<Item> inventory;
 	
 	public Command(int topScore) {
 		this.topScore = topScore;
@@ -280,7 +283,7 @@ public class Command {
 	}
 		
 	//Method to move item from one list to another
-	private String switchList(ArrayList<Item> listOne, ArrayList<Item> listTwo, String command, String statement, boolean itemTaken,boolean taking) {
+	private String switchList(List<Item> listOne, List<Item> listTwo, String command, String statement, boolean itemTaken,boolean taking) {
 
 		//Sets counter for items
 		int itemNo = -1;
@@ -363,7 +366,7 @@ public class Command {
 	}
 	
 	//Put an item into a container
-	private String putIn(ArrayList<Item> inventory, UserCommand command, ArrayList<Item> localItems) {
+	private String putIn(List<Item> inventory, UserCommand command, List<Item> localItems) {
 		response = "I can't do that";
 		
 		String subject = command.getSubject();
@@ -451,7 +454,7 @@ public class Command {
 		Item item = null;
 		
 		//Gets all items from location
-		ArrayList<Item> items = currentLocation.getItems();
+		List<Item> items = currentLocation.getItems();
 		
 		for (Item itemSearch:items) {
 			if (itemSearch.equals(command)) {
@@ -481,7 +484,7 @@ public class Command {
 		Exit exit = null;
 		
 		//Gets all exits from location
-		ArrayList<Exit> exits = currentLocation.getExits();
+		List<Exit> exits = currentLocation.getExits();
 		
 		for (Exit exitSearch:exits) {
 			if (exitSearch.equals(command)) {
@@ -632,8 +635,8 @@ public class Command {
 			}
 						
 			//Checks if the player is looking at the exit/Items
-			ArrayList<Exit> exits = location.getExits();
-			ArrayList<Item> items = location.getItems();
+			List<Exit> exits = location.getExits();
+			List<Item> items = location.getItems();
 			
 			boolean removeItem = false;
 			int itemIndex = 0;
@@ -781,7 +784,7 @@ public class Command {
 		return response;
 	}
 	
-	private String unlock(ArrayList<Item> inventory, ArrayList<Exit>exits, ArrayList<Item>items, UserCommand command) {
+	private String unlock(List<Item> inventory, List<Exit>exits, List<Item>items, UserCommand command) {
 	
 		response = "I do not see that here";
 		boolean foundItem = false;
@@ -896,7 +899,7 @@ public class Command {
 	//Function to move an item that can be moved
 	private String move(Location location, String command) {
 		
-		ArrayList<Item> items = location.getItems();
+		List<Item> items = location.getItems();
 		String response = "";
 		response = String.format("I do not see a %s here", command);
 		Item hiddenItem = null;
@@ -981,7 +984,7 @@ public class Command {
 	
 	//Handles increasing/decreasing the score based on whether the player is taking an item from
 	//a treasure store, or dropping it.
-	private int changeScore(boolean action,String verb, ArrayList<Item> items,Location location) {
+	private int changeScore(boolean action,String verb, List<Item> items,Location location) {
 		
 		int score = 0;
 				
@@ -1175,7 +1178,7 @@ public class Command {
 	}
 	
 	//Basic conversation function
-	private String conversation(String verb, ArrayList<Item> items) {
+	private String conversation(String verb, List<Item> items) {
 
 		String response = "I dont see that here";
 		ArrayList<String> endConv = new ArrayList<String>();
@@ -1276,4 +1279,5 @@ public class Command {
  * 12 January 2025 - Added method to check if player carrying the item. Moved open/close item to separate method. Added open
  * 16 January 2025 - Added the ability to put an item into a bag.
  * 18 January 2025 - Fixed problem with concurrent array when taking item from bag. Removed warnings. Get item from bag using just items name
+ * 4 August 2025 - Changed to handle List instead of ArrayList from Location
  */
