@@ -36,7 +36,7 @@ public class Location implements Serializable {
 	private boolean firstVisit = true;
 	private boolean scoreRoom = false;
 	
-	private Location(Builder builder) {
+	Location(Builder builder) {
 		this.name = Objects.requireNonNull(builder.name, "Name cannot be null");
 		this.description = Objects.requireNonNull(builder.description, "Description cannot be null");
 		this.nouns = new ArrayList<String>();
