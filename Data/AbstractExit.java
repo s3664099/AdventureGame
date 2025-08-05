@@ -1,8 +1,11 @@
 /* Abstract Exit Class
  * Created: 5 September 2023
- * Updated: 25 August 2024
- * Version 1.2
+ * Updated: 5 August 2025
+ * Version 1.3
  * Class to handle everything to do with an exit.
+ * 
+ * Add logging
+ * Add builder
  */
 
 package Data;
@@ -10,17 +13,19 @@ package Data;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 import java.io.Serializable;;
 
 public abstract class AbstractExit implements Serializable {
 	
-	private String name;
-	private String description = "There is nothing special";
-	private Location destination;
-	private boolean direction;
-	private ArrayList<String> commands = new ArrayList<String>();
-
-	public AbstractExit() {}
+	private static final long serialVersionUID = -5128312604573129248L;
+	private final String name;
+	private final String description;
+	private final Location destination;
+	private final boolean direction;
+	private final List<String> commands = new ArrayList<String>();
 	
 	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
 	    in.defaultReadObject();
@@ -28,32 +33,31 @@ public abstract class AbstractExit implements Serializable {
 	
 	public AbstractExit(String description, Location destination, boolean direction) {
 		 
-		this.name = description;
-		this.destination = destination;
-		this.direction = direction;
+		this.name = Objects.requireNonNull(description, "Name cannot be null");;
+		this.destination = Objects.requireNonNull(destination, "Destination cannot be null");;
+		this.direction = Objects.requireNonNull(direction, "Direction cannot be null");;
 		this.commands.add(description.toLowerCase());
+		this.description = "There is nothing special";
 	}
 	
 	public AbstractExit(String name, Location destination, boolean direction, 
 						String command, String description) {
 		 
-		this.name = name;
+		this.name = Objects.requireNonNull(name, "Name cannot be null");;
 				
 		for (String x:command.split(" ")) {
 			this.commands.add(x);
 		}
-		this.destination = destination;
-		this.direction = direction;
+		this.destination = Objects.requireNonNull(destination, "Destination cannot be null");;
+		this.direction = Objects.requireNonNull(direction, "Direction cannot be null");;
 		
 		if (description.length()>0) {
 			this.description = description;
+		} else {
+			this.description = "There is nothing special";
 		}
 	}
-	
-	public void addDescription(String description) {
-		this.description = description;
-	}
-	
+		
 	public String getName() {
 		return this.name;
 	}
@@ -62,8 +66,8 @@ public abstract class AbstractExit implements Serializable {
 		return description;
 	}
 	
-	public ArrayList<String> getCommands() {
-		return this.commands;
+	public List<String> getCommands() {
+		return Collections.unmodifiableList(this.commands);
 	}
 	
 	public Location getDestination() {
@@ -128,4 +132,6 @@ public abstract class AbstractExit implements Serializable {
  * 7 April 2024 - Added functions for items (namely people) to be revealed
  * 24 August 2024 - Added outline for the equals method
  * 25 August 2024 - Added equals method
+ * 5 August 2025 - Added null defense and changed ArrayList to list.
+ * 				 - Made list return unmodifiable
  */ 

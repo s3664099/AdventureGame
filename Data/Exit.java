@@ -8,7 +8,6 @@
 package Data;
 
 import java.util.ArrayList;
-import java.io.Serializable;
 
 public interface Exit {
 

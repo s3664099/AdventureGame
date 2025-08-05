@@ -1,7 +1,7 @@
 /* CloseableExit Class
  * Created: 4 September 2023
- * Updated: 7 April 2024
- * Version 1.0
+ * Updated: 5 August 2025
+ * Version 1.1
  * Class to handle and exit that can be closed
  */
 
@@ -12,6 +12,7 @@ import java.io.Serializable;
 
 public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 	
+	private static final long serialVersionUID = 8276805139765346452L;
 	private boolean closed;
 	private Item item;
 	private boolean itemRevealed;
@@ -42,9 +43,9 @@ public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 		String response = "";
 		
 		if (closed) {
-			response = response.format("The %s is closed%n", super.getName());
+			response = String.format("The %s is closed%n", super.getName());
 		} else {
-			response = response.format("You enter the %s%n",super.getName());
+			response = String.format("You enter the %s%n",super.getName());
 		}
 		
 		return response;
@@ -115,7 +116,6 @@ public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 
 	@Override
 	public String lockUnlock(CarriableItem item, String action) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
@@ -130,6 +130,9 @@ public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 	public boolean checkItem() {
 		return this.itemRevealed;
 	}
+
+	@Override
+	public void addDescription(String string) {}
 }
 
 /* 4 September 2023 - Created File
@@ -138,4 +141,5 @@ public class CloseableExit extends AbstractExit implements Exit, Serializable  {
  * 11 October 2023 - Added check for lockable
  * 13 October 2023 - Added unimplemented methods
  * 25 January 2024 - Made Class Serializable
+ * 5 August 2025 - Fixed minor issues
  */

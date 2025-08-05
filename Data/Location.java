@@ -5,7 +5,9 @@
  * The class that holds the details of the locations and handles
  * any actions that deal with the location
  * 
- * The check noun should be done elsewhere
+ * The check noun should be done elsewhere 
+ * 	- Actually need to see what it is used for. It doesn't seem to be filled or used
+ *  - Otherwise, it should be an equals override.
  */
 
 package Data;
@@ -36,7 +38,7 @@ public class Location implements Serializable {
 	private boolean firstVisit = true;
 	private boolean scoreRoom = false;
 	
-	Location(Builder builder) {
+	public Location(Builder builder) {
 		this.name = Objects.requireNonNull(builder.name, "Name cannot be null");
 		this.description = Objects.requireNonNull(builder.description, "Description cannot be null");
 		this.nouns = new ArrayList<String>();
