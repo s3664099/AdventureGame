@@ -27,6 +27,9 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
 		super.addDescription(description);
 	}
 	
+	public class Builder{
+	}
+	
 	//Exit is always moveable
 	public boolean haveMoved() {
 		return true;

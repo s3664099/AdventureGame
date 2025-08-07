@@ -3,8 +3,6 @@
  * Updated: 6 August 2025
  * Version 1.4
  * Class to handle everything to do with an exit.
- * 
- * Add logging
  */
 
 package Data;
@@ -15,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.io.Serializable;;
+import java.io.Serializable;
 
 public abstract class AbstractExit implements Serializable {
 	
@@ -37,6 +35,7 @@ public abstract class AbstractExit implements Serializable {
 		this.direction = Objects.requireNonNull(builder.direction, "Direction cannot be null");;
 		this.commands = Objects.requireNonNull(builder.commands,"Commands cannot be null");
 		this.description = Objects.requireNonNull(builder.description,"Description cannot be null");
+		
 	}
 
 	public static class Builder {
