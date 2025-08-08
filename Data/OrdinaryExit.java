@@ -8,28 +8,46 @@
 package Data;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.io.Serializable;
 
 public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
+		
+	private static final long serialVersionUID = 5320873411231936585L;
+
+	public OrdinaryExit(Builder builder) {
+		super(builder);
+	}
 	
-	//Standard Exit
-	public OrdinaryExit(String name, Location destination, boolean direction) {
-		super(name, destination, direction);
+	public static class Builder {
+		
+		private final String name;
+		private final List<String> command = new ArrayList<String>();
+		private final Location destination;
+		private final boolean direction;
+		
+		private String description;
+		
+		public Builder(String name,Location destination,
+						boolean direction,String description) {
+			this.name = name;
+			this.command.add(name);
+			this.destination = destination;
+			this.description = description;
+			this.direction = direction;
+		}
+		
+		public Builder addCommand(String command) {
+			this.command.add(command);
+			return this;
+		}
+		
+		public Builder addDescritpion(String description) {
+			this.description = description;
+			return this;
+		}
 	}
 		
-	//Exit with multiple commands
-	public OrdinaryExit(String name, String command, Location destination, 
-						boolean direction, String description) {
-		super(name, destination, direction, command, description);
-	}
-	
-	public void addDescription(String description) {
-		super.addDescription(description);
-	}
-	
-	public class Builder{
-	}
-	
 	//Exit is always moveable
 	public boolean haveMoved() {
 		return true;
@@ -43,7 +61,7 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
 		return super.getDescription();
 	}
 	
-	public ArrayList<String> getCommands() {
+	public List<String> getCommands() {
 		return super.getCommands();
 	}
 	
@@ -90,14 +108,17 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
 
 	@Override
 	public Item getKey() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String lockUnlock(CarriableItem item, String action) {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void addDescription(String string) {
+		
 	}
 
 }

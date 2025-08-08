@@ -1,7 +1,7 @@
 /* Exit Interface
  * Created: 5 September 2023
- * Updated: 24 Augsut 2024
- * Version 1.1
+ * Updated: 8 Augsut 2025
+ * Version 1.2
  * Interface to govern exits
  */
 
@@ -25,7 +25,6 @@ public interface Exit {
 	public boolean equals(String command);
 	public Item getKey();
 	public String lockUnlock(CarriableItem item, String action);
-	public void addDescription(String string);
 	public boolean checkItem();
 	public void setItem(boolean updateReveal);
 	public Item getItem();
@@ -40,4 +39,5 @@ public interface Exit {
  * 21 February 2024 - Added an addDescription method
  * 7 April 2024 - Added functions for items to be revealed
  * 24 August 2024 - Added the equals method
+ * 8 August 2025 - removed add direction
 */
