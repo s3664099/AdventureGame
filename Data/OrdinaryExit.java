@@ -1,14 +1,17 @@
 /* Ordinary Exit Class
  * Created: 25 August 2023
- * Updated: 3 January 2025
- * Version 1.1
+ * Updated: 8 August 2025
+ * Version 1.2
  * Class to handle everything to do with an exit.
+ * 
+ * Remove parameter from move description
  */
 
 package Data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.io.Serializable;
 
 public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
@@ -27,23 +30,23 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
 		private final boolean direction;
 		
 		private String description;
-		
+		//this.name = Objects.requireNonNull(builder.name, "Name cannot be null")
 		public Builder(String name,Location destination,
 						boolean direction,String description) {
-			this.name = name;
-			this.command.add(name);
-			this.destination = destination;
-			this.description = description;
-			this.direction = direction;
+			this.name = Objects.requireNonNull(name, "Name cannot be null");
+			this.command.add(Objects.requireNonNull(name, "Name cannot be null"));
+			this.destination = Objects.requireNonNull(destination, "Destination cannot be null");
+			this.description = Objects.requireNonNull(description, "Description cannot be null");
+			this.direction = Objects.requireNonNull(direction, "Direction cannot be null");
 		}
 		
 		public Builder addCommand(String command) {
-			this.command.add(command);
+			this.command.add(Objects.requireNonNull(command, "Command cannot be null"));
 			return this;
 		}
 		
 		public Builder addDescritpion(String description) {
-			this.description = description;
+			this.description = Objects.requireNonNull(description, "Description cannot be null");
 			return this;
 		}
 	}
@@ -115,12 +118,6 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
 	public String lockUnlock(CarriableItem item, String action) {
 		return null;
 	}
-
-	@Override
-	public void addDescription(String string) {
-		
-	}
-
 }
 
 /* 25 August 2023 - Created File
@@ -135,4 +132,5 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
  * 26 January 2024 - Made Object Serializable
  * 21 February 2024 - Added an add description method
  * 3 January 2025 - Changed getOpen to default to true
+ * 8 August 2025 - Added Builder Class. Added null protections.
 */

@@ -30,7 +30,7 @@ public abstract class AbstractExit implements Serializable {
 	
 	public AbstractExit(Builder builder) {
 		 
-		this.name = Objects.requireNonNull(builder.name, "Name cannot be null");;
+		this.name = Objects.requireNonNull(builder.name, "Name cannot be null");
 		this.destination = Objects.requireNonNull(builder.destination, "Destination cannot be null");
 		this.direction = Objects.requireNonNull(builder.direction, "Direction cannot be null");;
 		this.commands = Objects.requireNonNull(builder.commands,"Commands cannot be null");
