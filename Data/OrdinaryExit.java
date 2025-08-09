@@ -30,7 +30,7 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
 		private final boolean direction;
 		
 		private String description;
-		//this.name = Objects.requireNonNull(builder.name, "Name cannot be null")
+		
 		public Builder(String name,Location destination,
 						boolean direction,String description) {
 			this.name = Objects.requireNonNull(name, "Name cannot be null");
@@ -75,15 +75,14 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
 	public void openClose() {}
 
 	//Returns the description of the player attempts to move
-	@Override
-	public String moveDescription(String Command) {
+	public String moveDescription() {
 		
 		String moveDescription = "";
 		
 		if (super.getDirection()) {
-			moveDescription.format("You head %s%n",getName());
+			moveDescription = String.format("You head %s%n",getName());
 		} else {
-			moveDescription.format("You enter the %s%n",getName());
+			moveDescription = String.format("You enter the %s%n",getName());
 		}
 		
 		return moveDescription;
@@ -118,6 +117,12 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
 	public String lockUnlock(CarriableItem item, String action) {
 		return null;
 	}
+
+	@Override
+	public String moveDescription(String Command) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 
 /* 25 August 2023 - Created File
@@ -133,4 +138,5 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
  * 21 February 2024 - Added an add description method
  * 3 January 2025 - Changed getOpen to default to true
  * 8 August 2025 - Added Builder Class. Added null protections.
+ * 9 August 2025 - Fixed moveDescription
 */

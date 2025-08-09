@@ -7,14 +7,14 @@
 
 package Data;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface Exit {
 
 	public String moveDescription(String Command);
 	public String getName();
 	public String getDescription();
-	public ArrayList<String> getCommands();
+	public List<String> getCommands();
 	public boolean haveMoved();
 	public Location getDestination();
 	public void openClose();
@@ -40,4 +40,5 @@ public interface Exit {
  * 7 April 2024 - Added functions for items to be revealed
  * 24 August 2024 - Added the equals method
  * 8 August 2025 - removed add direction
+ * 9 August 2025 - Changed getCommands to List
 */
