@@ -102,7 +102,7 @@ public class Location implements Serializable {
 	
 	public void addItem(Item item) {		
 		this.items.add(Objects.requireNonNull(item, "Item cannot be null"));
-		logger.fine("Added exit: " + item.getName() + " to location: " + this.name);
+		logger.fine("Added item: " + item.getName() + " to location: " + this.name);
 	}
 	
 	public List<Item> getItems() {
@@ -171,6 +171,7 @@ public class Location implements Serializable {
 	//Loads player's score and inventory. Clears it afterwards
 	public Player getPlayer() {		
 		Player player = this.player;
+		this.player = null;
 		return player;
 	}
 		
@@ -182,13 +183,8 @@ public class Location implements Serializable {
 	//Checks if the room is a score room
 	public boolean checkScore() {
 		
-		boolean isScore = false;
-		
-		if (scoreRoom) {
-			isScore = true;
-			this.scoreRoom = false;
-		}
-		
+		boolean isScore = this.scoreRoom;
+		this.scoreRoom =false;		
 		return isScore;
 	}
 	
@@ -224,5 +220,5 @@ public class Location implements Serializable {
 * 				- Fixed strings being returned
 * 4 August 2025 - Added logging
 * 				- Added Builder class
-* 10 August 2025 - Changed location constructor to private
+* 10 August 2025 - Changed location constructor to private. Made minor modifications
 */
