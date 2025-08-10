@@ -19,6 +19,8 @@ import java.util.logging.Logger;
 
 import Model.Player;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 
 public class Location implements Serializable {
@@ -37,6 +39,15 @@ public class Location implements Serializable {
 	private Player player;
 	private boolean firstVisit = true;
 	private boolean scoreRoom = false;
+
+	private void readObject(ObjectInputStream in) 
+		    throws IOException, ClassNotFoundException {
+		    in.defaultReadObject();
+		    Objects.requireNonNull(name, "Deserialized name cannot be null");
+		    Objects.requireNonNull(endComment, "End Comment cannot be null");;
+			Objects.requireNonNull(description,"Description cannot be null");
+		    
+	}
 	
 	private Location(Builder builder) {
 		this.name = Objects.requireNonNull(builder.name, "Name cannot be null");
@@ -46,7 +57,7 @@ public class Location implements Serializable {
 		this.items = new ArrayList<Item>();
 		this.treasureStore = builder.treasureStore;
 		this.endRoom = builder.endRoom;
-		this.endComment = Objects.requireNonNull(builder.endComment, "End Comment cannot be null");;
+		this.endComment = Objects.requireNonNull(builder.endComment, "End Comment cannot be null");
 	}
 	
 	//Static builder class
@@ -221,4 +232,5 @@ public class Location implements Serializable {
 * 4 August 2025 - Added logging
 * 				- Added Builder class
 * 10 August 2025 - Changed location constructor to private. Made minor modifications
+* 				 - added readObject method
 */
