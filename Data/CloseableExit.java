@@ -72,24 +72,31 @@ public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 	    }
 	}
 	
-	//Returns the description of what happens when attempt to move
-	public String moveDescription() {
-		
-        return closed 
-                ? String.format("The %s is closed%n", super.getName())
-                : String.format("You enter the %s%n", super.getName());
+	//=== Basic Getters ===
+	@Override
+	public String getName() {
+		return super.getName();
+	}
+
+	@Override
+	public List<String> getCommands() {
+		return super.getCommands();
+	}
+
+	@Override
+	public Location getDestination() {
+		return super.getDestination();
 	}
 	
-	//Checks if it is possible to move in that direction
-	public boolean haveMoved() {
-		
-		boolean moved = true;
-		
-		if (closed) {
-			moved = false;
-		}
-		
-		return moved;
+	@Override
+	public String getDescription() {
+		return super.getDescription();
+	}
+	
+	// === Open/Close behaviour ===
+	@Override
+	public boolean isOpenable() {
+		return true;
 	}
 	
 	public boolean getOpen() {
@@ -99,37 +106,32 @@ public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 	public void openClose() {
 		this.closed = !this.closed;
 	}
-
-	@Override
-	public String getName() {
-		
-		return super.getName();
-	}
-
-	@Override
-	public List<String> getCommands() {
-		
-		return super.getCommands();
-	}
-
-	@Override
-	public Location getDestination() {
-		
-		return super.getDestination();
-	}
-
-	//Flags that the exit can be opened/closed
-	@Override
-	public boolean isOpenable() {
-		return true;
-	}
-
-	@Override
-	public String getDescription() {
-		
-		return super.getDescription();
+	
+	public boolean haveMoved() {
+		return !closed;
 	}
 	
+	public String moveDescription() {
+		
+        return closed 
+                ? String.format("The %s is closed%n", super.getName())
+                : String.format("You enter the %s%n", super.getName());
+	}
+	
+	// === Item Management ===
+	public Item getItem() {
+		return this.item;
+	}
+	
+	public boolean checkItem() {
+		return this.itemRevealed;
+	}
+	
+	public void setItem(boolean itemRevealed) {
+		this.itemRevealed = itemRevealed;
+	}
+
+	//=== Unsupported Operations ===
 	public boolean getLocked() {
 		return false;
 	}
@@ -146,18 +148,6 @@ public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 	@Override
 	public String lockUnlock(CarriableItem item, String action) {
 		return null;
-	}
-	
-	public void setItem(boolean itemRevealed) {
-		this.itemRevealed = itemRevealed;
-	}
-	
-	public Item getItem() {
-		return this.item;
-	}
-	
-	public boolean checkItem() {
-		return this.itemRevealed;
 	}
 }
 
