@@ -1,54 +1,83 @@
 /* CloseableExit Class
  * Created: 4 September 2023
- * Updated: 5 August 2025
- * Version 1.1
+ * Updated: 11 August 2025
+ * Version 1.2
  * Class to handle and exit that can be closed
  */
 
 package Data;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 import java.io.Serializable;
 
 public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 	
 	private static final long serialVersionUID = 8276805139765346452L;
 	private boolean closed;
-	private Item item;
+	private final Item item;
 	private boolean itemRevealed;
 		
 	//Exit with multiple commands
-	public CloseableExit(String name, String command, Location destination, 
-						boolean closed, String description) {
+	public CloseableExit(Builder builder) {
 	
-		super(name, destination, false, command, description);
-		this.closed = closed;
-		this.itemRevealed = false;
+		super(builder);
+		this.closed = builder.closed;
+		this.itemRevealed = builder.itemRevealed;
+		this.item = builder.item;
 
 	}
-
-	//Exit involving an item
-	public CloseableExit(String name, String command, Location destination, 
-						boolean closed, String description,Item item) {
 	
-		super(name, destination, false, command, description);
-		this.closed = closed;
-		this.itemRevealed = true;
-		this.item = item;
+	public static class Builder extends AbstractExit.Builder {
+		
+		private boolean closed;
+		private Item item;
+		private boolean itemRevealed;
+		
+		public Builder(String name, Location destination, boolean direction) {
+			super(name,destination,direction);		
+			this.closed = false;
+			this.itemRevealed = false;
+			this.item = null;
+		}
+		
+		public Builder addCommand(String command) {
+			super.addCommand(command);
+			return this;
+		}
+		
+		public Builder addDescritpion(String description) {
+			super.addDescription(description);
+			return this;
+		}
+		
+		public Builder addClosed(boolean closed) {
+			this.closed = closed;
+			return this;
+		}
+		
+		public Builder addItem(Item item) {
+			this.item = Objects.requireNonNull(item, "Item cannot be null");
+			return this;
+		}
+		
+		public Builder addItemRevealed(boolean itemRevealed) {
+			this.itemRevealed = itemRevealed;
+			return this;
+		}
+		
+	    public CloseableExit build() {
+	        return new CloseableExit(this);
+	    }
 	}
 	
 	//Returns the description of what happens when attempt to move
-	public String moveDescription(String command) {
+	public String moveDescription() {
 		
-		String response = "";
-		
-		if (closed) {
-			response = String.format("The %s is closed%n", super.getName());
-		} else {
-			response = String.format("You enter the %s%n",super.getName());
-		}
-		
-		return response;
+        return closed 
+                ? String.format("The %s is closed%n", super.getName())
+                : String.format("You enter the %s%n", super.getName());
 	}
 	
 	//Checks if it is possible to move in that direction
@@ -78,7 +107,7 @@ public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 	}
 
 	@Override
-	public ArrayList<String> getCommands() {
+	public List<String> getCommands() {
 		
 		return super.getCommands();
 	}
@@ -130,9 +159,6 @@ public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 	public boolean checkItem() {
 		return this.itemRevealed;
 	}
-
-	@Override
-	public void addDescription(String string) {}
 }
 
 /* 4 September 2023 - Created File
@@ -142,4 +168,5 @@ public class CloseableExit extends AbstractExit implements Exit, Serializable  {
  * 13 October 2023 - Added unimplemented methods
  * 25 January 2024 - Made Class Serializable
  * 5 August 2025 - Fixed minor issues
+ * 11 August 2025 - Updated class to use builder
  */

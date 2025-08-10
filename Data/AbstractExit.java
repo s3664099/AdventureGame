@@ -3,6 +3,8 @@
  * Updated: 10 August 2025
  * Version 1.5
  * Class to handle everything to do with an exit.
+ * 
+ * Go back and add generics once the exits are fixed.
  */
 
 package Data;
@@ -53,7 +55,7 @@ public abstract class AbstractExit implements Serializable, Exit {
 		private List<String> commands = new ArrayList<String>();
 		
 		public Builder(String name, Location destination, boolean direction) {
-			this.name = Objects.requireNonNull(name, "Name cannot be null");;
+			this.name = Objects.requireNonNull(name, "Name cannot be null");
 			this.destination = Objects.requireNonNull(destination, "Destination cannot be null");;
 			this.direction = direction;
 			this.commands.add(description.toLowerCase());
