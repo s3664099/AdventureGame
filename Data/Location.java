@@ -1,7 +1,7 @@
 /* Location Class
  * Created: 25 August 2023
- * Updated: 4 August 2025
- * Version: 1.5
+ * Updated: 10 August 2025
+ * Version: 1.6
  * The class that holds the details of the locations and handles
  * any actions that deal with the location
  * 
@@ -38,7 +38,7 @@ public class Location implements Serializable {
 	private boolean firstVisit = true;
 	private boolean scoreRoom = false;
 	
-	public Location(Builder builder) {
+	private Location(Builder builder) {
 		this.name = Objects.requireNonNull(builder.name, "Name cannot be null");
 		this.description = Objects.requireNonNull(builder.description, "Description cannot be null");
 		this.nouns = new ArrayList<String>();
@@ -224,4 +224,5 @@ public class Location implements Serializable {
 * 				- Fixed strings being returned
 * 4 August 2025 - Added logging
 * 				- Added Builder class
+* 10 August 2025 - Changed location constructor to private
 */

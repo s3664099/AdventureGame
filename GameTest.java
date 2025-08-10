@@ -12,7 +12,7 @@ class GameTest {
 
 	@Test
     public void testAddExit() {
-        Location location = new Location(new Builder("test location",""));
+        Location location = new Location.Builder("test location","").build();
         OrdinaryExit exit = new OrdinaryExit("test exit", new Location(new Builder("destination","")), false);
         location.addExit(exit);
         ArrayList<String> expectedNouns = new ArrayList<String>();
@@ -25,7 +25,7 @@ class GameTest {
 	
 	@Test
 	void testName() {
-		Location location = new Location(new Builder("Front Door",""));
+		Location location = new Location.Builder("Front Door","").build();
 		assertEquals("Front Door",location.getName(true));
 	}
 	
