@@ -1,7 +1,7 @@
 /* Exit Interface
  * Created: 5 September 2023
- * Updated: 8 Augsut 2025
- * Version 1.2
+ * Updated: 11 August 2025
+ * Version 1.3
  * Interface to govern exits
  */
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface Exit {
 
-	public String moveDescription(String Command);
+	public String moveDescription();
 	public String getName();
 	public String getDescription();
 	public List<String> getCommands();
@@ -41,4 +41,5 @@ public interface Exit {
  * 24 August 2024 - Added the equals method
  * 8 August 2025 - removed add direction
  * 9 August 2025 - Changed getCommands to List
+ * 11 August 2025 - Updated moveDescription function
 */

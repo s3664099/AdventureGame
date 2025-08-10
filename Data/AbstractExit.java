@@ -34,7 +34,7 @@ public abstract class AbstractExit implements Serializable, Exit {
 		    
 	}
 	
-	private AbstractExit(Builder builder) {
+	public AbstractExit(Builder builder) {
 		 
 		this.name = Objects.requireNonNull(builder.name, "Name cannot be null");
 		this.destination = Objects.requireNonNull(builder.destination, "Destination cannot be null");
@@ -60,7 +60,7 @@ public abstract class AbstractExit implements Serializable, Exit {
 			this.description = "There is nothing special";			
 		}
 		
-		public Builder setCommands(String command) {
+		public Builder addCommand(String command) {
 			
 			for (String x:command.split(" ")) {
 				this.commands.add(x);
@@ -68,7 +68,7 @@ public abstract class AbstractExit implements Serializable, Exit {
 			return this;
 		}
 		
-		public Builder setDescription(String description) {
+		public Builder addDescription(String description) {
 			if (description.length()>0) {
 				this.description = description;
 			} else {

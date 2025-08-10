@@ -1,17 +1,13 @@
 /* Ordinary Exit Class
  * Created: 25 August 2023
- * Updated: 8 August 2025
- * Version 1.2
+ * Updated: 11 August 2025
+ * Version 1.3
  * Class to handle everything to do with an exit.
- * 
- * Remove parameter from move description
  */
 
 package Data;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.io.Serializable;
 
 public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
@@ -22,32 +18,25 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
 		super(builder);
 	}
 	
-	public static class Builder {
-		
-		private final String name;
-		private final List<String> command = new ArrayList<String>();
-		private final Location destination;
-		private final boolean direction;
-		
-		private String description;
-		
+	public static class Builder extends AbstractExit.Builder {
+				
 		public Builder(String name,Location destination,
-						boolean direction,String description) {
-			this.name = Objects.requireNonNull(name, "Name cannot be null");
-			this.command.add(Objects.requireNonNull(name, "Name cannot be null"));
-			this.destination = Objects.requireNonNull(destination, "Destination cannot be null");
-			this.description = Objects.requireNonNull(description, "Description cannot be null");
-			this.direction = Objects.requireNonNull(direction, "Direction cannot be null");
+						boolean direction) {
+			super(name,destination,direction);
 		}
 		
 		public Builder addCommand(String command) {
-			this.command.add(Objects.requireNonNull(command, "Command cannot be null"));
+			super.addCommand(command);
 			return this;
 		}
 		
 		public Builder addDescritpion(String description) {
-			this.description = Objects.requireNonNull(description, "Description cannot be null");
+			super.addDescription(description);
 			return this;
+		}
+		
+		public OrdinaryExit build() {
+			return new OrdinaryExit(this);
 		}
 	}
 		
@@ -76,16 +65,9 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
 
 	//Returns the description of the player attempts to move
 	public String moveDescription() {
-		
-		String moveDescription = "";
-		
-		if (super.getDirection()) {
-			moveDescription = String.format("You head %s%n",getName());
-		} else {
-			moveDescription = String.format("You enter the %s%n",getName());
-		}
-		
-		return moveDescription;
+        return super.getDirection() 
+                ? String.format("You head %s%n", super.getName())
+                : String.format("You enter the %s%n", super.getName());
 	}
 
 	@Override
@@ -119,9 +101,12 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
 	}
 
 	@Override
-	public String moveDescription(String Command) {
-		// TODO Auto-generated method stub
+	public Item getItem() {
 		return null;
+	}
+
+	@Override
+	public void setItem(boolean updateReveal) {		
 	}
 }
 
@@ -139,4 +124,5 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
  * 3 January 2025 - Changed getOpen to default to true
  * 8 August 2025 - Added Builder Class. Added null protections.
  * 9 August 2025 - Fixed moveDescription
+ * 11 August 2025 - Fixed problem with builder not matching
 */
