@@ -41,7 +41,7 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
 	}
 		
 	//Exit is always moveable
-	public boolean haveMoved() {
+	public boolean canMoveThrough() {
 		return true;
 	}
 	
@@ -53,25 +53,25 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
 		return super.getDescription();
 	}
 	
-	public List<String> getCommands() {
-		return super.getCommands();
+	public List<String> getCommandSynonyms() {
+		return super.getCommandSynonyms();
 	}
 	
 	public Location getDestination() {
 		return super.getDestination();
 	}
 	
-	public void openClose() {}
+	public void toggleOpenClose() {}
 
 	//Returns the description of the player attempts to move
-	public String moveDescription() {
+	public String getMoveDirection() {
         return super.getDirection() 
                 ? String.format("You head %s%n", super.getName())
                 : String.format("You enter the %s%n", super.getName());
 	}
 
 	@Override
-	public boolean getOpen() {
+	public boolean isOpen() {
 		return true;
 	}
 
@@ -86,7 +86,7 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
 	}
 
 	@Override
-	public boolean getLocked() {
+	public boolean isLocked() {
 		return false;
 	}
 
@@ -96,12 +96,12 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
 	}
 
 	@Override
-	public String lockUnlock(CarriableItem item, String action) {
+	public String attemptLockUnlock(CarriableItem item, String action) {
 		return null;
 	}
 
 	@Override
-	public Item getItem() {
+	public Item getHiddenItem() {
 		return null;
 	}
 

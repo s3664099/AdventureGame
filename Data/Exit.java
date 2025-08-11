@@ -8,26 +8,38 @@
 package Data;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface Exit {
 
-	public String moveDescription();
+	//== Core Movement ==
 	public String getName();
-	public String getDescription();
-	public List<String> getCommands();
-	public boolean haveMoved();
 	public Location getDestination();
-	public void openClose();
-	public boolean getOpen();
+	public boolean canMoveThrough();
+	public String getMoveDirection();
+	
+	//=== State Inspection
+	public String getDescription();
+	public List<String> getCommandSynonyms();
+	
+	//== Open/Close Mechanism ===
 	public boolean isOpenable();
+	public boolean isOpen();
+	public void toggleOpenClose();
+	
+	//== Lock Mechanisms ==
 	public boolean isLockable();
-	public boolean getLocked();
-	public boolean equals(String command);
+	public boolean isLocked();
 	public Item getKey();
-	public String lockUnlock(CarriableItem item, String action);
-	public boolean checkItem();
-	public void setItem(boolean updateReveal);
-	public Item getItem();
+	public String attemptLockUnlock(CarriableItem item, String action);
+	
+	//== Item Interaction
+	public void setItem(boolean revealed);
+	public boolean isItemRevealed();
+	Optional <Item> getHiddenItem();
+	
+	//== Command Processing
+	public boolean equals(String command);
 }
 
 /*
@@ -42,4 +54,5 @@ public interface Exit {
  * 8 August 2025 - removed add direction
  * 9 August 2025 - Changed getCommands to List
  * 11 August 2025 - Updated moveDescription function
+ * 				  - Refactored to set code readable
 */

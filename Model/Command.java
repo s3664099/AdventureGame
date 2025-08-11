@@ -507,7 +507,7 @@ public class Command {
 		
 		if (exit !=  null) {
 			response = exit.moveDescription(command);
-			if (exit.haveMoved()) {
+			if (exit.canMoveThrough()) {
 				currentLocation = exit.getDestination();
 				
 				if (currentLocation.checkScore()) {
@@ -531,26 +531,26 @@ public class Command {
 		if (exit != null) {
 			
 			//Is the exit openable?
-			if (exit.isOpenable() && !exit.getLocked()) {
+			if (exit.isOpenable() && !exit.isLocked()) {
 
 				if (verb.equals("open")) {
 					//Is the exit open - if not the exit is opened.
-					if (exit.getOpen()) {
-						exit.openClose();
+					if (exit.isOpen()) {
+						exit.toggleOpenClose();
 						response = String.format("You open the %s",exit.getName());
 					} else {
 						response = String.format("The %s is already open",exit.getName());
 					}
 				} else if (verb.equals("close")) {
 					//Is the exit open - if not the exit is opened.
-					if (!exit.getOpen()) {
-						exit.openClose();
+					if (!exit.isOpen()) {
+						exit.toggleOpenClose();
 						response = String.format("You close the %s",exit.getName());
 					} else {
 						response = String.format("The %s is already closed",exit.getName());
 					}					
 				}
-			} else if (exit.getLocked()) {
+			} else if (exit.isLocked()) {
 				response = String.format("The %s is locked",exit.getName());
 			} else {
 				response = String.format("You cannot open the %s", exit.getName());
@@ -648,7 +648,7 @@ public class Command {
 					if (exit.equals(noun)) {
 					
 						if(command.getThrough()) {
-							if (!exit.getOpen()) {
+							if (!exit.isOpen()) {
 								response = exit.getDestination().getName(true);
 							} else {
 								response = String.format("You cannot look through a closed %s", exit.getName());
@@ -822,19 +822,19 @@ public class Command {
 							
 							//Acts on either lock/unlock, which does the opposite.
 							if (verb.equals("unlock")) {
-								if (exit.getLocked()) {
-									response = exit.lockUnlock((CarriableItem) key, verb);
+								if (exit.isLocked()) {
+									response = exit.attemptLockUnlock((CarriableItem) key, verb);
 								} else {
 									response = String.format("The %s is already unlocked",exit.getName());
 								}
 							} else if (verb.equals("lock")) {
-								if (!exit.getLocked()) {
+								if (!exit.isLocked()) {
 									
 									//If exit is open, cannot be locked
-									if (!exit.getOpen()) {
+									if (!exit.isOpen()) {
 										response = String.format("The %s is open. Please close it first", exit.getName());
 									} else {
-										response = exit.lockUnlock((CarriableItem) key, verb);
+										response = exit.attemptLockUnlock((CarriableItem) key, verb);
 									}
 									
 								} else {

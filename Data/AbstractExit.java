@@ -88,7 +88,7 @@ public abstract class AbstractExit implements Serializable, Exit {
 		return description;
 	}
 	
-	public List<String> getCommands() {
+	public List<String> getCommandSynonyms() {
 		return Collections.unmodifiableList(this.commands);
 	}
 	
@@ -100,11 +100,11 @@ public abstract class AbstractExit implements Serializable, Exit {
 		return direction;
 	}
 	
-	public boolean checkItem() {
+	public boolean isItemRevealed() {
 		return false;
 	}
 	
-	public abstract Item getItem();
+	public abstract Item getHiddenItem();
 	
 	public abstract void setItem(boolean updateReveal);
 	

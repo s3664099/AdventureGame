@@ -79,8 +79,8 @@ public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 	}
 
 	@Override
-	public List<String> getCommands() {
-		return super.getCommands();
+	public List<String> getCommandSynonyms() {
+		return super.getCommandSynonyms();
 	}
 
 	@Override
@@ -99,19 +99,19 @@ public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 		return true;
 	}
 	
-	public boolean getOpen() {
+	public boolean isOpen() {
 		return this.closed;
 	}
 	
-	public void openClose() {
+	public void toggleOpenClose() {
 		this.closed = !this.closed;
 	}
 	
-	public boolean haveMoved() {
+	public boolean canMoveThrough() {
 		return !closed;
 	}
 	
-	public String moveDescription() {
+	public String getMoveDirection() {
 		
         return closed 
                 ? String.format("The %s is closed%n", super.getName())
@@ -119,11 +119,11 @@ public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 	}
 	
 	// === Item Management ===
-	public Item getItem() {
+	public Item getHiddenItem() {
 		return this.item;
 	}
 	
-	public boolean checkItem() {
+	public boolean isItemRevealed() {
 		return this.itemRevealed;
 	}
 	
@@ -132,7 +132,7 @@ public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 	}
 
 	//=== Unsupported Operations ===
-	public boolean getLocked() {
+	public boolean isLocked() {
 		return false;
 	}
 	
@@ -146,7 +146,7 @@ public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 	}
 
 	@Override
-	public String lockUnlock(CarriableItem item, String action) {
+	public String attemptLockUnlock(CarriableItem item, String action) {
 		return null;
 	}
 }

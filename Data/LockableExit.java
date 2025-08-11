@@ -43,25 +43,25 @@ public class LockableExit extends CloseableExit implements Exit,Serializable {
 	}
 	
 	//Checks if it is possible to move in that direction
-	public boolean haveMoved() {
+	public boolean canMoveThrough() {
 		
 		boolean moved = true;
 		
 		if (locked) {
 			moved = false;
 		} else {
-			moved = super.haveMoved();
+			moved = super.canMoveThrough();
 		}
 		
 		return moved;
 	}
 	
-	public boolean getOpen() {
-		return super.getOpen();
+	public boolean isOpen() {
+		return super.isOpen();
 	}
 	
-	public void openClose() {
-		super.openClose();
+	public void toggleOpenClose() {
+		super.toggleOpenClose();
 	}
 
 	@Override
@@ -71,9 +71,9 @@ public class LockableExit extends CloseableExit implements Exit,Serializable {
 	}
 
 	@Override
-	public ArrayList<String> getCommands() {
+	public ArrayList<String> getCommandSynonyms() {
 		
-		return super.getCommands();
+		return super.getCommandSynonyms();
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class LockableExit extends CloseableExit implements Exit,Serializable {
 		return super.getDestination();
 	}
 
-	public String lockUnlock(CarriableItem item, String action) {
+	public String attemptLockUnlock(CarriableItem item, String action) {
 		this.locked = !this.locked;
 		return String.format("You %s the %s with the %s", action, this.getName(), this.key.getName());
 	}
@@ -102,7 +102,7 @@ public class LockableExit extends CloseableExit implements Exit,Serializable {
 		return super.getDescription();
 	}
 	
-	public boolean getLocked() {
+	public boolean isLocked() {
 		return locked;
 	}
 	
@@ -110,16 +110,16 @@ public class LockableExit extends CloseableExit implements Exit,Serializable {
 		return key;
 	}
 	
-	public boolean checkItem() {
-		return super.checkItem();
+	public boolean isItemRevealed() {
+		return super.isItemRevealed();
 	}
 	
 	public void setItem(boolean updateReveal) {
 		super.setItem(updateReveal);
 	}
 	
-	public Item getItem() {
-		return super.getItem();
+	public Item getHiddenItem() {
+		return super.getHiddenItem();
 	}
 }
 

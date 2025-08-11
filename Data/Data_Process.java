@@ -50,7 +50,7 @@ public class Data_Process implements AutoCloseable {
 		hall.addItem(note);
 		hall.addItem(leaflet);
 		door = new LockableExit("Door","door",start,false,"A flimsy door that leads into your office.",doorKey);
-		door.openClose();
+		door.toggleOpenClose();
 		hall.addExit(door);
 		hall.setScore(true);
 		Location street = new Location.Builder("On the Street","").setEndRoom(true).setEndComment("You got hit by a car!").build();
