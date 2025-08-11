@@ -9,7 +9,7 @@ package Data;
 
 import java.util.List;
 import java.util.Objects;
-
+import java.util.Optional;
 import java.io.Serializable;
 
 public class CloseableExit extends AbstractExit implements Exit, Serializable  {
@@ -119,10 +119,11 @@ public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 	}
 	
 	// === Item Management ===
-	public Item getHiddenItem() {
-		return this.item;
-	}
-	
+    @Override
+    public Optional<Item> getHiddenItem() {
+        return Optional.ofNullable(this.item);
+    }
+    	
 	public boolean isItemRevealed() {
 		return this.itemRevealed;
 	}

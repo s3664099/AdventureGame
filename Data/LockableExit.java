@@ -1,7 +1,7 @@
 /* LockableExit Class
  * Created: 11 October 2023
- * Updated: 7 January 2025
- * Version 1.1
+ * Updated: 11 August 2025
+ * Version 1.2
  * Class to handle and exit that can be locked
  */
 
@@ -12,6 +12,7 @@ import java.io.Serializable;
 
 public class LockableExit extends CloseableExit implements Exit,Serializable {
 	
+	private static final long serialVersionUID = 5219530774578813240L;
 	private boolean locked;
 	private CarriableItem key;
 	private Item item;
@@ -128,4 +129,5 @@ public class LockableExit extends CloseableExit implements Exit,Serializable {
  * 26 January 2024 - Made class serializable
  * 7 April 2024 - Added functions for items to be revealed
  * 7 January 2025 - Added lockable to confirm that this object can be locked.
+ * 11 August 2025 - Added serialised id
 */

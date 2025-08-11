@@ -1,7 +1,7 @@
 /* Abstract Exit Class
  * Created: 5 September 2023
- * Updated: 10 August 2025
- * Version 1.5
+ * Updated: 11 August 2025
+ * Version 1.6
  * Class to handle everything to do with an exit.
  * 
  * Go back and add generics once the exits are fixed.
@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.io.Serializable;
 
 public abstract class AbstractExit implements Serializable, Exit {
@@ -104,8 +105,10 @@ public abstract class AbstractExit implements Serializable, Exit {
 		return false;
 	}
 	
-	public abstract Item getHiddenItem();
-	
+    @Override
+    public Optional<Item> getHiddenItem() {
+		return null;}
+    	
 	public abstract void setItem(boolean updateReveal);
 	
 	public boolean equals (String userInput) {
@@ -126,4 +129,5 @@ public abstract class AbstractExit implements Serializable, Exit {
  * 				 - Made list return unmodifiable
  * 6 August 2025 - Added builder class
  * 10 August 2025 - Updated class for minor issues
+ * 11 August 2025 - Updated to add optional item
  */ 
