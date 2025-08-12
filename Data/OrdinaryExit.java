@@ -1,13 +1,14 @@
 /* Ordinary Exit Class
  * Created: 25 August 2023
- * Updated: 11 August 2025
- * Version 1.3
+ * Updated: 12 August 2025
+ * Version 1.4
  * Class to handle everything to do with an exit.
  */
 
 package Data;
 
 import java.util.List;
+import java.util.Optional;
 import java.io.Serializable;
 
 public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
@@ -101,7 +102,7 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
 	}
 
 	@Override
-	public Item getHiddenItem() {
+	public Optional<Item> getHiddenItem() {
 		return null;
 	}
 
@@ -125,4 +126,5 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
  * 8 August 2025 - Added Builder Class. Added null protections.
  * 9 August 2025 - Fixed moveDescription
  * 11 August 2025 - Fixed problem with builder not matching
+ * 12 August 2025 - Updated get item to optional
 */

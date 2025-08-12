@@ -15,12 +15,14 @@ import java.io.Serializable;
 public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 	
 	private static final long serialVersionUID = 8276805139765346452L;
-	private boolean closed;
+	
 	private final Item item;
+	
+	private boolean closed;
 	private boolean itemRevealed;
 		
 	//Exit with multiple commands
-	public CloseableExit(Builder builder) {
+	private CloseableExit(Builder builder) {
 	
 		super(builder);
 		this.closed = builder.closed;
