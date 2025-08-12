@@ -22,7 +22,7 @@ public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 	private boolean itemRevealed;
 		
 	//Exit with multiple commands
-	private CloseableExit(Builder builder) {
+	protected CloseableExit(Builder builder) {
 	
 		super(builder);
 		this.closed = builder.closed;

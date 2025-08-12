@@ -11,16 +11,12 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.io.Serializable;
 
-public class LockableExit extends AbstractExit implements Exit,Serializable {
+public class LockableExit extends CloseableExit implements Exit,Serializable {
 	
 	private static final long serialVersionUID = 5219530774578813240L;
 	
 	private final CarriableItem key;
-	private final Item item;
-	
-	private boolean itemRevealed;
 	private boolean locked;
-	private boolean closed;
 		
 	//Exit with multiple commands
 	private LockableExit(Builder builder) {
@@ -28,28 +24,18 @@ public class LockableExit extends AbstractExit implements Exit,Serializable {
 		super(builder);
 		this.locked = builder.locked;
 		this.key = Objects.requireNonNull(builder.key,"Key cannot be null");
-		this.item = builder.item;
-		this.itemRevealed = builder.itemRevealed;
-		this.closed = builder.closed;
-
 	}
 	
-	public static class Builder extends AbstractExit.Builder {
+	public static class Builder extends CloseableExit.Builder {
 		
-		private boolean itemRevealed;
 		private boolean locked;
-		private boolean closed;
 		private CarriableItem key;
-		private Item item;
 		
 		public Builder(String name, Location destination, boolean direction) {
 			super (name,destination,direction);
-			itemRevealed = false;
 			locked = false;
 			key = null;
-			item = null;
 		}
-		
 	}
 	
 	//Returns the description of what happens when attempt to move
@@ -132,12 +118,6 @@ public class LockableExit extends AbstractExit implements Exit,Serializable {
 	public Item getHiddenItem() {
 		return super.getHiddenItem();
 	}
-
-	@Override
-	public String getMoveDirection() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
 
 /* 11 October 2023 - Created File
@@ -146,5 +126,5 @@ public class LockableExit extends AbstractExit implements Exit,Serializable {
  * 7 April 2024 - Added functions for items to be revealed
  * 7 January 2025 - Added lockable to confirm that this object can be locked.
  * 11 August 2025 - Added serialised id
- * 12 August 2025 - Started Updating Lockable Exit with builder
+ * 12 August 2025 - Stated updating class to handle builder.
 */
