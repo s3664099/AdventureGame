@@ -1,14 +1,15 @@
 /* LockableExit Class
  * Created: 11 October 2023
- * Updated: 12 August 2025
- * Version 1.3
+ * Updated: 13 August 2025
+ * Version 1.4
  * Class to handle and exit that can be locked
  */
 
 package Data;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.io.Serializable;
 
 public class LockableExit extends CloseableExit implements Exit,Serializable {
@@ -28,15 +29,61 @@ public class LockableExit extends CloseableExit implements Exit,Serializable {
 	
 	public static class Builder extends CloseableExit.Builder {
 		
-		private boolean locked;
-		private CarriableItem key;
+		private boolean locked = false;
+		private CarriableItem key = null;
 		
 		public Builder(String name, Location destination, boolean direction) {
 			super (name,destination,direction);
-			locked = false;
-			key = null;
+		}
+		
+		public Builder setLocked(boolean locked) {
+			this.locked = locked;
+			return this;
+		}
+		
+		public Builder setKey(CarriableItem key) {
+			this.key = Objects.requireNonNull(key);
+			return this;
+		}
+		
+		@Override
+		public LockableExit build() {
+			if (key==null) {
+				throw new IllegalStateException("Key must be set for lockable");
+			}
+			return new LockableExit(this);
 		}
 	}
+	
+	// === Locking behavoir ===
+	public String attemptLockUnlock(CarriableItem attemptedKey, String action) {
+
+		String response = "";
+		
+		if(!attemptedKey.equals(key)) {
+			response = String.format("The %s doesn't work", attemptedKey.getName());
+		} else {
+			this.locked = !this.locked;
+			response = String.format("You %s the %s with the %s", action, this.getName(), this.key.getName());
+		}
+		return response;
+	}
+	
+	public boolean isLockable() {
+		return true;
+	}
+	
+	public boolean isLocked() {
+		return locked;
+	}
+	
+	public Item getKey() {
+		return key;
+	}
+	
+	
+	// === Movement ===
+	
 	
 	//Returns the description of what happens when attempt to move
 	public String moveDescription(String command) {
@@ -68,7 +115,7 @@ public class LockableExit extends CloseableExit implements Exit,Serializable {
 	}
 
 	@Override
-	public ArrayList<String> getCommandSynonyms() {
+	public List<String> getCommandSynonyms() {
 		
 		return super.getCommandSynonyms();
 	}
@@ -79,33 +126,22 @@ public class LockableExit extends CloseableExit implements Exit,Serializable {
 		return super.getDestination();
 	}
 
-	public String attemptLockUnlock(CarriableItem item, String action) {
-		this.locked = !this.locked;
-		return String.format("You %s the %s with the %s", action, this.getName(), this.key.getName());
-	}
-
 	//Flags that the exit can be opened/closed
 	@Override
 	public boolean isOpenable() {
 		return true;
 	}
 	
-	public boolean isLockable() {
-		return true;
-	}
+
 
 	@Override
 	public String getDescription() {
 		return super.getDescription();
 	}
 	
-	public boolean isLocked() {
-		return locked;
-	}
+
 	
-	public Item getKey() {
-		return key;
-	}
+
 	
 	public boolean isItemRevealed() {
 		return super.isItemRevealed();
@@ -115,7 +151,7 @@ public class LockableExit extends CloseableExit implements Exit,Serializable {
 		super.setItem(updateReveal);
 	}
 	
-	public Item getHiddenItem() {
+	public Optional<Item> getHiddenItem() {
 		return super.getHiddenItem();
 	}
 }
