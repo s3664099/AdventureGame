@@ -25,7 +25,7 @@ public class Data_Process implements AutoCloseable {
 		desk.addItem(doorKey);
 		start.addItem(desk);
 		Location hall = new Location.Builder("In a hall","A hallway in an 18th Century building in the heart of London. There is a door leading to your office and stairs leading down to the street").build();
-		LockableExit door = new LockableExit("Big Blue Mahogany Door","door",hall,true,"A flimsy door that leads to the hall",doorKey);
+		Exit door = (Exit) new LockableExit.Builder("Big Blue Mahogany Door", hall, false).setLocked(true).setKey(doorKey).addDescription("A flimsy door that leads to the hall").build();
 		start.addExit(door);
 		Location kitchen = new Location.Builder("In the kitchen","This office has a kitchen").build();
 		OrdinaryExit north = new OrdinaryExit("North",kitchen,false);

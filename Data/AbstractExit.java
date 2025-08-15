@@ -1,7 +1,7 @@
 /* Abstract Exit Class
  * Created: 5 September 2023
- * Updated: 11 August 2025
- * Version 1.6
+ * Updated: 15 August 2025
+ * Version 1.7
  * Class to handle everything to do with an exit.
  * 
  * Go back and add generics once the exits are fixed.
@@ -79,6 +79,10 @@ public abstract class AbstractExit implements Serializable, Exit {
 			}
 			return this;
 		}
+
+		public Exit build() {
+			return null;
+		}
 	}
 			
 	public String getName() {
@@ -130,4 +134,5 @@ public abstract class AbstractExit implements Serializable, Exit {
  * 6 August 2025 - Added builder class
  * 10 August 2025 - Updated class for minor issues
  * 11 August 2025 - Updated to add optional item
+ * 15 August 2025 - Added build method to AbstractExit.Builder
  */ 
