@@ -1,7 +1,7 @@
 /* LockableExit Class
  * Created: 11 October 2023
- * Updated: 13 August 2025
- * Version 1.4
+ * Updated: 15 August 2025
+ * Version 1.5
  * Class to handle and exit that can be locked
  */
 
@@ -83,65 +83,51 @@ public class LockableExit extends CloseableExit implements Exit,Serializable {
 	
 	
 	// === Movement ===
-	
-	
-	//Returns the description of what happens when attempt to move
-	public String moveDescription(String command) {
-		
-        return locked 
-                ? String.format("The %s is closed%n", super.getName())
-                : super.getMoveDirection();
-	}
-	
-	//Checks if it is possible to move in that direction
 	public boolean canMoveThrough() {
 		return locked
 				? false
 				: super.canMoveThrough();
 	}
 	
+	public String getMoveDescription(String command) {
+        return locked 
+                ? String.format("The %s is locked%n", super.getName())
+                : super.getMoveDescription();
+	}
+	
+	// === Inherited Methods ===
 	public boolean isOpen() {
 		return super.isOpen();
 	}
 	
-	public void toggleOpenClose() {
-		super.toggleOpenClose();
-	}
-
-	@Override
-	public String getName() {
-		
-		return super.getName();
-	}
-
-	@Override
-	public List<String> getCommandSynonyms() {
-		
-		return super.getCommandSynonyms();
-	}
-
-	@Override
-	public Location getDestination() {
-		
-		return super.getDestination();
-	}
-
-	//Flags that the exit can be opened/closed
 	@Override
 	public boolean isOpenable() {
 		return true;
 	}
 	
+	public void toggleOpenClose() {
+		super.toggleOpenClose();
+	}
+	
+	@Override
+	public String getName() {
+		return super.getName();
+	}
 
+	@Override
+	public List<String> getCommandSynonyms() {
+		return super.getCommandSynonyms();
+	}
 
+	@Override
+	public Location getDestination() {
+		return super.getDestination();
+	}
+	
 	@Override
 	public String getDescription() {
 		return super.getDescription();
 	}
-	
-
-	
-
 	
 	public boolean isItemRevealed() {
 		return super.isItemRevealed();
@@ -163,4 +149,6 @@ public class LockableExit extends CloseableExit implements Exit,Serializable {
  * 7 January 2025 - Added lockable to confirm that this object can be locked.
  * 11 August 2025 - Added serialised id
  * 12 August 2025 - Stated updating class to handle builder.
+ * 13 August 2025 - Fixed remaining errors and finalised builder
+ * 15 August 2025 - Sorted methods
 */

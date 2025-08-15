@@ -113,7 +113,7 @@ public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 		return !closed;
 	}
 	
-	public String getMoveDirection() {
+	public String getMoveDescription() {
 		
         return closed 
                 ? String.format("The %s is closed%n", super.getName())

@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import Data.OrdinaryExit;
 import Data.Location;
-import Data.Location.Builder;
 
 import java.util.ArrayList;
 
@@ -13,7 +12,7 @@ class GameTest {
 	@Test
     public void testAddExit() {
         Location location = new Location.Builder("test location","").build();
-        OrdinaryExit exit = new OrdinaryExit("test exit", new Location(new Builder("destination","")), false);
+        OrdinaryExit exit = new OrdinaryExit.Builder("test exit", new Location.Builder("destination","").build(), false).build();
         location.addExit(exit);
         ArrayList<String> expectedNouns = new ArrayList<String>();
         expectedNouns.add("test exit");

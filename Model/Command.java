@@ -506,7 +506,7 @@ public class Command {
 		Exit exit = getExits(command);
 		
 		if (exit !=  null) {
-			response = exit.moveDescription(command);
+			response = exit.getMoveDescription();
 			if (exit.canMoveThrough()) {
 				currentLocation = exit.getDestination();
 				

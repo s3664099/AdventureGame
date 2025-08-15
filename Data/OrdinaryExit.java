@@ -1,7 +1,7 @@
 /* Ordinary Exit Class
  * Created: 25 August 2023
- * Updated: 12 August 2025
- * Version 1.4
+ * Updated: 15 August 2025
+ * Version 1.5
  * Class to handle everything to do with an exit.
  */
 
@@ -65,7 +65,7 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
 	public void toggleOpenClose() {}
 
 	//Returns the description of the player attempts to move
-	public String getMoveDirection() {
+	public String getMoveDescription() {
         return super.getDirection() 
                 ? String.format("You head %s%n", super.getName())
                 : String.format("You enter the %s%n", super.getName());
@@ -127,4 +127,5 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
  * 9 August 2025 - Fixed moveDescription
  * 11 August 2025 - Fixed problem with builder not matching
  * 12 August 2025 - Updated get item to optional
+ * 15 August 2025 - Changed getMoveDirection to getMoveDescription
 */

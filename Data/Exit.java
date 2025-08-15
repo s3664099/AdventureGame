@@ -16,7 +16,7 @@ public interface Exit {
 	public String getName();
 	public Location getDestination();
 	public boolean canMoveThrough();
-	public String getMoveDirection();
+	public String getMoveDescription();
 	
 	//=== State Inspection
 	public String getDescription();
