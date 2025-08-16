@@ -1,17 +1,18 @@
 /* Abstract Item Class
  * Created: 25 August 2023
- * Updated: 9 January 2025
- * Version: 1.3
+ * Updated: 16 August 2025
+ * Version: 1.4
  * The main class for objects. Since we can't call it an object (reserved word)
  * we have to call it a thing.
  */
 
 package Data;
 
-import java.util.ArrayList;
 import java.io.Serializable;
 
 public class AbstractItem implements Serializable {
+	
+	private static final long serialVersionUID = -6794443495126875911L;
 	
 	private String name;
 	private String description;
@@ -89,7 +90,7 @@ public class AbstractItem implements Serializable {
 	public Conversation talk() {
 
 		String response = "";
-		response = response.format("The %s doesn't respond.", this.getName());
+		response = String.format("The %s doesn't respond.", this.getName());
 		Conversation conversation = new Conversation(response);
 		
 		return conversation;
@@ -113,14 +114,9 @@ public class AbstractItem implements Serializable {
 		return "";
 	}
 	
-	public void setLeave(String leave) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void setLeave(String leave) {}
 
-	public void setLeaveConvo(String leaveConvo, Conversation endConversation) {
-		// TODO Auto-generated method stub
-	}
+	public void setLeaveConvo(String leaveConvo, Conversation endConversation) {}
 	
 	public boolean equals (String command) {
 		
@@ -174,4 +170,5 @@ public class AbstractItem implements Serializable {
 * 24 August 2024 - Added outline for equals method
 * 26 August 2024 - Added equals method
 * 9 Janaury 2025 - Added read methons (ie read the item). Added basic name so containers list contents
+* 16 August 2025 - Fixed warnings
 */
