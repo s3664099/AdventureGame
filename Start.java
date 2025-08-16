@@ -24,6 +24,7 @@
 //TODO: For exits, add a response variable so that a unique response can be discplayed.
 //TODO: Consider dropping moveable item and simply using cover. In this sense we can add
 //		A verb that need to be used to move the item.
+//TODO: Need matching exits so if one is unlocked/opened, the other is automatically as well (and vice versa).
 
 import java.util.Objects;
 import java.util.logging.Logger;

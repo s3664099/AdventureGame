@@ -49,11 +49,6 @@ public class CloseableExit extends AbstractExit implements Exit, Serializable  {
 			return this;
 		}
 		
-		public Builder addDescritpion(String description) {
-			super.addDescription(description);
-			return this;
-		}
-		
 		public Builder addClosed(boolean closed) {
 			this.closed = closed;
 			return this;

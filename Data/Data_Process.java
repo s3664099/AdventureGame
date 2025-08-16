@@ -1,8 +1,6 @@
 package Data;
 
 import java.util.logging.Logger;
-
-import Data.Location.Builder;
 import Model.Main;
 
 public class Data_Process implements AutoCloseable {
@@ -25,11 +23,11 @@ public class Data_Process implements AutoCloseable {
 		desk.addItem(doorKey);
 		start.addItem(desk);
 		Location hall = new Location.Builder("In a hall","A hallway in an 18th Century building in the heart of London. There is a door leading to your office and stairs leading down to the street").build();
-		Exit door = (Exit) new LockableExit.Builder("Big Blue Mahogany Door", hall, false).setLocked(true).setKey(doorKey).addDescription("A flimsy door that leads to the hall").build();
+		Exit door = new LockableExit.Builder("Big Blue Mahogany Door", hall, false).setLocked(true).setKey(doorKey).addDescription("A flimsy door that leads to the hall").build();
 		start.addExit(door);
 		Location kitchen = new Location.Builder("In the kitchen","This office has a kitchen").build();
-		OrdinaryExit north = new OrdinaryExit("North",kitchen,false);
-		OrdinaryExit south = new OrdinaryExit("South",start,false);
+		Exit north = new OrdinaryExit.Builder("North", kitchen, true).build();
+		Exit south = new OrdinaryExit.Builder("South",start,true).build();
 		ImmoveableItem rug = new ImmoveableItem("Colourful Persian Rug","This looks pretty expensive. A shame it is nailed to the floor");
 		MoveableItem table = new MoveableItem("Dirty Kitchen Table","This table looks like it has seen better days, back in the 60s",rug);
 		kitchen.addExit(south);
@@ -49,19 +47,20 @@ public class Data_Process implements AutoCloseable {
 		hall.addItem(card);
 		hall.addItem(note);
 		hall.addItem(leaflet);
-		door = new LockableExit("Door","door",start,false,"A flimsy door that leads into your office.",doorKey);
+		door = new LockableExit.Builder("Door", start, false).setKey(doorKey).setLocked(true).addClosed(true)
+				.addDescription("A flimsy door that leads into your office.").addCommand("door").build();
 		door.toggleOpenClose();
 		hall.addExit(door);
 		hall.setScore(true);
 		Location street = new Location.Builder("On the Street","").setEndRoom(true).setEndComment("You got hit by a car!").build();
-		OrdinaryExit stairs = new OrdinaryExit("Stairs",street,false);
+		Exit stairs = new OrdinaryExit.Builder("Stairs",street,false).build();
 		hall.addExit(stairs);
 		Conversation hooker = new Conversation("Where's my 50 quid from last time?");
 		Being being = new Being("Dirty skanky hooker","A hooker with a cigarette in her mouth, dressed rather skantily, stands in the door opposite yours",hooker,false);
 		hall.addItem(being);
 		Location window = new Location.Builder("At the end of the hall","The end of the hallway. There is a window that looks out onto the street below").build();
-		OrdinaryExit ne = new OrdinaryExit("Northeast",window,false);
-		OrdinaryExit sw = new OrdinaryExit("Southwest",hall,false);
+		Exit ne = new OrdinaryExit.Builder("Northeast",window,false).build();
+		Exit sw = new OrdinaryExit.Builder("Southwest",hall,false).build();
 		hall.addExit(ne);
 		window.addExit(sw);
 		
@@ -71,8 +70,8 @@ public class Data_Process implements AutoCloseable {
 		Bag toteBag = new Bag("Tote Bag","A tote bag with a tarten pattern on it");
 		bookshelf.addItem(diary);
 		library.addItem(bookshelf);
-		OrdinaryExit west = new OrdinaryExit("West", library, false);
-		OrdinaryExit east = new OrdinaryExit("East", start, false);
+		Exit west = new OrdinaryExit.Builder("West", library, false).build();
+		Exit east = new OrdinaryExit.Builder("East", start, false).build();
 		start.addExit(west);
 		library.addExit(east);
 		library.addItem(toteBag);
@@ -82,7 +81,7 @@ public class Data_Process implements AutoCloseable {
 		CarriableItem flashlight = new CarriableItem("Flashlight", "An old flashlight. It might still work.");
 		crate.addItem(flashlight);
 		storage.addItem(crate);
-		east = new OrdinaryExit("East", storage, false);
+		east = new OrdinaryExit.Builder("East", storage, false).build();
 		hall.addExit(east);
 		storage.addExit(west);
 
@@ -90,7 +89,7 @@ public class Data_Process implements AutoCloseable {
 		ImmoveableItem antenna = new ImmoveableItem("Rusted Antenna", "An old TV antenna that no longer serves its purpose.");
 		MoveableItem box = new MoveableItem("Small Wooden Box", "A box that seems out of place here. It rattles when moved.", antenna);
 		roof.addItem(box);
-		OrdinaryExit up = new OrdinaryExit("Up", roof, false);
+		Exit up = new OrdinaryExit.Builder("Up", roof, false).build();
 		window.addExit(up);
 		roof.addExit(sw);
 
@@ -105,8 +104,10 @@ public class Data_Process implements AutoCloseable {
 		CarriableItem shovel = new CarriableItem("Rusty Shovel", "A shovel covered in rust. It might still be useful for digging.");
 		garden.addItem(fountain);
 		garden.addItem(shovel);
-		CloseableExit gardenExit = new CloseableExit("Back Door","door", garden, true, "This is a wooden door with a window looking out into the back yard");
-		CloseableExit kitchenExit = new CloseableExit("Back Door","door", kitchen, false, "This is a wooden door with a window looking into the kitchen");
+		Exit gardenExit = new CloseableExit.Builder("Back Door", garden, false).addClosed(true).addCommand("door")
+				.addDescription("This is a wooden door with a window looking out into the back yard").build();
+		Exit kitchenExit = new CloseableExit.Builder("Back Door", garden, false).addClosed(true).addCommand("door")
+				.addDescription("This is a wooden door with a window looking into the kitchen").build();
 		kitchen.addExit(gardenExit);
 		garden.addExit(kitchenExit);
 
@@ -115,8 +116,8 @@ public class Data_Process implements AutoCloseable {
 		CarriableItem letter = new CarriableItem("Sealed Letter", "A letter with a wax seal. It feels important.");
 		writingDesk.addItem(letter);
 		study.addItem(writingDesk);
-		OrdinaryExit studyExit = new OrdinaryExit("West", study, false);
-		OrdinaryExit libraryExit = new OrdinaryExit("East", library, false);
+		Exit studyExit = new OrdinaryExit.Builder("West", study, true).build();
+		Exit libraryExit = new OrdinaryExit.Builder("East", library, true).build();
 		library.addExit(studyExit);
 		study.addExit(libraryExit);		
 		

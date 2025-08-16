@@ -1,7 +1,7 @@
 /* LockableExit Class
  * Created: 11 October 2023
- * Updated: 15 August 2025
- * Version 1.5
+ * Updated: 16 August 2025
+ * Version 1.6
  * Class to handle and exit that can be locked
  */
 
@@ -151,4 +151,5 @@ public class LockableExit extends CloseableExit implements Exit,Serializable {
  * 12 August 2025 - Stated updating class to handle builder.
  * 13 August 2025 - Fixed remaining errors and finalised builder
  * 15 August 2025 - Sorted methods
+ * 16 August 2025 - Removed setDescription
 */

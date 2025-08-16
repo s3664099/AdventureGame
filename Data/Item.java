@@ -1,14 +1,12 @@
 /* Item Interface
  * Created: 12 September 2023
- * Updated: 11 January 2025
- * Version: 1.3
+ * Updated: 16 August 2025
+ * Version: 1.4
  * The main class for objects. Since we can't call it an object (reserved word)
  * we have to call it a thing.
  */
 
 package Data;
-
-import java.util.ArrayList;
 
 public interface Item {
 	
@@ -65,4 +63,5 @@ public interface Item {
  * 24 August 2024 - Added the equals method
  * 9 Janaury 2025 - Added a read method. Added basic name for containers that list contents
  * 11 January 2025 - Added an addItem method
+ * 16 August 2025 - Cleaned up unused sections
  */
