@@ -1,36 +1,76 @@
 /* Abstract Item Class
  * Created: 25 August 2023
- * Updated: 16 August 2025
- * Version: 1.4
+ * Updated: 17 August 2025
+ * Version: 1.5
  * The main class for objects. Since we can't call it an object (reserved word)
  * we have to call it a thing.
  */
 
 package Data;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 public class AbstractItem implements Serializable {
 	
 	private static final long serialVersionUID = -6794443495126875911L;
 	
-	private String name;
-	private String description;
-	private String[] nouns;
-	private boolean treasure;
-	private String read = "There is nothing to read on this";
-	
-	public AbstractItem() {}
-	
-	public AbstractItem(String name, String description) {
-		
-		this.name = name;
-		this.description = description;
-		name = name.toLowerCase();
-		this.nouns = name.split(" ");
-		this.treasure = false;
+	private final String name;
+	private final String description;
+	private final String[] nouns;
+	private final boolean treasure;
+	private final String read;
+
+	private void readObject(ObjectInputStream in) 
+		    throws IOException, ClassNotFoundException {
+		    in.defaultReadObject();
+		    Objects.requireNonNull(name, "Deserialized name cannot be null");
+		    Objects.requireNonNull(description, "Destination cannot be null");
+			Objects.requireNonNull(nouns,"Commands cannot be null");
+			Objects.requireNonNull(read,"Description cannot be null");
+		    
 	}
 	
+	public AbstractItem(Builder builder) {
+		this.name = Objects.requireNonNull(builder.name, "Deserialized name cannot be null");
+		this.description = Objects.requireNonNull(builder.description, "Destination cannot be null");
+		this.nouns = Objects.requireNonNull(builder.nouns,"Commands cannot be null");
+		this.treasure = builder.treasure;
+		this.read = Objects.requireNonNull(builder.read,"Description cannot be null");
+	}
+	
+	public static class Builder {
+		
+		private final String name;
+		private final String description;
+
+		private String[] nouns;
+		private boolean treasure;
+		private String read;
+		
+		public Builder(String name, String description) {
+			this.name = Objects.requireNonNull(name, "Deserialized name cannot be null");
+			this.description = Objects.requireNonNull(description, "Destination cannot be null");
+			this.nouns = name.toLowerCase().split(" ");
+			this.treasure = false;
+			this.read = "There is nothing to read here";
+		}
+		
+		public void setRead(String read) {
+			this.read = read;
+		}
+		
+		public void setTreasure() {
+			this.treasure = !this.treasure;
+		}
+		
+		public Item build() {
+			return null;
+		}
+	}
+		
 	public String getDescription() {
 		return description;
 	}
@@ -39,37 +79,18 @@ public class AbstractItem implements Serializable {
 		return name;
 	}
 	
-	public String getBasicName() {
-		return name;
-	}
-	
 	public String[] getNouns() {
 		return this.nouns;
-	}
-	
-	public void setRead(String read) {
-		this.read = read;
 	}
 	
 	public String readItem() {
 		return this.read;
 	}
-	
-	public void updateItem(String name, String description) {
-		this.name = name;
-		this.description = description;
-		this.nouns = name.split(" ");
-	}
-	
-	public void setTreasure() {
-		this.treasure = !this.treasure;
-	}
-	
+		
 	public boolean getTreasure() {
 		return this.treasure;
 	}
 	
-	//Flags that this item isn't a cover
 	public boolean checkIsCover() {
 		return false;
 	}
@@ -86,13 +107,9 @@ public class AbstractItem implements Serializable {
 	
 	public void addItem(Item hiddenItem) {}
 	
-	//Basic response when user attempts to speak to an object
 	public Conversation talk() {
-
-		String response = "";
-		response = String.format("The %s doesn't respond.", this.getName());
+		String response = String.format("The %s doesn't respond.", this.getName());;
 		Conversation conversation = new Conversation(response);
-		
 		return conversation;
 	}
 	
@@ -171,4 +188,5 @@ public class AbstractItem implements Serializable {
 * 26 August 2024 - Added equals method
 * 9 Janaury 2025 - Added read methons (ie read the item). Added basic name so containers list contents
 * 16 August 2025 - Fixed warnings
+* 17 August 2025 - Added builder and null warnings
 */

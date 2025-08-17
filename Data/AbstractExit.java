@@ -1,7 +1,7 @@
 /* Abstract Exit Class
  * Created: 5 September 2023
- * Updated: 15 August 2025
- * Version 1.7
+ * Updated: 17 August 2025
+ * Version 1.8
  * Class to handle everything to do with an exit.
  * 
  * Go back and add generics once the exits are fixed.
@@ -37,7 +37,7 @@ public abstract class AbstractExit implements Serializable, Exit {
 		    
 	}
 	
-	public AbstractExit(Builder builder) {
+	protected AbstractExit(Builder builder) {
 		 
 		this.name = Objects.requireNonNull(builder.name, "Name cannot be null");
 		this.destination = Objects.requireNonNull(builder.destination, "Destination cannot be null");
@@ -57,7 +57,7 @@ public abstract class AbstractExit implements Serializable, Exit {
 		
 		public Builder(String name, Location destination, boolean direction) {
 			this.name = Objects.requireNonNull(name, "Name cannot be null");
-			this.destination = Objects.requireNonNull(destination, "Destination cannot be null");;
+			this.destination = Objects.requireNonNull(destination, "Destination cannot be null");
 			this.direction = direction;
 			this.commands.add(description.toLowerCase());
 			this.description = "There is nothing special";			
@@ -135,4 +135,5 @@ public abstract class AbstractExit implements Serializable, Exit {
  * 10 August 2025 - Updated class for minor issues
  * 11 August 2025 - Updated to add optional item
  * 15 August 2025 - Added build method to AbstractExit.Builder
+ * 17 August 2025 - changed constructor to protected
  */ 
