@@ -1,7 +1,7 @@
 /* Item Interface
  * Created: 12 September 2023
- * Updated: 16 August 2025
- * Version: 1.4
+ * Updated: 21 August 2025
+ * Version: 1.5
  * The main class for objects. Since we can't call it an object (reserved word)
  * we have to call it a thing.
  */
@@ -14,7 +14,6 @@ public interface Item {
 	public String[] getNouns();
 	public String getName();
 	public String getBasicName();
-	public void updateItem(String name, String description);
 	public boolean getCloseable();
 	public boolean getClosed();
 	public boolean getLockable();
@@ -25,11 +24,9 @@ public interface Item {
 	public boolean getMoveable();
 	public boolean getMoved();
 	public boolean getExtended();
-	public void setExtended();
 	public void setMoved();
 	public Exit getHiddenExit();
 	public Item getHiddenItem();
-	public void setTreasure();
 	public boolean getTreasure();
 	public boolean checkIsCover();
 	public boolean checkHidden(boolean whatItems);
@@ -37,15 +34,10 @@ public interface Item {
 	public boolean checkHiddenExits();
 	public boolean checkHiddenItems();
 	public boolean equals(String command);
-	public void addExit(Exit hiddenExit);
-	public void addItem(Item hiddenItem);
 	public Conversation talk();
-	public void setLeave(String leave);
 	public String getLeave();
-	public void setLeaveConvo(String leaveConvo, Conversation endConversation);
 	public String getLeaveConvo();
 	public String readItem();
-	public void setRead(String read);
 	void addItem(CarriableItem item);
 };
 
@@ -64,4 +56,5 @@ public interface Item {
  * 9 Janaury 2025 - Added a read method. Added basic name for containers that list contents
  * 11 January 2025 - Added an addItem method
  * 16 August 2025 - Cleaned up unused sections
+ * 21 August 2025 - Removed setters that set up initial item
  */

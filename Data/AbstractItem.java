@@ -1,7 +1,7 @@
 /* Abstract Item Class
  * Created: 25 August 2023
- * Updated: 17 August 2025
- * Version: 1.5
+ * Updated: 21 August 2025
+ * Version: 1.6
  * The main class for objects. Since we can't call it an object (reserved word)
  * we have to call it a thing.
  */
@@ -13,7 +13,7 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class AbstractItem implements Serializable {
+public class AbstractItem implements Serializable,Item {
 	
 	private static final long serialVersionUID = -6794443495126875911L;
 	
@@ -30,7 +30,6 @@ public class AbstractItem implements Serializable {
 		    Objects.requireNonNull(description, "Destination cannot be null");
 			Objects.requireNonNull(nouns,"Commands cannot be null");
 			Objects.requireNonNull(read,"Description cannot be null");
-		    
 	}
 	
 	public AbstractItem(Builder builder) {
@@ -103,10 +102,6 @@ public class AbstractItem implements Serializable {
 		return false;
 	}
 	
-	public void addExit(Exit hiddenExit) {}
-	
-	public void addItem(Item hiddenItem) {}
-	
 	public Conversation talk() {
 		String response = String.format("The %s doesn't respond.", this.getName());;
 		Conversation conversation = new Conversation(response);
@@ -116,8 +111,6 @@ public class AbstractItem implements Serializable {
 	public boolean getExtended() {
 		return false;
 	}
-	
-	public void setExtended() {}
 	
 	public void getLeave(String leave) {}
 
@@ -130,10 +123,6 @@ public class AbstractItem implements Serializable {
 	public String getLeaveConvo() {
 		return "";
 	}
-	
-	public void setLeave(String leave) {}
-
-	public void setLeaveConvo(String leaveConvo, Conversation endConversation) {}
 	
 	public boolean equals (String command) {
 		
@@ -170,6 +159,78 @@ public class AbstractItem implements Serializable {
 		}		
 		return match;
 	}
+
+	@Override
+	public String getBasicName() {
+		return null;
+	}
+
+	@Override
+	public boolean getCloseable() {
+		return false;
+	}
+
+	@Override
+	public boolean getClosed() {
+		return false;
+	}
+
+	@Override
+	public boolean getLockable() {
+		return false;
+	}
+
+	@Override
+	public boolean getLocked() {
+		return false;
+	}
+
+	@Override
+	public void setClosed() {}
+
+	@Override
+	public void setLocked() {}
+
+	@Override
+	public boolean checkKey(Item key) {
+		return false;
+	}
+
+	@Override
+	public boolean getMoveable() {
+		return false;
+	}
+
+	@Override
+	public boolean getMoved() {
+		return false;
+	}
+
+	@Override
+	public void setMoved() {}
+
+	@Override
+	public Exit getHiddenExit() {
+		return null;
+	}
+
+	@Override
+	public Item getHiddenItem() {
+		return null;
+	}
+
+	@Override
+	public boolean checkHiddenExits() {
+		return false;
+	}
+
+	@Override
+	public boolean checkHiddenItems() {
+		return false;
+	}
+
+	@Override
+	public void addItem(CarriableItem item) {}
 }
 
 /* 25 August 2023 - Created File
@@ -189,4 +250,5 @@ public class AbstractItem implements Serializable {
 * 9 Janaury 2025 - Added read methons (ie read the item). Added basic name so containers list contents
 * 16 August 2025 - Fixed warnings
 * 17 August 2025 - Added builder and null warnings
+* 21 August 2025 - Removed setters. Added interface and methods
 */
