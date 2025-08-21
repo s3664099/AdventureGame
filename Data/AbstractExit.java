@@ -1,7 +1,7 @@
 /* Abstract Exit Class
  * Created: 5 September 2023
- * Updated: 17 August 2025
- * Version 1.8
+ * Updated: 21 August 2025
+ * Version 1.9
  * Class to handle everything to do with an exit.
  * 
  * Go back and add generics once the exits are fixed.
@@ -26,16 +26,6 @@ public abstract class AbstractExit implements Serializable, Exit {
 	private final Location destination;
 	private final boolean direction;
 	private final List<String> commands;
-	
-	private void readObject(ObjectInputStream in) 
-		    throws IOException, ClassNotFoundException {
-		    in.defaultReadObject();
-		    Objects.requireNonNull(name, "Deserialized name cannot be null");
-		    Objects.requireNonNull(destination, "Destination cannot be null");
-			Objects.requireNonNull(commands,"Commands cannot be null");
-			Objects.requireNonNull(description,"Description cannot be null");
-		    
-	}
 	
 	protected AbstractExit(Builder builder) {
 		 
@@ -136,4 +126,5 @@ public abstract class AbstractExit implements Serializable, Exit {
  * 11 August 2025 - Updated to add optional item
  * 15 August 2025 - Added build method to AbstractExit.Builder
  * 17 August 2025 - changed constructor to protected
+ * 21 August 2025 - Removed the readObject method
  */ 

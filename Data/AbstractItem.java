@@ -9,7 +9,6 @@
 package Data;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -22,15 +21,6 @@ public class AbstractItem implements Serializable,Item {
 	private final String[] nouns;
 	private final boolean treasure;
 	private final String read;
-
-	private void readObject(ObjectInputStream in) 
-		    throws IOException, ClassNotFoundException {
-		    in.defaultReadObject();
-		    Objects.requireNonNull(name, "Deserialized name cannot be null");
-		    Objects.requireNonNull(description, "Destination cannot be null");
-			Objects.requireNonNull(nouns,"Commands cannot be null");
-			Objects.requireNonNull(read,"Description cannot be null");
-	}
 	
 	public AbstractItem(Builder builder) {
 		this.name = Objects.requireNonNull(builder.name, "Deserialized name cannot be null");
@@ -46,15 +36,13 @@ public class AbstractItem implements Serializable,Item {
 		private final String description;
 
 		private String[] nouns;
-		private boolean treasure;
-		private String read;
+		private boolean treasure = false;
+		private String read = "There is nothing to read here";
 		
 		public Builder(String name, String description) {
 			this.name = Objects.requireNonNull(name, "Deserialized name cannot be null");
 			this.description = Objects.requireNonNull(description, "Destination cannot be null");
 			this.nouns = name.toLowerCase().split(" ");
-			this.treasure = false;
-			this.read = "There is nothing to read here";
 		}
 		
 		public void setRead(String read) {
@@ -65,7 +53,7 @@ public class AbstractItem implements Serializable,Item {
 			this.treasure = !this.treasure;
 		}
 		
-		public Item build() {
+		public AbstractItem build() {
 			return null;
 		}
 	}
@@ -126,26 +114,25 @@ public class AbstractItem implements Serializable,Item {
 	
 	public boolean equals (String command) {
 		
-		String[] names = this.name.toLowerCase().split(" ");
 		String[] commands = command.toLowerCase().split(" ");
 		boolean match = false;
 		
 		//Checks if the length of the words in the name is greater than the command
-		if (names.length>=commands.length) {
+		if (nouns.length>=commands.length) {
 			
 			//Does the last word of each match
-			if (names[names.length-1].equals(commands[commands.length-1])) {
+			if (nouns[nouns.length-1].equals(commands[commands.length-1])) {
 				
 				//If command only a single word
-				if (names.length == 1) {
+				if (nouns.length == 1) {
 					match = true;
 				} else {
 					
 					int wordsCounted = 0;
 					int commandWords = 0;
 					
-					while(wordsCounted<names.length) {
-						if (names[wordsCounted].equals(commands[commandWords])) {
+					while(wordsCounted<nouns.length) {
+						if (nouns[wordsCounted].equals(commands[commandWords])) {
 							commandWords += 1;
 						}
 						wordsCounted += 1;
