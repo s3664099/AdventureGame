@@ -1,14 +1,13 @@
 /* Abstract Item Class
  * Created: 25 August 2023
- * Updated: 21 August 2025
- * Version: 1.6
+ * Updated: 22 August 2025
+ * Version: 1.7
  * The main class for objects. Since we can't call it an object (reserved word)
  * we have to call it a thing.
  */
 
 package Data;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -45,12 +44,14 @@ public class AbstractItem implements Serializable,Item {
 			this.nouns = name.toLowerCase().split(" ");
 		}
 		
-		public void setRead(String read) {
+		public Builder setRead(String read) {
 			this.read = read;
+			return this;
 		}
 		
-		public void setTreasure() {
+		public Builder setTreasure() {
 			this.treasure = !this.treasure;
+			return this;
 		}
 		
 		public AbstractItem build() {
@@ -238,4 +239,5 @@ public class AbstractItem implements Serializable,Item {
 * 16 August 2025 - Fixed warnings
 * 17 August 2025 - Added builder and null warnings
 * 21 August 2025 - Removed setters. Added interface and methods
+* 22 August 2025 - Updated Builder
 */

@@ -1,7 +1,7 @@
 /* Carriable Item Class
  * Created: 25 August 2023
- * Updated: 25 January 2024
- * Version: 1.0
+ * Updated: 22 August 2025
+ * Version: 1.1
  * The class for things that can be picked up and carried
  */
 
@@ -11,8 +11,32 @@ import java.io.Serializable;
 
 public class CarriableItem extends AbstractItem implements Item, Serializable {
 
-	public CarriableItem(String name, String description) {
-		super(name, description);
+	private static final long serialVersionUID = -8200700530371084935L;
+
+	private CarriableItem(Builder builder) {
+		super(builder);
+	}
+	
+	public static class Builder extends AbstractItem.Builder {
+		
+		public Builder(String name, String description) {
+			super(name,description);
+		}
+		
+		public Builder setRead(String read) {
+			super.setRead(read);
+			return this;
+		}
+		
+		public Builder setTreasure() {
+			super.setTreasure();
+			return this;
+		}
+		
+		public AbstractItem build() {
+			return new CarriableItem(this);
+		}
+		
 	}
 	
 	public String getDescription() {
@@ -99,4 +123,5 @@ public class CarriableItem extends AbstractItem implements Item, Serializable {
  * 27 August 2023 - Added comments
  * 23 Janaury 2024 - Added methods for moveable item
  * 25 January 2024 - Made class serializable
+ * 22 August 2025 - Created Builder subclass
  */

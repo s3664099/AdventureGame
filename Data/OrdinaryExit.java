@@ -15,7 +15,7 @@ public class OrdinaryExit extends AbstractExit implements Exit,Serializable {
 		
 	private static final long serialVersionUID = 5320873411231936585L;
 
-	public OrdinaryExit(Builder builder) {
+	private OrdinaryExit(Builder builder) {
 		super(builder);
 	}
 	
