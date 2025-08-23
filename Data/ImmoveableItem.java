@@ -15,7 +15,7 @@ public class ImmoveableItem extends AbstractItem implements Item,Serializable {
 	
 	private static final long serialVersionUID = 8882947786140522306L;
 
-	public ImmoveableItem(Builder builder) {
+	private ImmoveableItem(Builder builder) {
 		super(builder);
 	}
 	
@@ -34,6 +34,11 @@ public class ImmoveableItem extends AbstractItem implements Item,Serializable {
 			super.setTreasure();
 			return this;
 		}
+		
+        @Override
+        protected Builder self() {
+            return this;
+        }
 		
 		public AbstractItem build() {
 			return new ImmoveableItem(this);
@@ -60,28 +65,27 @@ public class ImmoveableItem extends AbstractItem implements Item,Serializable {
 
 	@Override
 	public boolean getClosed() {
-		
 		return false;
 	}
 
 	@Override
 	public boolean getLockable() {
-		
 		return false;
 	}
 
 	@Override
 	public boolean getLocked() {
-		
 		return false;
 	}
 
 	@Override
-	public void setClosed() {		
+	public void setClosed() {	
+		// No operation for immoveable items
 	}
 
 	@Override
-	public void setLocked() {		
+	public void setLocked() {
+		// No operation for immoveable items
 	}
 
 	@Override

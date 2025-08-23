@@ -34,6 +34,11 @@ public class CarriableItem extends AbstractItem implements Item, Serializable {
 			return this;
 		}
 		
+        @Override
+        protected Builder self() {
+            return this;
+        }
+		
 		public AbstractItem build() {
 			return new CarriableItem(this);
 		}

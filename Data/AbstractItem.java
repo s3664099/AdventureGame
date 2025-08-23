@@ -55,6 +55,10 @@ public class AbstractItem implements Serializable,Item {
 			return this;
 		}
 		
+        protected Builder self() {
+            return this;
+        }
+		
 		public AbstractItem build() {
 			return null;
 		}
