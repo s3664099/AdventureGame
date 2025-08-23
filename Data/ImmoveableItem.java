@@ -1,19 +1,44 @@
 /* Immoveable Item Class
  * Created: 25 August 2023
- * Updated: 11 January 2025
- * Version: 1.1
+ * Updated: 23 August 2025
+ * Version: 1.2
  * Class for items that can't be picked up and carried.
  */
 
 package Data;
 
-import java.util.ArrayList;
+import java.util.Optional;
+
 import java.io.Serializable;
 
 public class ImmoveableItem extends AbstractItem implements Item,Serializable {
 	
-	public ImmoveableItem(String name, String description) {
-		super(name,description);
+	private static final long serialVersionUID = 8882947786140522306L;
+
+	public ImmoveableItem(Builder builder) {
+		super(builder);
+	}
+	
+	public static class Builder extends AbstractItem.Builder {
+		
+		public Builder(String name, String description) {
+			super(name,description);
+		}
+		
+		public Builder setRead(String read) {
+			super.setRead(read);
+			return this;
+		}
+		
+		public Builder setTreasure() {
+			super.setTreasure();
+			return this;
+		}
+		
+		public AbstractItem build() {
+			return new ImmoveableItem(this);
+		}
+		
 	}
 
 	@Override
@@ -27,7 +52,7 @@ public class ImmoveableItem extends AbstractItem implements Item,Serializable {
 		return super.getName();
 	}
 
-	//Methods for items that are closeable and lockable
+    // === Container-related methods (all return default values) ===
 	@Override
 	public boolean getCloseable() {
 		return false;
@@ -66,37 +91,31 @@ public class ImmoveableItem extends AbstractItem implements Item,Serializable {
 
 	@Override
 	public boolean getMoveable() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Exit getHiddenExit() {
-		// TODO Auto-generated method stub
-		return null;
+	public Optional<Exit> getHiddenExit() {
+		return super.getHiddenExit();
 	}
 
 	@Override
-	public Item getHiddenItem() {
-		// TODO Auto-generated method stub
-		return null;
+	public Optional<Item> getHiddenItem() {
+		return super.getHiddenItem();
 	}
 
 	@Override
 	public boolean getMoved() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void setMoved() {
-		// TODO Auto-generated method stub
-		
+		// No operation for Immoveable items		
 	}
 
 	@Override
 	public boolean checkHiddenExits() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -107,8 +126,7 @@ public class ImmoveableItem extends AbstractItem implements Item,Serializable {
 
 	@Override
 	public void addItem(CarriableItem item) {
-		// TODO Auto-generated method stub
-		
+		throw new UnsupportedOperationException("Immoveable items cannot contain other items");
 	}
 }
 
@@ -118,4 +136,5 @@ public class ImmoveableItem extends AbstractItem implements Item,Serializable {
  * 23 January 2024 - Added methods to handle the moveable items
  * 25 January 2024 - Made class serialisable.
  * 11 Janaury 2025 - Added an addItem method
+ * 23 August 2025 - Updated to have builder
 */
