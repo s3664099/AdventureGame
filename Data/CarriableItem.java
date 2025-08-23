@@ -1,13 +1,14 @@
 /* Carriable Item Class
  * Created: 25 August 2023
- * Updated: 22 August 2025
- * Version: 1.1
+ * Updated: 23 August 2025
+ * Version: 1.2
  * The class for things that can be picked up and carried
  */
 
 package Data;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 public class CarriableItem extends AbstractItem implements Item, Serializable {
 
@@ -51,7 +52,7 @@ public class CarriableItem extends AbstractItem implements Item, Serializable {
 		return super.getName();
 	}
 	
-	//Methods for containers
+    // === Container-related methods (all return default values) ===
 	@Override
 	public boolean getCloseable() {
 		return false;
@@ -73,11 +74,13 @@ public class CarriableItem extends AbstractItem implements Item, Serializable {
 	}
 
 	@Override
-	public void setClosed() {		
+	public void setClosed() {
+        // No operation for carriable items
 	}
 
 	@Override
-	public void setLocked() {		
+	public void setLocked() {
+        // No operation for carriable items
 	}
 
 	@Override
@@ -91,13 +94,13 @@ public class CarriableItem extends AbstractItem implements Item, Serializable {
 	}
 
 	@Override
-	public Exit getHiddenExit() {
-		return null;
+	public Optional<Exit> getHiddenExit() {
+		return super.getHiddenExit();
 	}
 
 	@Override
-	public Item getHiddenItem() {
-		return null;
+	public Optional<Item> getHiddenItem() {
+		return super.getHiddenItem();
 	}
 
 	@Override
@@ -106,7 +109,9 @@ public class CarriableItem extends AbstractItem implements Item, Serializable {
 	}
 
 	@Override
-	public void setMoved() {}
+	public void setMoved() {
+        // No operation for basic carriable items
+	}
 
 	@Override
 	public boolean checkHiddenExits() {
@@ -117,6 +122,11 @@ public class CarriableItem extends AbstractItem implements Item, Serializable {
 	public boolean checkHiddenItems() {
 		return false;
 	}
+	
+    @Override
+    public void addItem(CarriableItem item) {
+        throw new UnsupportedOperationException("Carriable items cannot contain other items");
+    }
 }
 
 /* 25 August 2023 - Created file.
@@ -124,4 +134,5 @@ public class CarriableItem extends AbstractItem implements Item, Serializable {
  * 23 Janaury 2024 - Added methods for moveable item
  * 25 January 2024 - Made class serializable
  * 22 August 2025 - Created Builder subclass
+ * 23 August 2025 - Updated class based on recommendations
  */

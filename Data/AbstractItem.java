@@ -1,7 +1,7 @@
 /* Abstract Item Class
  * Created: 25 August 2023
- * Updated: 22 August 2025
- * Version: 1.7
+ * Updated: 23 August 2025
+ * Version: 1.8
  * The main class for objects. Since we can't call it an object (reserved word)
  * we have to call it a thing.
  */
@@ -10,6 +10,7 @@ package Data;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Optional;
 
 public class AbstractItem implements Serializable,Item {
 	
@@ -198,13 +199,13 @@ public class AbstractItem implements Serializable,Item {
 	public void setMoved() {}
 
 	@Override
-	public Exit getHiddenExit() {
-		return null;
+	public Optional<Exit> getHiddenExit() {
+		return Optional.empty();
 	}
 
 	@Override
-	public Item getHiddenItem() {
-		return null;
+	public Optional<Item> getHiddenItem() {
+		return Optional.empty();
 	}
 
 	@Override
@@ -240,4 +241,5 @@ public class AbstractItem implements Serializable,Item {
 * 17 August 2025 - Added builder and null warnings
 * 21 August 2025 - Removed setters. Added interface and methods
 * 22 August 2025 - Updated Builder
+* 23 August 2025 - Updated getHiddenItems and getHiddenExits
 */

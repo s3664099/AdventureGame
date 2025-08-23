@@ -1,12 +1,14 @@
 /* Item Interface
  * Created: 12 September 2023
- * Updated: 21 August 2025
- * Version: 1.5
+ * Updated: 23 August 2025
+ * Version: 1.6
  * The main class for objects. Since we can't call it an object (reserved word)
  * we have to call it a thing.
  */
 
 package Data;
+
+import java.util.Optional;
 
 public interface Item {
 	
@@ -25,8 +27,8 @@ public interface Item {
 	public boolean getMoved();
 	public boolean getExtended();
 	public void setMoved();
-	public Exit getHiddenExit();
-	public Item getHiddenItem();
+	public Optional<Exit> getHiddenExit();
+	public Optional<Item> getHiddenItem();
 	public boolean getTreasure();
 	public boolean checkIsCover();
 	public boolean checkHidden(boolean whatItems);
@@ -57,4 +59,5 @@ public interface Item {
  * 11 January 2025 - Added an addItem method
  * 16 August 2025 - Cleaned up unused sections
  * 21 August 2025 - Removed setters that set up initial item
+ * 23 August 2024 - Updated getHiddenItem & getHiddenExit
  */
