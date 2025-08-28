@@ -1,31 +1,74 @@
 /* Moveable Item Class
  * Created: 5 October 2023
- * Updated: 29 August 2024
- * Version: 1.1
+ * Updated: 28 August 2025
+ * Version: 1.2
  * Class for items that hide exits and items.
  */
 
 package Data;
 
-import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Optional;
 import java.io.Serializable;
 
 public class MoveableItem extends ImmoveableItem implements Item, Serializable {
 	
-	private Exit exit;
-	private Item item;
+	private static final long serialVersionUID = 6462752323832943503L;
+	private final Exit exit;
+	private final Item item;
 	private boolean isMoveable = true;
 	private boolean hasMoved = false;
+	private boolean itemRevealed;
+	private boolean exitRevealed;
 	
-	public MoveableItem(String name, String description, Exit exit) {
-		super(name,description);
-		this.exit = exit;
+	private MoveableItem(Builder builder) {
+		super(builder);
+		this.exit = builder.exit;
+		this.exitRevealed = builder.exitRevealed;
+		this.item = builder.item;
+		this.itemRevealed = builder.itemRevealed;
 	}
-
-	public MoveableItem(String name, String description, Item item) {
-		super(name,description);
+	
+	public static class Builder extends ImmoveableItem.Builder {
 		
-		this.item = item;
+		public Exit exit;
+		public Item item;
+		public boolean itemRevealed;
+		public boolean exitRevealed;
+		
+		public Builder(String name, String description) {
+			super(name,description);
+			this.exit = null;
+			this.exitRevealed = true;
+			this.item = null;
+			this.itemRevealed = true;
+		}
+		
+		public Builder setExit(Exit exit) {
+			this.exit = Objects.requireNonNull(exit, "Exit cannot be null");
+			this.exitRevealed = false;
+			return this;
+		}
+		
+		public Builder setItem(Item item) {
+			this.item = Objects.requireNonNull(item, "Item cannot be null");
+			this.itemRevealed = true;
+			return this;
+		}
+		
+		public Builder setRead(String read) {
+			super.setRead(read);
+			return this;
+		}
+		
+        @Override
+        protected Builder self() {
+            return this;
+        }
+		
+		public AbstractItem build() {
+			return new MoveableItem(this);
+		}
 	}
 
 	@Override
@@ -43,12 +86,10 @@ public class MoveableItem extends ImmoveableItem implements Item, Serializable {
 		return isMoveable;
 	}
 	
-	//Checks to see whether the item has already been moved
 	public boolean getMoved() {
 		return hasMoved;
 	}
 	
-	//Sets the flag to inform item has been moved
 	public void setMoved() {
 		hasMoved = true;
 	}
@@ -61,43 +102,35 @@ public class MoveableItem extends ImmoveableItem implements Item, Serializable {
 		return item;
 	}
 	
-	public Exit getHiddenExit() {
+	public Optional<Exit> getHiddenExit() {
 		
-		Exit hiddenExit = this.exit;
-		this.exit = null;
-		
+		Optional<Exit> hiddenExit = null;
+		if (!exitRevealed) {
+			exitRevealed = true;
+			hiddenExit = Optional.ofNullable(this.exit);
+		}
 		return hiddenExit;
 	}
 	
-	public Item getHiddenItem() {
+	public Optional<Item> getHiddenItem() {
 		
-		Item hiddenItem = this.item;
-		this.item = null;
+		Optional<Item> hiddenItem = null;
+		if(!itemRevealed) {
+			hiddenItem = Optional.ofNullable(this.item);
+			itemRevealed = true;
+		}
 		
 		return hiddenItem;
 	}
 	
 	@Override
 	public boolean checkHiddenExits() {
-
-		boolean foundExit = false;
-		
-		if (this.exit != null) {
-			foundExit = true;
-		}
-		return foundExit;
+		return exitRevealed;
 	}
 
 	@Override
 	public boolean checkHiddenItems() {
-
-		boolean foundItem = false;
-		
-		if (this.item != null) {
-			foundItem = true;
-		}
-		
-		return foundItem;
+		return itemRevealed;
 	}	
 }
 
@@ -107,4 +140,5 @@ public class MoveableItem extends ImmoveableItem implements Item, Serializable {
  * 10 May 2024 - May variables private
  * 29 Aug 2024 - Fixed problem where items/exits not being revealed. Added necessary
  * 				 methods.
+ * 28 August 2025 - Updated class with builder
 */

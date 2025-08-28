@@ -1,7 +1,7 @@
 /* Immoveable Item Class
  * Created: 25 August 2023
- * Updated: 23 August 2025
- * Version: 1.2
+ * Updated: 28 August 2025
+ * Version: 1.3
  * Class for items that can't be picked up and carried.
  */
 
@@ -15,7 +15,7 @@ public class ImmoveableItem extends AbstractItem implements Item,Serializable {
 	
 	private static final long serialVersionUID = 8882947786140522306L;
 
-	private ImmoveableItem(Builder builder) {
+	protected ImmoveableItem(Builder builder) {
 		super(builder);
 	}
 	
@@ -141,4 +141,6 @@ public class ImmoveableItem extends AbstractItem implements Item,Serializable {
  * 25 January 2024 - Made class serialisable.
  * 11 Janaury 2025 - Added an addItem method
  * 23 August 2025 - Updated to have builder
+ * 28 August 2025 - Changed visibility of constructor to protected.
+ * 					Updated getHiddenItem & getHiddenExit
 */
