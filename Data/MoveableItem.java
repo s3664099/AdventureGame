@@ -1,7 +1,7 @@
 /* Moveable Item Class
  * Created: 5 October 2023
- * Updated: 28 August 2025
- * Version: 1.2
+ * Updated: 30 August 2025
+ * Version: 1.3
  * Class for items that hide exits and items.
  */
 
@@ -71,17 +71,7 @@ public class MoveableItem extends ImmoveableItem implements Item, Serializable {
 		}
 	}
 
-	@Override
-	public String[] getNouns() {
-		
-		return super.getNouns();
-	}
-
-	@Override
-	public String getName() {
-		return super.getName();
-	}
-	
+	// === Movement ===
 	public boolean getMoveable() {
 		return isMoveable;
 	}
@@ -94,17 +84,10 @@ public class MoveableItem extends ImmoveableItem implements Item, Serializable {
 		hasMoved = true;
 	}
 	
-	public Exit getExit() {
-		return exit;
-	}
-	
-	public Item getItem() {
-		return item;
-	}
-	
+	//=== Hidden Content ===
 	public Optional<Exit> getHiddenExit() {
 		
-		Optional<Exit> hiddenExit = null;
+		Optional<Exit> hiddenExit = Optional.empty();
 		if (!exitRevealed) {
 			exitRevealed = true;
 			hiddenExit = Optional.ofNullable(this.exit);
@@ -114,12 +97,11 @@ public class MoveableItem extends ImmoveableItem implements Item, Serializable {
 	
 	public Optional<Item> getHiddenItem() {
 		
-		Optional<Item> hiddenItem = null;
+		Optional<Item> hiddenItem = Optional.empty();
 		if(!itemRevealed) {
 			hiddenItem = Optional.ofNullable(this.item);
 			itemRevealed = true;
 		}
-		
 		return hiddenItem;
 	}
 	
@@ -131,7 +113,33 @@ public class MoveableItem extends ImmoveableItem implements Item, Serializable {
 	@Override
 	public boolean checkHiddenItems() {
 		return itemRevealed;
-	}	
+	}
+	
+	//=== Additional Getters ===
+	public Exit getExit() {
+		return exit;
+	}
+	
+	public Item getItem() {
+		return item;
+	}
+	
+	@Override
+	public String[] getNouns() {
+		
+		return super.getNouns();
+	}
+
+	@Override
+	public String getName() {
+		return super.getName();
+	}
+	
+	//=== Override Container methods ===
+	@Override
+	public void addItem(CarriableItem item) {
+		throw new UnsupportedOperationException("Moveable items cannot contain other items");
+	}
 }
 
 /* 5 October 2023 - created class
@@ -141,4 +149,5 @@ public class MoveableItem extends ImmoveableItem implements Item, Serializable {
  * 29 Aug 2024 - Fixed problem where items/exits not being revealed. Added necessary
  * 				 methods.
  * 28 August 2025 - Updated class with builder
+ * 30 August 2025 - Updated code
 */
