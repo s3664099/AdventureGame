@@ -1,7 +1,7 @@
 /* Abstract Exit Class
  * Created: 5 September 2023
- * Updated: 21 August 2025
- * Version 1.9
+ * Updated: 30 August 2025
+ * Version 1.10
  * Class to handle everything to do with an exit.
  * 
  * Go back and add generics once the exits are fixed.
@@ -9,8 +9,6 @@
 
 package Data;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -127,4 +125,5 @@ public abstract class AbstractExit implements Serializable, Exit {
  * 15 August 2025 - Added build method to AbstractExit.Builder
  * 17 August 2025 - changed constructor to protected
  * 21 August 2025 - Removed the readObject method
+ * 30 August 2025 - Removed unused code
  */ 
