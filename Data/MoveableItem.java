@@ -66,7 +66,7 @@ public class MoveableItem extends ImmoveableItem implements Item, Serializable {
             return this;
         }
 		
-		public AbstractItem build() {
+		public MoveableItem build() {
 			return new MoveableItem(this);
 		}
 	}

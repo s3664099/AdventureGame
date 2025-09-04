@@ -8,6 +8,7 @@
 package Data;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.io.Serializable;
@@ -15,9 +16,8 @@ import java.io.Serializable;
 public class Cover extends ImmoveableItem implements Item,Serializable {
 	
 	private static final long serialVersionUID = -1835310517980029996L;
-	private final ArrayList<Exit> hiddenExits = new ArrayList<Exit>();
-	private final ArrayList<Item> hiddenItems = new ArrayList<Item>();
-	private final boolean isCover = true;
+	private final List<Exit> hiddenExits = new ArrayList<Exit>();
+	private final List<Item> hiddenItems = new ArrayList<Item>();
 	private final boolean removeObject;
 	
 	public Cover(Builder builder) {
@@ -44,7 +44,7 @@ public class Cover extends ImmoveableItem implements Item,Serializable {
             return this;
         }
 		
-		public AbstractItem build() {
+		public Cover build() {
 			return new Cover(this);
 		}
 	}
@@ -100,28 +100,14 @@ public class Cover extends ImmoveableItem implements Item,Serializable {
 
 	@Override
 	public boolean getMoveable() {
-		return isCover;
+		return true;
 	}
 
 	//Checks if there are any hidden exits of items
 	//True: check for items
 	//False: check for exits
-	public boolean checkHidden (boolean whatItems) {
-		
-		boolean anyItems = false;
-		
-		if (whatItems) {
-			if (this.hiddenItems.size()>0) {
-				anyItems = true;
-			}
-		} else {
-			if (this.hiddenExits.size()>0) {
-				anyItems = true;
-			}
-		}
-		
-		return anyItems;
-		
+	public boolean hasHiddenContent (boolean checkItems) {
+		return checkItems ? !hiddenItems.isEmpty() : !hiddenExits.isEmpty();
 	}
 	
 	//Checks to see if the item is to be removed if there are no more items/exits

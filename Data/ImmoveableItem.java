@@ -40,7 +40,7 @@ public class ImmoveableItem extends AbstractItem implements Item,Serializable {
             return this;
         }
 		
-		public AbstractItem build() {
+		public ImmoveableItem build() {
 			return new ImmoveableItem(this);
 		}
 		

@@ -39,7 +39,7 @@ public class CarriableItem extends AbstractItem implements Item, Serializable {
             return this;
         }
 		
-		public AbstractItem build() {
+		public CarriableItem build() {
 			return new CarriableItem(this);
 		}
 		
