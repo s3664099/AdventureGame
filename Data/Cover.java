@@ -1,54 +1,62 @@
 /* Cover Item Class
  * Created: 28 January 2024
- * Updated: 10 May 2024
- * Version: 1.0
+ * Updated: 4 September 2025
+ * Version: 1.1
  * Class for items either cover items or exits
  */
 
 package Data;
 
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Optional;
 import java.io.Serializable;
 
 public class Cover extends ImmoveableItem implements Item,Serializable {
 	
-	private ArrayList<Exit> hiddenExits = new ArrayList<Exit>();
-	private ArrayList<Item> hiddenItems = new ArrayList<Item>();
-	private boolean isCover = true;
-	private boolean removeObject;
+	private static final long serialVersionUID = -1835310517980029996L;
+	private final ArrayList<Exit> hiddenExits = new ArrayList<Exit>();
+	private final ArrayList<Item> hiddenItems = new ArrayList<Item>();
+	private final boolean isCover = true;
+	private final boolean removeObject;
 	
-	//Adds a hidden exit to the list
-	public Cover(String name, String description, Exit hiddenExit, boolean remove) {
-		super(name,description);
-		this.hiddenExits.add(hiddenExit);
-		this.removeObject = remove;
+	public Cover(Builder builder) {
+		super(builder);
+		this.removeObject = builder.removeObject;
 	}
 	
-	//Adds a hidden item to the list
-	public Cover(String name, String description, Item hiddenItem, boolean remove) {
-		super(name,description);
-		this.hiddenItems.add(hiddenItem);
-		this.removeObject = remove;
+	public static class Builder extends ImmoveableItem.Builder {
+		
+		private boolean removeObject;
+		
+		public Builder(String name, String description) {
+			super(name,description);
+			removeObject = false;
+		}
+		
+		public Builder setRemoveObject(boolean removeObject) {
+			this.removeObject = removeObject;
+			return this;
+		}
+				
+        @Override
+        protected Builder self() {
+            return this;
+        }
+		
+		public AbstractItem build() {
+			return new Cover(this);
+		}
 	}
 	
-	//Adds both hidden exits and items
-	public Cover(String name, String description, Exit hiddenExit, Item hiddenItem, boolean remove) {
-		super(name,description);
-		this.hiddenExits.add(hiddenExit);
-		this.hiddenItems.add(hiddenItem);
-		this.removeObject = remove;
+	public void addHiddenExit(Exit hiddenExit) {
+		this.hiddenExits.add(Objects.requireNonNull(hiddenExit, "Exit Comment cannot be null"));
 	}
 	
-	//Adds another exit to the cover
-	public void addExit(Exit hiddenExit) {
-		this.hiddenExits.add(hiddenExit);
+	public void addHiddenItem(Item hiddenItem) {
+		this.hiddenItems.add(Objects.requireNonNull(hiddenItem, "Item Comment cannot be null"));
 	}
 	
-	//Adds another item to the cover
-	public void addItem(Item hiddenItem) {
-		this.hiddenItems.add(hiddenItem);
-	}
-
 	@Override
 	public String[] getNouns() {
 		return super.getNouns();
@@ -59,7 +67,6 @@ public class Cover extends ImmoveableItem implements Item,Serializable {
 		return super.getName();
 	}
 
-	//Methods for items that are closeable and lockable
 	@Override
 	public boolean getCloseable() {
 		return false;
@@ -124,7 +131,7 @@ public class Cover extends ImmoveableItem implements Item,Serializable {
 	
 	//Removes a hidden item. Sends null if no item available
 	@Override
-	public Item getHiddenItem() {
+	public Optional<Item> getHiddenItem() {
 		
 		Item returnItem = null;
 		
@@ -133,12 +140,12 @@ public class Cover extends ImmoveableItem implements Item,Serializable {
 			returnItem = hiddenItems.remove(itemPosition);
 		}
 		
-		return returnItem;
+		return Optional.ofNullable(returnItem);
 	}
 
 	//Removes a hidden exits. Sends null if no exit available
 	@Override
-	public Exit getHiddenExit() {
+	public Optional<Exit> getHiddenExit() {
 		
 		Exit returnExit = null;
 		
@@ -147,31 +154,17 @@ public class Cover extends ImmoveableItem implements Item,Serializable {
 			returnExit = hiddenExits.remove(itemPosition);
 		}
 		
-		return returnExit;
+		return Optional.ofNullable(returnExit);
 	}
 	
 	//Checks if there are any exits
 	public boolean checkHiddenExits() {
-		
-		boolean hasExits = false;
-				
-		if (hiddenExits.size()>0) {
-			hasExits = true;
-		}
-		
-		return hasExits;
+		return hiddenExits.size()>0;
 	}
 
 	//Checks if there are any exits
-	public boolean checkHiddenItems() {
-		
-		boolean hasItems = false;
-		
-		if (hiddenItems.size()>0) {
-			hasItems = true;
-		}
-		
-		return hasItems;
+	public boolean checkHiddenItems() {		
+		return hiddenItems.size()>0;
 	}
 
 	@Override
@@ -188,4 +181,5 @@ public class Cover extends ImmoveableItem implements Item,Serializable {
  * 21 February 2024 - Added methods to make the class work properly
  * 13 March 2024 - Added methods to add more hidden items
  * 10 May 2024 - Made Variables private
+ * 4 September 2025 - Updated class with builder.
 */
