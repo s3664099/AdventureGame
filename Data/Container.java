@@ -27,12 +27,37 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 	
 	private Container(Builder builder) {
 		super(builder);
-		this.contents = builder.contents;
+		this.contents = new ArrayList<>(builder.contents);
 		this.lockable = builder.lockable;
 		this.closeable = builder.closeable;
-		this.locked = builder.locked;
-		this.closed = builder.closed;
+		this.locked = validateLockState(builder.locked,builder.lockable,builder.closeable);
+		this.closed = validateCloseState(builder.closed,builder.closeable);
 		this.key = builder.key;
+		
+		validateState();
+	}
+	
+	private boolean validateLockState(boolean requestedLocked,boolean isLockable,boolean isCloseable) {
+		if(requestedLocked && (!isLockable || !isCloseable)) {
+			throw new IllegalStateException("Cannot lock a container that is not lockable and closeable");
+		}
+		return requestedLocked;
+	}
+	
+	private boolean validateCloseState(boolean requestedClosed, boolean isCloseable) {
+		if(requestedClosed && !isCloseable) {
+			throw new IllegalStateException("Cannot close a container that is not closeable");
+		}
+		return requestedClosed;
+	}
+	
+	private void validateState() {
+		if (locked && !closed) {
+			throw new IllegalStateException("Cannot have a locked container that is not closed");
+		}
+		if (locked && !lockable) {
+			throw new IllegalStateException("Cannot have a locked container that is not lockable");
+		}
 	}
 	
 	public static class Builder extends ImmoveableItem.Builder {
