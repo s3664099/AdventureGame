@@ -1,7 +1,7 @@
 /* Container Class
  * Created: 5 October 2023
- * Updated: 16 Janaury 2025
- * Version: 1.3
+ * Updated: 6 September 2025
+ * Version: 1.4
  * Class for items that can contain other items. Cannot be carried
  */
 
@@ -12,13 +12,38 @@ import java.io.Serializable;
 
 public class Container extends ImmoveableItem implements Item,Serializable {
 	
-	private ArrayList<Item> contents = new ArrayList<Item>();
-	private boolean lockable = false;
-	private boolean closeable = false;
-	private boolean locked = false;
-	private boolean closed = false;
-	private boolean haveViewed = false;
-	private Item key;
+	private final ArrayList<Item> contents;
+	private final boolean lockable;
+	private final boolean closeable;
+	private boolean locked;
+	private boolean closed;
+	private boolean haveViewed;
+	private final Item key;
+	
+	private Container(Builder builder) {
+		super(builder);
+		this.contents = builder.contents;
+		this.lockable = builder.lockable;
+		this.closeable = builder.closeable;
+		this.locked = builder.locked;
+		this.closed = builder.closed;
+		this.key = builder.key;
+	}
+	
+	public static class Builder extends ImmoveableItem.Builder {
+		
+		private final ArrayList<Item> contents = new ArrayList<Item>();
+		private final boolean lockable = false;
+		private final boolean closeable = false;
+		private boolean locked = false;
+		private boolean closed = false;
+		private final Item key = null;
+		
+		public Builder(String name, String description) {
+			super(name,description);
+		}
+	}
+	
 	
 	public Container(String name, String description) {
 		super(name,description);
@@ -177,4 +202,5 @@ public class Container extends ImmoveableItem implements Item,Serializable {
  * 9 January 2025 - added the contents if look at room when container open
  * 11 Janaury 2025 - Put item in container now works.
  * 16 January 2025 - Update the constructor
+ * 6 September 2025 - STarted updating class with builder
 */
