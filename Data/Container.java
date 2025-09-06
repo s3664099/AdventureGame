@@ -8,11 +8,16 @@
 package Data;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+
 import java.io.Serializable;
 
 public class Container extends ImmoveableItem implements Item,Serializable {
 	
-	private final ArrayList<Item> contents;
+	private static final long serialVersionUID = 2484768982194210993L;
+	private final List<Item> contents;
 	private final boolean lockable;
 	private final boolean closeable;
 	private boolean locked;
@@ -32,56 +37,63 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 	
 	public static class Builder extends ImmoveableItem.Builder {
 		
-		private final ArrayList<Item> contents = new ArrayList<Item>();
-		private final boolean lockable = false;
-		private final boolean closeable = false;
+		private List<Item> contents = new ArrayList<Item>();
+		private boolean lockable = false;
+		private boolean closeable = false;
 		private boolean locked = false;
 		private boolean closed = false;
-		private final Item key = null;
+		private Item key = null;
 		
 		public Builder(String name, String description) {
 			super(name,description);
 		}
-	}
-	
-	
-	public Container(String name, String description) {
-		super(name,description);
-	}
-	
-	public Container(String name, String description, boolean closed) {
-		super(name, description);
-		this.closeable = true;
-		this.lockable = false;
-		this.locked = false;
-		this.closed = closed;
-	}
-
-	public Container(String name, String description, boolean locked, 
-					 boolean closed, boolean lockable, boolean closeable, Item key) {
-		super(name, description);
-
-		this.closeable = closeable;
-		this.lockable = lockable;
-		this.locked = locked;
-		this.closed = closed;
 		
-		//Overwrites to prevent conflict
-		if (locked) {
+		public Builder setKey(Item key) {
+			this.key = Objects.requireNonNull(key,"Key cannot be null");
+			return this;
+		}
+		
+		public Builder setCloseable(boolean closeable) {
+			this.closeable = closeable;
+			return this;
+		}
+		
+		public Builder setClosed(boolean closed) {
+			this.closeable = true;
+			this.closed = closed;
+			return this;
+		}
+		
+		public Builder setLockable(boolean lockable) {
+			this.lockable = lockable;
+			return this;
+		}
+		
+		public Builder setLocked(boolean locked) {
 			this.lockable = true;
 			this.closeable = true;
 			this.closed = true;
-		} else if (closed) {
-			this.closeable = true;
+			this.locked = locked;
+			return this;
 		}
 		
+		public Builder addItem(CarriableItem item) {
+			contents.add(Objects.requireNonNull(item,"Item cannot be null"));
+			return this;
+		}
 		
-		this.key = key;
+        @Override
+        protected Builder self() {
+            return this;
+        }
+		
+		public Container build() {
+			return new Container(this);
+		}
 	}
-
+		
 	@Override
 	public String[] getNouns() {
-		
 		return super.getNouns();
 	}
 
@@ -105,7 +117,7 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 	private String getContents(String response) {
 		
 		if ((!closed) && (!locked)) {
-			response = response.format("%s. The %s contains",super.getDescription(),super.getName());
+			response = String.format("%s. The %s contains",super.getDescription(),super.getName());
 			int length = 0;
 		
 			for (Item content:contents) {
@@ -119,32 +131,31 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 				}
 				
 				if (length == 0) {
-					response = response.format("%s %s %s",response, article, content.getName());
+					response = String.format("%s %s %s",response, article, content.getName());
 				} else {
-					response = response.format("%s, %s %s",response,article, content.getName());
+					response = String.format("%s, %s %s",response,article, content.getName());
 				}
 				length ++;
 			}
 			
 			if (length == 0) {
-				response = response.format("%s nothing.",response);
+				response = String.format("%s nothing.",response);
 			} else {
 				this.haveViewed = true;
 			}
 		
 		} else {
-			response = response.format("%s. The %s is closed",response, super.getName());
+			response = String.format("%s. The %s is closed",response, super.getName());
 		}
 		return response;
 	}
 	
 	public void addItem(CarriableItem item) {
-		contents.add(item);
+		contents.add(Objects.requireNonNull(item,"Item cannot be null"));
 	}
 	
-	public ArrayList<Item> getContents() {
-		
-		return contents;
+	public List<Item> getContents() {
+		return Collections.unmodifiableList(this.contents);
 	}
 		
 	public boolean getViewed() {
@@ -182,15 +193,8 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 	}
 	
 	//Checks that the key is the correct key
-	public boolean checkKey(Item key) {
-		
-		boolean hasKey = false;
-		
-		if (key.equals(this.key)) {
-			hasKey = true;
-		}
-		
-		return hasKey;
+	public boolean checkKey(Item key) {		
+		return key.equals(this.key);
 	}
 }
 
@@ -202,5 +206,6 @@ public class Container extends ImmoveableItem implements Item,Serializable {
  * 9 January 2025 - added the contents if look at room when container open
  * 11 Janaury 2025 - Put item in container now works.
  * 16 January 2025 - Update the constructor
- * 6 September 2025 - STarted updating class with builder
+ * 6 September 2025 - Updated class with builder and added protections such as nonNull
+ * 					  unmodifiable list
 */
