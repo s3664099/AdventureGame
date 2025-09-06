@@ -133,6 +133,25 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 			return new Container(this);
 		}
 	}
+	
+	//=== Content Management ===
+	public void addItem(CarriableItem item) {
+		if (locked||closed) {
+			throw new IllegalStateException("Cannot add items to a locked or closed container");
+		}
+		contents.add(Objects.requireNonNull(item,"Item cannot be null"));
+	}
+	
+	public boolean removeItem(Item item) {
+		if (locked||closed) {
+			throw new IllegalStateException("Cannot remove items from a locked or closed container");
+		}
+		return contents.remove(item);
+	}
+	
+	public boolean containsItem(Item item) {
+		return contents.contains(item);
+	}
 		
 	@Override
 	public String[] getNouns() {
@@ -142,7 +161,7 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 	@Override
 	public String getName() {
 		String response = super.getName();
-		response = getContents(response);
+		response = getDescription(response);
 		return response;
 	}
 	
@@ -152,11 +171,27 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 	
 	public String getDescription() {
 		String response = super.getDescription();
-		response = getContents(response);			
+		response = getDescription(response);			
 		return response;
 	}
 	
-	private String getContents(String response) {
+	public List<Item> getContents() {
+		if(locked||closed) {
+			return Collections.emptyList();
+		}
+		return Collections.unmodifiableList(this.contents);
+	}
+	
+	public boolean isEmpty() {
+		return contents.isEmpty();
+	}
+	
+	public int getItemCount() {
+		return contents.size();
+	}
+	
+	// === Description Generation ===
+	private String getDescription(String response) {
 		
 		if ((!closed) && (!locked)) {
 			response = String.format("%s. The %s contains",super.getDescription(),super.getName());
@@ -191,14 +226,8 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 		}
 		return response;
 	}
-	
-	public void addItem(CarriableItem item) {
-		contents.add(Objects.requireNonNull(item,"Item cannot be null"));
-	}
-	
-	public List<Item> getContents() {
-		return Collections.unmodifiableList(this.contents);
-	}
+		
+
 		
 	public boolean getViewed() {
 		return haveViewed;
