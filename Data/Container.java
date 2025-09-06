@@ -75,30 +75,47 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 		
 		public Builder setKey(Item key) {
 			this.key = Objects.requireNonNull(key,"Key cannot be null");
+			this.lockable = true;
+			this.closeable = true;
 			return this;
 		}
 		
 		public Builder setCloseable(boolean closeable) {
 			this.closeable = closeable;
+			if (!closeable) {
+				this.closed = false;
+				this.locked = false;
+			}
 			return this;
 		}
 		
 		public Builder setClosed(boolean closed) {
-			this.closeable = true;
+			if (closed && !closeable) {
+				throw new IllegalStateException("Cannot set closed if container is not closeable");
+			}
 			this.closed = closed;
+			if (!closed) {
+				this.locked = false;
+			}
 			return this;
 		}
 		
 		public Builder setLockable(boolean lockable) {
 			this.lockable = lockable;
+			if (!lockable) {
+				this.locked = false;
+			}
 			return this;
 		}
 		
 		public Builder setLocked(boolean locked) {
-			this.lockable = true;
-			this.closeable = true;
-			this.closed = true;
+			if (locked && (!lockable || !closeable)) {
+				throw new IllegalStateException("Cannot set locked if container is not lockable and closeable");
+			}
 			this.locked = locked;
+			if(locked) {
+				this.closed = true;
+			}
 			return this;
 		}
 		
@@ -233,4 +250,5 @@ public class Container extends ImmoveableItem implements Item,Serializable {
  * 16 January 2025 - Update the constructor
  * 6 September 2025 - Updated class with builder and added protections such as nonNull
  * 					  unmodifiable list
+ * 					- Added validations
 */
