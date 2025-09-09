@@ -14,7 +14,7 @@ public class CarriableItem extends AbstractItem implements Item, Serializable {
 
 	private static final long serialVersionUID = -8200700530371084935L;
 
-	private CarriableItem(Builder builder) {
+	protected CarriableItem(Builder builder) {
 		super(builder);
 	}
 	

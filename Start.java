@@ -7,7 +7,7 @@
 
 //TODO: Add a game state
 //TODO: Add Class to hold constants
-//TODO: Change the add item to not throw an exception - update the functionality to take something from the container
+//TODO: Change the add item to not throw an exception - update the functionality to take something from the container & bag
 //				- It should take the string, and go through items, check each of them.
 //TODO: Implement multi word parser
 //		Handle the with section here - and if there is a with, will do both of them.

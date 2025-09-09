@@ -32,6 +32,7 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 		this.closeable = builder.closeable;
 		this.locked = validateLockState(builder.locked,builder.lockable,builder.closeable);
 		this.closed = validateCloseState(builder.closed,builder.closeable);
+		this.haveViewed = false;
 		this.key = builder.key;
 		
 		validateState();

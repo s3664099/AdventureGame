@@ -1,7 +1,7 @@
 /* Carriable Item Class
  * Created: 11 January 2025
- * Updated: 16 January 2025
- * Version: 1.2
+ * Updated: 9 September 2025
+ * Version: 1.3
  * The class for a carriable container
  */
 
@@ -9,10 +9,12 @@ package Data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Bag extends CarriableItem implements Item, Serializable {
 
-	private ArrayList<Item> contents = new ArrayList<Item>();
+	private static final long serialVersionUID = 9052718269968423337L;
+	private List<Item> contents;
 	private boolean lockable = false;
 	private boolean closeable = false;
 	private boolean locked = false;
@@ -20,32 +22,39 @@ public class Bag extends CarriableItem implements Item, Serializable {
 	private boolean haveViewed = false;
 	private Item key;
 	
-	public Bag(String name, String description) {
-		super(name, description);	
+	public Bag(Builder builder) {
+		super(builder);
+		this.contents = new ArrayList<>(builder.contents);
+		this.closeable = builder.closeable;
+		this.lockable = builder.lockable;
+		this.locked = validateLockState(builder.locked,builder.lockable,builder.closeable);
+		this.closed = validateCloseState(builder.closed,builder.closeable);
+		this.haveViewed = builder.haveViewed;
+		this.key = builder.key;
+		
+		validateState();
 	}
 	
-	public Bag(String name,String description,boolean closeable,boolean closed,boolean lockable, boolean locked, CarriableItem key) {
-		super(name,description);
-		
-		this.closeable = closeable;
-		this.closed = closed;		
-		this.lockable = lockable;
-		this.locked = locked;
-		
-		//Overwrite to prevent conflict
-		if (locked) {
-			this.lockable = true;
-			this.closeable = true;
-			this.closed = true;
-		} else if (closed) {
-			this.closeable = true;
+	private boolean validateLockState(boolean requestedLocked,boolean isLockable,boolean isCloseable) {
+		if(requestedLocked && (!isLockable || !isCloseable)) {
+			throw new IllegalStateException("Cannot lock a container that is not lockable and closeable");
 		}
-		
-		this.key = key;
-		
-		//Overrides a false lockable
-		if (locked) {
-			this.lockable = true;
+		return requestedLocked;
+	}
+	
+	private boolean validateCloseState(boolean requestedClosed, boolean isCloseable) {
+		if(requestedClosed && !isCloseable) {
+			throw new IllegalStateException("Cannot close a container that is not closeable");
+		}
+		return requestedClosed;
+	}
+	
+	private void validateState() {
+		if (locked && !closed) {
+			throw new IllegalStateException("Cannot have a locked container that is not closed");
+		}
+		if (locked && !lockable) {
+			throw new IllegalStateException("Cannot have a locked container that is not lockable");
 		}
 	}
 	
@@ -163,4 +172,5 @@ public class Bag extends CarriableItem implements Item, Serializable {
 /* 11 January 2025 - Created File
  * 12 January 2025 - Added methods to open and close the bag
  * 16 January 2025 - Added a key to the bag
+ * 9 September 2025 - Started implementing builder class
  */
