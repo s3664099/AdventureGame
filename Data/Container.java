@@ -1,7 +1,7 @@
 /* Container Class
  * Created: 5 October 2023
- * Updated: 6 September 2025
- * Version: 1.4
+ * Updated: 9 September 2025
+ * Version: 1.5
  * Class for items that can contain other items. Cannot be carried
  */
 
@@ -162,7 +162,9 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 	@Override
 	public String getName() {
 		String response = super.getName();
-		response = getDescription(response);
+		if (!haveViewed) {
+			response = getDescription(response);
+		}
 		return response;
 	}
 	
@@ -216,10 +218,12 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 				length ++;
 			}
 			
-			if (length == 0) {
-				response = String.format("%s nothing.",response);
-			} else {
-				this.haveViewed = true;
+			if ((!closed) && (!locked) && (!haveViewed)) {
+				if (length == 0) {
+					response = String.format("%s nothing.",response);
+				} else {
+					this.haveViewed = true;
+				}
 			}
 		
 		} else {
@@ -281,4 +285,5 @@ public class Container extends ImmoveableItem implements Item,Serializable {
  * 6 September 2025 - Updated class with builder and added protections such as nonNull
  * 					  unmodifiable list
  * 					- Added validations
+ * 9 September 2025 - Added value for haveViewed. Updated descriptions for have viewed
 */

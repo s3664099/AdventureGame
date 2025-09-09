@@ -9,7 +9,9 @@ package Data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class Bag extends CarriableItem implements Item, Serializable {
 
@@ -29,7 +31,7 @@ public class Bag extends CarriableItem implements Item, Serializable {
 		this.lockable = builder.lockable;
 		this.locked = validateLockState(builder.locked,builder.lockable,builder.closeable);
 		this.closed = validateCloseState(builder.closed,builder.closeable);
-		this.haveViewed = builder.haveViewed;
+		this.haveViewed = false;
 		this.key = builder.key;
 		
 		validateState();
@@ -58,6 +60,80 @@ public class Bag extends CarriableItem implements Item, Serializable {
 		}
 	}
 	
+	public static class Builder extends CarriableItem.Builder {
+		
+		private List<Item> contents = new ArrayList<Item>();
+		private boolean lockable = false;
+		private boolean closeable = false;
+		private boolean locked = false;
+		private boolean closed = false;
+		private Item key = null;
+		
+		public Builder(String name, String description) {
+			super(name,description);
+		}
+		
+		public Builder setKey(Item key) {
+			this.key = Objects.requireNonNull(key,"Key cannot be null");
+			this.lockable = true;
+			this.closeable = true;
+			return this;
+		}
+		
+		public Builder setCloseable(boolean closeable) {
+			this.closeable = closeable;
+			if (!closeable) {
+				this.closed = false;
+				this.locked = false;
+			}
+			return this;
+		}
+		
+		public Builder setClosed(boolean closed) {
+			if (closed && !closeable) {
+				throw new IllegalStateException("Cannot set closed if container is not closeable");
+			}
+			this.closed = closed;
+			if (!closed) {
+				this.locked = false;
+			}
+			return this;
+		}
+		
+		public Builder setLockable(boolean lockable) {
+			this.lockable = lockable;
+			if (!lockable) {
+				this.locked = false;
+			}
+			return this;
+		}
+		
+		public Builder setLocked(boolean locked) {
+			if (locked && (!lockable || !closeable)) {
+				throw new IllegalStateException("Cannot set locked if container is not lockable and closeable");
+			}
+			this.locked = locked;
+			if(locked) {
+				this.closed = true;
+			}
+			return this;
+		}
+		
+		public Builder addItem(CarriableItem item) {
+			contents.add(Objects.requireNonNull(item,"Item cannot be null"));
+			return this;
+		}
+		
+        @Override
+        protected Builder self() {
+            return this;
+        }
+		
+		public Bag build() {
+			return new Bag(this);
+		}
+	}
+	
 	public void addItem(CarriableItem item) {
 		contents.add(item);
 	}
@@ -66,14 +142,19 @@ public class Bag extends CarriableItem implements Item, Serializable {
 		contents.remove(index);
 	}
 	
-	public ArrayList<Item> getContents() {
-		return contents;
+	public List<Item> getContents() {
+		if(locked||closed) {
+			return Collections.emptyList();
+		}
+		return Collections.unmodifiableList(this.contents);
 	}
 
 	@Override
 	public String getName() {
 		String response = super.getName();
-		response = getContents(response);
+		if (!haveViewed) {
+			response = getContents(response);
+		}
 		return response;
 	}
 	
@@ -90,7 +171,7 @@ public class Bag extends CarriableItem implements Item, Serializable {
 	private String getContents(String response) {
 		
 		if ((!closed) && (!locked)) {
-			response = response.format("%s. The %s contains",super.getDescription(),super.getName());
+			response = String.format("%s. The %s contains",super.getDescription(),super.getName());
 			int length = 0;
 		
 			for (Item content:contents) {
@@ -104,21 +185,23 @@ public class Bag extends CarriableItem implements Item, Serializable {
 				}
 				
 				if (length == 0) {
-					response = response.format("%s %s %s",response, article, content.getName());
+					response = String.format("%s %s %s",response, article, content.getName());
 				} else {
-					response = response.format("%s, %s %s",response,article, content.getName());
+					response = String.format("%s, %s %s",response,article, content.getName());
 				}
 				length ++;
 			}
 			
-			if (length == 0) {
-				response = response.format("%s nothing.",response);
-			} else {
-				this.haveViewed = true;
+			if ((!closed) && (!locked) && (!haveViewed)) {
+				if (length == 0) {
+					response = String.format("%s nothing.",response);
+				} else {
+					this.haveViewed = true;
+				}
 			}
 		
 		} else {
-			response = response.format("%s. The %s is closed",response, super.getName());
+			response = String.format("%s. The %s is closed",response, super.getName());
 		}
 		return response;
 	}
@@ -172,5 +255,5 @@ public class Bag extends CarriableItem implements Item, Serializable {
 /* 11 January 2025 - Created File
  * 12 January 2025 - Added methods to open and close the bag
  * 16 January 2025 - Added a key to the bag
- * 9 September 2025 - Started implementing builder class
+ * 9 September 2025 - Added builder class
  */
