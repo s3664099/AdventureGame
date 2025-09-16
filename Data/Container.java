@@ -1,7 +1,7 @@
 /* Container Class
  * Created: 5 October 2023
- * Updated: 9 September 2025
- * Version: 1.5
+ * Updated: 16 September 2025
+ * Version: 1.6
  * Class for items that can contain other items. Cannot be carried
  */
 
@@ -143,11 +143,30 @@ public class Container extends ImmoveableItem implements Item,Serializable {
 		contents.add(Objects.requireNonNull(item,"Item cannot be null"));
 	}
 	
-	public boolean removeItem(Item item) {
+	public void removeItem(int index) {
 		if (locked||closed) {
 			throw new IllegalStateException("Cannot remove items from a locked or closed container");
 		}
-		return contents.remove(item);
+		contents.remove(index);
+	}
+	
+	public Item removeItem(String itemName) {
+		
+		if (locked||closed) {
+			throw new IllegalStateException("Cannot remove items from a locked or closed container");
+		}
+		
+		Item itemToRemove = null;
+		for (Item item:this.contents) {
+			if (item.equals(itemName)) {
+				itemToRemove = item;
+			}
+		}
+		
+		if(itemToRemove != null) {
+			this.contents.remove(itemToRemove);
+		}
+		return itemToRemove;
 	}
 	
 	public boolean containsItem(Item item) {
@@ -286,4 +305,5 @@ public class Container extends ImmoveableItem implements Item,Serializable {
  * 					  unmodifiable list
  * 					- Added validations
  * 9 September 2025 - Added value for haveViewed. Updated descriptions for have viewed
+ * 16 September 2025 - Added method to remove item based on name
 */

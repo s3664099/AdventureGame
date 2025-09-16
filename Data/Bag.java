@@ -135,14 +135,25 @@ public class Bag extends CarriableItem implements Item, Serializable {
 	}
 	
 	public void addItem(CarriableItem item) {
+		if (locked||closed) {
+			throw new IllegalStateException("Cannot add items to a locked or closed bag");
+		}
 		contents.add(item);
 	}
 	
 	public void removeItem(int index) {
+		if (locked||closed) {
+			throw new IllegalStateException("Cannot remove items from a locked or closed bag");
+		}
 		contents.remove(index);
 	}
 	
 	public Item removeItem(String itemName) {
+		
+		if (locked||closed) {
+			throw new IllegalStateException("Cannot remove items from a locked or closed bag");
+		}
+		
 		Item itemToRemove = null;
 		for (Item item:this.contents) {
 			if (item.equals(itemName)) {
@@ -271,4 +282,5 @@ public class Bag extends CarriableItem implements Item, Serializable {
  * 16 January 2025 - Added a key to the bag
  * 9 September 2025 - Added builder class
  * 16 September 2025 - Added function to find item based on name and remove it
+ * 					 - Added check to prevent removing items from lock/closed bag
  */
