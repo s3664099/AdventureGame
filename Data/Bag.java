@@ -1,7 +1,7 @@
 /* Carriable Item Class
  * Created: 11 January 2025
- * Updated: 9 September 2025
- * Version: 1.3
+ * Updated: 16 September 2025
+ * Version: 1.4
  * The class for a carriable container
  */
 
@@ -142,6 +142,20 @@ public class Bag extends CarriableItem implements Item, Serializable {
 		contents.remove(index);
 	}
 	
+	public Item removeItem(String itemName) {
+		Item itemToRemove = null;
+		for (Item item:this.contents) {
+			if (item.equals(itemName)) {
+				itemToRemove = item;
+			}
+		}
+		
+		if(itemToRemove != null) {
+			this.contents.remove(itemToRemove);
+		}
+		return itemToRemove;
+	}
+	
 	public List<Item> getContents() {
 		if(locked||closed) {
 			return Collections.emptyList();
@@ -256,4 +270,5 @@ public class Bag extends CarriableItem implements Item, Serializable {
  * 12 January 2025 - Added methods to open and close the bag
  * 16 January 2025 - Added a key to the bag
  * 9 September 2025 - Added builder class
+ * 16 September 2025 - Added function to find item based on name and remove it
  */
