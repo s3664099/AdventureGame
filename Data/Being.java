@@ -7,21 +7,16 @@
 
 package Data;
 
-import java.util.ArrayList;
 import java.util.Objects;
-
-import Data.Bag.Builder;
-
+import java.util.Optional;
 import java.io.Serializable;
 
 public class Being extends AbstractItem implements Item,Serializable {
 	
 	private static final long serialVersionUID = 9188928562890699138L;
 	private final Conversation conversation;
-	private final Conversation conversationStart;
 	private final String leave;
 	private final String leaveConvo;
-	private final String leaveResponse;
 	private final Conversation endConversation;
 	private final String read;
 	private Boolean extended;
@@ -30,13 +25,11 @@ public class Being extends AbstractItem implements Item,Serializable {
 	public Being(Builder builder) {
 		super(builder);
 		this.conversation = builder.conversation;
-		this.conversationStart = builder.conversationStart;
 		this.extended = builder.extended;
 		this.leaveSet = false;
 		this.read = builder.read;
 		this.leave = builder.leave;
 		this.leaveConvo = builder.leaveConvo;
-		this.leaveResponse = builder.leaveResponse;
 		this.endConversation = builder.endConversation;
 	}
 	
@@ -44,10 +37,8 @@ public class Being extends AbstractItem implements Item,Serializable {
 		
 		private Conversation conversation;
 		private Boolean extended;
-		private Conversation conversationStart;
 		private String leave;
 		private String leaveConvo;
-		private String leaveResponse;
 		private Conversation endConversation;
 		private String read;
 		
@@ -57,24 +48,12 @@ public class Being extends AbstractItem implements Item,Serializable {
 			this.read = String.format("Despite your amazing intuition, you are unable to read %s", name);
 			this.conversation = Objects.requireNonNull(conversation,"Conversation cannot be null");;
 			this.extended = extended;
-			this.conversationStart = null;
 			this.leaveConvo = null;
-			this.leaveResponse = null;
 			this.endConversation = null;
-		}
-		
-		public Builder setConversationStart(Conversation conversationStart) {
-			this.conversationStart = Objects.requireNonNull(conversationStart,"ConversationStart cannot be null");
-			return this;
 		}
 		
 		public Builder setLeave(String leave) {
 			this.leave = Objects.requireNonNull(leave,"leave cannot be null");
-			return this;
-		}
-		
-		public Builder setLeaveResponse(String leaveResponse) {
-			this.leaveResponse = Objects.requireNonNull(leaveResponse,"leaveResponse cannot be null");
 			return this;
 		}
 		
@@ -129,10 +108,13 @@ public class Being extends AbstractItem implements Item,Serializable {
 	public void setExtended() {
 		this.extended = !this.extended;
 	}
+	
+	public String getRead() {
+		return this.read;
+	}
 
 	@Override
 	public String[] getNouns() {
-		
 		return super.getNouns();
 	}
 
@@ -144,25 +126,21 @@ public class Being extends AbstractItem implements Item,Serializable {
 	//Methods for items that are closeable and lockable
 	@Override
 	public boolean getCloseable() {
-
 		return false;
 	}
 
 	@Override
 	public boolean getClosed() {
-		
 		return false;
 	}
 
 	@Override
 	public boolean getLockable() {
-		
 		return false;
 	}
 
 	@Override
 	public boolean getLocked() {
-		
 		return false;
 	}
 
@@ -181,51 +159,39 @@ public class Being extends AbstractItem implements Item,Serializable {
 
 	@Override
 	public boolean getMoveable() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Exit getHiddenExit() {
-		// TODO Auto-generated method stub
+	public Optional<Exit> getHiddenExit() {
 		return null;
 	}
 
 	@Override
-	public Item getHiddenItem() {
-		// TODO Auto-generated method stub
+	public Optional<Item> getHiddenItem() {
 		return null;
 	}
 
 	@Override
 	public boolean getMoved() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void setMoved() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void setMoved() {}
 
 	@Override
 	public boolean checkHiddenExits() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean checkHiddenItems() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void addItem(CarriableItem item) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void addItem(CarriableItem item) {}
 }
 
 /* 23 March 2024 - Created file
@@ -236,5 +202,5 @@ public class Being extends AbstractItem implements Item,Serializable {
  * 8 June 2024 - Added the leave conversation
  * 9 January 2025 - Added special read for a being
  * 11 January 2025 - Added an addItem method
- * 20 September 2025 - Start builder class
+ * 20 September 2025 - Added builder class and updated methods
 */
