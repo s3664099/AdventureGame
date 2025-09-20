@@ -1,7 +1,7 @@
 /* Being
  * Created: 23 March 2024
- * Updated: 11 January 2025
- * Version: 1.2
+ * Updated: 20 September 2025
+ * Version: 1.3
  * Class for creatures.
  */
 
@@ -12,21 +12,43 @@ import java.io.Serializable;
 
 public class Being extends AbstractItem implements Item,Serializable {
 	
-	private Conversation conversation;
-	private Boolean extended;
-	private static Conversation conversationStart;
-	private String leave = "ok";
-	private String leaveConvo;
-	private String leaveResponse;
-	private Conversation endCoversation;
-	private String read = String.format("Despite your amazing intuition, you are unable to read %s", this.getName());
+	private final Conversation conversation;
+	private final Boolean extended;
+	private final static Conversation conversationStart;
+	private final String leave;
+	private final String leaveConvo;
+	private final String leaveResponse;
+	private final Conversation endCoversation;
+	private final String read;
 	
-	public Being(String name, String description, Conversation conversation, Boolean extended) {
-		super(name,description);
+	public Being(Builder builder) {
+		super(builder);
 		this.conversation = conversation;
 		this.conversationStart = conversation;
 		this.extended = extended;
+		this.read = builder.read;
+		this.leave = builder.leave;
 	}
+	
+	public static class Builder extends AbstractItem.Builder {
+		
+		private Conversation conversation;
+		private Boolean extended;
+		private static Conversation conversationStart;
+		private String leave;
+		private String leaveConvo;
+		private String leaveResponse;
+		private Conversation endCoversation;
+		private String read;
+		
+		public Builder(String name, String description,Conversation conversation, Boolean extended) {
+			super(name,description);
+			this.leave = "ok";
+			this.read = String.format("Despite your amazing intuition, you are unable to read %s", name);
+		}
+		
+	}
+	
 	
 	public void setLeave(String leave) {
 		this.leave = leave;
@@ -168,4 +190,5 @@ public class Being extends AbstractItem implements Item,Serializable {
  * 8 June 2024 - Added the leave conversation
  * 9 January 2025 - Added special read for a being
  * 11 January 2025 - Added an addItem method
+ * 20 September 2025 - Start builder class
 */
