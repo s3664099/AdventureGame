@@ -3,6 +3,8 @@
  * Updated: 20 September 2025
  * Version: 1.3
  * Class for creatures.
+ * 
+ * Look at how convo works, and maybe set the endConvo with the leave
  */
 
 package Data;
@@ -19,8 +21,8 @@ public class Being extends AbstractItem implements Item,Serializable {
 	private final String leaveConvo;
 	private final Conversation endConversation;
 	private final String read;
-	private Boolean extended;
-	private Boolean leaveSet;
+	private boolean extended;
+	private boolean leaveSet;
 	
 	public Being(Builder builder) {
 		super(builder);
@@ -36,7 +38,7 @@ public class Being extends AbstractItem implements Item,Serializable {
 	public static class Builder extends AbstractItem.Builder {
 		
 		private Conversation conversation;
-		private Boolean extended;
+		private boolean extended;
 		private String leave;
 		private String leaveConvo;
 		private Conversation endConversation;
@@ -86,27 +88,25 @@ public class Being extends AbstractItem implements Item,Serializable {
 		return leave;
 	}
 	
-	public void setLeaveConvo() {
-		this.leaveSet = false;
+	public void setLeaveConvo(boolean leaveSet) {
+		this.leaveSet = leaveSet;
 	}
 	
 	//Leave function for when the being no longer wishes to talk.
 	public String getLeaveConvo() {
-		
-		this.extended = !this.extended;
 		return this.leaveConvo;
 	}
 	
 	public Conversation talk() {
-		return leaveSet?conversation:endConversation;
+		return leaveSet?endConversation:conversation;
 	}
 	
 	public boolean getExtended() {
 		return this.extended;
 	}
 	
-	public void setExtended() {
-		this.extended = !this.extended;
+	public void setExtended(boolean extended) {
+		this.extended = extended;
 	}
 	
 	public String getRead() {
@@ -164,12 +164,12 @@ public class Being extends AbstractItem implements Item,Serializable {
 
 	@Override
 	public Optional<Exit> getHiddenExit() {
-		return null;
+		return Optional.empty();
 	}
 
 	@Override
 	public Optional<Item> getHiddenItem() {
-		return null;
+		return Optional.empty();
 	}
 
 	@Override
