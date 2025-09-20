@@ -9,30 +9,35 @@ package Data;
 
 import java.util.ArrayList;
 import java.util.Objects;
+
+import Data.Bag.Builder;
+
 import java.io.Serializable;
 
 public class Being extends AbstractItem implements Item,Serializable {
 	
 	private static final long serialVersionUID = 9188928562890699138L;
 	private final Conversation conversation;
-	private final Boolean extended;
 	private final Conversation conversationStart;
 	private final String leave;
 	private final String leaveConvo;
 	private final String leaveResponse;
-	private final Conversation endCoversation;
+	private final Conversation endConversation;
 	private final String read;
+	private Boolean extended;
+	private Boolean leaveSet;
 	
 	public Being(Builder builder) {
 		super(builder);
 		this.conversation = builder.conversation;
 		this.conversationStart = builder.conversationStart;
 		this.extended = builder.extended;
+		this.leaveSet = false;
 		this.read = builder.read;
 		this.leave = builder.leave;
-		this.leaveConvo = null;
-		this.leaveResponse = null;
-		this.endCoversation = null;
+		this.leaveConvo = builder.leaveConvo;
+		this.leaveResponse = builder.leaveResponse;
+		this.endConversation = builder.endConversation;
 	}
 	
 	public static class Builder extends AbstractItem.Builder {
@@ -43,7 +48,7 @@ public class Being extends AbstractItem implements Item,Serializable {
 		private String leave;
 		private String leaveConvo;
 		private String leaveResponse;
-		private Conversation endCoversation;
+		private Conversation endConversation;
 		private String read;
 		
 		public Builder(String name, String description,Conversation conversation, Boolean extended) {
@@ -55,7 +60,7 @@ public class Being extends AbstractItem implements Item,Serializable {
 			this.conversationStart = null;
 			this.leaveConvo = null;
 			this.leaveResponse = null;
-			this.endCoversation = null;
+			this.endConversation = null;
 		}
 		
 		public Builder setConversationStart(Conversation conversationStart) {
@@ -63,33 +68,58 @@ public class Being extends AbstractItem implements Item,Serializable {
 			return this;
 		}
 		
+		public Builder setLeave(String leave) {
+			this.leave = Objects.requireNonNull(leave,"leave cannot be null");
+			return this;
+		}
+		
+		public Builder setLeaveResponse(String leaveResponse) {
+			this.leaveResponse = Objects.requireNonNull(leaveResponse,"leaveResponse cannot be null");
+			return this;
+		}
+		
+		public Builder setLeaveConvo(String leaveConvo) {
+			this.leaveConvo = Objects.requireNonNull(leaveConvo,"leaveConvo cannot be null");
+			return this;
+		}
+		
+		public Builder setRead(String read) {
+			this.read = Objects.requireNonNull(read,"read cannot be null");
+			return this;
+		}
+		
+		public Builder setEndConversation(Conversation endConversation) {
+			this.endConversation = Objects.requireNonNull(endConversation,"endConversation cannot be null");
+			return this;
+		}
+		
+        @Override
+        protected Builder self() {
+            return this;
+        }
+		
+		public Being build() {
+			return new Being(this);
+		}
 	}
-	
-	
-	public void setLeave(String leave) {
-		this.leave = leave;
-	}
-	
+		
 	public String getLeave() {
 		return leave;
 	}
 	
-	//Sets a conversation if the user no longer wishes to talk.
-	public void setLeaveConvo(String leaveConvo, Conversation endConversation) {
-		this.leaveConvo = leaveConvo;
-		this.endCoversation = endConversation;
+	public void setLeaveConvo() {
+		this.leaveSet = false;
 	}
 	
 	//Leave function for when the being no longer wishes to talk.
 	public String getLeaveConvo() {
 		
 		this.extended = !this.extended;
-		this.conversation = this.endCoversation;
 		return this.leaveConvo;
 	}
 	
 	public Conversation talk() {
-		return conversation;
+		return leaveSet?conversation:endConversation;
 	}
 	
 	public boolean getExtended() {
