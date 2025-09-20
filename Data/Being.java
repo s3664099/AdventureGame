@@ -8,13 +8,15 @@
 package Data;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.io.Serializable;
 
 public class Being extends AbstractItem implements Item,Serializable {
 	
+	private static final long serialVersionUID = 9188928562890699138L;
 	private final Conversation conversation;
 	private final Boolean extended;
-	private final static Conversation conversationStart;
+	private final Conversation conversationStart;
 	private final String leave;
 	private final String leaveConvo;
 	private final String leaveResponse;
@@ -23,18 +25,21 @@ public class Being extends AbstractItem implements Item,Serializable {
 	
 	public Being(Builder builder) {
 		super(builder);
-		this.conversation = conversation;
-		this.conversationStart = conversation;
-		this.extended = extended;
+		this.conversation = builder.conversation;
+		this.conversationStart = builder.conversationStart;
+		this.extended = builder.extended;
 		this.read = builder.read;
 		this.leave = builder.leave;
+		this.leaveConvo = null;
+		this.leaveResponse = null;
+		this.endCoversation = null;
 	}
 	
 	public static class Builder extends AbstractItem.Builder {
 		
 		private Conversation conversation;
 		private Boolean extended;
-		private static Conversation conversationStart;
+		private Conversation conversationStart;
 		private String leave;
 		private String leaveConvo;
 		private String leaveResponse;
@@ -45,6 +50,17 @@ public class Being extends AbstractItem implements Item,Serializable {
 			super(name,description);
 			this.leave = "ok";
 			this.read = String.format("Despite your amazing intuition, you are unable to read %s", name);
+			this.conversation = Objects.requireNonNull(conversation,"Conversation cannot be null");;
+			this.extended = extended;
+			this.conversationStart = null;
+			this.leaveConvo = null;
+			this.leaveResponse = null;
+			this.endCoversation = null;
+		}
+		
+		public Builder setConversationStart(Conversation conversationStart) {
+			this.conversationStart = Objects.requireNonNull(conversationStart,"ConversationStart cannot be null");
+			return this;
 		}
 		
 	}
