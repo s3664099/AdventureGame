@@ -1,7 +1,7 @@
 /* Conversation
  * Created: 23 March 2024
- * Updated: 4 January 2025
- * Version: 1.1
+ * Updated: 23 September 2025
+ * Version: 1.2
  * Class for conversations.
  */
 
@@ -9,34 +9,79 @@ package Data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import Data.Being.Builder;
 
 public class Conversation implements Serializable {
 
-	private String response;
-	private ArrayList<Query> queries = new ArrayList<Query>();
-	private Conversation upto;
-	private String endConvo = "";
-	private ArrayList<String> endResponse = new ArrayList<String>();
+	private static final long serialVersionUID = -7100430312452939043L;
+	private final String response;
+	private final List<Query> queries;
+	private final Conversation upto;
+	private final String endConversation;
+	private final List<String> endResponse;
 	
 	//Constructor where there is only a response
-	public Conversation(String response) {
-		this.response = response;
+	public Conversation(Builder builder) {
+		this.response = builder.response;
+		this.queries = builder.queries;
+		this.upto = builder.upto;
+		this.endConversation = builder.endConversation;
+		this.endResponse = builder.endResponse;
 	}
 	
-	//Constructor that includes queries
-	public Conversation(String response, ArrayList<Query> queries, String endConvo) {
-		this.response = response;
-		this.queries = queries;
-		this.endConvo = endConvo;
+	public static class Builder {
+		private String response;
+		private List<Query> queries;
+		private Conversation upto;
+		private String endConversation;
+		private List<String> endResponse;
+		
+		public Builder(String response) {
+			this.response = response;
+			this.upto = null;
+			this.queries = new ArrayList<Query>();
+			this.endConversation = "";
+			this.endResponse = new ArrayList<String>();
+		}
+		
+		public Builder setQueries(ArrayList<Query> queries) {
+			this.queries = queries;
+			return this;
+		}
+		
+		public Builder addQuery(Query query) {
+			this.queries.add(query);
+			return this;
+		}
+		
+		public Builder setEndResponse(ArrayList<String> endResponse) {
+			this.endResponse = endResponse;
+			return this;
+		}
+		
+		public Builder addEndResponse(String endResponse) {
+			this.endResponse.add(endResponse);
+			return this;
+		}
+		
+		public Builder setEndConversation(String endConversation) {
+			this.endConversation = endConversation;
+			return this;
+		}
+		
+        protected Builder self() {
+            return this;
+        }
+		
+		public Conversation build() {
+			return new Conversation(this);
+		}
+		
 	}
-
-	//Constructor that doesn't include queries
-	public Conversation(String response, String endConvo) {
-		this.response = response;
-		this.endConvo = endConvo;
-	}
-	
+		
 	public void addQuery(Query query) {
 		this.queries.add(query);
 	}
@@ -181,4 +226,5 @@ public class Conversation implements Serializable {
  * 14 May 2024 - Fixing issue with last reply
  * 8 June 2024 - Cleared the array.
  * 4 January 2025 - Made class serializable
+ * 23 September 2025 - Added Builder class
 */
