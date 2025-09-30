@@ -9,6 +9,10 @@
 //TODO: Add Class to hold constants
 //TODO: Change the add item to not throw an exception - update the functionality to take something from the container & bag
 //				- It should take the string, and go through items, check each of them.
+//TODO: Move the displayConversation to a separate function to handle conversations
+//		ClearConvo should be done outside of the Conversation Class.
+//		The GetInput class should be in the control package
+//		UpTo should probably be in the being class as a conversation handler - or even in a conversation handler
 //TODO: Implement multi word parser
 //		Handle the with section here - and if there is a with, will do both of them.
 //			Add a with to carriable items that unless with specific item cannot pick it up

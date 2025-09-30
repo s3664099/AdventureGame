@@ -1,7 +1,7 @@
 /* Conversation
  * Created: 23 March 2024
- * Updated: 23 September 2025
- * Version: 1.2
+ * Updated: 30 September 2025
+ * Version: 1.3
  * Class for conversations.
  */
 
@@ -10,41 +10,30 @@ package Data;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
-import Data.Being.Builder;
 
 public class Conversation implements Serializable {
 
 	private static final long serialVersionUID = -7100430312452939043L;
 	private final String response;
 	private final List<Query> queries;
-	private final Conversation upto;
 	private final String endConversation;
-	private final List<String> endResponse;
 	
 	//Constructor where there is only a response
 	public Conversation(Builder builder) {
 		this.response = builder.response;
 		this.queries = builder.queries;
-		this.upto = builder.upto;
 		this.endConversation = builder.endConversation;
-		this.endResponse = builder.endResponse;
 	}
 	
 	public static class Builder {
 		private String response;
 		private List<Query> queries;
-		private Conversation upto;
 		private String endConversation;
-		private List<String> endResponse;
 		
 		public Builder(String response) {
 			this.response = response;
-			this.upto = null;
 			this.queries = new ArrayList<Query>();
 			this.endConversation = "";
-			this.endResponse = new ArrayList<String>();
 		}
 		
 		public Builder setQueries(ArrayList<Query> queries) {
@@ -54,16 +43,6 @@ public class Conversation implements Serializable {
 		
 		public Builder addQuery(Query query) {
 			this.queries.add(query);
-			return this;
-		}
-		
-		public Builder setEndResponse(ArrayList<String> endResponse) {
-			this.endResponse = endResponse;
-			return this;
-		}
-		
-		public Builder addEndResponse(String endResponse) {
-			this.endResponse.add(endResponse);
 			return this;
 		}
 		
@@ -90,19 +69,26 @@ public class Conversation implements Serializable {
 		return this.response;
 	}
 	
-	//Checks to see if there are any queries
 	public boolean checkQueries() {
-		
-		boolean queries = false;
-		
-		if (this.queries.size()>0) {
-			queries = true;
-		}
-		
-		return queries;
+		return this.queries.size()>0;
 	}
 	
-	public ArrayList<String> displayConversation() {
+	public List<Query> getQueries() {
+		return this.queries;
+	}
+	
+	//Gets the number of queries
+	public int getNoQueries() {
+		return queries.size();
+	}
+	
+	public String getEndConversation() {
+		return this.endConversation;
+	}
+	
+	/*
+	//Maybe move this to a separate function
+	public List<String> displayConversation() {
 		
 		int noQueries = 1;
 		System.out.printf("%s%n",this.getResponse());
@@ -172,15 +158,13 @@ public class Conversation implements Serializable {
 		return this.endResponse;
 	}
 	
-	public ArrayList<Query> getQueries() {
-		return this.queries;
-	}
-	
+	//Move this outside the class
 	private void clearConvo(String response) {
-		this.response = response;
-		this.queries = new ArrayList<Query>();
+		//this.response = response;
+		//this.queries = new ArrayList<Query>();
 	}
 	
+	//Move this outside the class
 	private int getInput(int noQueries) {
 		
 		boolean validInput = false;
@@ -209,11 +193,7 @@ public class Conversation implements Serializable {
 		}
 		return input;
 	}
-	
-	//Gets the number of queries
-	public int getNoQueries() {
-		return queries.size();
-	}
+	*/
 }
 
 /* 23 March 2024 - Created file
@@ -227,4 +207,5 @@ public class Conversation implements Serializable {
  * 8 June 2024 - Cleared the array.
  * 4 January 2025 - Made class serializable
  * 23 September 2025 - Added Builder class
+ * 30 September 2025 - Completed updating class
 */
