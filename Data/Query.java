@@ -15,18 +15,18 @@ public class Query implements Serializable {
 	private static final long serialVersionUID = -3179181971555916081L;
 	private final String question;
 	private final Conversation conversation;
-	private final String end;
+	private final String endConvo;
 
 	private Query(Builder builder) {
 		this.question = builder.question;
 		this.conversation = builder.conversation;
-		this.end = builder.end;
+		this.endConvo = builder.endConvo;
 	}
 	
 	public static class Builder {
 		private String question;
 		private Conversation conversation = null;
-		private String end = "";
+		private String endConvo = "";
 		
 		public Builder(String question) {
 			this.question = Objects.requireNonNull(question,"Question cannot be null");
@@ -37,8 +37,8 @@ public class Query implements Serializable {
 			return this;
 		}
 		
-		public Builder setEnd(String end) {
-			this.end = Objects.requireNonNull(end,"End cannot be null");
+		public Builder setEnd(String endConvo) {
+			this.endConvo = Objects.requireNonNull(endConvo,"endConvo cannot be null");
 			return this;
 		}
 		
@@ -51,18 +51,17 @@ public class Query implements Serializable {
 		}
 	}
 		
-	public Conversation getConversation() {
-		return this.conversation;
-	}
+    public Optional<Conversation> getConversation() {
+        return Optional.ofNullable(conversation);
+    }
 	
-	public String getQuery() {
+	public String getQuestion() {
 		return question;
 	}
 	
 	public String getEndConvo() {
-		return this.end;
-	}
-	
+		return this.endConvo;
+	}	
 }
 
 /* 23 March 2024 - Created file
