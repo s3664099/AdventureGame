@@ -10,8 +10,6 @@ package Data;
 import java.io.Serializable;
 import java.util.Objects;
 
-import Data.Conversation.Builder;
-
 public class Query implements Serializable {
 
 	private static final long serialVersionUID = -3179181971555916081L;
@@ -59,14 +57,6 @@ public class Query implements Serializable {
 	
 	public String getQuery() {
 		return question;
-	}
-	
-	public void addConversation(Conversation conversation) {
-		this.conversation = conversation;
-	}
-	
-	public void setEndConvo(String endConvo) {
-		this.end = endConvo;
 	}
 	
 	public String getEndConvo() {
