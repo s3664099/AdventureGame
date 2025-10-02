@@ -1,7 +1,7 @@
 /* Abstract Item Class
  * Created: 25 August 2023
- * Updated: 23 August 2025
- * Version: 1.8
+ * Updated: 2 October 2025
+ * Version: 1.9
  * The main class for objects. Since we can't call it an object (reserved word)
  * we have to call it a thing.
  */
@@ -98,7 +98,7 @@ public class AbstractItem implements Serializable,Item {
 	
 	public Conversation talk() {
 		String response = String.format("The %s doesn't respond.", this.getName());;
-		Conversation conversation = new Conversation(response);
+		Conversation conversation = new Conversation.Builder(response).build();
 		return conversation;
 	}
 	
@@ -246,4 +246,5 @@ public class AbstractItem implements Serializable,Item {
 * 21 August 2025 - Removed setters. Added interface and methods
 * 22 August 2025 - Updated Builder
 * 23 August 2025 - Updated getHiddenItems and getHiddenExits
+* 2 October 2025 - Updated Conversation
 */

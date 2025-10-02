@@ -1,7 +1,7 @@
 /* Conversation
  * Created: 23 March 2024
- * Updated: 30 September 2025
- * Version: 1.3
+ * Updated: 2 October 2025
+ * Version: 1.4
  * Class for conversations.
  */
 
@@ -9,7 +9,10 @@ package Data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 public class Conversation implements Serializable {
 
@@ -20,34 +23,32 @@ public class Conversation implements Serializable {
 	
 	//Constructor where there is only a response
 	public Conversation(Builder builder) {
-		this.response = builder.response;
-		this.queries = builder.queries;
-		this.endConversation = builder.endConversation;
+		this.response = Objects.requireNonNull(builder.response,"response cannot be null");
+		this.queries = List.copyOf(Objects.requireNonNull(builder.queries,"queries cannot be null"));
+		this.endConversation = Objects.requireNonNull(builder.endConversation,"end conversation cannot be null");
 	}
 	
 	public static class Builder {
 		private String response;
-		private List<Query> queries;
-		private String endConversation;
+		private List<Query> queries = new ArrayList<Query>();
+		private String endConversation = "";
 		
 		public Builder(String response) {
-			this.response = response;
-			this.queries = new ArrayList<Query>();
-			this.endConversation = "";
+			this.response = Objects.requireNonNull(response,"response cannot be null");
 		}
 		
-		public Builder setQueries(ArrayList<Query> queries) {
-			this.queries = queries;
+		public Builder setQueries(List<Query> queries) {
+			this.queries = Objects.requireNonNull(queries,"queries cannot be null");
 			return this;
 		}
 		
 		public Builder addQuery(Query query) {
-			this.queries.add(query);
+			this.queries.add(Objects.requireNonNull(query,"query cannot be null"));
 			return this;
 		}
 		
 		public Builder setEndConversation(String endConversation) {
-			this.endConversation = endConversation;
+			this.endConversation = Objects.requireNonNull(endConversation,"endConversation cannot be null");
 			return this;
 		}
 		
@@ -60,24 +61,25 @@ public class Conversation implements Serializable {
 		}
 		
 	}
-		
-	public void addQuery(Query query) {
-		this.queries.add(query);
-	}
-	
+			
 	public String getResponse() {
 		return this.response;
 	}
 	
-	public boolean checkQueries() {
+	public boolean hasQueries() {
 		return this.queries.size()>0;
 	}
 	
+	public Optional<Query> getQuery(int index) {
+	    return index >= 0 && index < queries.size() 
+	        ? Optional.of(queries.get(index)) 
+	        : Optional.empty();
+	}
+		
 	public List<Query> getQueries() {
-		return this.queries;
+		return Collections.unmodifiableList(this.queries);
 	}
 	
-	//Gets the number of queries
 	public int getNoQueries() {
 		return queries.size();
 	}
@@ -208,4 +210,5 @@ public class Conversation implements Serializable {
  * 4 January 2025 - Made class serializable
  * 23 September 2025 - Added Builder class
  * 30 September 2025 - Completed updating class
+ * 2 October 2025 - Updated class based on recommendations
 */
