@@ -11,10 +11,21 @@ import java.io.Serializable;
 
 public class Query implements Serializable {
 
-	private String question;
-	private Conversation conversation;
-	private String end = "";
+	private static final long serialVersionUID = -3179181971555916081L;
+	private final String question;
+	private final Conversation conversation;
+	private final String end = "";
 
+	private Query(Builder builder) {
+		this.question = builder.question;
+		this.conversation = builder.conversation;
+		this.end = builder.end;
+	}
+	
+	public static class Builder(){
+		pr
+	}
+	
 	//Continue conversation query
 	public Query(String question, Conversation conversation) {
 		this.question = question;

@@ -22,7 +22,7 @@ public class Conversation implements Serializable {
 	private final String endConversation;
 	
 	//Constructor where there is only a response
-	public Conversation(Builder builder) {
+	private Conversation(Builder builder) {
 		this.response = Objects.requireNonNull(builder.response,"response cannot be null");
 		this.queries = List.copyOf(Objects.requireNonNull(builder.queries,"queries cannot be null"));
 		this.endConversation = Objects.requireNonNull(builder.endConversation,"end conversation cannot be null");
