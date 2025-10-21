@@ -9,6 +9,7 @@ package Data;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Optional;
 
 public class Query implements Serializable {
 

@@ -18,9 +18,9 @@ public class Data_Process implements AutoCloseable {
 		this.topScore = 2;
 		
 		start = new Location.Builder("In an office","An office of a consulting detective. The room is dark and dingy, and little light permeates the shadows").setTreasureStore(true).build();
-		Container desk = new Container("Large Old Mahogany Desk","A large mahogany desk sitting across from the door. The desk is covered in papers",true);
-		CarriableItem doorKey = new CarriableItem("Small Modern Brass Key","A brass key with the word 'door' carved into the head");
-		desk.addItem(doorKey);
+		CarriableItem doorKey = new CarriableItem.Builder("Small Modern Brass Key","A brass key with the word 'door' carved into the head").build();
+		CarriableItem goldKey = new CarriableItem.Builder("Gold Key","A small gold key. I wonder what it opens").build();
+		Container desk = new Container.Builder("Large Old Mahogany Desk","A large mahogany desk sitting across from the door. The desk is covered in papers").setClosed(true).addItem(doorKey).addItem(goldKey).build();
 		start.addItem(desk);
 		Location hall = new Location.Builder("In a hall","A hallway in an 18th Century building in the heart of London. There is a door leading to your office and stairs leading down to the street").build();
 		Exit door = new LockableExit.Builder("Big Blue Mahogany Door", hall, false).setLocked(true).setKey(doorKey).addDescription("A flimsy door that leads to the hall").build();
@@ -28,6 +28,7 @@ public class Data_Process implements AutoCloseable {
 		Location kitchen = new Location.Builder("In the kitchen","This office has a kitchen").build();
 		Exit north = new OrdinaryExit.Builder("North", kitchen, true).build();
 		Exit south = new OrdinaryExit.Builder("South",start,true).build();
+		
 		ImmoveableItem rug = new ImmoveableItem("Colourful Persian Rug","This looks pretty expensive. A shame it is nailed to the floor");
 		MoveableItem table = new MoveableItem("Dirty Kitchen Table","This table looks like it has seen better days, back in the 60s",rug);
 		kitchen.addExit(south);
@@ -35,11 +36,9 @@ public class Data_Process implements AutoCloseable {
 		Bag suitcase = new Bag("Suitcase","It is tattered and has seen better days. It is made of leather",true,true,false,false,null);
 		kitchen.addItem(suitcase);
 		start.addExit(north);
-		CarriableItem card = new CarriableItem("Card","A Gold American Express credit card");
-		CarriableItem leaflet = new CarriableItem("Leaflet","An advertisment for curtian installation");
-		CarriableItem note = new CarriableItem("Note","It looks like it is from your landlord");
-		CarriableItem goldKey = new CarriableItem("Gold Key","A small gold key. I wonder what it opens");
-		desk.addItem(goldKey);
+		CarriableItem card = new CarriableItem.Builder("Card","A Gold American Express credit card").build();
+		CarriableItem leaflet = new CarriableItem.Builder("Leaflet","An advertisment for curtian installation").build();
+		CarriableItem note = new CarriableItem.Builder("Note","It looks like it is from your landlord").build();
 		card.setRead("It has the name of Richard Pickles, but I'm not telling you the number because I don't trust you.");
 		leaflet.setRead("Bob's curtians, make sure you neighbour can't see you dismembering that body");
 		note.setRead("You are way, way, way behind in your rent. Pay me now or, or, or, there will be trouble");
