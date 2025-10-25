@@ -28,9 +28,8 @@ public class Data_Process implements AutoCloseable {
 		Location kitchen = new Location.Builder("In the kitchen","This office has a kitchen").build();
 		Exit north = new OrdinaryExit.Builder("North", kitchen, true).build();
 		Exit south = new OrdinaryExit.Builder("South",start,true).build();
-		
-		ImmoveableItem rug = new ImmoveableItem("Colourful Persian Rug","This looks pretty expensive. A shame it is nailed to the floor");
-		MoveableItem table = new MoveableItem("Dirty Kitchen Table","This table looks like it has seen better days, back in the 60s",rug);
+		ImmoveableItem rug = new ImmoveableItem.Builder("Colourful Persian Rug", "This looks pretty expensive. A shame it is nailed to the floor").build();
+		MoveableItem table = new MoveableItem.Builder("Dirty Kitchen Table","This table looks like it has seen better days, back in the 60s").setItem(rug).build();
 		kitchen.addExit(south);
 		kitchen.addItem(table);
 		Bag suitcase = new Bag("Suitcase","It is tattered and has seen better days. It is made of leather",true,true,false,false,null);
@@ -85,8 +84,8 @@ public class Data_Process implements AutoCloseable {
 		storage.addExit(west);
 
 		Location roof = new Location.Builder("On the roof", "A flat rooftop with a great view of the city skyline. The wind is strong up here.").build();
-		ImmoveableItem antenna = new ImmoveableItem("Rusted Antenna", "An old TV antenna that no longer serves its purpose.");
-		MoveableItem box = new MoveableItem("Small Wooden Box", "A box that seems out of place here. It rattles when moved.", antenna);
+		ImmoveableItem antenna = new ImmoveableItem.Builder("Rusted Antenna", "An old TV antenna that no longer serves its purpose.").build();
+		MoveableItem box = new MoveableItem.Builder("Small Wooden Box", "A box that seems out of place here. It rattles when moved.").setItem(antenna).build();
 		roof.addItem(box);
 		Exit up = new OrdinaryExit.Builder("Up", roof, false).build();
 		window.addExit(up);
@@ -99,7 +98,7 @@ public class Data_Process implements AutoCloseable {
 		basement.addItem(chest);
 		
 		Location garden = new Location.Builder("In the garden", "A peaceful garden filled with overgrown plants and flowers. A small fountain trickles in the center.").build();
-		ImmoveableItem fountain = new ImmoveableItem("Stone Fountain", "A small fountain with water trickling down. It looks like it hasn't been maintained in years.");
+		ImmoveableItem fountain = new ImmoveableItem.Builder("Stone Fountain", "A small fountain with water trickling down. It looks like it hasn't been maintained in years.").build();
 		CarriableItem shovel = new CarriableItem("Rusty Shovel", "A shovel covered in rust. It might still be useful for digging.");
 		garden.addItem(fountain);
 		garden.addItem(shovel);
