@@ -32,7 +32,13 @@ public class Data_Process implements AutoCloseable {
 		MoveableItem table = new MoveableItem.Builder("Dirty Kitchen Table","This table looks like it has seen better days, back in the 60s").setItem(rug).build();
 		kitchen.addExit(south);
 		kitchen.addItem(table);
-		Bag suitcase = new Bag("Suitcase","It is tattered and has seen better days. It is made of leather",true,true,false,false,null);
+		Bag suitcase = new Bag.Builder("Suitcase","It is tattered and has seen better days. It is made of leather")
+					.setCloseable(true)
+					.setClosed(true)
+					.setLockable(false)
+					.setLocked(false)
+					.setKey(null)
+					.build();
 		kitchen.addItem(suitcase);
 		start.addExit(north);
 		CarriableItem card = new CarriableItem.Builder("Card","A Gold American Express credit card")
@@ -66,9 +72,15 @@ public class Data_Process implements AutoCloseable {
 		window.addExit(sw);
 		
 		Location library = new Location.Builder("In a library", "A cozy library with walls lined with bookshelves. A leather armchair sits in one corner.").build();
-		Container bookshelf = new Container("Tall Oak Bookshelf", "An old bookshelf filled with dusty tomes and journals.", true,true,true,true,goldKey);		
+		Container bookshelf = new Container.Builder("Tall Oak Bookshelf", "An old bookshelf filled with dusty tomes and journals.")
+					.setCloseable(true)
+					.setClosed(true)
+					.setLockable(true)
+					.setLocked(true)
+					.setKey(goldKey)
+					.build();	
 		CarriableItem diary = new CarriableItem.Builder("Leather-bound Diary", "An old diary with a lock on it. It might contain secrets.").build();
-		Bag toteBag = new Bag("Tote Bag","A tote bag with a tarten pattern on it");
+		Bag toteBag = new Bag.Builder("Tote Bag","A tote bag with a tarten pattern on it").build();
 		bookshelf.addItem(diary);
 		library.addItem(bookshelf);
 		Exit west = new OrdinaryExit.Builder("West", library, false).build();
@@ -78,7 +90,10 @@ public class Data_Process implements AutoCloseable {
 		library.addItem(toteBag);
 
 		Location storage = new Location.Builder("In the storage room", "A small, cluttered room filled with crates and forgotten items.").build();
-		Container crate = new Container("Wooden Crate", "A large crate covered in cobwebs.", true);
+		Container crate = new Container.Builder("Wooden Crate", "A large crate covered in cobwebs.")
+					.setCloseable(true)
+					.setClosed(true)
+					.build();
 		CarriableItem flashlight = new CarriableItem.Builder("Flashlight", "An old flashlight. It might still work.").build();
 		crate.addItem(flashlight);
 		storage.addItem(crate);
@@ -95,14 +110,17 @@ public class Data_Process implements AutoCloseable {
 		roof.addExit(sw);
 
 		Location basement = new Location.Builder("In the basement", "A damp and dark basement filled with a musty smell.").build();
-		Container chest = new Container("Iron-bound Chest", "A heavy chest with a large padlock.", true);
+		Container chest = new Container.Builder("Iron-bound Chest", "A heavy chest with a large padlock.")
+					.setCloseable(true)
+					.setClosed(true)
+					.build();
 		CarriableItem map = new CarriableItem.Builder("Treasure Map", "An old map with faded markings. It might lead to something valuable.").build();
 		chest.addItem(map);
 		basement.addItem(chest);
 		
 		Location garden = new Location.Builder("In the garden", "A peaceful garden filled with overgrown plants and flowers. A small fountain trickles in the center.").build();
 		ImmoveableItem fountain = new ImmoveableItem.Builder("Stone Fountain", "A small fountain with water trickling down. It looks like it hasn't been maintained in years.").build();
-		CarriableItem shovel = new CarriableItem("Rusty Shovel", "A shovel covered in rust. It might still be useful for digging.");
+		CarriableItem shovel = new CarriableItem.Builder("Rusty Shovel", "A shovel covered in rust. It might still be useful for digging.").build();
 		garden.addItem(fountain);
 		garden.addItem(shovel);
 		Exit gardenExit = new CloseableExit.Builder("Back Door", garden, false).addClosed(true).addCommand("door")
@@ -113,7 +131,10 @@ public class Data_Process implements AutoCloseable {
 		garden.addExit(kitchenExit);
 
 		Location study = new Location.Builder("In the study", "A quiet study with a large writing desk, a fireplace, and shelves filled with books.").build();
-		Container writingDesk = new Container("Writing Desk", "A sturdy desk with drawers. It looks like it's been used frequently.", true);
+		Container writingDesk = new Container.Builder("Writing Desk", "A sturdy desk with drawers. It looks like it's been used frequently.")
+					.setCloseable(true)
+					.setClosed(true)
+					.build();
 		CarriableItem letter = new CarriableItem.Builder("Sealed Letter", "A letter with a wax seal. It feels important.").build();
 		writingDesk.addItem(letter);
 		study.addItem(writingDesk);
