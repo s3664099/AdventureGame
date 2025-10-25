@@ -35,13 +35,16 @@ public class Data_Process implements AutoCloseable {
 		Bag suitcase = new Bag("Suitcase","It is tattered and has seen better days. It is made of leather",true,true,false,false,null);
 		kitchen.addItem(suitcase);
 		start.addExit(north);
-		CarriableItem card = new CarriableItem.Builder("Card","A Gold American Express credit card").build();
-		CarriableItem leaflet = new CarriableItem.Builder("Leaflet","An advertisment for curtian installation").build();
-		CarriableItem note = new CarriableItem.Builder("Note","It looks like it is from your landlord").build();
-		card.setRead("It has the name of Richard Pickles, but I'm not telling you the number because I don't trust you.");
-		leaflet.setRead("Bob's curtians, make sure you neighbour can't see you dismembering that body");
-		note.setRead("You are way, way, way behind in your rent. Pay me now or, or, or, there will be trouble");
-		card.setTreasure();
+		CarriableItem card = new CarriableItem.Builder("Card","A Gold American Express credit card")
+					.setRead("It has the name of Richard Pickles, but I'm not telling you the number because I don't trust you.")
+					.setTreasure()
+					.build();
+		CarriableItem leaflet = new CarriableItem.Builder("Leaflet","An advertisment for curtian installation")
+					.setRead("Bob's curtians, make sure you neighbour can't see you dismembering that body")
+					.build();
+		CarriableItem note = new CarriableItem.Builder("Note","It looks like it is from your landlord")
+					.setRead("You are way, way, way behind in your rent. Pay me now or, or, or, there will be trouble")
+					.build();
 		hall.addItem(card);
 		hall.addItem(note);
 		hall.addItem(leaflet);
@@ -64,7 +67,7 @@ public class Data_Process implements AutoCloseable {
 		
 		Location library = new Location.Builder("In a library", "A cozy library with walls lined with bookshelves. A leather armchair sits in one corner.").build();
 		Container bookshelf = new Container("Tall Oak Bookshelf", "An old bookshelf filled with dusty tomes and journals.", true,true,true,true,goldKey);		
-		CarriableItem diary = new CarriableItem("Leather-bound Diary", "An old diary with a lock on it. It might contain secrets.");
+		CarriableItem diary = new CarriableItem.Builder("Leather-bound Diary", "An old diary with a lock on it. It might contain secrets.").build();
 		Bag toteBag = new Bag("Tote Bag","A tote bag with a tarten pattern on it");
 		bookshelf.addItem(diary);
 		library.addItem(bookshelf);
@@ -76,7 +79,7 @@ public class Data_Process implements AutoCloseable {
 
 		Location storage = new Location.Builder("In the storage room", "A small, cluttered room filled with crates and forgotten items.").build();
 		Container crate = new Container("Wooden Crate", "A large crate covered in cobwebs.", true);
-		CarriableItem flashlight = new CarriableItem("Flashlight", "An old flashlight. It might still work.");
+		CarriableItem flashlight = new CarriableItem.Builder("Flashlight", "An old flashlight. It might still work.").build();
 		crate.addItem(flashlight);
 		storage.addItem(crate);
 		east = new OrdinaryExit.Builder("East", storage, false).build();
@@ -93,7 +96,7 @@ public class Data_Process implements AutoCloseable {
 
 		Location basement = new Location.Builder("In the basement", "A damp and dark basement filled with a musty smell.").build();
 		Container chest = new Container("Iron-bound Chest", "A heavy chest with a large padlock.", true);
-		CarriableItem map = new CarriableItem("Treasure Map", "An old map with faded markings. It might lead to something valuable.");
+		CarriableItem map = new CarriableItem.Builder("Treasure Map", "An old map with faded markings. It might lead to something valuable.").build();
 		chest.addItem(map);
 		basement.addItem(chest);
 		
@@ -111,7 +114,7 @@ public class Data_Process implements AutoCloseable {
 
 		Location study = new Location.Builder("In the study", "A quiet study with a large writing desk, a fireplace, and shelves filled with books.").build();
 		Container writingDesk = new Container("Writing Desk", "A sturdy desk with drawers. It looks like it's been used frequently.", true);
-		CarriableItem letter = new CarriableItem("Sealed Letter", "A letter with a wax seal. It feels important.");
+		CarriableItem letter = new CarriableItem.Builder("Sealed Letter", "A letter with a wax seal. It feels important.").build();
 		writingDesk.addItem(letter);
 		study.addItem(writingDesk);
 		Exit studyExit = new OrdinaryExit.Builder("West", study, true).build();
